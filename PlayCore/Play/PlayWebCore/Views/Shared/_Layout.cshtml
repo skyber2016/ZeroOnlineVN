@@ -1,0 +1,261 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Play</title>
+    <style>
+        body, div, h1, h2, h3, h4, h5, h6, p, blockquote, dl, dt, dd, ul, ol, li, fieldset, form, tr, th, td, center, input, button, textarea {
+            padding: 0;
+            margin: 0
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        fieldset, img {
+            border: 0;
+        }
+
+        button, input, select, textarea {
+            font-size: 12px
+        }
+
+        li {
+            list-style: none
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-size: 100%;
+        }
+
+        td {
+            font-size: 12px;
+        }
+        /* 链接样式 */
+        a {
+            color: #00006e;
+            text-decoration: none;
+        }
+
+            a:hover {
+                color: #3333cc;
+                text-decoration: underline;
+            }
+
+        /* 基础设置 */
+        body {
+            background: #000; /* font-family:"宋体"; */
+            font-size: 12px;
+            color: #8389a0;
+            line-height: 22px;
+        }
+
+        .clear:after {
+            content: ".";
+            display: block;
+            height: 0;
+            clear: both;
+            visibility: hidden;
+        }
+
+        .clear {
+            +display:none;
+            clear: both;
+        }
+
+        .main {
+            position: relative;
+            left: 0;
+            top: 0;
+            width: 420px;
+        }
+
+        .nav {
+            background: url(/main_1_2.jpg) no-repeat;
+            background-size: 100%;
+            height: 49px;
+            width: 100%;
+        }
+
+            .nav a {
+                height: 49px;
+                position: absolute;
+                overflow: hidden;
+            }
+
+                .nav a:hover {
+                    background: url(/nav_bg_1.jpg);
+                }
+
+            .nav .a1 {
+                left: 0px;
+                width: 115px;
+            }
+
+                .nav .a1:hover {
+                    background-position: 0px -49px;
+                }
+
+            .nav .a2 {
+                left: 115px;
+                width: 95px;
+            }
+
+                .nav .a2:hover {
+                    background-position: -115px -49px;
+                }
+
+            .nav .a3 {
+                left: 210px;
+                width: 95px;
+            }
+
+                .nav .a3:hover {
+                    background-position: -210px -49px;
+                }
+
+            .nav .a4 {
+                left: 305px;
+                width: 95px;
+            }
+
+                .nav .a4:hover {
+                    background-position: -305px -49px;
+                }
+
+            .nav .a5 {
+                left: 400px;
+                width: 115px;
+            }
+
+                .nav .a5:hover {
+                    background-position: -400px -49px;
+                }
+
+        .main_1 {
+            background: url(/main_1_2.jpg) no-repeat;
+            background-size: 100%;
+            height: 81px;
+            width: 100%;
+        }
+
+        .pic_gg {
+            position: absolute;
+            top: 0px;
+            left: 4px;
+            width: 97.5%;
+            height: 129px;
+        }
+
+        .main_2 {
+            background: url(/main_2_1.jpg) no-repeat;
+            height: 108px;
+            background-size: 100% 109px;
+            width: 100%;
+        }
+
+        .tab {
+            position: absolute;
+            left: 25px;
+            top: 130px;
+        }
+
+            .tab a {
+                background-image: url(/tab_bg.jpg);
+                width: 85px;
+                height: 27px;
+                display: block;
+                display: block;
+                blr: expression(this.onFocus=this.blur());
+            }
+
+                .tab a.on {
+                    background-image: url(/tab_bg.jpg)
+                }
+
+            .tab li {
+                float: left;
+            }
+
+        .tab_1 a {
+            background-position: 0 0;
+        }
+
+        .tab_2 a {
+            background-position: -85px 0;
+        }
+
+        .tab_1 a.on {
+            background-position: 0 -27px;
+        }
+
+        .tab_2 a.on {
+            background-position: -85px -27px;
+        }
+
+        .con {
+            position: absolute;
+            left: 20px;
+            top: 158px;
+            width: 356px;
+            height: 67px;
+            overflow: hidden;
+            /* color: white; */
+        }
+
+            .con a {
+                color: #8389a0;
+            }
+
+                .con a:hover {
+                    text-decoration: underline;
+                    color: #fff;
+                }
+
+        .footer {
+            position: absolute;
+            left: 35px;
+            top: 283px;
+            width: 450px;
+            overflow: hidden;
+            text-align: center;
+            color: #669999;
+            font-size: 12px;
+        }
+
+            .footer li {
+                line-height: 15px;
+            }
+
+            .footer a {
+                color: #669999;
+            }
+
+                .footer a:hover {
+                    color: #669999;
+                }
+
+        .cmsTable {
+            width: 100%;
+        }
+
+            .cmsTable td {
+                height: 22px;
+            }
+
+        .bq {
+            position: absolute;
+            top: 315px;
+            text-align: center;
+            width: 540px;
+            height: 20px;
+            color: #364684
+        }
+
+
+    </style>
+</head>
+<body>
+    @RenderBody()
+</body>
+</html>

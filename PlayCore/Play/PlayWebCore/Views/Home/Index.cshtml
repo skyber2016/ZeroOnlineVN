@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    var posts = this.ViewBag.Posts as List<PlayWebCore.Controllers.Posts>;
+}
+<div class="main">
+    <div class="nav">
+    </div>
+    <div class="main_1">
+        <div class="pic_gg">
+            <table class='cmsTable' cellspacing="0">
+                <tr>
+                    <td align=center>
+                        <a href='https://zeroonlinevn.com' target="_blank" title="Trang chủ">
+                            <img src='/bg.jpg?v=@this.ViewBag.versionBG' border=0 style="width:415px" height=129>
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <ul class="tab" style="width: 365px;">
+            <li class="tab_1">
+                <span>Phiên bản hiện tại: @this.ViewBag.Version</span>
+            </li>
+            <li class="tab_2" style="float: right">Phiên bản máy chủ: @this.ViewBag.ServerVersion</li>
+        </ul>
+
+        <div class="con" id="con">
+            <div id="tab1">
+                @foreach (var post in posts)
+                {
+                    <table class='cmsTable' cellspacing=0>
+                        <tr>
+                            <td style="width: 310px">
+                                <a href='https://zeroonlinevn.com/#/chi-tiet/@post.slug' title='@post.title.rendered'
+                                   target='_blank'>@post.title.rendered</a>
+                            </td>
+                            <td style="float:right"> [@post.date.ToString("dd-MM")]</td>
+                        </tr>
+                    </table>
+                }
+
+            </div>
+        </div>
+    </div>
+    <div class="main_2">
+    </div>
+
+</div>

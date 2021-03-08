@@ -1,0 +1,7 @@
+﻿[*.cs]
+
+# S1075: URIs should not be hardcoded
+dotnet_diagnostic.S1075.severity = none
+
+# S1854: Unused assignments should be removed
+dotnet_diagnostic.S1854.severity = none

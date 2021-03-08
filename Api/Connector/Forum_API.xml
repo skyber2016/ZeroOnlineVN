@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Forum_API</name>
+    </assembly>
+    <members>
+        <member name="F:Forum_API.Common.FuncConstants.Create">
+            <summary>
+            METHOD CODE
+            </summary>
+        </member>
+        <member name="F:Forum_API.Common.FuncConstants.User">
+            <summary>
+            FUNCTION ID
+            </summary>
+        </member>
+        <member name="F:Forum_API.Common.URLConstants.ResetPassworldLink">
+            <summary>
+            METHOD CODE
+            </summary>
+        </member>
+        <member name="M:Forum_API.Controllers.AuthController.Login(Forum_API.DTO.Authenticate.Requests.LoginRequest)">
+            <summary>
+            API Login
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forum_API.Controllers.AuthController.RefreshToken(Forum_API.DTO.Authenticate.Requests.RefreshTokenRequest)">
+            <summary>
+            Khi đăng nhập hết hạn cần phải lấy token mới, nếu trả về lỗi 401 thì redirect login
+            </summary>
+            <param name="request">Refresh token: được cấp khi đăng nhập thành công</param>
+            <returns></returns>
+        </member>
+        <member name="M:Forum_API.Controllers.AuthController.Logout">
+            <summary>
+            Khi đăng xuất sẽ xóa bỏ jwt hiện tại
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Forum_API.Cores.GeneralController`2.Get(System.Int32,System.Int32)">
+            <summary>
+            API Lấy tất cả thông tin và có phân trang
+            </summary>
+            <param name="pageNumber">Index của page hiện tại</param>
+            <param name="pageSize">Số item trong 1 page, max = 100</param>
+            <returns></returns>
+        </member>
+        <member name="M:Forum_API.Cores.GeneralController`2.GetById(System.Int64)">
+            <summary>
+            Lấy thông tin của 1 entity
+            </summary>
+            <param name="id">ID của entity</param>
+            <returns></returns>
+        </member>
+        <member name="M:Forum_API.Cores.GeneralController`4.Create(`2)">
+            <summary>
+            API Tạo entity
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forum_API.Cores.GeneralController`6.Update(`4)">
+            <summary>
+            API Chỉnh sửa thông tin
+            </summary>
+            <param name="request">Các thông tin này sẽ được cập nhật lại</param>
+            <returns>Trả về entity đã update</returns>
+        </member>
+        <member name="M:Forum_API.Services.JwtService.GenerateRefreshToken">
+            <summary>
+            Generate random refresh token
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

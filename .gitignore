@@ -1,0 +1,9 @@
+Api/Connector/bin/
+Api/Connector/obj/
+Caching/.vs/
+Caching/Caching/bin/
+Caching/Caching/obj/
+PlayCore/Play/PlayWebCore/bin/
+PlayCore/Play/PlayWebCore/obj/
+PlayCore/Play/.vs/
+Api/.vs/
