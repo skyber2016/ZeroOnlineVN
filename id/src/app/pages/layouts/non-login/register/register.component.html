@@ -1,0 +1,66 @@
+<section id="content">
+  <form method="post" name="register" action="index.php?mod=register">
+    <input type="hidden" name="register" value="register">
+    <div class="form-2">
+      <h1>Đăng kí ngay</h1>
+      <div class="form-box">
+        <input type="text" autocomplete="false" autofocus="true" class="form-input" id="user" name="username" value="" maxlength="10" required="required">
+        <label for="username">Tài khoản</label>
+      </div>
+
+      <input type="hidden" name="thehe" value="1">
+      <div class="line"></div>
+
+
+      <div class="form-box">
+        <input type="password" class="form-input" id="passweb1" name="pass1" maxlength="10" required="required">
+
+        <label for="gpassword">Mật khẩu</label>
+
+
+      </div>
+
+
+      <div class="form-box">
+
+        <select id="question" name="quest" class="form-select">
+          <option value="0">[Chọn câu hỏi]</option>
+          <option label="Tên con vật yêu thích?" value="1">Tên con vật yêu thích?</option>
+          <option label="Trường cấp 1 của bạn tên gì?" value="2">Trường cấp 1 của bạn tên gì?</option>
+          <option label="Người bạn yêu quý nhất?" value="3">Người bạn yêu quý nhất?</option>
+          <option label="Trò chơi bạn thích nhất?" value="4">Trò chơi bạn thích nhất?</option>
+          <option label="Nơi để lại kỉ niệm khó quên nhất?" value="5">Nơi để lại kỉ niệm khó quên nhất?</option>
+        </select>
+
+        <div class="form-col-3">
+          <div id="msg_quest"></div>
+        </div>
+      </div>
+
+      <div class="form-box">
+        <input type="text" class="form-input" id="answer" name="ans" required="">
+        <label for="answer">Câu trả lời bí mật</label>
+      </div>
+
+      <div class="form-box">
+        <input type="text" class="form-input" id="sno_numb" name="sno_numb" required="">
+        <label for="sno_numb">7 số bí mật</label>
+      </div>
+
+      <div class="form-box">
+        <input type="text" class="form-input" id="phone" name="tel" required="required" maxlength="10">
+        <label for="phone">Số điện thoại</label>
+      </div>
+
+      <div class="captcha">
+        <button class="button button-blue" type="submit" id="btn-register" name="submit" value="ĐĂNG KÝ TÀI KHOẢN"
+                onsubmit="return btn_check_register();"><i class="fa fa-clock-o"></i><strong> ĐĂNG KÍ</strong></button>
+        <br> <br>
+
+      </div>
+
+
+    </div>
+
+  </form>
+</section>

@@ -798,9 +798,9 @@ table{border-collapse:collapse;border-spacing:0}
 .col-left .left-content .menu-collap:hover .collap-icon{background-position:0 -12px}
 .left-collap .col-left .left-content .menu-collap .collap-icon{background-position:-12px 0}
 .left-collap .col-left .left-content .menu-collap:hover .collap-icon{background-position:-12px -12px}
-.left-collap .col-right{margin-left:50px}
-.col-right{margin-left: -7;padding-top: 37px;transition:all 200ms ease;-webkit-transition:all 200ms ease;}
-.col-right .right-content{padding: 0px 0px 30px 8px;}
+.left-collap .col-right{}
+.col-right{margin-left: -7px;padding-top: 37px;transition:all 200ms ease;-webkit-transition:all 200ms ease;}
+.col-right .right-content{padding: 0px 0px 0px 8px;}
 .col-right .right-content .home-login-block{width:100%;height:550px;display:table;#margin-top:30px}
 .col-right .right-content .home-login-block .home-left{width:75%;float:left}
 .col-right .right-content .home-login-block .home-left .home-slide{height:auto;overflow:hidden}

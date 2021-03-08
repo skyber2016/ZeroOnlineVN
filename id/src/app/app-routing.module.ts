@@ -5,6 +5,10 @@ const routes: Routes = [
   {
     path: 'auth',
     loadChildren: () => import('./pages/layouts/non-login/non-login.module').then(m => m.NonLoginModule)
+  },
+  {
+    path: '',
+    loadChildren: () => import('./pages/layouts/in-login/in-login.module').then(m => m.InLoginModule)
   }
 ];
 

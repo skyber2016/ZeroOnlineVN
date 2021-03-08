@@ -12,7 +12,20 @@ export class BaseComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private scriptsOfComponent: Array<string> = [];
   private _scripts: string[] = [
-
+    "/assets/HT/js/jquery.min.js",
+    "/assets/HT/js/popper.min.js",
+    "/assets/HT/js/jquery-ui.min.js",
+    "/assets/HT/js/bootstrap.min.js",
+    "/assets/HT/js/owl.carousel.min.js",
+    "/assets/HT/js/jquery.mCustomScrollbar.concat.min.js",
+    "/assets/HT/js/jquery.cookie.js",
+    "/assets/HT/js/jquery.ba-hashchange.min.js",
+    "/assets/HT/js/jquery.tablesorter.min.js",
+    "/assets/HT/js/jquery.colorbox-min.js",
+    "/assets/HT/js/jquery.twbsPagination.js",
+    "/assets/HT/js/theme_muhnx.js",
+    "/assets/HT/js/validation_muhnx.js",
+    "/assets/HT/js/jquery.rotate.js",
   ];
 
   constructor() {

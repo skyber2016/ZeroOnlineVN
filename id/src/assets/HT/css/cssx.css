@@ -5344,7 +5344,6 @@ img {
 }
 
 .login-page .home-page {
-    min-height: 700px
 }
 
 .login-page .home-page .login-section {
@@ -5432,7 +5431,6 @@ img {
     .login-page .home-page .login-section .login-section-container {
         /* margin-top: 55px */
         margin-top: 18px;
-        margin-left: 60px;
     }
 }
 
