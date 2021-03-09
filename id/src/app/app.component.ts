@@ -11,7 +11,6 @@ export class AppComponent implements AfterViewInit {
   css: string[] = [
     '/assets/HT/images/css_x.css',
     '/assets/HT/css/cssmin.css',
-    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css',
     '/assets/HT/css/cssx.css',
     'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css',
     '/assets/HT/css/jquery-ui-1.8.16.custom.css',
@@ -26,6 +25,10 @@ export class AppComponent implements AfterViewInit {
     '/assets/HT/css/style1.css',
     '/assets/HT/css/additions.css',
     '/assets/HT/show/tooltip.css',
+    'http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css',
+    'http://taikhoan.mu-hanoi.vn/HT/fontawesome/css/all.css',
+    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css',
+
   ];
 
   addCss(source, allSource: string[]) {
