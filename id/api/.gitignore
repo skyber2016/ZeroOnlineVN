@@ -1,0 +1,5 @@
+API/bin/
+API/obj/
+MailWorker/bin/
+MailWorker/obj/
+.vs/

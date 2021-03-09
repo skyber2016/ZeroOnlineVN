@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>dotnet-MailWorker-0B4DFDDE-5E39-43A0-89F4-D0AFA4BAF00F</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+	<RuntimeHostConfigurationOption Include="System.Globalization.Invariant" Value="true" />
+    <PackageReference Include="log4net" Version="2.0.12" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Systemd" Version="3.1.10" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.1" />
+  </ItemGroup>
+</Project>

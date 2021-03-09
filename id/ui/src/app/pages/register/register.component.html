@@ -1,0 +1,58 @@
+<section id="content">
+  <form method="post" name="register">
+    <div class="form-2">
+      <h1>Đăng kí ngay</h1>
+      <div class="form-box">
+        <input type="text" class="form-input" id="username" autocomplete="off"  maxlength="12" required="required" [(ngModel)]="username" autofocus="true">
+        <label for="username">Tài khoản</label>
+      </div>
+
+      <input type='hidden' name='thehe' value='1'/>
+      <div class="line"></div>
+
+
+      <div class="form-box">
+        <input type="password" class="form-input" id="passweb1" autocomplete="off" name="pass1" maxlength="12" required="required" [(ngModel)]="password">
+        <label for="passweb1">Mật khẩu</label>
+      </div>
+
+      <div class="form-box">
+        <input type="email" class="form-input" id="email" autocomplete="off" name="email" maxlength="50" required="required" [(ngModel)]="email">
+        <label for="email">Email</label>
+      </div>
+
+
+      <div class="form-box">
+
+        <select id="question" name="quest" class="form-select" [(ngModel)]="question">
+          <option label="Tên con vật yêu thích?" value="1">Tên con vật yêu thích?</option>
+          <option label="Trường cấp 1 của bạn tên gì?" value="2">Trường cấp 1 của bạn tên gì?</option>
+          <option label="Người bạn yêu quý nhất?" value="3">Người bạn yêu quý nhất?</option>
+          <option label="Trò chơi bạn thích nhất?" value="4">Trò chơi bạn thích nhất?</option>
+          <option label="Nơi để lại kỉ niệm khó quên nhất?" value="5">Nơi để lại kỉ niệm khó quên nhất?</option>
+        </select>
+      </div>
+
+      <div class="form-box">
+        <input type="text" class="form-input" id="answer" name="ans" required="" [(ngModel)]="answer" maxlength="50">
+        <label for="answer">Câu trả lời bí mật</label>
+      </div>
+
+      <div class="form-box">
+        <input type="text" class="form-input" id="phone" name="tel" required="required" maxlength="10" [(ngModel)]="sdt">
+        <label for="phone">Số điện thoại</label>
+      </div>
+
+      <div class="captcha">
+        <button class="button button-blue" (click)="onRegister()" type="button" id="btn-register" name="submit" value="ĐĂNG KÝ TÀI KHOẢN">
+          <i class="fa fa-clock-o"></i>
+          <strong> ĐĂNG KÍ</strong>
+        </button>
+        <br>
+
+      </div>
+
+
+    </div>
+  </form>
+</section>

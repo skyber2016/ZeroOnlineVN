@@ -7,3 +7,7 @@ PlayCore/Play/PlayWebCore/bin/
 PlayCore/Play/PlayWebCore/obj/
 PlayCore/Play/.vs/
 Api/.vs/
+id/api/SqlKata.Execution/obj/
+id/api/SqlKata.Execution/bin/
+id/api/QueryBuilder/obj/
+id/api/QueryBuilder/bin/
