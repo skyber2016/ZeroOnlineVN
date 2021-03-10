@@ -20,4 +20,8 @@ export class AuthService {
   Register(obj): Observable<any>{
     return this.http.post('auth/register', obj);
   }
+
+  Logout(): Observable<any>{
+    return this.http.post('auth/logout', {});
+  }
 }

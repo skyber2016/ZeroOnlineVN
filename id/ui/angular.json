@@ -24,7 +24,6 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
             ],
             "scripts": []
           },
@@ -41,7 +40,7 @@
               "sourceMap": false,
               "namedChunks": false,
               "extractLicenses": true,
-              "vendorChunk": false,
+              "vendorChunk": true,
               "buildOptimizer": true,
               "budgets": [
                 {

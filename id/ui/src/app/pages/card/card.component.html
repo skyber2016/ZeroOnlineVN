@@ -1,0 +1,140 @@
+<div class="main-head">
+  <div class="breadcrumbs1">
+    <a [routerLink]="['/']" class="tooltipstered">Trang Chủ</a>
+    <a href="javascript:void(0);" class="tooltipstered">Nạp thẻ</a>
+  </div>
+  <h1 class="module-title">Nạp thẻ cào</h1>
+  <div class="page-tabs">
+
+    <div class="tab"><a href="#napthe&amp;act=atm" class="tooltipstered">Nạp qua ngân hàng <sup id="award_un" class="badge badge-green">+20% Gcoin</sup></a></div>
+    <div class="tab active"><a href="#napthe&amp;act=viettel" class="tooltipstered">Nạp thẻ Viettel</a></div>
+    <div class="tab"><a href="#napthe&amp;act=listcard" class="tooltipstered">Danh sách đã nạp</a></div>
+  </div>
+</div>
+
+<div class="main-page">
+  <div class="main-left">
+    <div class="alert alert-blue">
+      <h3 class="alert-caption">Lưu ý</h3>
+      <ul class="alert-list">
+        <li>BQT sẽ không chịu trách nhiệm và không giải quyết với các trường hợp nạp sai mệnh giá</li>
+        <li>Mệnh giá nạp sẽ thay đổi luôn phiên , mọi người trước khi nạp thẻ lưu ý đọc mục này mỗi ngày ! </li>
+        <li>Nếu hệ thống báo sai. Vui lòng nạp lại sau 1 phút! </li>
+        <li>Thời gian chờ duyệt thẻ Viettel: 15-30 phút. </li>
+        <li>Giới hạn thẻ Viettel trong 1 ngày là: 1.000.000</li>
+      </ul>
+    </div>
+    <div class="main-body">
+      <p>
+        <span style="margin-right: 20px">Số Gcoin hiện có</span>
+        <span data-toggle="tooltip" data-placement="bottom" title="" data-original-title="GCent" style="margin-right: 20px">
+                    <i class="ic ic-g"></i>
+                    <span>x 0</span>
+                </span>
+
+      </p>
+      <span class="break"></span>
+      <input type="hidden" name="loaithe" id="loaithe" value="viettel">
+      <div class="cash-section">
+
+        <div class="cash-form-block">
+          <div class="form-box">
+            <input name="card_num" id="card_num" class="form-input" required="">
+            <label for="card_num">Nhập mã thẻ</label>
+          </div>
+          <div class="suggest">
+            <div id="msg_card_num"></div>
+          </div>
+
+          <div class="form-box">
+            <input type="text" class="form-input" name="card_serial" id="card_serial" required="">
+            <label for="card_serial">Nhập serial</label>
+          </div>
+          <div class="suggest">
+            <div id="msg_card_serial"></div>
+          </div>
+          <div class="form-box">
+            <select name="cardtype" id="cardtype" class="form-select" onchange="location = this.options[this.selectedIndex].value;">
+              <option value="#napthe&amp;act=viettel" selected="selected">Viettel</option>
+            </select>
+          </div>
+
+          <div class="form-box">
+            <select name="menhgia" id="menhgia" class="form-select">
+              <option value="0" selected="selected">Chọn mệnh giá</option>
+              <option value="50000">50.000 VNĐ</option>
+              <option value="100000">100.000 VNĐ</option>
+              <option value="200000">200.000 VNĐ</option>
+              <option value="300000">300.000 VNĐ</option>
+              <option value="500000">500.000 VNĐ</option>
+              <option value="1000000">1.000.000 VNĐ</option>
+            </select>
+          </div>
+          <div class="suggest">
+            <div id="msg_menhgia"></div>
+          </div>
+
+
+        </div>
+      </div>
+
+      <span class="break"></span>
+      <div class="act-btn">
+        <button class="btn btn-primary btn-lg btn-block" id="btn_napthe" type="submit" name="submit">Nạp thẻ</button>
+      </div>
+      <br>
+      <div id="msg_napthe"></div>
+    </div>
+
+    <div class="main-body">
+      <div class="table-responsive">
+        <table class="table table-striped table-red">
+          <thead>
+          <tr>
+            <th>50k</th>
+            <th>100k</th>
+            <th>200k</th>
+            <th>500k</th>
+            <th>1.000k</th>
+            <th>2.000k</th>
+            <th>5.000k</th>
+          </tr>
+          </thead>
+          <tbody>
+
+          <tr>
+
+
+            <td><strong>40.000</strong> <span class="icon-g"></span></td>
+            <td><strong>90.000</strong> <span class="icon-g"></span></td>
+            <td><strong>180.000</strong> <span class="icon-g"></span></td>
+            <td><strong>450.000</strong> <span class="icon-g"></span></td>
+            <td><strong>900.000</strong> <span class="icon-g"></span></td>
+            <td><strong>1.800.000</strong> <span class="icon-g"></span></td>
+            <td><strong>4.500.000</strong> <span class="icon-g"></span></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="main-right">
+    <div class="alert alert-primary" role="alert">
+      <h3 class="alert-caption">Lưu ý</h3>
+      <ul class="alert-list">
+        <li>- Sau khi nạp thẻ phải giữ thẻ cẩn thận không cho một ai biết cho đến khi nào <a href="#napthe&amp;act=listcard" rel="ajax" class="tooltipstered">TÌNH TRẠNG THẺ</a> đó là Thẻ đúng/hoàn tất.</li>
+        <li>- Nếu không thẻ của bạn bị người khác lấy và nạp mất thì chúng tôi hoàn toàn không chịu trách nhiệm.</li>
+      </ul>
+    </div>
+    <div class="alert alert-white-secondary" role="alert">
+      <h3 class="alert-caption">Số thẻ nạp trong ngày</h3>
+      <ul class="alert-list-column">
+        <li>
+          <div class="l">Reset &lt; 1 lần</div>
+          <div class="v">100  thẻ / ngày</div>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</div>
