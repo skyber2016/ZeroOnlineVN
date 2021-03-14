@@ -1,0 +1,156 @@
+[2021-03-14 22:50:17,151] [INFO] [SfmU8Bqy] BOT ARE READY 
+[2021-03-14 22:50:20,970] [INFO] [SfmU8Bqy] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 22:50:21,099] [INFO] [SfmU8Bqy] BOT SCAN: 0 
+[2021-03-14 22:50:26,114] [INFO] [SfmU8Bqy] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 22:50:26,150] [INFO] [SfmU8Bqy] BOT SCAN: 0 
+[2021-03-14 22:50:31,170] [INFO] [SfmU8Bqy] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 22:50:31,216] [INFO] [SfmU8Bqy] BOT SCAN: 0 
+[2021-03-14 22:50:36,242] [INFO] [SfmU8Bqy] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 22:50:36,294] [INFO] [SfmU8Bqy] BOT SCAN: 0 
+[2021-03-14 22:50:41,307] [INFO] [SfmU8Bqy] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 22:50:41,348] [INFO] [SfmU8Bqy] BOT SCAN: 0 
+[2021-03-14 22:50:48,410] [INFO] [SfmU8Bqy] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 22:50:49,337] [INFO] [SfmU8Bqy] BOT SCAN: 0 
+[2021-03-14 22:51:01,970] [INFO] [SfmU8Bqy] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 22:51:02,582] [INFO] [SfmU8Bqy] BOT SCAN: 0 
+[2021-03-14 22:51:07,592] [INFO] [SfmU8Bqy] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 22:51:07,654] [INFO] [SfmU8Bqy] BOT SCAN: 0 
+[2021-03-14 22:51:12,670] [INFO] [SfmU8Bqy] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 22:51:12,814] [INFO] [SfmU8Bqy] BOT SCAN: 0 
+[2021-03-14 22:51:20,427] [INFO] [SfmU8Bqy] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 22:51:23,564] [INFO] [SfmU8Bqy] BOT SCAN: 0 
+[2021-03-14 22:51:28,580] [INFO] [SfmU8Bqy] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 22:51:28,609] [INFO] [SfmU8Bqy] BOT SCAN: 0 
+[2021-03-14 22:51:33,625] [INFO] [SfmU8Bqy] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 22:51:33,853] [INFO] [SfmU8Bqy] BOT SCAN: 0 
+[2021-03-14 22:51:38,872] [INFO] [SfmU8Bqy] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 22:51:38,923] [INFO] [SfmU8Bqy] BOT SCAN: 0 
+[2021-03-14 22:51:43,934] [INFO] [SfmU8Bqy] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 22:51:43,970] [INFO] [SfmU8Bqy] BOT SCAN: 0 
+[2021-03-14 22:51:48,980] [INFO] [SfmU8Bqy] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 22:51:49,437] [INFO] [SfmU8Bqy] BOT SCAN: 0 
+[2021-03-14 22:51:54,447] [INFO] [SfmU8Bqy] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 22:51:54,504] [INFO] [SfmU8Bqy] BOT SCAN: 0 
+[2021-03-14 22:51:59,512] [INFO] [SfmU8Bqy] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 22:51:59,545] [INFO] [SfmU8Bqy] BOT SCAN: 0 
+[2021-03-14 22:52:04,551] [INFO] [SfmU8Bqy] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 22:52:04,588] [INFO] [SfmU8Bqy] BOT SCAN: 1 
+[2021-03-14 22:52:22,840] [INFO] [SfmU8Bqy] UPDATE `bot_message` SET `message` = 'DQotLS0tLS0gKipZw4pVIEPhuqZVIEtJ4buCTSBUUkEqKiAtLS0tLS0NCm5oZHV5IHbhu6thIHnDqnUgY+G6p3Uga2nhu4NtIHRyYSBu4buZaSBkdW5nIGNodXnhu4NuIGtob+G6o24NCg==', `created_date` = '2021-03-14 22:42:49', `is_sent` = true, `image` = 'e549e773-8944-453a-ac8a-58eccca50d3f.png', `id` = 98 WHERE `id` = 98; 
+[2021-03-14 22:55:44,933] [INFO] [SfmU8Bqy] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 22:55:45,077] [INFO] [SfmU8Bqy] BOT SCAN: 0 
+[2021-03-14 22:55:47,626] [INFO] [SfmU8Bqy] BOT ARE READY 
+[2021-03-14 22:55:50,093] [INFO] [SfmU8Bqy] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 22:55:50,131] [INFO] [SfmU8Bqy] BOT SCAN: 0 
+[2021-03-14 22:55:55,139] [INFO] [SfmU8Bqy] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 22:55:55,170] [INFO] [SfmU8Bqy] BOT SCAN: 0 
+[2021-03-14 22:56:00,191] [INFO] [SfmU8Bqy] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 22:56:00,654] [INFO] [SfmU8Bqy] BOT SCAN: 0 
+[2021-03-14 22:56:05,670] [INFO] [SfmU8Bqy] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 22:56:05,725] [INFO] [SfmU8Bqy] BOT SCAN: 0 
+[2021-03-14 22:56:10,737] [INFO] [SfmU8Bqy] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 22:56:10,963] [INFO] [SfmU8Bqy] BOT SCAN: 0 
+[2021-03-14 22:56:15,981] [INFO] [SfmU8Bqy] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 22:56:16,021] [INFO] [SfmU8Bqy] BOT SCAN: 0 
+[2021-03-14 22:56:21,039] [INFO] [SfmU8Bqy] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 22:56:21,082] [INFO] [SfmU8Bqy] BOT SCAN: 0 
+[2021-03-14 22:56:26,087] [INFO] [SfmU8Bqy] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 22:56:26,733] [INFO] [SfmU8Bqy] BOT SCAN: 0 
+[2021-03-14 22:56:31,748] [INFO] [SfmU8Bqy] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 22:56:31,788] [INFO] [SfmU8Bqy] BOT SCAN: 0 
+[2021-03-14 22:56:36,791] [INFO] [SfmU8Bqy] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 22:56:36,845] [INFO] [SfmU8Bqy] BOT SCAN: 0 
+[2021-03-14 22:56:41,854] [INFO] [SfmU8Bqy] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 22:56:41,897] [INFO] [SfmU8Bqy] BOT SCAN: 0 
+[2021-03-14 22:56:46,906] [INFO] [SfmU8Bqy] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 22:56:47,019] [INFO] [SfmU8Bqy] BOT SCAN: 0 
+[2021-03-14 22:56:52,039] [INFO] [SfmU8Bqy] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 22:56:52,073] [INFO] [SfmU8Bqy] BOT SCAN: 0 
+[2021-03-14 22:56:57,084] [INFO] [SfmU8Bqy] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 22:56:57,126] [INFO] [SfmU8Bqy] BOT SCAN: 0 
+[2021-03-14 22:57:02,131] [INFO] [SfmU8Bqy] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 22:57:03,062] [INFO] [SfmU8Bqy] BOT SCAN: 0 
+[2021-03-14 22:57:08,071] [INFO] [SfmU8Bqy] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 22:57:09,186] [INFO] [SfmU8Bqy] BOT SCAN: 0 
+[2021-03-14 22:57:14,196] [INFO] [SfmU8Bqy] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 22:57:14,234] [INFO] [SfmU8Bqy] BOT SCAN: 0 
+[2021-03-14 22:57:19,255] [INFO] [SfmU8Bqy] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 22:57:19,289] [INFO] [SfmU8Bqy] BOT SCAN: 1 
+[2021-03-14 22:57:38,937] [INFO] [SfmU8Bqy] UPDATE `bot_message` SET `message` = 'DQotLS0tLS0gKipZw4pVIEPhuqZVIEtJ4buCTSBUUkEqKiAtLS0tLS0NCm5oZHV5IHbhu6thIHnDqnUgY+G6p3Uga2nhu4NtIHRyYSBu4buZaSBkdW5nIGNodXnhu4NuIGtob+G6o24NCg==', `created_date` = '2021-03-14 22:42:49', `is_sent` = true, `image` = 'e549e773-8944-453a-ac8a-58eccca50d3f.png', `id` = 98 WHERE `id` = 98; 
+[2021-03-14 22:57:43,979] [INFO] [SfmU8Bqy] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 22:57:44,014] [INFO] [SfmU8Bqy] BOT SCAN: 0 
+[2021-03-14 22:57:49,030] [INFO] [SfmU8Bqy] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 22:57:49,068] [INFO] [SfmU8Bqy] BOT SCAN: 0 
+[2021-03-14 22:57:54,083] [INFO] [SfmU8Bqy] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 22:57:55,138] [INFO] [SfmU8Bqy] BOT SCAN: 0 
+[2021-03-14 22:58:00,154] [INFO] [SfmU8Bqy] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 22:58:00,192] [INFO] [SfmU8Bqy] BOT SCAN: 0 
+[2021-03-14 22:58:05,205] [INFO] [SfmU8Bqy] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 22:58:05,254] [INFO] [SfmU8Bqy] BOT SCAN: 0 
+[2021-03-14 22:58:10,260] [INFO] [SfmU8Bqy] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 22:58:10,326] [INFO] [SfmU8Bqy] BOT SCAN: 0 
+[2021-03-14 22:58:15,340] [INFO] [SfmU8Bqy] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 22:58:15,377] [INFO] [SfmU8Bqy] BOT SCAN: 0 
+[2021-03-14 22:58:25,431] [INFO] [kAY4Smec] BOT ARE READY 
+[2021-03-14 22:58:29,215] [INFO] [kAY4Smec] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 22:58:29,380] [INFO] [kAY4Smec] BOT SCAN: 0 
+[2021-03-14 22:58:34,393] [INFO] [kAY4Smec] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 22:58:34,461] [INFO] [kAY4Smec] BOT SCAN: 0 
+[2021-03-14 22:58:39,484] [INFO] [kAY4Smec] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 22:58:39,527] [INFO] [kAY4Smec] BOT SCAN: 0 
+[2021-03-14 22:58:44,538] [INFO] [kAY4Smec] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 22:58:44,586] [INFO] [kAY4Smec] BOT SCAN: 1 
+[2021-03-14 22:59:35,028] [INFO] [kAY4Smec] UPDATE `bot_message` SET `message` = 'DQotLS0tLS0gKipZw4pVIEPhuqZVIEtJ4buCTSBUUkEqKiAtLS0tLS0NCm5oZHV5IHbhu6thIHnDqnUgY+G6p3Uga2nhu4NtIHRyYSBu4buZaSBkdW5nIGNodXnhu4NuIGtob+G6o24NCg==', `created_date` = '2021-03-14 22:42:49', `is_sent` = true, `image` = 'e549e773-8944-453a-ac8a-58eccca50d3f.png', `id` = 98 WHERE `id` = 98; 
+[2021-03-14 22:59:40,079] [INFO] [kAY4Smec] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 22:59:40,113] [INFO] [kAY4Smec] BOT SCAN: 0 
+[2021-03-14 22:59:45,125] [INFO] [kAY4Smec] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 22:59:45,160] [INFO] [kAY4Smec] BOT SCAN: 0 
+[2021-03-14 22:59:50,181] [INFO] [kAY4Smec] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 22:59:50,225] [INFO] [kAY4Smec] BOT SCAN: 0 
+[2021-03-14 22:59:55,240] [INFO] [kAY4Smec] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 22:59:55,279] [INFO] [kAY4Smec] BOT SCAN: 0 
+[2021-03-14 23:00:00,286] [INFO] [kAY4Smec] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 23:00:00,318] [INFO] [kAY4Smec] BOT SCAN: 0 
+[2021-03-14 23:00:05,323] [INFO] [kAY4Smec] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 23:00:05,392] [INFO] [kAY4Smec] BOT SCAN: 0 
+[2021-03-14 23:00:10,405] [INFO] [kAY4Smec] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 23:00:10,460] [INFO] [kAY4Smec] BOT SCAN: 0 
+[2021-03-14 23:00:15,467] [INFO] [kAY4Smec] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 23:00:15,508] [INFO] [kAY4Smec] BOT SCAN: 0 
+[2021-03-14 23:00:20,525] [INFO] [kAY4Smec] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 23:00:20,563] [INFO] [kAY4Smec] BOT SCAN: 0 
+[2021-03-14 23:00:25,579] [INFO] [kAY4Smec] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 23:00:25,623] [INFO] [kAY4Smec] BOT SCAN: 0 
+[2021-03-14 23:00:30,641] [INFO] [kAY4Smec] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 23:00:30,681] [INFO] [kAY4Smec] BOT SCAN: 0 
+[2021-03-14 23:00:35,700] [INFO] [kAY4Smec] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 23:00:35,751] [INFO] [kAY4Smec] BOT SCAN: 0 
+[2021-03-14 23:00:40,770] [INFO] [kAY4Smec] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 23:00:40,806] [INFO] [kAY4Smec] BOT SCAN: 0 
+[2021-03-14 23:00:45,826] [INFO] [kAY4Smec] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 23:00:45,864] [INFO] [kAY4Smec] BOT SCAN: 0 
+[2021-03-14 23:00:50,884] [INFO] [kAY4Smec] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 23:00:50,924] [INFO] [kAY4Smec] BOT SCAN: 0 
+[2021-03-14 23:00:55,944] [INFO] [kAY4Smec] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 23:00:56,001] [INFO] [kAY4Smec] BOT SCAN: 0 
+[2021-03-14 23:01:01,017] [INFO] [kAY4Smec] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 23:01:01,054] [INFO] [kAY4Smec] BOT SCAN: 0 
+[2021-03-14 23:01:06,071] [INFO] [kAY4Smec] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 23:01:06,263] [INFO] [kAY4Smec] BOT SCAN: 0 
+[2021-03-14 23:01:11,274] [INFO] [kAY4Smec] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 23:01:11,309] [INFO] [kAY4Smec] BOT SCAN: 0 
+[2021-03-14 23:01:16,325] [INFO] [kAY4Smec] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 23:01:16,369] [INFO] [kAY4Smec] BOT SCAN: 0 
+[2021-03-14 23:01:21,378] [INFO] [kAY4Smec] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 23:01:21,433] [INFO] [kAY4Smec] BOT SCAN: 0 
+[2021-03-14 23:01:26,450] [INFO] [kAY4Smec] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 23:01:26,503] [INFO] [kAY4Smec] BOT SCAN: 0 
+[2021-03-14 23:01:31,512] [INFO] [kAY4Smec] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 23:01:31,550] [INFO] [kAY4Smec] BOT SCAN: 0 
+[2021-03-14 23:01:36,571] [INFO] [kAY4Smec] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 23:01:36,625] [INFO] [kAY4Smec] BOT SCAN: 0 
+[2021-03-14 23:01:41,631] [INFO] [kAY4Smec] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 23:01:41,677] [INFO] [kAY4Smec] BOT SCAN: 0 
+[2021-03-14 23:01:46,695] [INFO] [kAY4Smec] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 23:01:46,734] [INFO] [kAY4Smec] BOT SCAN: 0 
+[2021-03-14 23:01:51,752] [INFO] [kAY4Smec] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-14 23:01:51,781] [INFO] [kAY4Smec] BOT SCAN: 0 

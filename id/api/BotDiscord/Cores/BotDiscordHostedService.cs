@@ -184,7 +184,17 @@ namespace API.Cores
                         var text = data.Message.Base64Decode();
                         if (text != null && channel != null)
                         {
-                            await channel.SendMessageAsync(text);
+                            if(data.Image != null)
+                            {
+                                using(var r = new StreamReader(AppSettings.PathToImage + data.Image))
+                                {
+                                    await channel.SendFileAsync(r.BaseStream, data.Image, data.Message.Base64Decode());
+                                }
+                            }
+                            else
+                            {
+                                await channel.SendMessageAsync(text);
+                            }
                         }
                         else
                         {

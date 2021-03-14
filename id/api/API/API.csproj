@@ -48,5 +48,9 @@
     <ProjectReference Include="..\SqlKata.Execution\SqlKata.Execution.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwRoot\images-upload\" />
+  </ItemGroup>
+
 
 </Project>

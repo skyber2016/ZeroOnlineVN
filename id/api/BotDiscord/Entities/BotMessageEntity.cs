@@ -21,5 +21,7 @@ namespace API.Entities
 
         [Column("is_sent")]
         public bool IsSent { get; set; }
+        [Column("image")]
+        public string Image { get; set; }
     }
 }

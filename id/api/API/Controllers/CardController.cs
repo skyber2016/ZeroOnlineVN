@@ -124,6 +124,10 @@ namespace API.Controllers
         [Route("ConfirmBanking")]
         public async Task<IActionResult> ConfirmBanking(IFormFile file)
         {
+            if(file == null)
+            {
+                throw new BadRequestException("File không hợp lệ");
+            }
             var allowExt = new string[] { "png", "jpg", "jpeg" };
             var ext = file.FileName.Split('.').LastOrDefault();
             if (!allowExt.Contains(ext))
@@ -138,11 +142,20 @@ namespace API.Controllers
             {
                 await file.CopyToAsync(mem);
                 var fileName = Guid.NewGuid().ToString() + "." + ext;
-                var path = this.Env.ContentRootPath + "\\image-upload\\" + fileName;
+                var path = this.Env.ContentRootPath + "\\wwwRoot\\images-upload\\" + fileName;
                 await System.IO.File.WriteAllBytesAsync(path, mem.ToArray());
-                var host = this.Request.Scheme + "://" + this.Request.Host + "/" + path;
-                return Response(host.Replace("\\", "/");
+                var host = fileName;
+                var builder = new StringBuilder();
+                builder.AppendLine("");
+                builder.AppendLine($"------ **YÊU CẦU KIỂM TRA** ------");
+                builder.AppendLine($"{this.UserService.GetCurrentUser().Username} vừa yêu cầu kiểm tra nội dung chuyển khoản");
+                await this.BotMessageService.AddAsync(new BotMessageEntity
+                {
+                    Message = builder.ToString().Base64Encode(),
+                    Image = fileName
+                });
             }
+            return Response();
         }
     }
 }

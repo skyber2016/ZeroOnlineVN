@@ -20,8 +20,20 @@
       <li>Thời gian duyệt 5 đến 10 phút</li>
       <li>Vui lòng chụp lại hóa đơn sau khi chuyển khoản gửi cho Admin nếu sau 5 đến 10 phút chưa cộng tiền</li>
       <li>Click vào hình QR và dùng chức năng quét QR trên app để nhập thông tin nhanh và chính xác hơn</li>
+      <li style="color: red;font-weight: bold">Sau khi chuyển khoản vui lòng chụp hóa đơn và bấm xác nhận chuyển khoản để Admin kiểm tra</li>
 
     </ul>
+
+  </div>
+  <div class="text-center w-100" style="margin-left: 40%;padding-bottom: 10px;margin: 5px; font-size: 22px;">
+    <div class="col-md-3">
+        <span>Ảnh chụp hóa đơn chuyển tiền</span>
+    </div>
+    <div class="col-md-3">
+      <input type="file" id="file-upload" placeholder=""  class="form-control">
+      <button class="btn btn-success" style="font-size: 22px" (click)="onConfirm()">Xác nhận chuyển khoản</button>
+    </div>
+    <div class="col-md-3"></div>
   </div>
   <div class="section-content">
     <div class="charge">
