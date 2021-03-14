@@ -1,4 +1,14 @@
-﻿using AutoMapper;
+﻿using API.Configurations;
+using API.Cores;
+using API.Database;
+using API.DTO.Error.Responses;
+using API.Helpers;
+using API.Security;
+using API.Services;
+using API.Services.Authenticate;
+using API.Services.Interfaces;
+using AutoMapper;
+using Discord.WebSocket;
 using log4net;
 using log4net.Config;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -19,15 +29,6 @@ using System.Reflection;
 using System.Text;
 using System.Xml;
 using Unity;
-using API.Configurations;
-using API.Cores;
-using API.Database;
-using API.DTO.Error.Responses;
-using API.Helpers;
-using API.Security;
-using API.Services;
-using API.Services.Authenticate;
-using API.Services.Interfaces;
 
 namespace API
 {
@@ -80,10 +81,12 @@ namespace API
             services.AddSingleton(mapper);
             services.Configure<JwtSetting>(Configuration.GetSection("JwtSetting"));
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
+            services.Configure<NapTheNgaySetting>(Configuration.GetSection("NapTheNgay"));
             services.Configure<SftpSetting>(Configuration.GetSection("SftpSetting"));
 
             services.Configure<ConnectionSetting>(Configuration.GetSection("ConnectionStrings"));
             services.AddScoped<DatabaseContext>();
+            services.AddSingleton<DiscordSocketClient>();
             services.AddScoped<ILoggerManager, LoggerHelper>();
             // Register interface
             this.Register(services);
@@ -102,7 +105,7 @@ namespace API
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1");
                     c.RoutePrefix = string.Empty;
                 });
-                //app.UseMiddleware<AutomationLoginMiddleware>();
+                app.UseMiddleware<AutomationLoginMiddleware>();
             }
             app.UseCors("MyPolicy");
             app.UseRouting();

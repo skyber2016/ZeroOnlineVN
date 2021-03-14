@@ -38,8 +38,7 @@
                 <div class="aic-bottom">
                   <i class="fas fa-sign-out-alt"></i>
                   <span>
-											<form method="post" name="logout" action="index.php"
-                            pmbx_context="2FEC16B8-C9CA-43BE-AA75-984BD86FBE62">
+											<form>
 													<input type="button" (click)="onLogout()" name="submit" value="Thoát"
                                  style="
     background: #ffffff00;
@@ -53,25 +52,25 @@
 												</span>
 
                   <span data-toggle="tooltip" data-placement="bottom" title="" id="head_wcoin"
-                        data-original-title="WCoin hiện có">
+                        data-original-title="ZCoin hiện có">
 													<i class="ic ic-w"></i>
-													<span> 0</span>
+													<span> {{money}}</span>
 												</span>
                 </div>
               </div>
             </div>
             <div class="acc-action">
               <div class="links">
-                <a href="http://home.mu-hanoi.vn">
+                <a href="https://zeroonlinevn.com" target="_blank">
                   <i class=" fa fa-home"></i> Trang chủ
                 </a>
-                <a href="http://dl.mu-hanoi.vn">
+                <a href="http://download.zeroonlinevn.com" target="_blank">
                   <i class="fal fa-download"></i> Tải game
                 </a>
-                <a href="http://home.mu-hanoi.vn">
+                <a href="https://zeroonlinevn.com" target="_blank">
                   <i class=" fa fa-comments"></i> Tin tức
                 </a>
-                <a href="https://www.facebook.com/muhanoi2010">
+                <a href="https://www.facebook.com/ZeroSeverVN" target="_blank">
                   <i class="fab fa-facebook-square"></i>
                 </a>
               </div>
@@ -87,7 +86,7 @@
       <div class="col-right">
         <div class="right-content">
           <div class="main-block">
-            <div class="main-right">
+            <div class="main-right" style="position: fixed">
               <div id="Login_Content">
                 <div class="priority-block out-top-20 out-top-20 character-wrap-block">
                   <br>
@@ -107,7 +106,7 @@
                         <div clas="text-center">
                           <a href="#">
                             <strong>Hỗ trợ</strong>
-                            <span class="tag1 tag1-time">037 440 4746</span>
+                            <span class="tag1 tag1-time">03 6655 4400</span>
                           </a>
                         </div>
                       </ul>
@@ -191,7 +190,7 @@
 																		</span>
                             <ul class="sub-menu">
                               <li class="sub-item">
-                                <a href="#tiente&act=gcoin2wcoin" rel="ajax">Đổi WCoin sang ZPs</a>
+                                <a [routerLink]="['/doi-tien']">Đổi ZCoin sang ZPs</a>
                               </li>
                             </ul>
                           </li>
@@ -202,13 +201,13 @@
 																		</span>
                             <ul class="sub-menu">
                               <li class="sub-item">
-                                <a href="#napthe&act=atm" rel="ajax">Nạp ATM
+                                <a [routerLink]="routerContant.card.ATM">Nạp ATM
                                   <span
                                     class="badge badge-green">+ 20 %</span>
                                 </a>
                               </li>
                               <li class="sub-item">
-                                <a href="#napthe&act=atm" rel="ajax">Nạp Ví MOMO
+                                <a [routerLink]="routerContant.card.ATM">Nạp Ví MOMO
                                   <span
                                     class="badge badge-green">+ 20 %</span>
                                 </a>
@@ -217,7 +216,7 @@
                                 <a [routerLink]="[routerContant.card.napThe]">Nạp thẻ</a>
                               </li>
                               <li class="sub-item">
-                                <a href="#napthe&act=listcard" rel="ajax">Lịch sử nạp thẻ</a>
+                                <a [routerLink]="routerContant.card.history">Lịch sử nạp thẻ</a>
                               </li>
                             </ul>
                           </li>

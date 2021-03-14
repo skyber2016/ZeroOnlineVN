@@ -17,3 +17,6 @@ dotnet_diagnostic.S112.severity = none
 
 # S2971: "IEnumerable" LINQs should be simplified
 dotnet_diagnostic.S2971.severity = none
+
+# S2386: Mutable fields should not be "public static"
+dotnet_diagnostic.S2386.severity = none

@@ -1,0 +1,13 @@
+[2021-03-12 22:12:29,311] [INFO] [we7R614p] BOT ARE READY 
+[2021-03-12 22:12:32,084] [INFO] [we7R614p] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-12 22:12:42,964] [ERROR] [we7R614p] ERROR [IM003] Specified driver could not be loaded due to system error  126: The specified module could not be found. (MySQL ODBC 3.51 Driver, C:\Windows\SysWOW64\myodbc3.dll). 
+[2021-03-12 22:12:47,999] [INFO] [we7R614p] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-12 22:12:48,345] [ERROR] [we7R614p] ERROR [IM003] Specified driver could not be loaded due to system error  126: The specified module could not be found. (MySQL ODBC 3.51 Driver, C:\Windows\SysWOW64\myodbc3.dll). 
+[2021-03-12 22:12:53,361] [INFO] [we7R614p] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-12 22:12:53,538] [ERROR] [we7R614p] ERROR [IM003] Specified driver could not be loaded due to system error  126: The specified module could not be found. (MySQL ODBC 3.51 Driver, C:\Windows\SysWOW64\myodbc3.dll). 
+[2021-03-12 22:12:58,846] [INFO] [we7R614p] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2021-03-12 22:13:00,164] [ERROR] [we7R614p] ERROR [IM003] Specified driver could not be loaded due to system error  126: The specified module could not be found. (MySQL ODBC 3.51 Driver, C:\Windows\SysWOW64\myodbc3.dll). 
+[2021-03-12 22:15:51,342] [INFO] [KtIlMPXT] BOT ARE READY 
+[2021-03-12 22:16:39,845] [INFO] [ynmGzVi1] BOT ARE READY 
+[2021-03-12 22:18:19,922] [INFO] [nwyLUk3N] BOT ARE READY 
+[2021-03-12 22:18:20,698] [INFO] [nwyLUk3N] 3/12/2021 10:18:14 PM 

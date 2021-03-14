@@ -2,7 +2,10 @@ import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {AuthService} from '../../../shared/services/auth.service';
 import {Router} from '@angular/router';
 import {RouterConstant} from '../../../core/infrastructure/router-constant';
+import {UserService} from '../../../shared/services/user.service';
 
+// @ts-ignore
+import {version} from '../../../../../package.json';
 @Component({
   selector: 'app-in-login',
   templateUrl: './in-login.component.html',
@@ -11,12 +14,19 @@ import {RouterConstant} from '../../../core/infrastructure/router-constant';
 export class InLoginComponent implements OnInit, AfterViewInit, OnDestroy {
   fullName = '';
   routerContant = RouterConstant;
-  constructor(private authService: AuthService, private router: Router) { }
+  money = 0;
+  constructor(private authService: AuthService, private router: Router, private userService: UserService) { }
 
   ngOnInit(): void {
     this.fullName = localStorage.getItem('fullName');
+    this.getMoney();
   }
 
+  getMoney(){
+    this.userService.getMoney().subscribe(resp =>{
+      this.money = resp.webMoney;
+    })
+  }
   css: string[] = [
     '/assets/HT/images/in-login.css',
     '/assets/HT/css/cssmin.css',
@@ -46,7 +56,7 @@ export class InLoginComponent implements OnInit, AfterViewInit, OnDestroy {
     // add and remove
     const css = document.createElement('link');
     css.rel = 'stylesheet';
-    css.href = source;
+    css.href = source + `?version=${version}`;
     css.id = source.replace(/[/:.]/gi, '_');
     css.onload = ()=>{
       this.idloaded.push(css.id);
@@ -65,7 +75,8 @@ export class InLoginComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onLogout(){
-    this.authService.Logout().subscribe(resp => {
+    this.authService.Logout().toPromise().finally(() => {
+      localStorage.clear();
       this.router.navigate([RouterConstant.auth.login]).then();
     });
   }

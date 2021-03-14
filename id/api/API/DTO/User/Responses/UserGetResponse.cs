@@ -1,15 +1,16 @@
-﻿using API.DTO.Base;
-
-namespace API.DTO.User.Responses
+﻿namespace API.DTO.User.Responses
 {
-    public class UserGetResponse : StatusResponse
+    public class UserGetResponse
     {
         public int Id { get; set; }
-        public string Branch { get; set; }
-        public string BankPos { get; set; }
-        public string LastLogin { get; set; }
-        public string LastIpLogin { get; set; }
-        public int RoleId { get; set; }
-        public string RoleName { get; set; }
+        public string Username { get; set; }
+        public bool IsAdmin { get; set; }
+        public int VIP { get; set; }
+        public string NetbarIP { get; set; }
+        public int WebMoney { get; set; }
+        public string Question { get; set; }
+        public string Answer { get; set; }
+        public string Email { get; set; }
+        public string Sdt { get; set; }
     }
 }

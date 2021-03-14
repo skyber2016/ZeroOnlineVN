@@ -9,10 +9,12 @@ namespace API.Database
 {
     public class DatabaseContext
     {
+        public Guid SessionId { get; set; }
         public QueryFactory Factory { get; set; }
         private static string ConnectionString { get; set; }
         public DatabaseContext(ILoggerManager logger)
         {
+            this.SessionId = Guid.NewGuid();
             if (ConnectionString == null)
             {
                 IConfigurationRoot configuration = new ConfigurationBuilder()

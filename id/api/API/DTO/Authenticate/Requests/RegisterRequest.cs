@@ -1,4 +1,4 @@
-﻿using API.Common;
+using API.Common;
 using API.Cores.Validations;
 
 namespace API.DTO.Authenticate.Requests
@@ -19,8 +19,7 @@ namespace API.DTO.Authenticate.Requests
         public string Email { get; set; }
 
         [NotNull(Message.NotNull, "câu hỏi")]
-        [MaxLength(50, Message.MaxLength, "câu hỏi")]
-        public string Question { get; set; }
+        public int? Question { get; set; }
 
         [NotNull(Message.NotNull, "câu trả lời")]
         [MinLength(6, Message.MinLength, "câu trả lời")]

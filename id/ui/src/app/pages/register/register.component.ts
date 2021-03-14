@@ -31,7 +31,7 @@ export class RegisterComponent extends BaseComponent implements OnInit {
       username: this.username,
       password: this.password,
       sdt: this.sdt,
-      question: this.question,
+      question: +this.question,
       answer: this.answer,
       email: this.email
     }).subscribe( resp => {

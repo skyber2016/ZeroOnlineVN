@@ -7,7 +7,9 @@ export const RouterConstant = {
     register: '/auth/register'
   },
   card: {
-    napThe: '/nap-the'
+    napThe: '/nap-the',
+    history: '/nap-the/lich-su',
+    ATM: '/nap-the/atm'
   },
   error: {
     _404: '/error/404',

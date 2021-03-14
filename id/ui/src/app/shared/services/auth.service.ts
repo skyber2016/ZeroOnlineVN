@@ -24,4 +24,8 @@ export class AuthService {
   Logout(): Observable<any>{
     return this.http.post('auth/logout', {});
   }
+
+  ResetPassword(obj): Observable<any>{
+    return this.http.post<any>('auth/resetPassword', obj);
+  }
 }

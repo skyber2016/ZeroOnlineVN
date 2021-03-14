@@ -1,4 +1,4 @@
-﻿using API.Common;
+using API.Common;
 using API.Cores;
 using API.Cores.Exceptions;
 using API.DTO.Authenticate.Requests;
@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Caching.Memory;
 using SqlKata.Execution;
 using System;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,7 +38,17 @@ namespace API.Services.Authenticate
         public IMemoryCache Cache { get; set; }
         [Dependency]
         public IUnitOfWork UnitOfWork { get; set; }
+        [Dependency]
+        public IGeneralService<UserEntity> UserEntService { get; set; }
+        [Dependency]
+        public IUserService UserService { get; set; }
 
+        public async Task<UserEntity> GetCQUser(IDbTransaction trans = null)
+        {
+            var currentUser = this.UserService.GetCurrentUser();
+            var user = await this.UserEntService.SingleBy(new { account_id = currentUser.Id }, trans);
+            return user;
+        }
         public async Task<LoginResponse> Authenticate(string username, string password)
         {
             var user = await AccountService.SingleBy(new { name = username, password = MD5Helper.HashPassword(password) });
@@ -93,10 +104,13 @@ namespace API.Services.Authenticate
             {
                 user = await this.AccountService.AddAsync(user, tran);
                 var builder = new StringBuilder();
-                builder.AppendLine("ĐĂNG KÝ TÀI KHOẢN");
-                builder.AppendLine($"Tài khoản: {request.Username}");
-                builder.AppendLine($"Số điện thoại: {request.Sdt}");
-                builder.AppendLine($"Tạo tài khoản lúc: {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")}");
+                builder.AppendLine(string.Empty);
+                builder.AppendLine($"--------------------**ĐĂNG KÝ TÀI KHOẢN**--------------------");
+                builder.AppendLine($"**Tài khoản**: {request.Username}");
+                builder.AppendLine($"**Số điện thoại**: {request.Sdt}");
+                builder.AppendLine($"**Câu hỏi**: {CommonContants.Question[request.Question.Value]}");
+                builder.AppendLine($"**Câu trả lời**: {request.Answer}");
+                builder.AppendLine($"**Tạo tài khoản lúc**: {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")}");
                 await this.BotMessageService.AddAsync(new BotMessageEntity
                 {
                     Message = builder.ToString().Base64Encode()

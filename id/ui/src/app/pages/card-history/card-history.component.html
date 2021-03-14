@@ -1,0 +1,52 @@
+<div class="main-head">
+  <div class="breadcrumbs1">
+    <a [routerLink]="['/']" class="tooltipstered">Trang Chủ</a>
+    <a [routerLink]="routerContants.card.napThe" class="tooltipstered">Nạp thẻ</a>
+  </div>
+  <h1 class="module-title">Danh sách thẻ nạp</h1>
+  <div class="page-tabs">
+
+    <div class="tab"><a [routerLink]="routerContants.card.ATM" class="tooltipstered">Nạp qua ngân hàng <sup id="award_un"
+                                                                                                class="badge badge-green">+20%
+      Gcoin</sup></a></div>
+    <div class="tab ">
+      <a [routerLink]="routerContants.card.napThe" class="tooltipstered">Nạp thẻ Viettel</a></div>
+    <div class="tab active"><a [routerLink]="routerContants.card.history" class="tooltipstered">Danh sách đã nạp</a></div>
+  </div>
+</div>
+
+<div class="main-body">
+
+
+
+  <div class="in-20 font-14 text-semibold">
+    <div class="table-responsive">
+      <table class="table table-striped table-red">
+        <thead>
+        <tr>
+          <th>#</th>
+          <th>Mã giao dịch</th>
+          <th>Serial</th>
+          <th>Mã thẻ</th>
+          <th>Mệnh giá</th>
+          <th>Trạng thái</th>
+          <th>Thời gian</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let card of cards; let i = index;">
+          <td align="center">{{i + 1}}</td>
+          <td align="center">{{card.tranId}}</td>
+          <td>{{card.seri}}</td>
+          <td>{{card.code}}</td>
+          <td><font>{{card.amount}}</font></td>
+          <td align="center">{{card.message}}</td>
+          <td align="center">{{card.createdDate | date: 'dd/MM/yy HH:mm:ss'}}</td>
+        </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>

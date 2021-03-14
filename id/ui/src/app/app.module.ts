@@ -6,25 +6,36 @@ import {AppComponent} from './app.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {ApiEndpointInterceptor} from './core/http-interceptor/api-endpoint.interceptor';
 import {AuthGuard} from './shared/guard/auth.guard';
-import { InLoginComponent } from './pages/layouts/in-login/in-login.component';
+import {InLoginComponent} from './pages/layouts/in-login/in-login.component';
+import {ForgotPasswordComponent} from './pages/forgot-password/forgot-password.component';
+import {FormsModule} from '@angular/forms';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
+import {ToastrModule} from 'ngx-toastr';
+import { CoinToZpsComponent } from './pages/coin-to-zps/coin-to-zps.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    InLoginComponent
+    InLoginComponent,
+    ForgotPasswordComponent,
+    CoinToZpsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [
     AuthGuard,
     {
-    provide: HTTP_INTERCEPTORS,
-    useClass: ApiEndpointInterceptor,
-    multi: true,
-  }],
+      provide: HTTP_INTERCEPTORS,
+      useClass: ApiEndpointInterceptor,
+      multi: true,
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule {

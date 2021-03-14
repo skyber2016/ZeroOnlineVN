@@ -7,7 +7,7 @@ import {BaseComponent} from '../../shared/components/base.component';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent extends BaseComponent implements OnInit {
-
+  username = localStorage.getItem('fullName');
   constructor() { super() }
 
   ngOnInit(): void {

@@ -1,6 +1,7 @@
 import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {environment} from 'src/environments/environment';
-
+// @ts-ignore
+import {version} from '../../../../package.json';
 
 @Component({
   selector: 'app-base',
@@ -18,12 +19,12 @@ export class BaseComponent implements OnInit, OnDestroy, AfterViewInit {
     '/assets/HT/js/bootstrap.min.js',
     '/assets/HT/js/owl.carousel.min.js',
     '/assets/HT/js/jquery.mCustomScrollbar.concat.min.js',
-    '/assets/HT/js/jquery.cookie.js',
+    '/assets/HT/js/jquery.cookie.min.js',
     '/assets/HT/js/jquery.ba-hashchange.min.js',
     '/assets/HT/js/jquery.tablesorter.min.js',
-    '/assets/HT/js/jquery.colorbox-min.js',
-    '/assets/HT/js/jquery.twbsPagination.js',
-    '/assets/HT/js/theme_muhnx.js',
+    '/assets/HT/js/jquery.colorbox.min.js',
+    '/assets/HT/js/jquery.twbsPagination.min.js',
+    '/assets/HT/js/theme.min.js',
     '/assets/HT/js/validation_muhnx.js',
     '/assets/HT/js/jquery.countdown.min.js',
     '/assets/HT/js/dhtmltooltip.js',
@@ -110,7 +111,7 @@ export class BaseComponent implements OnInit, OnDestroy, AfterViewInit {
       console.log(`%cInstalled ... ${source}`, 'color: gray;');
     }
 
-    script.src = source;
+    script.src = source + `?version=${version}`;
     head.appendChild(script);
   }
 

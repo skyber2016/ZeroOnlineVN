@@ -8,7 +8,7 @@ import {RouterConstant} from '../infrastructure/router-constant';
 import {AuthService} from 'src/app/shared/services/auth.service';
 import {MessageConstants} from '../infrastructure/message-constant';
 import {LoaderService} from 'src/app/shared/services/loader.service';
-import {ToastrService} from '../../shared/services/toastr.service';
+import {MessageService} from '../../shared/services/message.service';
 
 @Injectable()
 export class ApiEndpointInterceptor implements HttpInterceptor {
@@ -16,7 +16,7 @@ export class ApiEndpointInterceptor implements HttpInterceptor {
 
   constructor(
     private router: Router,
-    private toastr: ToastrService,
+    private toastr: MessageService,
     private authService: AuthService,
     private loaderService: LoaderService) {
   }
@@ -47,7 +47,8 @@ export class ApiEndpointInterceptor implements HttpInterceptor {
             this.toastr.error((err.error && err.error.message) || MessageConstants.ConnectServerFail);
             break;
           case 401:
-            if (err.url.toLowerCase().endsWith(RouterConstant.auth.refreshToken.toLowerCase())) {
+            if (err.url.toLowerCase().endsWith('refreshtoken')) {
+              localStorage.clear();
               this.router.navigate([RouterConstant.auth.login]).then();
               break;
             }
@@ -80,7 +81,13 @@ export class ApiEndpointInterceptor implements HttpInterceptor {
           return next.handle(this.mappingToken(req));
         }), catchError(err => {
           if (err.status === 401) {
-            return this.refreshTokenAndRetry(req, next);
+            if(err.url.toLowerCase().endsWith('refreshtoken')){
+              localStorage.clear();
+              this.router.navigate([RouterConstant.auth.login]).then();
+            }
+            else{
+              return this.refreshTokenAndRetry(req, next);
+            }
           }
           throw err;
         }));

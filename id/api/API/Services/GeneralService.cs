@@ -26,7 +26,6 @@ namespace API.Services
         public IUnitOfWork UnitOfWork { get; set; }
         [Dependency]
         public DatabaseContext Context { get; set; }
-
         private string TableName
         {
             get
@@ -90,9 +89,9 @@ namespace API.Services
             return this.Context.Factory.Query(this.TableName);
         }
 
-        public async Task<TEntity> SingleBy(object predicate)
+        public async Task<TEntity> SingleBy(object predicate, IDbTransaction transaction = null)
         {
-            var query = await this.FindBy(predicate).GetAsync<TEntity>();
+            var query = await this.FindBy(predicate).GetAsync<TEntity>(transaction);
             var result = query.FirstOrDefault();
             return result;
         }

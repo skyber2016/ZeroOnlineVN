@@ -7,5 +7,6 @@ namespace API.Entities
     public class UserEntity : BaseEntity
     {
         public string Name { get; set; }
+        public int Emoney { get; set; }
     }
 }

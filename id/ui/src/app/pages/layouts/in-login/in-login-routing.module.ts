@@ -14,6 +14,18 @@ const routes: Routes = [
       {
         path: 'nap-the',
         loadChildren: () => import('../../card/card.module').then(m => m.CardModule)
+      },
+      {
+        path: 'nap-the/lich-su',
+        loadChildren: () => import('../../card-history/card-history.module').then(m => m.CardHistoryModule)
+      },
+      {
+        path: 'nap-the/atm',
+        loadChildren: () => import('../../atm/atm.module').then(m => m.AtmModule)
+      },
+      {
+        path: 'doi-tien',
+        loadChildren: () => import('../../coin-to-zps/coin-to-zps.module').then(m => m.CoinToZpsModule)
       }
     ]
   }

@@ -1,0 +1,49 @@
+<div class="main-head">
+  <div class="breadcrumbs1">
+    <a [routerLink]="['/']" class="tooltipstered">Trang Chủ</a>
+    <a [routerLink]="routerContants.card.napThe" class="tooltipstered">Nạp thẻ</a>
+  </div>
+  <h1 class="module-title">Quy đổi ZCoin sang ZPs</h1>
+</div>
+
+<div class="main-page">
+  <div class="main-left">
+    <div class="main-body">
+      <p>
+        <span style="margin-right: 20px">Số ZCoin hiện có</span>
+        <span data-toggle="tooltip" data-placement="bottom" title="" data-original-title="GCent"
+              style="margin-right: 20px">
+                    <i class="ic ic-g"></i>
+                    <span>x {{money}}</span>
+                </span>
+
+      </p>
+      <span class="break"></span>
+      <input type="hidden" name="loaithe" id="loaithe" value="viettel">
+      <div class="cash-section">
+
+        <div class="cash-form-block">
+
+          <div class="form-box">
+            <input name="card_num" id="card_num" class="form-input" required="" [(ngModel)]="value" type="number" min="0" [max]="money">
+            <label for="card_num">Nhập số tiền muốn quy đổi</label>
+          </div>
+          <div class="suggest">
+            <div id="msg_card_num"></div>
+          </div>
+        </div>
+      </div>
+
+      <span class="break"></span>
+      <div class="act-btn">
+        <button class="btn btn-primary btn-lg btn-block" id="btn_napthe" type="button" name="submit"
+                (click)="onSubmit()">Đổi sang ZPs
+        </button>
+      </div>
+      <br>
+      <div id="msg_napthe"></div>
+    </div>
+
+  </div>
+</div>
+

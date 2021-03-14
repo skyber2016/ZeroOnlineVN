@@ -1,5 +1,7 @@
 import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 
+// @ts-ignore
+import {version} from '../../../../../package.json';
 @Component({
   selector: 'app-non-login',
   templateUrl: './non-login.component.html',
@@ -40,7 +42,7 @@ export class NonLoginComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     const css = document.createElement('link');
     css.rel = 'stylesheet';
-    css.href = source;
+    css.href = source + `?version=${version}`;
     css.id = source.replace(/[/:.]/gi, '_');
     css.onload = ()=>{
       this.ids.push(css.id);

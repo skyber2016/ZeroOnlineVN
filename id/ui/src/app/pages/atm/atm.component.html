@@ -1,0 +1,234 @@
+<div class="main-head">
+  <div class="breadcrumbs1">
+    <a [routerLink]="['/']" class="tooltipstered">Trang Chủ</a>
+    <a [routerLink]="routerContants.card.napThe" class="tooltipstered">Nạp thẻ</a>
+  </div>
+  <h1 class="module-title">Nạp thẻ cào</h1>
+  <div class="page-tabs">
+
+    <div class="tab active"><a [routerLink]="routerContants.card.ATM" class="tooltipstered">Nạp qua ngân hàng <sup
+      id="award_un"
+      class="badge badge-green">+20%
+      Gcoin</sup></a></div>
+    <div class="tab"><a [routerLink]="routerContants.card.napThe" class="tooltipstered">Nạp thẻ Viettel</a></div>
+    <div class="tab"><a [routerLink]="routerContants.card.history" class="tooltipstered">Danh sách đã nạp</a></div>
+  </div>
+  <div class="alert alert-primary">
+    <div class="alert-caption">Lưu ý</div>
+    <ul class="alert-list">
+      <li>Nạp ATM được khuyến mãi vào tài khoản chính</li>
+      <li>Thời gian duyệt 5 đến 10 phút</li>
+      <li>Vui lòng chụp lại hóa đơn sau khi chuyển khoản gửi cho Admin nếu sau 5 đến 10 phút chưa cộng tiền</li>
+      <li>Click vào hình QR và dùng chức năng quét QR trên app để nhập thông tin nhanh và chính xác hơn</li>
+
+    </ul>
+  </div>
+  <div class="section-content">
+    <div class="charge">
+      <div class="charge-form charge-bank">
+        <div class="logo-bank">
+          <span  class="bank-item momo"><img  src="/assets/HT/images/vcb.jpg" alt=""></span>
+          <a href='/assets/HT/images/qr/vcb.jpg' target="_blank" class="bank-item momo"><img  src="/assets/HT/images/qr/vcb_short.png"  alt=""></a>
+        </div>
+
+        <div class="bank-tabs">
+          <div class="tab active">
+            <div class="form">
+              <div class="promo">Nạp qua <span>ATM</span> được khuyến mại thêm <strong>+20%</strong></div>
+              <ul class="list-form form-charge">
+                <li id="chonthe">
+                  <span class="label">Số tài khoản</span>
+                  <div class="value">0421000534687</div>
+                </li>
+                <li>
+                  <span class="label">Chủ tài khoản</span>
+                  <div class="value">NGUYỄN HOÀNG DUY</div>
+                </li>
+                <li>
+                  <span class="label">Ngân hàng</span>
+                  <div class="value">Ngân hàng Vietcombank</div>
+                </li>
+                <li>
+                  <span class="label">Chi nhánh</span>
+                  <div class="value">HUNG VUONG - PGD LE DAI HANH</div>
+                </li>
+              </ul>
+              <blockquote>
+                <div class="cap">Lưu ý:</div>
+                <ul class="cont">
+                  <li>Khi chuyển khoản cần ghi rõ nội dung như sau: <strong class="transfer-text"> {{username}} WCoin</strong></li>
+                </ul>
+              </blockquote>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class="break"></span>
+  <div class="section-content">
+    <div class="charge">
+      <div class="charge-form charge-bank">
+        <div class="logo-bank">
+          <span  class=""><img width="130" src="/assets/HT/images/bidv.png" alt=""></span>
+          <a href='/assets/HT/images/qr/bidv.jpg' target="_blank" class="bank-item momo"><img  src="/assets/HT/images/qr/bidv_short.png"  alt=""></a>
+        </div>
+
+        <div class="bank-tabs">
+          <div class="tab active">
+            <div class="form">
+              <div class="promo">Nạp qua <span>ATM</span> được khuyến mại thêm <strong>+20%</strong></div>
+              <ul class="list-form form-charge">
+                <li id="chonthe">
+                  <span class="label">Số tài khoản</span>
+                  <div class="value">21110001602992</div>
+                </li>
+                <li>
+                  <span class="label">Chủ tài khoản</span>
+                  <div class="value">NGUYỄN HOÀNG DUY</div>
+                </li>
+                <li>
+                  <span class="label">Ngân hàng</span>
+                  <div class="value">Ngân hàng BIDV</div>
+                </li>
+                <li>
+                  <span class="label">Chi nhánh</span>
+                  <div class="value">Hà Nội</div>
+                </li>
+              </ul>
+              <blockquote>
+                <div class="cap">Lưu ý:</div>
+                <ul class="cont">
+                  <li>Khi chuyển khoản cần ghi rõ nội dung như sau: <strong class="transfer-text"> {{username}} WCoin</strong></li>
+                </ul>
+              </blockquote>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class="break"></span>
+  <div class="section-content">
+    <div class="charge">
+      <div class="charge-form charge-bank">
+        <div class="logo-bank">
+          <span  class=""><img width="130" src="/assets/HT/images/agribank.png" alt=""></span>
+        </div>
+
+        <div class="bank-tabs">
+          <div class="tab active">
+            <div class="form">
+              <div class="promo">Nạp qua <span>ATM</span> được khuyến mại thêm <strong>+20%</strong></div>
+              <ul class="list-form form-charge">
+                <li id="chonthe">
+                  <span class="label">Số tài khoản</span>
+                  <div class="value">5405205163795</div>
+                </li>
+                <li>
+                  <span class="label">Chủ tài khoản</span>
+                  <div class="value">NGUYỄN HOÀNG DUY</div>
+                </li>
+                <li>
+                  <span class="label">Ngân hàng</span>
+                  <div class="value">Ngân hàng Agribank</div>
+                </li>
+                <li>
+                  <span class="label">Chi nhánh</span>
+                  <div class="value">Đơn Dương - Lâm Đồng</div>
+                </li>
+              </ul>
+              <blockquote>
+                <div class="cap">Lưu ý:</div>
+                <ul class="cont">
+                  <li>Agribank ngoài giờ hành chính hay bị nhận tiền <strong class="transfer-text">CHẬM</strong> </li>
+                  <li>Vui lòng chụp lại hóa đơn sau khi chuyển khoản gửi qua Admin để giải quyết nhanh</li>
+                  <li>Khi chuyển khoản cần ghi rõ nội dung như sau: <strong class="transfer-text"> {{username}} WCoin</strong></li>
+                </ul>
+              </blockquote>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class="break"></span>
+  <div class="section-content" id="momo_pay">
+    <div class="charge">
+      <div class="charge-form charge-bank">
+        <div class="logo-bank">
+          <span  class="bank-item momo"><img width="130" src="/assets/HT/images/momo.png" alt=""></span>
+          <a href="/assets/HT/images/qr/momo.png" class="bank-item momo" target="_blank"><img width="130" src="/assets/HT/images/qr/momo_short.png" alt=""></a>
+        </div>
+
+        <div class="bank-tabs">
+          <div class="tab active">
+            <div class="form">
+              <div class="promo">Nạp qua <span>ATM</span> được khuyến mại thêm <strong>+20%</strong></div>
+              <ul class="list-form form-charge">
+                <li id="chonthe">
+                  <span class="label">Số tài khoản</span>
+                  <div class="value">037 440 4746</div>
+                </li>
+                <li>
+                  <span class="label">Chủ tài khoản</span>
+                  <div class="value">NGUYỄN HOÀNG DUY</div>
+                </li>
+                <li>
+                  <span class="label">Ứng dụng</span>
+                  <div class="value">Ví MOMO</div>
+                </li>
+              </ul>
+              <blockquote>
+                <div class="cap">Lưu ý:</div>
+                <ul class="cont">
+                  <li>Khi chuyển khoản cần ghi rõ nội dung như sau: <strong class="transfer-text"> {{username}} WCoin</strong></li>
+                </ul>
+              </blockquote>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class="break"></span>
+  <div class="section-content">
+    <div class="charge">
+      <div class="charge-form charge-bank">
+        <div class="logo-bank">
+          <span  class="bank-item momo"><img width="130" src="/assets/HT/images/vnpay.png" alt=""></span>
+          <a href="/assets/HT/images/qr/vnpay.jpg" class="bank-item momo" target="_blank"><img width="130" src="/assets/HT/images/qr/vnpay_short.png" alt=""></a>
+        </div>
+
+        <div class="bank-tabs">
+          <div class="tab active">
+            <div class="form">
+              <div class="promo">Nạp qua <span>ATM</span> được khuyến mại thêm <strong>+20%</strong></div>
+              <ul class="list-form form-charge">
+                <li id="chonthe">
+                  <span class="label">Số tài khoản</span>
+                  <div class="value">037 440 4746</div>
+                </li>
+                <li>
+                  <span class="label">Chủ tài khoản</span>
+                  <div class="value">NGUYỄN HOÀNG DUY</div>
+                </li>
+                <li>
+                  <span class="label">Ứng dụng</span>
+                  <div class="value">Ví VNPAY</div>
+                </li>
+              </ul>
+              <blockquote>
+                <div class="cap">Lưu ý:</div>
+                <ul class="cont">
+                  <li>Khi chuyển khoản cần ghi rõ nội dung như sau: <strong class="transfer-text"> {{username}} WCoin</strong></li>
+                </ul>
+              </blockquote>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

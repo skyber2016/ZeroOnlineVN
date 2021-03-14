@@ -3,28 +3,27 @@
     <div class="form-2">
       <h1>Đăng kí ngay</h1>
       <div class="form-box">
-        <input type="text" class="form-input" id="username" autocomplete="off"  maxlength="12" required="required" [(ngModel)]="username" autofocus="true">
+        <input type="text" class="form-input" id="username" autocomplete="off"  maxlength="12" required="required" [(ngModel)]="username" autofocus="true" [ngModelOptions]="{standalone: true}">
         <label for="username">Tài khoản</label>
       </div>
 
-      <input type='hidden' name='thehe' value='1'/>
       <div class="line"></div>
 
 
       <div class="form-box">
-        <input type="password" class="form-input" id="passweb1" autocomplete="off" name="pass1" maxlength="12" required="required" [(ngModel)]="password">
+        <input type="password" class="form-input" id="passweb1" autocomplete="off" name="pass1" maxlength="12" required="required" [(ngModel)]="password" [ngModelOptions]="{standalone: true}">
         <label for="passweb1">Mật khẩu</label>
       </div>
 
       <div class="form-box">
-        <input type="email" class="form-input" id="email" autocomplete="off" name="email" maxlength="50" required="required" [(ngModel)]="email">
+        <input type="email" class="form-input" id="email" autocomplete="off" name="email" maxlength="50" required="required" [(ngModel)]="email" [ngModelOptions]="{standalone: true}">
         <label for="email">Email</label>
       </div>
 
 
       <div class="form-box">
 
-        <select id="question" name="quest" class="form-select" [(ngModel)]="question">
+        <select id="question" name="quest" class="form-select" [(ngModel)]="question" [ngModelOptions]="{standalone: true}">
           <option label="Tên con vật yêu thích?" value="1">Tên con vật yêu thích?</option>
           <option label="Trường cấp 1 của bạn tên gì?" value="2">Trường cấp 1 của bạn tên gì?</option>
           <option label="Người bạn yêu quý nhất?" value="3">Người bạn yêu quý nhất?</option>
@@ -34,12 +33,12 @@
       </div>
 
       <div class="form-box">
-        <input type="text" class="form-input" id="answer" name="ans" required="" [(ngModel)]="answer" maxlength="50">
+        <input type="text" class="form-input" id="answer" name="ans" required="" [(ngModel)]="answer" maxlength="50" [ngModelOptions]="{standalone: true}">
         <label for="answer">Câu trả lời bí mật</label>
       </div>
 
       <div class="form-box">
-        <input type="text" class="form-input" id="phone" name="tel" required="required" maxlength="10" [(ngModel)]="sdt">
+        <input type="text" class="form-input" id="phone" name="tel" required="required" maxlength="10" [(ngModel)]="sdt" [ngModelOptions]="{standalone: true}">
         <label for="phone">Số điện thoại</label>
       </div>
 
@@ -51,7 +50,6 @@
         <br>
 
       </div>
-
 
     </div>
   </form>

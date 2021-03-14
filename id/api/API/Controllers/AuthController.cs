@@ -12,6 +12,11 @@ using API.Cores;
 using API.DTO.Authenticate.Requests;
 using API.DTO.Authenticate.Responses;
 using API.Services.Interfaces;
+using API.DTO.User.Request;
+using API.Entities;
+using API.Cores.Exceptions;
+using System;
+using System.Linq;
 
 namespace API.Controllers
 {
@@ -25,6 +30,8 @@ namespace API.Controllers
         public IUserService UserService { get; set; }
         [Dependency]
         public IWebHostEnvironment env { get; set; }
+        [Dependency]
+        public IGeneralService<AccountEntity> AccountService { get; set; }
 
         [HttpPost]
         [Route("Register")]
@@ -85,6 +92,27 @@ namespace API.Controllers
             var userId = UserService.GetCurrentUser().Id;
             await AuthService.RevokeToken(userId);
             return Response();
+        }
+
+
+        [HttpPost]
+        [Route("ResetPassword")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ResetPassword(ResetPasswordRequest request)
+        {
+            var user = await this.AccountService.SingleBy(new
+            {
+                name = request.Username,
+                Question1 = request.Question,
+                Answer1 = request.Answer
+            });
+            if(user == null)
+            {
+                throw new BadRequestException("Tài khoản hoặc câu trả lời không khớp");
+            }
+            var newPassword = Guid.NewGuid().ToString().Split('-').LastOrDefault();
+            user.Password = MD5Helper.HashPassword(newPassword);
+            return Ok(new { password = newPassword });
         }
     }
 }

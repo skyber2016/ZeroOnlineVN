@@ -1,5 +1,6 @@
 import {AfterViewInit, Component} from '@angular/core';
-
+// @ts-ignore
+import { version } from '../../package.json';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -18,12 +19,13 @@ export class AppComponent implements AfterViewInit {
     }
     const css = document.createElement('link');
     css.rel = 'stylesheet';
-    css.href = source;
+    css.href = source + '?version=' + version;
     document.head.append(css);
     this.addCss(allSource.shift(), allSource);
   }
 
   ngAfterViewInit(): void {
+    console.info('App version',version);
     this.addCss(this.css.shift(), this.css);
   }
 }
