@@ -11,3 +11,10 @@ id/api/SqlKata.Execution/obj/
 id/api/SqlKata.Execution/bin/
 id/api/QueryBuilder/obj/
 id/api/QueryBuilder/bin/
+Tools/Tools/BotDiscord/bin/
+Tools/Tools/BotDiscord/obj/
+Tools/Tools/QueryBuilder/bin/
+Tools/Tools/QueryBuilder/obj/
+Tools/Tools/SqlKata.Execution/bin/
+Tools/Tools/SqlKata.Execution/obj/
+Tools/Tools/.vs/

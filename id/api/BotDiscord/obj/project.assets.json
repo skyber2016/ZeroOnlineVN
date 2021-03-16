@@ -6661,7 +6661,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\User\\.nuget\\packages\\": {}
+    "C:\\Users\\duynh\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
@@ -6669,11 +6669,11 @@
       "projectUniqueName": "D:\\projects\\06.Zero\\ZeroOnlineV3\\id\\api\\BotDiscord\\BotDiscord.csproj",
       "projectName": "BotDiscord",
       "projectPath": "D:\\projects\\06.Zero\\ZeroOnlineV3\\id\\api\\BotDiscord\\BotDiscord.csproj",
-      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\duynh\\.nuget\\packages\\",
       "outputPath": "D:\\projects\\06.Zero\\ZeroOnlineV3\\id\\api\\BotDiscord\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\duynh\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
