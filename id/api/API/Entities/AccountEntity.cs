@@ -47,6 +47,9 @@ namespace API.Entities
         [Column("sdt")]
         public string Sdt { get; set; }
 
+        [Column("web_money_using")]
+        public long WebMoneyUsing { get; set; }
+
 
         public AccountEntity()
         {

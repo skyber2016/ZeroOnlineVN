@@ -50,12 +50,16 @@
 ">
 													</form>
 												</span>
-
+                  <span data-toggle="tooltip" data-placement="bottom" title="" id="vip" *ngIf="vip > 0"
+                        data-original-title="VIP hiện tại">
+													<img [src]="getUrlVip()" alt="" height="30px">
+												</span>
                   <span data-toggle="tooltip" data-placement="bottom" title="" id="head_wcoin"
                         data-original-title="ZCoin hiện có">
 													<i class="ic ic-w"></i>
 													<span> {{money}}</span>
 												</span>
+
                 </div>
               </div>
             </div>

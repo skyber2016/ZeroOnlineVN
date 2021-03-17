@@ -34,7 +34,7 @@ namespace API.Controllers
 
         [HttpGet]
         [Route("Money")]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Money()
         {
             var currentUser = this.UserService.GetCurrentUser();
             var user = await this.AccountService.SingleBy(new { id = currentUser.Id });
@@ -58,6 +58,7 @@ namespace API.Controllers
             {
                 throw new BadRequestException("Số tiền quy đổi phải lớn hơn 0");
             }
+            var upgradeVIP = false;
             await this.UnitOfWork.CreateTransaction(async tran =>
             {
                 var builder = new StringBuilder();
@@ -67,6 +68,37 @@ namespace API.Controllers
                 builder.AppendLine($"**Số tiền đổi:** {request.Money.Value.ToString("#,##0")}");
                 builder.AppendLine($"**ZCoin hiện có:** {account.WebMoney.ToString("#,##0")}");
                 account.WebMoney -= request.Money.Value;
+                account.WebMoneyUsing += request.Money.Value;
+                if (account.WebMoneyUsing >= 12000000 && account.VIP < 6)
+                {
+                    account.VIP = 6;
+                    upgradeVIP = true;
+                }
+                else if(account.WebMoneyUsing >= 8000000 && account.VIP < 5)
+                {
+                    account.VIP = 5;
+                    upgradeVIP = true;
+                }
+                else if(account.WebMoneyUsing >= 6000000 && account.VIP < 4)
+                {
+                    account.VIP = 4;
+                    upgradeVIP = true;
+                }
+                else if(account.WebMoneyUsing >= 2000000 && account.VIP < 3)
+                {
+                    account.VIP = 3;
+                    upgradeVIP = true;
+                }
+                else if(account.WebMoneyUsing >= 1000000 && account.VIP < 2)
+                {
+                    account.VIP = 2;
+                    upgradeVIP = true;
+                }
+                else if(account.WebMoneyUsing >= 500000 && account.VIP < 1)
+                {
+                    account.VIP = 1;
+                    upgradeVIP = true;
+                }
                 var user = await this.AuthService.GetCQUser(tran);
                 if(user == null)
                 {
@@ -102,6 +134,10 @@ namespace API.Controllers
                 await this.AccountService.UpdateAsync(account, tran);
                 builder.AppendLine($"**ZCoin còn lại:** {account.WebMoney.ToString("#,##0")}");
                 builder.AppendLine($"**Thời gian:** {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")}");
+                if (upgradeVIP)
+                {
+                    builder.AppendLine($"**Đạt mốc VIP mới:** {account.VIP}");
+                }
                 await this.WebLogService.AddAsync(new WebLogEntity
                 {
                     AccountId = this.UserService.GetCurrentUser().Id,
@@ -113,6 +149,10 @@ namespace API.Controllers
                     Message = builder.ToString().Base64Encode()
                 }, tran);
             });
+            if (upgradeVIP)
+            {
+                return Response(new { message = $"Chúc mừng bạn đã mốc VIP mới là {account.VIP}" });
+            }
             return Response();
         }
 

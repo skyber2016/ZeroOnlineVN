@@ -7,6 +7,7 @@ using API.Services.Interfaces;
 using Discord.WebSocket;
 using log4net;
 using log4net.Config;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.IO;
@@ -36,7 +37,6 @@ namespace BotDiscord
                     services.AddSingleton<ILoggerManager, LoggerHelper>();
                     services.AddSingleton(typeof(IGeneralService<>), typeof(GeneralService<>));
                     services.AddSingleton<IUnitOfWork, UnitOfWork>();
-                    
                 });
     }
 }

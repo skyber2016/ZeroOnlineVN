@@ -15,6 +15,7 @@ export class InLoginComponent implements OnInit, AfterViewInit, OnDestroy {
   fullName = '';
   routerContant = RouterConstant;
   money = 0;
+  vip = 0;
   constructor(private authService: AuthService, private router: Router, private userService: UserService) { }
 
   ngOnInit(): void {
@@ -25,7 +26,11 @@ export class InLoginComponent implements OnInit, AfterViewInit, OnDestroy {
   getMoney(){
     this.userService.getMoney().subscribe(resp =>{
       this.money = resp.webMoney;
+      this.vip = resp.vip;
     })
+  }
+  getUrlVip(){
+    return `/assets/images/vip/vip${this.vip}.png`;
   }
   css: string[] = [
     '/assets/HT/images/in-login.css',

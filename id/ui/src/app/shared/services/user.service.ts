@@ -17,7 +17,7 @@ export class  UserService extends GeneralService{
     return this.http.get<any>(this.apiName +'/Money');
   }
 
-  coinToZP(coin){
+  coinToZP(coin): Observable<any>{
     return this.http.post(this.apiName + '/CoinToZP', {money: coin});
   }
 }

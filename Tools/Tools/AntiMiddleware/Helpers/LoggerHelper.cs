@@ -28,6 +28,7 @@ namespace API.Helpers
 
         public void Error(string message)
         {
+            Console.WriteLine(message);
             var mess = $"[{ThreadId}] {message}";
             _logFile.Error(mess);
         }

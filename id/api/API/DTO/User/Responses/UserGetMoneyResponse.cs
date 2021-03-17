@@ -16,5 +16,7 @@ namespace API.DTO.User.Responses
                 this._money = Convert.ToInt32(value);
             }
         }
+
+        public int Vip { get; set; }
     }
 }

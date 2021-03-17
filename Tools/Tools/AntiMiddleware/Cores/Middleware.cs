@@ -59,7 +59,7 @@ namespace BotDiscord
                     this.Logger.Info("Middleware started");
                     this.MiddlewareService = new MiddlewareService(UnitOfWork);
                 }
-                await Task.Delay(10000, stoppingToken);
+                await Task.Delay(60000, stoppingToken);
             }
         }
     }

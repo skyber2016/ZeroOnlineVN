@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31019.35
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiddlewareTCP", "BotDiscord\MiddlewareTCP.csproj", "{F542E9AF-E107-4F67-BDC3-BD3973010C73}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiddlewareTCP", "AntiMiddleware\MiddlewareTCP.csproj", "{F542E9AF-E107-4F67-BDC3-BD3973010C73}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QueryBuilder", "QueryBuilder\QueryBuilder.csproj", "{308DB242-5A65-4097-8D24-0BBA2CB2968F}"
 EndProject
