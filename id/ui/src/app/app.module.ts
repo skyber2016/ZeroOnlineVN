@@ -13,13 +13,17 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {ToastrModule} from 'ngx-toastr';
 import { CoinToZpsComponent } from './pages/coin-to-zps/coin-to-zps.component';
+import { RewardVipComponent } from './pages/reward-vip/reward-vip.component';
+import { PowerRankingComponent } from './pages/power-ranking/power-ranking.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     InLoginComponent,
     ForgotPasswordComponent,
-    CoinToZpsComponent
+    CoinToZpsComponent,
+    RewardVipComponent,
+    PowerRankingComponent
   ],
   imports: [
     BrowserModule,

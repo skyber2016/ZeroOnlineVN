@@ -8,6 +8,7 @@ using API.Configurations;
 using API.Database;
 using API.Helpers;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace API.Cores
 {
@@ -18,16 +19,19 @@ namespace API.Cores
         IOptions<AppSettings> AppSettings { get; set; }
         DatabaseContext DatabaseContext { get; set; }
         T GetInstance<T>();
+        IMemoryCache Cache { get; set; }
     }
     public class UnitOfWork : IUnitOfWork
     {
         public IOptions<AppSettings> AppSettings { get; set; }
         public ILoggerManager Logger { get; set; }
         public IServiceProvider ServicesProvider { get; set; }
+        public IMemoryCache Cache { get; set; }
 
         public DatabaseContext DatabaseContext { get; set; }
-        public UnitOfWork(DatabaseContext db, IOptions<AppSettings> AppSettings, ILoggerManager Logger, IServiceProvider services)
+        public UnitOfWork(DatabaseContext db, IOptions<AppSettings> AppSettings, ILoggerManager Logger, IServiceProvider services, IMemoryCache caching)
         {
+            this.Cache = caching;
             this.ServicesProvider = services;
             DatabaseContext = db;
             this.Logger = Logger;
@@ -49,6 +53,7 @@ namespace API.Cores
                     try
                     {
                         await action(transaction);
+                        transaction.Rollback();
                         transaction.Commit();
                         this.Logger.Info($"Transaction commit success");
                     }

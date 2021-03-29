@@ -12,6 +12,10 @@ namespace API.Cores.Validations
             this.ErrorMessage = MessageConstants.GetMessage(message);
             this.ColumnName = columnName;
         }
+        public NotNullAttribute(string message)
+        {
+            this.ErrorMessage = message;
+        }
         public NotNullAttribute(Message message)
         {
             this.ErrorMessage = MessageConstants.GetMessage(message);

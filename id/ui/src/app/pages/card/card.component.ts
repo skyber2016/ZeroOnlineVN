@@ -38,7 +38,6 @@ export class CardComponent extends BaseComponent implements OnInit {
     });
   }
   statusClick(status){
-    debugger;
     this.status = status;
   }
   onSubmit() {

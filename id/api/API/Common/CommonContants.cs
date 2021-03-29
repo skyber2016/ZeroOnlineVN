@@ -80,5 +80,21 @@ namespace API.Common
                 return new Dictionary<int, int>();
             }
         }
+        public static IDictionary<int,int> ActionRewardVip
+        {
+            get
+            {
+                return new Dictionary<int, int>
+                {
+                    [1] = 301,
+                    [2] = 302,
+                    [3] = 303,
+                    [4] = 304,
+                    [5] = 305,
+                    [6] = 306
+                };
+            }
+        }
+
     }
 }

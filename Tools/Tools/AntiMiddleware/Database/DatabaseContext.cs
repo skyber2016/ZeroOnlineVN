@@ -20,9 +20,10 @@ namespace API.Database
                 .AddJsonFile("appsettings.json")
                 .Build();
                 ConnectionString = configuration.GetConnectionString("DefaultConnection");
+                logger.Info("CONNECT DATABASE: " + ConnectionString);
             }
             this.Factory = new QueryFactory(new OdbcConnection(ConnectionString), new MySqlCompiler());
-            this.Factory.Logger = result => logger.Info(result.ToString());
+            this.Factory.Logger = result => logger.Queries(result.ToString());
         }
     }
 }

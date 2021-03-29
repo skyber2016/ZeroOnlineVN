@@ -7,12 +7,19 @@ namespace API.Helpers
     public interface ILoggerManager
     {
         void Info(string message);
+        void Debug(string message);
         void Error(string message);
+        void Data(string message);
+        void Queries(string message);
+        void Status(string message);
     }
 
     public class LoggerHelper : ILoggerManager
     {
-        private readonly ILog _logFile = LogManager.GetLogger(typeof(LoggerHelper));
+        private readonly ILog _logFile = LogManager.GetLogger("RollingLogFileAppender");
+        private readonly ILog _logQueries = LogManager.GetLogger("Queries");
+        private readonly ILog _logStatus = LogManager.GetLogger("Status");
+        private readonly ILog _logData = LogManager.GetLogger("Data");
         private string ThreadId { get; set; }
         public LoggerHelper()
         {
@@ -28,15 +35,31 @@ namespace API.Helpers
 
         public void Error(string message)
         {
-            Console.WriteLine(message);
-            var mess = $"[{ThreadId}] {message}";
-            _logFile.Error(mess);
+            _logFile.Error(message);
+        }
+        public void Debug(string message)
+        {
+            _logFile.Debug(message);
         }
 
         public void Info(string message)
         {
-            var mess = $"[{ThreadId}] {message}";
-            _logFile.Info(mess);
+            _logFile.Info(message);
+        }
+
+        public void Data(string message)
+        {
+            _logData.Info(message);
+        }
+
+        public void Queries(string message)
+        {
+            _logQueries.Info(message);
+        }
+
+        public void Status(string message)
+        {
+            _logStatus.Info(message);
         }
     }
 

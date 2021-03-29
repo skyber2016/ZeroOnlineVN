@@ -6,32 +6,39 @@ import {UserService} from '../../../shared/services/user.service';
 
 // @ts-ignore
 import {version} from '../../../../../package.json';
+import {BaseComponent} from '../../../shared/components/base.component';
+
 @Component({
   selector: 'app-in-login',
   templateUrl: './in-login.component.html',
-  styleUrls: ['./in-login.component.css']
+  styleUrls: []
 })
-export class InLoginComponent implements OnInit, AfterViewInit, OnDestroy {
+export class InLoginComponent extends BaseComponent implements OnInit, AfterViewInit, OnDestroy {
   fullName = '';
   routerContant = RouterConstant;
   money = 0;
   vip = 0;
-  constructor(private authService: AuthService, private router: Router, private userService: UserService) { }
+
+  constructor(private authService: AuthService, private router: Router, private userService: UserService) {
+    super();
+  }
 
   ngOnInit(): void {
     this.fullName = localStorage.getItem('fullName');
     this.getMoney();
   }
 
-  getMoney(){
-    this.userService.getMoney().subscribe(resp =>{
+  getMoney() {
+    this.userService.getMoney().subscribe(resp => {
       this.money = resp.webMoney;
       this.vip = resp.vip;
-    })
+    });
   }
-  getUrlVip(){
+
+  getUrlVip() {
     return `/assets/images/vip/vip${this.vip}.png`;
   }
+
   css: string[] = [
     '/assets/HT/images/in-login.css',
     '/assets/HT/css/cssmin.css',
@@ -63,23 +70,28 @@ export class InLoginComponent implements OnInit, AfterViewInit, OnDestroy {
     css.rel = 'stylesheet';
     css.href = source + `?version=${version}`;
     css.id = source.replace(/[/:.]/gi, '_');
-    css.onload = ()=>{
+    css.onload = () => {
       this.idloaded.push(css.id);
-    }
+    };
     document.head.append(css);
     this.addCss(allSource.shift(), allSource);
 
   }
-  idloaded:string[] = [];
+
+  idloaded: string[] = [];
+
   ngAfterViewInit(): void {
     this.addCss(this.css.shift(), this.css);
+    setTimeout(()=>{
+      this.reloadScript();
+    },500);
   }
 
   ngOnDestroy(): void {
     this.idloaded.forEach(item => document.getElementById(item).remove());
   }
 
-  onLogout(){
+  onLogout() {
     this.authService.Logout().toPromise().finally(() => {
       localStorage.clear();
       this.router.navigate([RouterConstant.auth.login]).then();

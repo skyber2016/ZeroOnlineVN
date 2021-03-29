@@ -38,6 +38,14 @@ namespace MiddlewareTCP.command
             }
         }
 
+        public static byte[] AttackNormal
+        {
+            get
+            {
+                return new byte[] { 0xFE, 0x03 };
+            }
+        }
+
         public static byte[] GetPacketType(this byte[] data, int length = 6)
         {
             return data.Skip(2).Take(length).ToArray();

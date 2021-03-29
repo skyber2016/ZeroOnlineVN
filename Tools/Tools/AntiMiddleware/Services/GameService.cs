@@ -1,14 +1,18 @@
 ﻿using API.Configurations;
 using API.Cores;
 using API.Services.Interfaces;
+using BotDiscord;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
 using MiddlewareTCP.command;
 using SimpleTCP;
+using SqlKata.Execution;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace MiddlewareTCP.Entities
 {
@@ -18,8 +22,8 @@ namespace MiddlewareTCP.Entities
         private SimpleTcpClient MidClient { get; set; }
         private IUnitOfWork UnitOfWork { get; set; }
         private IDictionary<string, byte[]> Cache { get; set; }
-        private string Username { get; set; }
-        private string IP { get; set; }
+        private string Username { get; set; } = string.Empty;
+        private string IP { get; set; } = "NOIP";
         private IOptions<AppSettings> AppSettings
         {
             get
@@ -35,13 +39,14 @@ namespace MiddlewareTCP.Entities
             {
                 this.LoginHistoryService = unitOfWork.GetInstance<IGeneralService<LoginHistoryEntity>>();
                 this.Cache = new Dictionary<string, byte[]>();
-                this.SessionId = DateTime.Now.Ticks.ToString("X2");
+                this.SessionId = Guid.NewGuid().ToString();
                 this.UnitOfWork = unitOfWork;
                 this.MidClient = new SimpleTcpClient();
                 this.MidClient.DataReceived += ServerToMid_Receiver;
             }
             catch (Exception ex)
             {
+                this.UnitOfWork.Logger.Error($"[{this.Username}] [GameService] [Contructor] [{ex.Message}]");
                 WriteError(ex);
             }
             
@@ -49,6 +54,7 @@ namespace MiddlewareTCP.Entities
 
         public void GameToMid_Disconnected(object sender, TcpClient e)
         {
+            this.UnitOfWork.Logger.Error($"[{this.Username}] [GameService] [GameToMid_Disconnected] [Game disconnected]");
             this.Dispose();
         }
 
@@ -58,58 +64,106 @@ namespace MiddlewareTCP.Entities
             {
                 this.WriteError(ex.InnerException);
             }
-            this.UnitOfWork.Logger.Error("GAME:" + ex.Message);
+            this.UnitOfWork.Logger.Error($"[{this.Username}] [GameService] [WriteError] [{ex.Message}]");
+            this.UnitOfWork.Logger.Error($"[{this.Username}] [GameService] [WriteError] [{ex.StackTrace}]");
         }
-
+        private void CreateTransaction(Func<Task> action)
+        {
+            try
+            {
+                lock (Middleware.Locking)
+                {
+                    this.UnitOfWork.Logger.Info($"[{this.Username}] [GameService] [CreateTransaction] [Begin execute transaction]");
+                    var task = action();
+                    if (!task.Wait(TimeSpan.FromSeconds(3)))
+                    {
+                        this.UnitOfWork.Logger.Error($"[{this.Username}] [GameService] [CreateTransaction] [End execute transaction timeout]");
+                    }
+                    else
+                    {
+                        this.UnitOfWork.Logger.Info($"[{this.Username}] [GameService] [CreateTransaction] [End execute transaction success]");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                this.UnitOfWork.Logger.Error($"[{this.Username}] [GameService] [CreateTransaction] [End execute transaction throw Exception]");
+                this.WriteError(ex);
+            }
+        }
         public void GameToMid_Data(object sender, Message e)
         {
             try
             {
                 var data = e.Data.Split();
+                if (e.Data.GetPacketType(2).vnEquals(PacketContants.ARM))
+                {
+                    this.UnitOfWork.Logger.Data($"[GameToMid_Data] [{this.Username}] [{data}]");
+                    var key = "ChangeARM" + this.SessionId;
+                    object obj;
+                    this.UnitOfWork.Cache.TryGetValue(key, out obj);
+                    if (obj == null)
+                    {
+                        this.UnitOfWork.Cache.Set(key, true, TimeSpan.FromSeconds(1));
+                    }
+                    else
+                    {
+                        this.UnitOfWork.Logger.Error($"[{this.IP}] [{this.Username}] pendding change arm");
+                        this.UnitOfWork.Logger.Data($"[{this.IP}] [{this.Username}] pendding change arm");
+                        return;
+                    }
+                }
+                if (this.MidClient.TcpClient.Connected)
+                {
+                    try
+                    {
+                        this.MidClient.Write(e.Data);
+                    }
+                    catch (Exception ex)
+                    {
+                        this.UnitOfWork.Logger.Error($"[{this.Username}] [GameService] [GameToMid_Data] [Dispose] [Mid client throw abort connection]");
+                        this.WriteError(ex);
+                        this.Dispose();
+                    }
+                }
+                else
+                {
+                    this.UnitOfWork.Logger.Error($"[{this.Username}] [GameService] [GameToMid_Data] [Dispose] [Client disconnected]");
+                    this.Dispose();
+                    return;
+                }
                 if (e.Data.GetPacketType(2).vnEquals(PacketContants.JoinGameRequest))
                 {
+                    this.UnitOfWork.Logger.Info($"[{this.Username}] [GameService] [GameToMid_Data] [Begin join game request]");
                     var secretKey = e.Data.Skip(8).Take(4).ToArray().Split();
                     if (PacketContants.SecretKey.ContainsKey(secretKey))
                     {
                         var username = PacketContants.SecretKey[secretKey];
                         this.UnitOfWork.Logger.Info($"[{e.TcpClient.GetIP()}] [{username}] login success");
                         this.Username = username;
-                        this.LoginHistoryService.AddAsync(new LoginHistoryEntity
+                        this.CreateTransaction(() =>
                         {
-                            Username = username,
-                            LoginTime = DateTime.Now,
-                            SessionId = this.SessionId
-                        }).WaitTask();
+                            return Task.Run(() =>
+                            {
+                                this.UnitOfWork.Logger.Info($"[{this.Username}] [GameService] [GameToMid_Data] [JoinGameRequest] [Begin insert new login history success]");
+                                this.LoginHistoryService.AddAsync(new LoginHistoryEntity
+                                {
+                                    Username = username,
+                                    LoginTime = DateTime.Now,
+                                    SessionId = this.SessionId
+                                }).WaitTask();
+                                this.UnitOfWork.Logger.Info($"[{this.Username}] [GameService] [GameToMid_Data] [JoinGameRequest] [Insert new login history success]");
+                            });
+                        });
                     }
-                }
-                if (e.Data.GetPacketType(2).vnEquals(PacketContants.ARM))
-                {
-                    var key = "ChangeARM" + this.SessionId + DateTime.Now.ToString("yyyyMMddHHmmss");
-                    if (!this.Cache.ContainsKey(key))
-                    {
-                        this.Cache.Clear();
-                        this.Cache[key] = e.Data;
-                    }
-                    else
-                    {
-                        this.UnitOfWork.Logger.Error($"[{this.IP}] [{this.Username}] pendding change arm");
-                        return;
-                    }
-                }
-                if (this.MidClient.TcpClient.Connected)
-                {
-                    this.MidClient.Write(e.Data);
-                }
-                else
-                {
-                    this.Dispose();
+                    this.UnitOfWork.Logger.Info($"[{this.Username}] [GameService] [GameToMid_Data] [End join game request]");
                 }
             }
             catch (Exception ex)
             {
+                this.UnitOfWork.Logger.Error($"[{this.Username}] [GameService] [GameToMid_Data] [Throw Exception]");
                 this.WriteError(ex);
             }
-            
         }
 
         public void GameToMid_Connected(object sender, TcpClient e)
@@ -118,10 +172,29 @@ namespace MiddlewareTCP.Entities
             {
                 this.Game = e;
                 this.IP = this.Game.GetIP();
-                this.MidClient.Connect(this.AppSettings.Value.IpServer, this.AppSettings.Value.PortGameServer);
+                var task = Task.Run(() =>
+                {
+                    try
+                    {
+                        this.UnitOfWork.Logger.Info($"[{this.Username}] [GameService] [GameToMid_Connected] [Begin Connect to server]");
+                        this.MidClient.Connect(this.AppSettings.Value.IpServer, this.AppSettings.Value.PortGameServer);
+                        this.UnitOfWork.Logger.Info($"[{this.Username}] [GameService] [GameToMid_Connected] [End connect to server success]");
+                    }
+                    catch (Exception ex)
+                    {
+                        this.UnitOfWork.Logger.Error($"[{this.Username}] [GameService] [GameToMid_Connected] [{ex.Message}]");
+                        this.WriteError(ex);
+                    }
+                });
+                if (!task.Wait(TimeSpan.FromSeconds(3)))
+                {
+                    this.UnitOfWork.Logger.Error("TIMEOUT CONNECT TO SERVER");
+                    this.Dispose();
+                }
             }
             catch (Exception ex)
             {
+                this.UnitOfWork.Logger.Error($"[{this.Username}] [GameService] [GameToMid_Connected] [{ex.Message}]");
                 this.Game.Close();
                 this.Game.Dispose();
                 this.WriteError(ex);
@@ -133,14 +206,27 @@ namespace MiddlewareTCP.Entities
         {
             try
             {
-                if (!this.Game.Connected)
+                if (!this.Game.Client.Connected)
                 {
+                    this.UnitOfWork.Logger.Error($"[{this.Username}] [GameService] [ServerToMid_Receiver] [Game not connected]");
+                    this.Dispose();
                     return;
                 }
-                this.Game.Client.Send(e.Data);
+                try
+                {
+                    this.Game.Client.Send(e.Data);
+                }
+                catch (Exception ex)
+                {
+                    this.UnitOfWork.Logger.Error($"[{this.Username}] [GameService] [ServerToMid_Receiver] [Game throw abort connection]");
+                    this.WriteError(ex);
+                    this.Dispose();
+                }
+
             }
             catch (Exception ex)
             {
+                this.UnitOfWork.Logger.Error($"[{this.Username}] [GameService] [ServerToMid_Receiver] [Throw exception]");
                 this.WriteError(ex);
             }
             
@@ -150,20 +236,28 @@ namespace MiddlewareTCP.Entities
         {
             try
             {
-                this.UnitOfWork.Logger.Info($"[{this.IP}] [{this.Username}] logout");
-                var currentHistory = this.LoginHistoryService.SingleBy(new { session_id = this.SessionId }).WaitTask();
-                if (currentHistory != null)
-                {
-                    currentHistory.LogoutTime = DateTime.Now;
-                    this.LoginHistoryService.UpdateAsync(currentHistory).WaitTask();
-                }
+                this.UnitOfWork.Logger.Info($"[{this.Username}] [GameService] [Dispose] [Begin Logout client]");
                 this.Game.Close();
                 this.Game.Dispose();
                 this.MidClient.Disconnect();
                 this.MidClient.Dispose();
+                this.UnitOfWork.Logger.Info($"[{this.Username}] [GameService] [Dispose] [End Logout client]");
+                this.CreateTransaction(() =>
+                {
+                    return Task.Run(() =>
+                    {
+                        this.UnitOfWork.Logger.Info($"[{this.Username}] [GameService] [Dispose] [Begin update logout time]");
+                        this.UnitOfWork.DatabaseContext.Factory.Query("login_history").Where("session_id", this.SessionId).Update(new
+                        {
+                            logout_time = DateTime.Now
+                        });
+                        this.UnitOfWork.Logger.Info($"[{this.Username}] [GameService] [Dispose] [End update logout time success]");
+                    });
+                });
             }
             catch (Exception ex)
             {
+                this.UnitOfWork.Logger.Error($"[{this.Username}] [GameService] [Dispose] [{ex.Message}]");
                 this.WriteError(ex);
             }
             

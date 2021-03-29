@@ -11,8 +11,8 @@ namespace MiddlewareTCP.Services
 {
     public class MiddlewareService : IDisposable
     {
-        private SimpleTcpServer LoginServer { get; set; }
-        private SimpleTcpServer GameServer { get; set; }
+        public SimpleTcpServer LoginServer { get; set; }
+        public SimpleTcpServer GameServer { get; set; }
         private IUnitOfWork UnitOfWork { get; set; }
         private IDictionary<string, LoginService> LoginUsers { get; set; }
         private IDictionary<string, GameService> GameUsers { get; set; }
@@ -26,62 +26,158 @@ namespace MiddlewareTCP.Services
             this.LoginServer.DataReceived += LoginServer_DataReceived;
             this.LoginServer.ClientDisconnected += LoginServer_Disconnected;
             this.LoginServer.Start(unitOfWork.AppSettings.Value.PortLoginMid);
-
+            this.UnitOfWork.Logger.Info($"LOGIN SERVER STARTED ON {unitOfWork.AppSettings.Value.PortLoginMid}");
             this.GameServer = new SimpleTcpServer();
             this.GameServer.DataReceived += GameServer_ReceiveData;
             this.GameServer.ClientConnected += GameServer_ClientConnected;
             this.GameServer.ClientDisconnected += GameServer_ClientDisconnected;
             this.GameServer.Start(unitOfWork.AppSettings.Value.PortGameMid);
+            this.UnitOfWork.Logger.Info($"GAME SERVER STARTED ON {unitOfWork.AppSettings.Value.PortGameMid}");
         }
 
         private void GameServer_ClientDisconnected(object sender, TcpClient e)
         {
-            var user = this.GameUsers[e.GetSessionId()];
-            user.Dispose();
-        }
+            var ip = e.GetIP();
+            try
+            {
+                this.UnitOfWork.Logger.Info($"[MiddlewareService] [GameServer_ClientDisconnected] [LoginUsers available: {this.LoginUsers.Count}]");
+                var sessionId = e.GetSessionId();
+                var user = this.GameUsers[sessionId];
+                user.Dispose();
+                this.GameUsers.Remove(sessionId);
+                this.UnitOfWork.Logger.Info($"[{ip}] [Middleware service] [Remove {sessionId} from LoginUsers]");
+                this.UnitOfWork.Logger.Info($"[MiddlewareService] [GameServer_ClientDisconnected] [LoginUsers available: {this.LoginUsers.Count}]");
 
+            }
+            catch (Exception ex)
+            {
+                this.UnitOfWork.Logger.Error($"[MiddlewareService] [GameServer_ClientDisconnected] [{ip}] [Throw Exception]");
+                this.WriteError(ex);
+            }
+            
+        }
+        private void WriteError(Exception ex)
+        {
+            if (ex.InnerException != null)
+            {
+                WriteError(ex.InnerException);
+            }
+            this.UnitOfWork.Logger.Error("LOGIN: " + ex.Message);
+            this.UnitOfWork.Logger.Error("LOGIN: " + ex.StackTrace);
+        }
         private void GameServer_ClientConnected(object sender, TcpClient e)
         {
-            var user = new GameService(this.UnitOfWork);
-            this.GameUsers[e.GetSessionId()] = user;
-            user.GameToMid_Connected(sender, e);
-            this.UnitOfWork.Logger.Info($"{e.GetIP()} connected");
+            var ip = e.GetIP();
+            try
+            {
+                var user = new GameService(this.UnitOfWork);
+                this.GameUsers[e.GetSessionId()] = user;
+                user.GameToMid_Connected(sender, e);
+                this.UnitOfWork.Logger.Info($"{ip} connected");
+            }
+            catch (Exception ex)
+            {
+                this.UnitOfWork.Logger.Error($"[MiddlewareService] [GameServer_ClientConnected] [{ip}] [Throw Exception]");
+                this.WriteError(ex);
+            }
         }
 
         private void GameServer_ReceiveData(object sender, Message e)
         {
-            if (!this.GameUsers.ContainsKey(e.TcpClient.GetSessionId()))
+            var ip = e.TcpClient.GetIP();
+            try
             {
-                return;
+                if (!this.GameUsers.ContainsKey(e.TcpClient.GetSessionId()))
+                {
+                    this.UnitOfWork.Logger.Error($"[MiddlewareService] [GameServer_ReceiveData] [{ip}] [Not found user]");
+                    return;
+                }
+                var user = this.GameUsers[e.TcpClient.GetSessionId()];
+                user.GameToMid_Data(sender, e);
             }
-            var user = this.GameUsers[e.TcpClient.GetSessionId()];
-            user.GameToMid_Data(sender, e);
+            catch (Exception ex)
+            {
+                this.UnitOfWork.Logger.Error($"[MiddlewareService] [GameServer_ReceiveData] [{ip}] [Throw Exception]");
+                this.WriteError(ex);
+            }
+            
         }
 
         private void LoginServer_Disconnected(object sender, TcpClient e)
         {
-            var user = this.LoginUsers[e.GetSessionId()];
-            user.Dispose();
+            try
+            {
+                this.UnitOfWork.Logger.Info($"[MiddlewareService] [LoginServer_Disconnected] [LoginUsers available: {this.LoginUsers.Count}]");
+
+                var ip = e.GetIP();
+                var sessionId = e.GetSessionId();
+                this.UnitOfWork.Logger.Info($"{e.GetIP()} disconnected");
+                var user = this.LoginUsers[sessionId];
+                user.Dispose();
+                this.LoginUsers.Remove(sessionId);
+                this.UnitOfWork.Logger.Info($"[{ip}] [Middleware service] [Remove {sessionId} from LoginUsers]");
+                this.UnitOfWork.Logger.Info($"[MiddlewareService] [LoginServer_Disconnected] [LoginUsers available: {this.LoginUsers.Count}]");
+            }
+            catch (Exception ex)
+            {
+                this.UnitOfWork.Logger.Error($"[MiddlewareService] [Throw Exception]");
+                this.WriteError(ex);
+            }
         }
 
         private void LoginServer_DataReceived(object sender, Message e)
         {
-            var user = this.LoginUsers[e.TcpClient.GetSessionId()];
-            user.GameToMid_DataReceiver(sender, e);
+            var ip = e.TcpClient.GetIP();
+            try
+            {
+                var user = this.LoginUsers[e.TcpClient.GetSessionId()];
+                user.GameToMid_DataReceiver(sender, e);
+            }
+            catch (Exception ex)
+            {
+                this.UnitOfWork.Logger.Error($"[LoginServer_DataReceived] [{ip}] [Throw Exception]");
+                this.WriteError(ex);
+            }
+            
         }
 
         private void LoginServer_ClientConnected(object sender, TcpClient e)
         {
-            var user = new LoginService(this.UnitOfWork);
-            this.LoginUsers[e.GetSessionId()] = user;
-            this.UnitOfWork.Logger.Info($"{e.GetIP()} connected");
-            user.GameToMid_Connected(sender, e);
+            var ip = e.GetIP();
+            try
+            {
+                var user = new LoginService(this.UnitOfWork);
+                this.LoginUsers[e.GetSessionId()] = user;
+                this.UnitOfWork.Logger.Info($"{e.GetIP()} connected");
+                user.GameToMid_Connected(sender, e);
+            }
+            catch (Exception ex)
+            {
+                this.UnitOfWork.Logger.Error($"[MiddlewareService] [LoginServer_ClientConnected] [{ip}] [Throw Exception]");
+                this.WriteError(ex);
+            }
+            
         }
 
         public void Dispose()
         {
-            this.LoginUsers.Clear();
-            this.GameUsers.Clear();
+            try
+            {
+                this.UnitOfWork.Logger.Info("SERVER STOPPING");
+                this.UnitOfWork.Logger.Info($"Begin disconnect {this.GameUsers.Count} user");
+                foreach (var item in this.GameUsers)
+                {
+                    item.Value.Dispose();
+                }
+                this.LoginUsers.Clear();
+                this.GameUsers.Clear();
+            }
+            catch (Exception ex)
+            {
+                this.UnitOfWork.Logger.Error($"[MiddlewareService] [Dispose] [Throw Exception]");
+                this.WriteError(ex);
+            }
+            
         }
     }
 }

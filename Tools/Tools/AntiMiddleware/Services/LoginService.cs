@@ -6,10 +6,11 @@ using SimpleTCP;
 using System;
 using System.Linq;
 using System.Net.Sockets;
+using System.Threading.Tasks;
 
 namespace MiddlewareTCP.Entities
 {
-    public class LoginService
+    public class LoginService : IDisposable
     {
         public string SessionId { get; set; }
         private SimpleTcpClient MidClient { get; set; }
@@ -28,52 +29,88 @@ namespace MiddlewareTCP.Entities
         {
             try
             {
-                this.SessionId = Guid.NewGuid().ToString().Split('-').LastOrDefault();
+                this.SessionId = Guid.NewGuid().ToString();
                 this.UnitOfWork = unitOfWork;
                 this.MidClient = new SimpleTcpClient();
                 this.MidClient.DataReceived += ServerToMid_Receiver;
-                this.UnitOfWork.Logger.Info("LOGIN IS STARTED");
             }
             catch (Exception ex)
             {
+                this.UnitOfWork.Logger.Error($"[{this.Username}] [LoginService] [Dispose] [Throw exception]");
                 this.WriteError(ex);
             }
         }
 
         private void WriteError(Exception ex)
         {
-            if(ex.InnerException != null)
+
+            if (ex.InnerException != null)
             {
-                WriteError(ex.InnerException);
+                this.WriteError(ex.InnerException);
             }
-            this.UnitOfWork.Logger.Error("LOGIN: " + ex.Message);
+            this.UnitOfWork.Logger.Error($"[{this.Username}] [LoginService] [WriteError] [{ex.Message}]");
+            this.UnitOfWork.Logger.Error($"[{this.Username}] [LoginService] [WriteError] [{ex.StackTrace}]");
         }
         public void GameToMid_DataReceiver(object sender, Message e)
         {
+            var ip = e.TcpClient.GetIP();
             try
             {
+                this.UnitOfWork.Logger.Info($"[{this.Username}] [LoginService] [GameToMid_DataReceiver] [Begin send data]");
                 if (e.Data.GetPacketType().vnEquals(PacketContants.LoginTypeRequest))
                 {
+                    this.UnitOfWork.Logger.Info($"[{this.Username}] [LoginService] [GameToMid_DataReceiver] [Begin get username]");
                     this.Username = e.Data.Skip(8).Take(32).Where(x => x != 0x0).ToArray().ConvertToString();
+                    this.UnitOfWork.Logger.Info($"[{this.Username}] [LoginService] [GameToMid_DataReceiver] [End get username success]");
                 }
-                this.MidClient.Write(e.Data);
+                if (this.MidClient.TcpClient.Connected)
+                {
+                    this.UnitOfWork.Logger.Info($"[{this.Username}] [LoginService] [GameToMid_DataReceiver] [Begin send data to mid client]");
+                    this.MidClient.Write(e.Data);
+                    this.UnitOfWork.Logger.Info($"[{this.Username}] [LoginService] [GameToMid_DataReceiver] [End send data to mid client success]");
+                }
+                else
+                {
+                    this.UnitOfWork.Logger.Error($"[{ip}] [{this.Username}] [LoginService] [GameToMid_DataReceiver] [Mid client is not connected]");
+                    this.Dispose();
+                }
             }
             catch (Exception ex)
             {
+                this.UnitOfWork.Logger.Error($"[{ip}] [{this.Username}] [LoginService] [GameToMid_DataReceiver] [Throw exception]");
                 this.WriteError(ex);
             }
         }
 
         public void GameToMid_Connected(object sender, TcpClient e)
         {
+            var ip = e.GetIP();
             try
             {
                 this.Game = e;
-                this.MidClient.TimeOut = TimeSpan.FromSeconds(5);
-                this.MidClient.Connect(this.AppSettings.Value.IpServer, this.AppSettings.Value.PortLoginServer);
+                var task = Task.Run(() =>
+                {
+                    try
+                    {
+                        this.UnitOfWork.Logger.Info($"[{this.Username}] [LoginService] [GameToMid_Connected] [Begin connect to server]");
+                        this.MidClient.Connect(this.AppSettings.Value.IpServer, this.AppSettings.Value.PortLoginServer);
+                        this.UnitOfWork.Logger.Info($"[{this.Username}] [LoginService] [GameToMid_Connected] [End connect to server success]");
+                    }
+                    catch (Exception ex)
+                    {
+                        this.UnitOfWork.Logger.Error($"[{ip}] [{this.Username}] [LoginService] [GameToMid_Connected] [End connect to server timeout]");
+                        this.WriteError(ex);
+                    }
+                });
+                if(!Task.WaitAll(new Task[] { task }, TimeSpan.FromSeconds(3)))
+                {
+                    this.UnitOfWork.Logger.Error("TIMEOUT CONNECT TO SERVER");
+                    this.Dispose();
+                }
             }
             catch (Exception ex)
             {
+                this.UnitOfWork.Logger.Error($"[{ip}] [{this.Username}] [LoginService] [GameToMid_Connected] [Throw exception]");
                 this.WriteError(ex);
                 this.Game.Close();
                 this.Game.Dispose();
@@ -83,6 +120,8 @@ namespace MiddlewareTCP.Entities
         {
             try
             {
+                var ip = e.TcpClient.GetIP();
+                this.UnitOfWork.Logger.Info($"[{ip}] [{this.Username}] [LoginService] [ServerToMid_Receiver] [Begin send data to Game]");
                 byte[] dataSend = e.Data;
 
                 if (e.Data.GetPacketType(2).vnEquals(PacketContants.LoginResponse))
@@ -98,16 +137,24 @@ namespace MiddlewareTCP.Entities
                     {
                         dataSend = data.Replace(portLoginServer, portLoginMid).Split(' ').Select(x => Convert.ToByte(x)).ToArray();
                         dataSend = dataSend.Replace(ipServer.ToByte(), ipMid.ToByte());
+                        this.UnitOfWork.Logger.Error($"[{ip}] [{this.Username}] [LoginService] [ServerToMid_Receiver] [Change port {portLoginServer} to {portLoginMid}]");
+                        this.UnitOfWork.Logger.Error($"[{ip}] [{this.Username}] [LoginService] [ServerToMid_Receiver] [Change IP {ipServer} to {ipMid}]");
+
                     }
                 }
-                if (!this.Game.Connected)
+                if (!this.Game.Client.Connected)
                 {
+                    this.UnitOfWork.Logger.Error($"[{ip}] [{this.Username}] [LoginService] [ServerToMid_Receiver] [Game is not connected]");
+                    this.Dispose();
                     return;
                 }
                 this.Game.Client.Send(dataSend);
+                this.UnitOfWork.Logger.Info($"[{this.Username}] [LoginService] [ServerToMid_Receiver] [End send data to Game success]");
             }
             catch (Exception ex)
             {
+                this.UnitOfWork.Logger.Error($"[{this.Username}] [LoginService] [Dispose] [Throw exception]");
+
                 this.WriteError(ex);
             }
         }
@@ -116,11 +163,16 @@ namespace MiddlewareTCP.Entities
         {
             try
             {
+                this.UnitOfWork.Logger.Info($"[{this.Username}] [LoginService] [Dispose] [Begin dispose login service]");
                 this.Game.Close();
+                this.Game.Dispose();
                 this.MidClient.Disconnect();
+                this.MidClient.Dispose();
+                this.UnitOfWork.Logger.Info($"[{this.Username}] [LoginService] [Dispose] [End dispose login service]");
             }
             catch (Exception ex)
             {
+                this.UnitOfWork.Logger.Error($"[{this.Username}] [LoginService] [Dispose] [Throw exception]");
                 this.WriteError(ex);
             }
             

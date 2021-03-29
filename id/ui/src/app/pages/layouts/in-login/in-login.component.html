@@ -154,21 +154,7 @@
                               </li>
                             </ul>
                           </li>
-                          <li class="cat-item">
-																		<span>
-																			<i class="fal fa-user-circle"></i>&emsp;&emsp;Nhân vật
-																			<i
-                                        class="fas fa-angle-down"></i>
-																		</span>
-                            <ul class="sub-menu">
-                              <li class="sub-item">
-                                <a href="#questdaily" rel="ajax">Phúc Lợi Nạp Ngày
-                                  <span id="qdl_un"
-                                        class=""></span>
-                                </a>
-                              </li>
-                            </ul>
-                          </li>
+
                           <li class="cat-item">
 																		<span>
 																			<i class="fal fa-calendar-alt"></i>&emsp;&emsp;Event
@@ -176,7 +162,7 @@
 																		</span>
                             <ul class="sub-menu">
                               <li class="sub-item">
-                                <a href="#event&act=event_tichluythe" rel="ajax">Tích lũy thẻ nạp</a>
+                                <a [routerLink]="['nhan-thuong-vip']" rel="ajax">Nhận thưởng mốc VIP</a>
                               </li>
                               <li class="sub-item">
                                 <a href="#questdaily" rel="ajax">Nhiệm vụ Hằng Ngày</a>
@@ -244,7 +230,7 @@
 																		</span>
                             <ul class="sub-menu">
                               <li class="sub-item">
-                                <a href="#rank&act=ranking" rel="ajax">BXH Lực Chiến</a>
+                                <a [routerLink]="['xep-hang/luc-chien']" rel="ajax">BXH Lực Chiến</a>
                               </li>
                               <li class="sub-item">
                                 <a href="#rank&act=ranking_guild&type=rs" rel="ajax">BXH Hạm Đội</a>

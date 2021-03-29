@@ -13,7 +13,7 @@ namespace API.Cores
     public class GeneralController<EntityModel> : BaseController where EntityModel : BaseEntity, new()
     {
         [Dependency]
-        protected IGeneralService<EntityModel> GeneralService { get; set; }
+        public IGeneralService<EntityModel> GeneralService { get; set; }
         [Dependency]
         public IUserService UserService { get; set; }
         [Dependency]

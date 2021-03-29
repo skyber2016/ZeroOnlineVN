@@ -8,7 +8,14 @@ namespace MiddlewareTCP
     {
         public static string GetSessionId(this TcpClient client)
         {
-            return HashHelper.Base64Encode(client.Client.RemoteEndPoint.ToString());
+            try
+            {
+                return HashHelper.Base64Encode(client.Client.RemoteEndPoint.ToString());
+            }
+            catch (System.Exception)
+            {
+                return "";
+            }
         }
         public static string GetIP(this TcpClient client)
         {

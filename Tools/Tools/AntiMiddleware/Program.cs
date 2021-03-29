@@ -37,6 +37,7 @@ namespace BotDiscord
                     services.AddSingleton<ILoggerManager, LoggerHelper>();
                     services.AddSingleton(typeof(IGeneralService<>), typeof(GeneralService<>));
                     services.AddSingleton<IUnitOfWork, UnitOfWork>();
+                    services.AddSingleton<IMemoryCache, MemoryCache>();
                 });
     }
 }

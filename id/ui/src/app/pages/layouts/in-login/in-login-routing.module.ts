@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 import {InLoginComponent} from './in-login.component';
 
 const routes: Routes = [
@@ -26,7 +26,16 @@ const routes: Routes = [
       {
         path: 'doi-tien',
         loadChildren: () => import('../../coin-to-zps/coin-to-zps.module').then(m => m.CoinToZpsModule)
+      },
+      {
+        path: 'nhan-thuong-vip',
+        loadChildren: () => import('../../reward-vip/reward-vip.module').then(m => m.RewardVipModule)
+      },
+      {
+        path: 'xep-hang/luc-chien',
+        loadChildren: () => import('../../power-ranking/power-ranking.module').then(m => m.PowerRankingModule)
       }
+
     ]
   }
 ];
@@ -35,4 +44,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class InLoginRoutingModule { }
+export class InLoginRoutingModule {
+}
