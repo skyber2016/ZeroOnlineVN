@@ -6,6 +6,7 @@ using Forum_API.Cores.WebSockets.Handler;
 using Forum_API.Database;
 using Forum_API.DTO.Error.Responses;
 using Forum_API.Helpers;
+using Forum_API.Middlewares;
 using Forum_API.Security;
 using Forum_API.Services;
 using Forum_API.Services.Authenticate;
@@ -97,6 +98,7 @@ namespace Forum_API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseMiddleware<CryptoMiddleware>();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

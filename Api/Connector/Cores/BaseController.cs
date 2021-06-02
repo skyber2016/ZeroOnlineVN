@@ -13,7 +13,7 @@ namespace Forum_API.Cores
 {
     [TypeFilter(typeof(ErrorHandlingAttribute))]
     [ApiController]
-    [Route("[controller]")]
+    [Route("/api/[controller]")]
     [Authorize]
     [TypeFilter(typeof(SingleUserAttribute))]
     [TypeFilter(typeof(RolePermissionAttribute))]

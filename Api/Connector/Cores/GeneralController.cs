@@ -2,7 +2,6 @@
 using Forum_API.Cores.Exceptions;
 using Forum_API.DTO.Base;
 using Forum_API.Entities;
-using Forum_API.Helpers;
 using Forum_API.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -19,20 +18,22 @@ namespace Forum_API.Cores
         
     }
 
-    public class GeneralController<EntityModel, GetResponse> : GeneralController<EntityModel>
+    public class GeneralController<EntityModel, GetRequest, GetResponse> : GeneralController<EntityModel>
         where EntityModel : BaseEntity, new()
         where GetResponse: class,new()
+        where GetRequest: BaseFilterRequest,new()
     {
         /// <summary>
         /// API Lấy tất cả thông tin và có phân trang
         /// </summary>
-        /// <param name="pageNumber">Index của page hiện tại</param>
-        /// <param name="pageSize">Số item trong 1 page, max = 100</param>
+        /// <param name="request"></param>
         /// <returns></returns>
         [HttpGet]
         [FunctionMethod(FuncConstants.Get)]
-        public virtual async Task<IActionResult> Get(int pageNumber = 1, int pageSize = 10)
+        public virtual async Task<IActionResult> Get(GetRequest request)
         {
+            var pageSize = request.PageSize;
+            var pageNumber = request.PageNumber;
             var maxPageSize = 500;
             if(pageSize > maxPageSize)
             {
@@ -69,10 +70,10 @@ namespace Forum_API.Cores
         }
     }
 
-    public class GeneralController<EntityModel, GetResponse, CreateRequest, CreateResponse> : GeneralController<EntityModel, GetResponse>
+    public class GeneralController<EntityModel, GetRequest, GetResponse, CreateRequest> : GeneralController<EntityModel, GetRequest, GetResponse>
         where EntityModel : BaseEntity, new()
         where GetResponse : class, new()
-        where CreateResponse: class,new()
+        where GetRequest : BaseFilterRequest, new()
     {
         /// <summary>
         /// API Tạo entity
@@ -84,17 +85,16 @@ namespace Forum_API.Cores
         public virtual async Task<IActionResult> Create(CreateRequest request)
         {
             var entity = Mapper.Map<EntityModel>(request);
-            entity = await this.GeneralService.AddAsync(entity);
-            return Response<CreateResponse>(entity);
+            await this.GeneralService.AddAsync(entity);
+            return Response();
         }
     }
 
-    public class GeneralController<EntityModel, GetResponse, CreateRequest, CreateResponse, UpdateRequest, UpdateResponse> : GeneralController<EntityModel, GetResponse, CreateRequest, CreateResponse>
+    public class GeneralController<EntityModel, GetRequest, GetResponse, CreateRequest, UpdateRequest> : GeneralController<EntityModel,GetRequest, GetResponse, CreateRequest>
         where EntityModel : BaseEntity, new()
         where GetResponse : class, new()
-        where CreateResponse : class, new()
-        where UpdateResponse : class, new()
         where UpdateRequest : DTO.Base.UpdateRequest, new()
+        where GetRequest : BaseFilterRequest, new()
     {
         /// <summary>
         /// API Chỉnh sửa thông tin
@@ -111,8 +111,8 @@ namespace Forum_API.Cores
                 throw new NotFoundException();
             }
             entity = Mapper.Map(request, entity);
-            entity = await this.GeneralService.UpdateAsync(entity);
-            return Response<UpdateResponse>(entity);
+            await this.GeneralService.UpdateAsync(entity);
+            return Response();
         }
 
         [HttpDelete]
@@ -125,7 +125,7 @@ namespace Forum_API.Cores
                 throw new NotFoundException();
             }
             await this.GeneralService.Delete(entity);
-            return Response<UpdateResponse>(entity);
+            return Response();
         }
     }
 
