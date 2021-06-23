@@ -3,6 +3,7 @@ using API.Configurations;
 using API.Entities;
 using API.Helpers;
 using API.Services.Interfaces;
+using BotDiscord;
 using Discord;
 using Discord.WebSocket;
 using log4net;
@@ -173,41 +174,41 @@ namespace API.Cores
         private async Task Process()
         {
             var messages = await this.BotMessageService.FindBy(new { is_sent = false }).GetAsync<BotMessageEntity>();
-            this.Logger.Info("BOT SCAN: " + messages.Count());
+            if (messages.Any())
+            {
+                this.Logger.Info("BOT SCAN: " + messages.Count());
+            }
             foreach (var data in messages)
             {
-                foreach (var ch in this.AppSettings.Channels)
+                try
                 {
-                    try
+                    var channelId = Convert.ToUInt64(data.Channel ?? ChannelConstant.REPORT.ToString());
+                    var channel = this.Client.GetChannel(channelId) as IMessageChannel;
+                    var text = data.Message.Base64Decode();
+                    if (text != null && channel != null)
                     {
-                        var channel = this.Client.GetChannel(ch) as IMessageChannel;
-                        var text = data.Message.Base64Decode();
-                        if (text != null && channel != null)
+                        if (data.Image != null)
                         {
-                            if(data.Image != null)
+                            using (var r = new StreamReader(AppSettings.PathToImage + data.Image))
                             {
-                                using(var r = new StreamReader(AppSettings.PathToImage + data.Image))
-                                {
-                                    await channel.SendFileAsync(r.BaseStream, data.Image, data.Message.Base64Decode());
-                                }
-                            }
-                            else
-                            {
-                                await channel.SendMessageAsync(text);
+                                await channel.SendFileAsync(r.BaseStream, data.Image, data.Message.Base64Decode());
                             }
                         }
                         else
                         {
-                            this.Logger.Error($"BOT_MESSAGE text: ${text?.ToString()} channelId: ${ch}");
+                            await channel.SendMessageAsync(text);
                         }
-                        data.IsSent = true;
-                        await this.BotMessageService.UpdateAsync(data);
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        this.WriteError(ex);
+                        this.Logger.Error($"BOT_MESSAGE text: ${text?.ToString()} channelId: ${data.Channel ?? ChannelConstant.REPORT.ToString()}");
                     }
-                    
+                    data.IsSent = true;
+                    await this.BotMessageService.UpdateAsync(data);
+                }
+                catch (Exception ex)
+                {
+                    this.WriteError(ex);
                 }
             }
         }

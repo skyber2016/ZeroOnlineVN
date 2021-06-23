@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Steeltoe.Discovery.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,7 @@ namespace Caching
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDiscoveryClient(Configuration);
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
             services.AddControllers();
             services.AddMemoryCache();
@@ -46,12 +48,12 @@ namespace Caching
             {
                 endpoints.MapControllers();
             });
-            app.UseMiddleware<WordpressMiddleware>();
             app.UseCors(x => x
                 .AllowAnyMethod()
                 .AllowAnyHeader()
                 .SetIsOriginAllowed(origin => true) // allow any origin
                 .AllowCredentials()); // allow credentials
+            app.UseDiscoveryClient();
         }
     }
 }

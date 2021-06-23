@@ -46,7 +46,7 @@ export class CardComponent extends BaseComponent implements OnInit {
       seri: this.serial,
       code: this.code,
       value: +this.value,
-      status: +this.status
+      status: 1
     }).subscribe(resp => {
       alert(resp.message);
       this.router.navigate([this.routerContants.card.history]).then();

@@ -1,0 +1,1 @@
+document.write('<table width=100%><tr><td class=wb_title><a target="_blank" class=wb_title href="http://wb.99.com/question/661249.html" title="月面要塞那个冰封任务要怎么做？...">月面要塞那个冰封任务要怎么做？...</a></td><td class=wb_point><img src="https://image.99.com/wb91/images/money.gif"/>15</td><td class=wb_date>[04-05]</td></tr></table>')

@@ -113,6 +113,7 @@ namespace API.Services.Authenticate
                 builder.AppendLine($"**Tạo tài khoản lúc**: {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")}");
                 await this.BotMessageService.AddAsync(new BotMessageEntity
                 {
+                    Channel = ChannelConstant.REGISTER.ToString(),
                     Message = builder.ToString().Base64Encode()
                 }, tran);
             });

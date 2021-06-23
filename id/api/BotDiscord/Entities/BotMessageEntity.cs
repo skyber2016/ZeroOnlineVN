@@ -23,5 +23,7 @@ namespace API.Entities
         public bool IsSent { get; set; }
         [Column("image")]
         public string Image { get; set; }
+        [Column("channel")]
+        public string Channel { get; set; }
     }
 }

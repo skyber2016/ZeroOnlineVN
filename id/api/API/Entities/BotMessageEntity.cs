@@ -1,6 +1,7 @@
+using API.Common;
+using SqlKata;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
-using SqlKata;
 using ColumnAttribute = SqlKata.ColumnAttribute;
 
 namespace API.Entities
@@ -11,6 +12,7 @@ namespace API.Entities
         public BotMessageEntity()
         {
             this.CreatedDate = DateTime.Now;
+            this.Channel = ChannelConstant.REPORT.ToString();
         }
 
         [Column("message")]
@@ -24,5 +26,8 @@ namespace API.Entities
 
         [Column("image")]
         public string Image { get; set; }
+
+        [Column("channel")]
+        public string Channel { get; set; }
     }
 }
