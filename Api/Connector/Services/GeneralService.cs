@@ -33,7 +33,7 @@ namespace Forum_API.Services
         }
         public async Task<IEnumerable<TEntity>> GetAll()
         {
-            return await this.FindBy(_=>true).ToListAsync();
+            return await this.FindBy(_=>!_.IsDeleted).ToListAsync();
         }
         
         public async Task<TEntity> AddAsync(TEntity entity)
@@ -81,7 +81,7 @@ namespace Forum_API.Services
         public IQueryable<TEntity> FindBy(Expression<Func<TEntity, bool>> predicate)
         {
             this.SetContext();
-            return this.Context.Where(predicate).Where(x => !x.IsDeleted);
+            return this.Context.Include(x=>x.CreatedByUser).Where(predicate).Where(x => !x.IsDeleted);
         }
 
         public TEntity SingleBy(Expression<Func<TEntity, bool>> predicate)

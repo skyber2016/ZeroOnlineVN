@@ -1,6 +1,7 @@
 ﻿using Forum_API.Configurations;
 using Forum_API.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Unity;
 
@@ -33,8 +34,9 @@ namespace Forum_API.Database
         {
             var setting = ConnectionSetting.Value;
             optionsBuilder
+                .EnableSensitiveDataLogging()
+                .UseLoggerFactory(LoggerFactory.Create(builder => { builder.AddDebug(); }))
                 .UseNpgsql(setting.ConnectionString)
-                .UseLazyLoadingProxies()
                 ;
         }
     }

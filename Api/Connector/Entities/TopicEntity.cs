@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace Forum_API.Entities
 {
@@ -15,5 +16,6 @@ namespace Forum_API.Entities
         public bool IsAnnouncement { get; set; }
         public virtual CategoryEntity Category { get; set; }
         public virtual ICollection<PostEntity> Posts { get; set; }
+
     }
 }
