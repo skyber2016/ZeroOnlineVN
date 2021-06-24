@@ -1,1 +1,0 @@
-document.write('<table width=100%><tr><td class=wb_title><a target="_blank" class=wb_title href="http://wb.99.com/question/661189.html" title="机战内怎么签到">机战内怎么签到</a></td><td class=wb_point><img src="https://image.99.com/wb91/images/money.gif"/>0</td><td class=wb_date>[01-01]</td></tr></table>')

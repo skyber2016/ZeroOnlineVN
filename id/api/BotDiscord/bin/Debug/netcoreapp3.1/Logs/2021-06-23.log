@@ -1,8 +1,0 @@
-[2021-06-23 15:11:04,490] [INFO] [huQFLKF1] BOT ARE READY 
-[2021-06-23 15:11:09,853] [INFO] [huQFLKF1] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
-[2021-06-23 15:12:03,637] [INFO] [huQFLKF1] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
-[2021-06-23 15:12:18,906] [INFO] [huQFLKF1] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
-[2021-06-23 15:12:26,199] [INFO] [huQFLKF1] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
-[2021-06-23 15:12:31,242] [INFO] [huQFLKF1] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
-[2021-06-23 15:12:36,288] [INFO] [huQFLKF1] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
-[2021-06-23 15:12:36,314] [INFO] [huQFLKF1] BOT SCAN: 1 
