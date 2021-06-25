@@ -14,6 +14,7 @@ namespace API.Cores
     [Route("api/[controller]")]
     [Authorize]
     [TypeFilter(typeof(SingleUserAttribute))]
+    [TypeFilter(typeof(RoleAttribute))]
     public class BaseController : ControllerBase
     {
         [Dependency]

@@ -3,6 +3,7 @@ using API.Cores;
 using API.Database;
 using API.DTO.Error.Responses;
 using API.Helpers;
+using API.Middlewares;
 using API.Security;
 using API.Services;
 using API.Services.Authenticate;
@@ -83,7 +84,7 @@ namespace API
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
             services.Configure<NapTheNgaySetting>(Configuration.GetSection("NapTheNgay"));
             services.Configure<SftpSetting>(Configuration.GetSection("SftpSetting"));
-
+            services.Configure<CryptoSettings>(Configuration.GetSection("CryptoSettings"));
             services.Configure<ConnectionSetting>(Configuration.GetSection("ConnectionStrings"));
             services.AddScoped<DatabaseContext>();
             services.AddSingleton<DiscordSocketClient>();
@@ -107,6 +108,7 @@ namespace API
                 });
                 app.UseMiddleware<AutomationLoginMiddleware>();
             }
+            //app.UseMiddleware<CryptoMiddleware>();
             app.UseCors("MyPolicy");
             app.UseRouting();
 

@@ -4,5 +4,6 @@ namespace API.Configurations
     {
         public int EventType_Statistic { get; set; }
         public int VIPDefault { get; set; }
+        public string[] Admin { get; set; }
     }
 }

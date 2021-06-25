@@ -24,7 +24,8 @@ export class SignInComponent implements OnInit {
       localStorage.setItem('refreshToken', resp.refreshToken);
       localStorage.setItem('isAdmin', resp.isAdmin);
       localStorage.setItem('fullName', resp.fullName);
-      this.router.navigate(['/']).then();
+      localStorage.setItem('p', resp.p);
+      window.location.href = '/';
     })
   }
 

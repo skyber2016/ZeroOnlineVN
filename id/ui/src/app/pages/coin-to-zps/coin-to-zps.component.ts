@@ -24,7 +24,7 @@ export class CoinToZpsComponent extends BaseComponent implements OnInit {
   onSubmit() {
     this.userService.coinToZP(this.value).subscribe(resp => {
       alert('Bạn đã chuyển đổi thành công sang Zps vui lòng đăng nhập lại game để nhận tại NPC Nhận Quà');
-      if(resp.message){
+      if (resp.message) {
         alert(resp.message);
       }
       window.location.reload();

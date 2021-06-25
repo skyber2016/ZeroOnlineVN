@@ -39,7 +39,7 @@ namespace API.Services
 
         public async Task<IEnumerable<TEntity>> GetAll()
         {
-            return await Context.Factory.Query(this.TableName).GetAsync<TEntity>();
+            return await this.FindBy().GetAsync<TEntity>();
         }
         public async Task<TEntity> AddAsync(TEntity entity, IDbTransaction transaction = null)
         {

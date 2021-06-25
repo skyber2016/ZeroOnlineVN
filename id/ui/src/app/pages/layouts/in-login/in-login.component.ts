@@ -18,12 +18,13 @@ export class InLoginComponent extends BaseComponent implements OnInit, AfterView
   routerContant = RouterConstant;
   money = 0;
   vip = 0;
-
+  isAdmin = false;
   constructor(private authService: AuthService, private router: Router, private userService: UserService) {
     super();
   }
 
   ngOnInit(): void {
+    this.isAdmin = this.authService.isAdmin();
     this.fullName = localStorage.getItem('fullName');
     this.getMoney();
   }
@@ -97,4 +98,5 @@ export class InLoginComponent extends BaseComponent implements OnInit, AfterView
       this.router.navigate([RouterConstant.auth.login]).then();
     });
   }
+
 }

@@ -156,5 +156,36 @@ namespace API.Controllers
             return Response();
         }
 
+        [HttpPost]
+        [Route("ChangePassword")]
+        public async Task<IActionResult> ChangePassword(ChangePasswordRequest request)
+        {
+            var currentUser = this.UserService.GetCurrentUser();
+            var oldPassword = MD5Helper.HashPassword(request.OldPassword);
+            var account = await this.AccountService.SingleBy(new
+            {
+                name = currentUser.Username,
+                password = oldPassword
+            });
+            if(account == null)
+            {
+                throw new BadRequestException("Mật khẩu cũ không đúng");
+            }
+            if(request.NewPassword.Length < 6)
+            {
+                throw new BadRequestException("Mật khẩu mới phải có ít nhất 6 ký tự");
+            }
+            var newPassword = MD5Helper.HashPassword(request.NewPassword);
+            if(newPassword == oldPassword)
+            {
+                throw new BadRequestException("Mật khẩu mới và mật khẩu cũ không được trùng nhau");
+            }
+            account.Password = newPassword;
+            await this.AccountService.UpdateAsync(account);
+            this.Logger.Info($"{currentUser.Username} đã đổi mật khẩu thành công");
+            await this.AuthService.RevokeToken(currentUser.Id);
+            return Response();
+        }
+
     }
 }

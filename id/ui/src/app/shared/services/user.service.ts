@@ -20,4 +20,7 @@ export class  UserService extends GeneralService{
   coinToZP(coin): Observable<any>{
     return this.http.post(this.apiName + '/CoinToZP', {money: coin});
   }
+  changePassword(params): Observable<any>{
+    return this.http.post(this.apiName + '/ChangePassword', params);
+  }
 }

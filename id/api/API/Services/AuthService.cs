@@ -75,13 +75,15 @@ namespace API.Services.Authenticate
                     await RefreshTokenService.UpdateAsync(rfToken, tran);
                 }
                 refreshToken = await this.RefreshTokenService.AddAsync(refreshToken, tran);
+
                 response = new LoginResponse
                 {
                     RefreshToken = refreshToken.Token,
                     Token = jwt,
                     Username = username,
-                    FullName = user.Username
-                };
+                    FullName = user.Username,
+                    P = this.UserService.IsAdmin(user.Username) ? AuthConstant.ADMIN : AuthConstant.NON_ADMIN
+            };
                 Cache.Set("JWT:" + user.Id, jwt, DateTime.Now.AddMinutes(UnitOfWork.JwtSetting.Value.Expire));
             });
             
@@ -100,6 +102,7 @@ namespace API.Services.Authenticate
             user.IPMask = this.Context.HttpContext.Connection.RemoteIpAddress.ToString();
             user.VIP = this.UnitOfWork.AppSettings.Value.VIPDefault;
             user.Password = MD5Helper.HashPassword(request.Password);
+            user.Answer = request.Answer.Base64Encode();
             await this.UnitOfWork.CreateTransaction(async tran =>
             {
                 user = await this.AccountService.AddAsync(user, tran);
@@ -133,6 +136,7 @@ namespace API.Services.Authenticate
             }
             var user = await AccountService.SingleBy(new { id = token.UserId });
             var userPrincipal = Mapper.Map<UserPrincipal>(user);
+
             var jwt = JwtService.GenerateJwtToken(userPrincipal);
             Cache.Set("JWT:" + user.Id, jwt, DateTime.Now.AddMinutes(UnitOfWork.JwtSetting.Value.Expire));
 

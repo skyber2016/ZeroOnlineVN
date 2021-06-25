@@ -24,7 +24,7 @@
                        data-original-title="Truy cập nhanh"></i>
                   </button>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuQuickAction">
-                    <a class="dropdown-item" href="#">Đổi mật khẩu</a>
+                    <a class="dropdown-item" routerLink="/doi-mat-khau">Đổi mật khẩu</a>
                   </div>
                 </div>
               </div>
@@ -124,8 +124,11 @@
 																			<i class="fas fa-angle-down"></i>
 																		</span>
                             <ul class="sub-menu">
+                              <li class="sub-item" *ngIf="isAdmin">
+                                <a routerLink="/gift-code/create">Tạo GiftCode</a>
+                              </li>
                               <li class="sub-item">
-                                <a href="#event&act=giftcode_change" rel="ajax">Nhận phần thưởng
+                                <a routerLink="/gift-code">Nhận phần thưởng
                                   GiftCode</a>
                               </li>
                               <li class="sub-item">
@@ -141,7 +144,7 @@
 																		</span>
                             <ul class="sub-menu">
                               <li class="sub-item">
-                                <a href="#acc_manager&act=changepassgame" rel="ajax">Đổi mật khẩu
+                                <a routerLink="/doi-mat-khau">Đổi mật khẩu
                                   Game</a>
                               </li>
                               <li class="sub-item">

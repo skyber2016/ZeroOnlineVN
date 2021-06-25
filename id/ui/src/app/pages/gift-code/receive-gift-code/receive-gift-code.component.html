@@ -1,0 +1,38 @@
+<div class="main-head">
+  <div class="breadcrumbs1">
+    <a [routerLink]="['/']" class="tooltipstered">Trang Chủ</a>
+    <a  class="tooltipstered">Gift Code</a>
+  </div>
+  <h1 class="module-title">Nhận Gift Code</h1>
+</div>
+<div class="alert alert-primary">
+  <p class="alert-caption">Lưu ý</p>
+  <ul class="noted in-left-10">
+    <li>Mỗi Gift Code chỉ có thể nhận <strong>1 lần</strong> duy nhất</li>
+  </ul>
+</div>
+<div class="main-page">
+  <div class="main-left">
+    <div class="main-body">
+      <div class="cash-section">
+        <div class="cash-form-block" style="max-width: 500px; margin: 0 auto;">
+
+          <div class="form-box">
+            <input id="giftCode" class="form-input" required="" [(ngModel)]="giftCode" type="text">
+            <label for="giftCode">Gift Code</label>
+          </div>
+        </div>
+      </div>
+
+      <span class="break"></span>
+      <div class="act-btn">
+        <button class="btn btn-primary btn-lg btn-block" type="button" (click)="receive()">Nhận Gift Code
+        </button>
+      </div>
+    </div>
+    <div class="form-box text-center">
+      <p style="font-size: 22px; font-weight: bold;color: red;">Sau khi nhận GiftCode vui lòng đến NPC để nhận vật phẩm</p>
+      <img src="./assets/images/huong-dan-nhan-tien.png" alt="">
+    </div>
+  </div>
+</div>

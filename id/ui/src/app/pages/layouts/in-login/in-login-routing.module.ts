@@ -34,6 +34,14 @@ const routes: Routes = [
       {
         path: 'xep-hang/luc-chien',
         loadChildren: () => import('../../power-ranking/power-ranking.module').then(m => m.PowerRankingModule)
+      },
+      {
+        path: 'doi-mat-khau',
+        loadChildren: () => import('../../../pages/change-password/change-password.module').then(m => m.ChangePasswordModule)
+      },
+      {
+        path: 'gift-code',
+        loadChildren: () => import('../../../pages/gift-code/gift-code.module').then(m => m.GiftCodeModule)
       }
 
     ]

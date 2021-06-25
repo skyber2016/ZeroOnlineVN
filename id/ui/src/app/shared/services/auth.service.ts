@@ -28,4 +28,9 @@ export class AuthService {
   ResetPassword(obj): Observable<any>{
     return this.http.post<any>('auth/resetPassword', obj);
   }
+
+  isAdmin(): boolean {
+    const p = localStorage.getItem('p');
+    return p == '631999';
+  }
 }

@@ -7,6 +7,8 @@ using API.Services.Interfaces;
 using API.Entities;
 using System.Threading.Tasks;
 using System.Data;
+using Microsoft.Extensions.Options;
+using API.Configurations;
 
 namespace API.Services
 {
@@ -15,6 +17,11 @@ namespace API.Services
         [Dependency]
         public IHttpContextAccessor Accessor { get; set; }
 
+        [Dependency]
+        public IOptions<AppSettings> Config { get; set; }
+
+        private UserPrincipal User { get; set; }
+
         public UserPrincipal GetCurrentUser()
         {
             var user = Accessor.HttpContext.User;
@@ -22,13 +29,35 @@ namespace API.Services
             {
                 return null;
             }
-            return new UserPrincipal
+            if(this.User == null)
             {
-                Email = user.FindFirst(nameof(UserPrincipal.Email))?.Value,
-                Id = Convert.ToInt32(user.FindFirst(nameof(UserPrincipal.Id))?.Value ?? "-1"),
-                FullName = user.FindFirst(nameof(UserPrincipal.FullName))?.Value,
-                Username = user.FindFirst(nameof(UserPrincipal.Username))?.Value,
-            };
+                this.User = new UserPrincipal
+                {
+                    Email = user.FindFirst(nameof(UserPrincipal.Email))?.Value,
+                    Id = Convert.ToInt32(user.FindFirst(nameof(UserPrincipal.Id))?.Value ?? "-1"),
+                    FullName = user.FindFirst(nameof(UserPrincipal.FullName))?.Value,
+                    Username = user.FindFirst(nameof(UserPrincipal.Username))?.Value
+                };
+            }
+            return this.User;
+        }
+
+        public bool IsAdmin(string username = null)
+        {
+            try
+            {
+                var currentUser = username;
+                if(username == null)
+                {
+                    currentUser = this.GetCurrentUser()?.Username;
+                }
+                return this.Config.Value.Admin.Contains(currentUser);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            
         }
         
     }

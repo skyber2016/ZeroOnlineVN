@@ -32,12 +32,15 @@ namespace API.Cores
         public IGeneralService<AccountEntity> AccountService { get; set; }
         public IUnitOfWork UnitOfWork { get; set; }
         private DiscordSocketClient Client { get; set; }
+        public IGeneralService<GiftCodeEntity> GiftCodeService { get; set; }
+
         public BotDiscordHostedService(
             IOptions<AppSettings> options,
             IUnitOfWork unitOfWork,
             ILoggerManager logger,
             IGeneralService<BotMessageEntity> botMessageService,
-            IGeneralService<AccountEntity> accountService
+            IGeneralService<AccountEntity> accountService,
+            IGeneralService<GiftCodeEntity> giftCodeService
             )
         {
             this.AppSettings = options.Value;
@@ -45,6 +48,7 @@ namespace API.Cores
             this.Logger = logger;
             this.BotMessageService = botMessageService;
             this.AccountService = accountService;
+            this.GiftCodeService = giftCodeService;
             Console.WriteLine(AppDomain.CurrentDomain.BaseDirectory);
             XmlDocument log4netConfig = new XmlDocument();
 
@@ -107,6 +111,10 @@ namespace API.Cores
                 {
                     await this.CongTien(content, arg.Channel);
                 }
+                else if (command == BotCommand.GiftCode && content.Length == 4)
+                {
+                    await this.GiftCode(content, arg.Channel);
+                }
             }
             catch (Exception ex)
             {
@@ -114,6 +122,44 @@ namespace API.Cores
             }
             await Task.CompletedTask;
 
+        }
+
+        private async Task GiftCode(string[] command, IMessageChannel channel)
+        {
+            try
+            {
+                var code = command[1];
+                var itemId = command[2];
+                var type = command[3];
+                if (string.IsNullOrEmpty(code) || string.IsNullOrEmpty(itemId) || string.IsNullOrEmpty(type))
+                {
+                    throw new FormatException();
+                }
+                var typeCode = Convert.ToInt32(type);
+                if(typeCode != GiftCodeTypeConstant.SINGLE && typeCode != GiftCodeTypeConstant.MULTIPLE)
+                {
+                    throw new FormatException();
+                }
+                var giftCode = new GiftCodeEntity
+                {
+                    Code = code,
+                    ItemId = Convert.ToInt32(itemId),
+                    Type = typeCode
+                };
+                await this.GiftCodeService.AddAsync(giftCode);
+                var build = new StringBuilder();
+                build.AppendLine($"-------- **Tạo Gift Code** --------");
+                build.AppendLine($"**Gift Code**: {code}");
+                var loaiCode = typeCode == GiftCodeTypeConstant.SINGLE ? "1 cho 1" : "1 cho nhiều";
+                build.AppendLine($"**Loại**: { loaiCode }");
+                build.AppendLine($"**Action ID**: { giftCode.ItemId }");
+                await channel.SendMessageAsync(build.ToString());
+            }
+            catch (FormatException)
+            {
+                await channel.SendMessageAsync("Cú pháp không hợp lệ. **/code {mã} {action_id} {loại} '1': 1 cho 1 - '2': 1 cho nhiều tài khoản**");
+            }
+            
         }
 
         private async Task CongTien(string[] command, IMessageChannel channel)
