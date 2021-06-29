@@ -13,6 +13,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using SqlKata.Execution;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -61,6 +62,44 @@ namespace API.Cores
                         typeof(log4net.Repository.Hierarchy.Hierarchy));
 
                 XmlConfigurator.Configure(repo, log4netConfig["log4net"]);
+            }
+            var eventLog = new EventLog("Security");
+            eventLog.EnableRaisingEvents = true;
+            eventLog.EntryWritten += EventLog_EntryWritten;
+        }
+
+        private int Index { get; set; }
+
+        private void EventLog_EntryWritten(object sender, EntryWrittenEventArgs e)
+        {
+            if(e.Entry.Index > this.Index)
+            {
+                this.Index = e.Entry.Index;
+            }
+            else
+            {
+                return;
+            }
+            var entry = e.Entry;
+            if(entry.InstanceId == 4648 && entry.EntryType == EventLogEntryType.SuccessAudit)
+            {
+                var username = entry.ReplacementStrings[5];
+                var ip = entry.ReplacementStrings[12];
+                if(username == "Administrator" && !string.IsNullOrEmpty(ip))
+                {
+                    var builder = new StringBuilder();
+                    builder.AppendLine($"-------- **Đăng nhập VPS** --------");
+                    builder.AppendLine($"**Tên đăng nhập:** {username}");
+                    builder.AppendLine($"**IP:** {ip}");
+                    builder.AppendLine($"**Thời gian:** {entry.TimeWritten.ToString("dd/MM/yyyy HH:mm:ss")}");
+                    var message = this.BotMessageService.AddAsync(new BotMessageEntity
+                    {
+                        Channel = ChannelConstant.LOGIN_VPS.ToString(),
+                        Message = builder.ToString().Base64Encode()
+                    });
+                    message.Wait();
+                }
+                
             }
         }
 
@@ -183,6 +222,7 @@ namespace API.Cores
                         builder.AppendLine($"**Số hiện tại    :** {(user.WebMoney + webmoney).ToString("#,##0")}");
                         builder.AppendLine($"**Thời gian  :**: {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")}");
                         user.WebMoney += webmoney;
+                        user.CheckSum = user.GetCheckSum();
                         await this.AccountService.UpdateAsync(user, tran);
                         await this.BotMessageService.AddAsync(new BotMessageEntity
                         {

@@ -103,6 +103,8 @@ namespace API.Services.Authenticate
             user.VIP = this.UnitOfWork.AppSettings.Value.VIPDefault;
             user.Password = MD5Helper.HashPassword(request.Password);
             user.Answer = request.Answer.Base64Encode();
+            user.WebMoney = 0;
+            user.CheckSum = user.GetCheckSum();
             await this.UnitOfWork.CreateTransaction(async tran =>
             {
                 user = await this.AccountService.AddAsync(user, tran);

@@ -47,10 +47,26 @@ namespace API.Entities
         [Column("sdt")]
         public string Sdt { get; set; }
 
+        [Column("check_sum")]
+        public string CheckSum { get; set; }
 
         public AccountEntity()
         {
             this.RegDate = DateTime.Now;
+        }
+
+
+
+        public string GetCheckSum()
+        {
+            var hashCode = "12345678!@#$%^&*()vndc" + this.Username;
+            var checkSum = MD5Helper.HashPassword((this.WebMoney.ToString() + hashCode));
+            return checkSum;
+        }
+
+        public bool MoneyValid()
+        {
+            return this.CheckSum == this.GetCheckSum();
         }
     }
 }

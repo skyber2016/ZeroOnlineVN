@@ -1,4 +1,5 @@
-﻿using API.Configurations;
+﻿using API.Common;
+using API.Configurations;
 using API.Cores;
 using API.Cores.Exceptions;
 using API.DTO.User.Request;
@@ -57,6 +58,11 @@ namespace API.Controllers
             if(request.Money <= 0)
             {
                 throw new BadRequestException("Số tiền quy đổi phải lớn hơn 0");
+            }
+            
+            if(!account.MoneyValid())
+            {
+                throw new BadRequestException("Số tiền không hợp lệ");
             }
             var upgradeVIP = false;
             await this.UnitOfWork.CreateTransaction(async tran =>
@@ -131,6 +137,7 @@ namespace API.Controllers
                     statics.EventTime = 0;
                     await this.StatisticService.UpdateAsync(statics, tran);
                 }
+                account.CheckSum = account.GetCheckSum();
                 await this.AccountService.UpdateAsync(account, tran);
                 builder.AppendLine($"**ZCoin còn lại:** {account.WebMoney.ToString("#,##0")}");
                 builder.AppendLine($"**Thời gian:** {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")}");
@@ -146,6 +153,7 @@ namespace API.Controllers
                 }, tran);
                 await this.BotMessageService.AddAsync(new BotMessageEntity
                 {
+                    Channel = ChannelConstant.DOI_TIEN.ToString(),
                     Message = builder.ToString().Base64Encode()
                 }, tran);
             });

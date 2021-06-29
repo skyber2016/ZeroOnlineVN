@@ -86,6 +86,7 @@ namespace API
             services.Configure<SftpSetting>(Configuration.GetSection("SftpSetting"));
             services.Configure<CryptoSettings>(Configuration.GetSection("CryptoSettings"));
             services.Configure<ConnectionSetting>(Configuration.GetSection("ConnectionStrings"));
+            services.Configure<WheelSetting>(Configuration.GetSection("WheelSetting"));
             services.AddScoped<DatabaseContext>();
             services.AddSingleton<DiscordSocketClient>();
             services.AddScoped<ILoggerManager, LoggerHelper>();

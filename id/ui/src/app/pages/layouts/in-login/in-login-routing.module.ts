@@ -42,6 +42,10 @@ const routes: Routes = [
       {
         path: 'gift-code',
         loadChildren: () => import('../../../pages/gift-code/gift-code.module').then(m => m.GiftCodeModule)
+      },
+      {
+        path: 'vong-quay',
+        loadChildren: () => import('../../wheel/wheel.module').then(m => m.WheelModule)
       }
 
     ]

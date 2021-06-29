@@ -3,11 +3,14 @@ using API.Common;
 using API.Cores;
 using API.Cores.Exceptions;
 using API.DTO.GiftCode.Requests;
+using API.DTO.GiftCode.Responses;
 using API.Entities;
 using API.Helpers;
 using API.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using SqlKata.Execution;
+using System;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Unity;
@@ -122,6 +125,24 @@ namespace API.Controllers
         {
             var giftCodes = await this.GeneralService.FindBy().OrderByDesc("id").Limit(100).GetAsync<GiftCodeEntity>();
             return Response(giftCodes);
+        }
+
+        [HttpGet]
+        [Route("History")]
+        public async Task<IActionResult> History()
+        {
+            var currentUser = this.UserService.GetCurrentUser();
+            var logs = await this.GiftCodeLogService.FindBy(new
+            {
+                user_id = currentUser.Id
+            })
+                .LeftJoin("gift_code","gift_code.id","gift_code_log.gift_code_id")
+                .Select("gift_code.code", "gift_code_log.created_date as CreatedDate")
+                .OrderByDesc("gift_code_log.id")
+                .Limit(100)
+                .GetAsync<GiftCodeHistoryGetResponse>()
+                ;
+            return Response(logs);
         }
     }
 }

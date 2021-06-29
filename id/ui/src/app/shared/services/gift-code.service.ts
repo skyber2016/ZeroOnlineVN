@@ -16,4 +16,7 @@ export class GiftCodeService extends GeneralService {
   public receive(params): Observable<any>{
     return this.http.post(this.apiName + '/Receive', params);
   }
+  public history(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiName + '/History');
+  }
 }
