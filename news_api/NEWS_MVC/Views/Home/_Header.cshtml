@@ -1,0 +1,116 @@
+﻿@using NEWS_MVC.Services.Interfaces; 
+ 
+@inject IPostService postsService; 
+
+@{ 
+    var domainID = "http://id.zeroonlinevn.com";
+    var detail = "/chi-tiet";
+
+    var data = postsService.GetPosts();
+
+    var events = data.Events.Take(5);
+    var activities = data.Activities.Take(5);
+    var guilds = data.Guilds.Take(5);
+    var images = data.Images.Take(5);
+}
+<div class="header">
+    <div class="wrapper">
+        <div class="top-nav">
+            <ul class="nav-ul clearfix">
+                <li>
+                    <a href="@domainID" target="_blank">
+                        <p>Tài khoản</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" target="_blank">
+                        <p>Sự kiện</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" target="_blank">
+                        <p>Hoạt động</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" target="_blank">
+                        <p>Hướng dẫn</p>
+                    </a>
+                </li>
+                <li class="logo">
+                    <a href="/trang-chu" title="Trang chủ">
+                    <img src="~/images/logo.png" />
+                    </a>
+                </li>
+                <li>
+                    <a href="http://download.zeroonlinevn.com" target="_blank">
+                        <p>Tải game</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" target="_blank">
+                        <p>Hình ảnh</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="@domainID/nap-the" target="_blank">
+                        <p>Nạp thẻ</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);">
+                        <p>Diễn đàn</p>
+                    </a>
+                </li>
+            </ul>
+            <ul class="nav-content clearfix">
+                <li>
+                    <a target="_blank" href="@domainID/auth/register" class="">Đăng ký tài khoản</a>
+                    <a target="_blank" href="@domainID/doi-mat-khau" class="">Đổi mật khẩu</a>
+                    <a target="_blank" href="@domainID/quen-mat-khau" class="">Quên mật khẩu</a>
+                </li>
+                <li>
+                    @foreach (var post in events)
+                    {
+                        <a target="_blank" href="@detail/@post.PostName" class="">@string.Join(" ", post.PostTitle.Split(' ').Take(5))</a>
+                    }
+                </li>
+
+                <li>
+                    @foreach (var post in activities)
+                    {
+                    <a target="_blank" href="@detail/@post.PostName" class="">@string.Join(" ", post.PostTitle.Split(' ').Take(5))</a>
+                    }
+                </li>
+                <li>
+                    @foreach (var post in guilds)
+                    {
+                        <a target="_blank" href="@detail/@post.PostName" class="">@string.Join(" ", post.PostTitle.Split(' ').Take(5))</a>
+                    }
+                </li>
+                <li class="nologo"><a href="javascript:void(0);" class=""></a></li>
+                <li>
+                    <a target="_blank" href="http://zeroonlinevn.com/details/huong-dan/184" class="">Cài đặt</a>
+                    <a target="_blank" href="http://zeroonlinevn.com/details/huong-dan/sua-loi-man-hinh-bao-flash">Sửa lỗi Flash</a>
+                </li>
+                <li>
+                    @foreach (var post in images)
+                    {
+                        <a target="_blank" href="@detail/@post.PostName" class="">@string.Join(" ", post.PostTitle.Split(' ').Take(5))</a>
+                    }
+                </li>
+                <li>
+                    <a target="_blank" href="@domainID/nhan-thuong-vip" class="">Mốc VIP</a>
+                    <a target="_blank" href="@domainID/gift-code" class="">Quà tặng</a>
+                    <a target="_blank" href="@domainID/vong-quay" class="">Vòng quay may mắn</a>
+                </li>
+                <li>
+                    <a target="_blank" href="https://www.facebook.com/ZeroSeverVN/" class="">Fanpage</a>
+                    <a target="_blank" href="https://www.facebook.com/groups/ZeroOnlineVN" class="">Group</a>
+                    <a target="_blank" href="https://discord.gg/jxSnEe9c" class="">Discord</a>
+                    
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,163 @@
+﻿@using NEWS_MVC.Services.Interfaces;
+@inject IPostService postsService;
+@{
+    var data = postsService.GetPosts();
+
+    var events = data.Events.Take(8);
+    var activities = data.Activities.Take(8);
+    var guilds = data.Guilds.Take(8);
+    var images = data.Images.Take(8);
+    var banners = data.Banners;
+    var alls = data.Alls;
+}
+<div class="m1">
+    <div class="wrapper sec">
+        <div class="m1-tips">
+            <a class="sever"> <span>Máy chủ mới：</span><font color="yellow">Gemini</font> </a>
+        </div>
+        <div class="m1-content">
+            @await Html.PartialAsync("_Left")
+            <div class="c-div">
+                @await Html.PartialAsync("_Banner")
+            </div>
+            <div class="r-div">
+                <div class="sw-btn" id="swBtn">
+                    <a class="on" href="javascript:void(0);">Tất cả</a>
+                    <a href="javascript:void(0);" target="_blank">Sự kiện</a>
+                    <a href="javascript:void(0);" target="_blank">Hoạt động</a>
+                    <a href="javascript:void(0);" target="_blank">Hướng dẫn</a>
+                </div>
+                <a class="more-btn" href="/bai-viet" target="_blank" title="Xem thêm"></a>
+                <div class="swiper-container swiper-no-swiping" id="newSwiper">
+                    <div class="swiper-wrapper">
+                        <!--综合-->
+                        <div class="swiper-slide">
+                            <table class="cmsTable">
+                                <tbody>
+                                    @foreach (var post in alls)
+                                    {
+                                        <tr>
+                                            <td>【@post.TagName】</td>
+                                            <td>
+                                                <a href="/chi-tiet/@post.PostName" title="@post.PostTitle" target="_blank">
+                                                    @post.PostTitle
+                                                </a>
+                                            </td>
+                                            <td>[@post.PostModified.ToString("dd/MM")]</td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <!--公告-->
+                        <div class="swiper-slide">
+                            <table class="cmsTable">
+                                <tbody>
+                                    @foreach (var post in events)
+                                    {
+                                        <tr>
+                                            <td>【@post.TagName】</td>
+                                            <td>
+                                                <a href="/chi-tiet/@post.PostName" title="@post.PostTitle" target="_blank">
+                                                    @post.PostTitle
+                                                </a>
+                                            </td>
+                                            <td>[@post.PostModified.ToString("dd/MM")]</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <!--更新-->
+                        <div class="swiper-slide">
+                            <table class="cmsTable">
+                                <tbody>
+                                    @foreach (var post in activities)
+                                    {
+                                        <tr>
+                                            <td>【@post.TagName】</td>
+                                            <td>
+                                                <a href="/chi-tiet/@post.PostName" title="@post.PostTitle" target="_blank">
+                                                    @post.PostTitle
+                                                </a>
+                                            </td>
+                                            <td>[@post.PostModified.ToString("dd/MM")]</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <!--攻略-->
+                        <div class="swiper-slide">
+                            <table class="cmsTable">
+                                <tbody>
+                                    @foreach (var post in guilds)
+                                    {
+                                        <tr>
+                                            <td>【@post.TagName】</td>
+                                            <td>
+                                                <a href="/chi-tiet/@post.PostName" title="@post.PostTitle" target="_blank">
+                                                    @post.PostTitle
+                                                </a>
+                                            </td>
+                                            <td>[@post.PostModified.ToString("dd/MM")]</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--主题活动-->
+        <div class="sec hot-event" id="hotEvent">
+            <h3>
+                Hợp thể
+            </h3>
+            <!--正在进行-->
+            <div class="hot-content show" id="ing">
+                <a class="hot" href="/chi-tiet/hop-the-nu-i" target="_blank" title="Wing Combination">
+                    <img src="/images/robot_1.png" alt="" />
+                    <p class="name">
+                        Wing Combination
+                    </p>
+                </a>
+
+                <a class="hot" href="/chi-tiet/hop-the-nam-i" target="_blank" title="Burst Combination">
+                    <img src="/images/robot_2.png" alt="Burst Combination" />
+                    <p class="name">
+                        Tianyi Combination
+                    </p>
+                </a>
+                <a class="hot" href="/chi-tiet/hop-the-nu-i" target="_blank" title="Butterfly Wing Combination">
+                    <img src="/images/robot_3.png" alt="Butterfly Wing Combination" />
+                    <p class="name">
+                        Butterfly Wing Combination
+                    </p>
+                </a>
+                <a class="hot" href="/chi-tiet/hop-the-nam-i" target="_blank" title="Burst Combination">
+                    <img src="/images/robot_4.png" alt="Burst Combination" />
+                    <p class="name">
+                        Burst Combination
+                    </p>
+                </a>
+                <a class="hot" href="/chi-tiet/hop-the-nam-i" target="_blank" title="Burst Combination">
+                    <img src="/images/robot_4.png" alt="Burst Combination" />
+                    <p class="name">
+                        Burst Combination
+                    </p>
+                </a>
+
+            </div>
+        </div>
+        <!--/主题活动-->
+        <div class="jump-link">
+            <a class="r-btn btn1" href="/chi-tiet/robot-hop-the-nam-i" target="_blank"><i></i></a>
+            <a class="r-btn btn2" href="/chi-tiet/hop-the-nu-i" target="_blank"><i></i></a>
+            <a class="r-btn btn3" href="/chi-tiet/robot-hop-the-nam" target="_blank"><i></i></a>
+            <a class="r-btn btn4" href="/chi-tiet/robot-hop-the-nu" target="_blank"><i></i></a>
+        </div>
+    </div>
+</div>

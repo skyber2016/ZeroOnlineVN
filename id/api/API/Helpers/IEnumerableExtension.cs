@@ -1,4 +1,5 @@
-﻿using System;
+﻿using API.Configurations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,7 +9,7 @@ namespace API
     public static class IEnumerableExtension
     {
         private static Random rng = new Random();
-
+        private static List<WheelItem> Items { get; set; }
         public static void Shuffle<T>(this IList<T> list)
         {
             int n = list.Count;
@@ -25,6 +26,23 @@ namespace API
         public static T ItemRandom<T>(this IList<T> list)
         {
             return list[rng.Next(0 ,list.Count - 1)];
+        }
+
+        public static List<WheelItem> GetItems(this List<WheelItem> items)
+        {
+            if(Items == null)
+            {
+                Items = new List<WheelItem>();
+                foreach (var item in items)
+                {
+                    for (int i = 0; i < item.Rate; i++)
+                    {
+                        Items.Add(item);
+                    }
+                }
+                Items.Shuffle();
+            }
+            return Items;
         }
     }
 }

@@ -1,0 +1,21 @@
+﻿@using NEWS_MVC.Services.Interfaces;
+@inject IPostService postsService;
+@{
+
+    var data = postsService.GetPosts();
+
+    var banners = data.Banners;
+}
+<div class="swiper-container" id="lunboSwiper">
+    <div class="swiper-wrapper">
+        @foreach (var banner in banners)
+        {
+            <div class="swiper-slide">
+                <a href="javascript:void(0);" title="@banner.PostTitle"><img src="@banner.Guid" alt="@banner.PostTitle" /></a>
+            </div>
+        }
+
+
+    </div>
+    <div class="pagination"></div>
+</div>

@@ -1,0 +1,56 @@
+[
+  {
+    "outputFileName": "wwwroot/css/sub.min.css",
+    "inputFiles": [
+      "wwwroot/css/sub.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/style.min.css",
+    "inputFiles": [
+      "wwwroot/css/style.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/intro.min.css",
+    "inputFiles": [
+      "wwwroot/css/intro.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/idangerous.swiper.min.css",
+    "inputFiles": [
+      "wwwroot/css/idangerous.swiper.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/custom.min.js",
+    "inputFiles": [
+      "wwwroot/js/custom.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/g_topmenu.min.min.js",
+    "inputFiles": [
+      "wwwroot/js/g_topmenu.min.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/idangerous.swiper.min.min.js",
+    "inputFiles": [
+      "wwwroot/js/idangerous.swiper.min.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/public.min.js",
+    "inputFiles": [
+      "wwwroot/js/public.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/smartpaginator.min.js",
+    "inputFiles": [
+      "wwwroot/js/smartpaginator.js"
+    ]
+  }
+]

@@ -1,0 +1,161 @@
+﻿@using NEWS_MVC.Services.Interfaces;
+@inject IPostService postService
+@{
+    var thumbnail = this.ViewBag.Thumbnail as string;
+    Layout = "~/Views/Shared/_DetailLayout.cshtml";
+    ViewData["Title"] = "Danh sách bài viết";
+}
+<div class="main-cont clearfix">
+    <div class="main-cont-title">
+        <h3>Bài viết<span>INFORMATION</span></h3>
+        <p><span>Vị trí của bạn：</span><a href="/trang-chu">Trang chủ</a> > <a href="/bai-viet">Bài viết</a></p>
+    </div>
+    <div id="tabSwiper" class="list">
+        <div class="tab" id="newsBtn">
+            <a href="javascript:;" class="active" title=""><i></i>Tất cả</a>
+            <a href="javascript:;" class="" title=""><i></i>Sự kiện</a>
+            <a href="javascript:;" class="" title=""><i></i>Hoạt động</a>
+            <a href="javascript:;" class="" title=""><i></i>Hướng dẫn</a>
+        </div>
+        <div class="newslist">
+            <div class="swiper-container tab-swiper" id="newsSwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <!--公告-->
+                        <ul id="allList" class="nlist"></ul>
+                        <!--page-->
+                        <div id="allPage" class="page pager"></div>
+                        <!--/page-->
+                    </div>
+                    <div class="swiper-slide">
+                        <!--活动-->
+                        <ul id="eventList" class="nlist"></ul>
+                        <!--page-->
+                        <div id="eventPage" class="page"></div>
+                        <!--/page-->
+                    </div>
+                    <div class="swiper-slide">
+                        <!--更新-->
+                        <ul id="actList" class="nlist"></ul>
+                        <!--page-->
+                        <div id="actPage" class="page"></div>
+                        <!--/page-->
+                    </div>
+                    <div class="swiper-slide">
+                        <!--攻略-->
+                        <ul id="guildList" class="nlist"></ul>
+                        <!--page-->
+                        <div id="guildPage" class="page"></div>
+                        <!--/page-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section DetailScripts {
+    @{ 
+        if (Env.IsDevelopment())
+        {
+            <script src="~/js/smartpaginator.js"></script>
+        }
+        else
+        {
+            <script src="~/js/smartpaginator.min.js"></script>
+        }
+    }
+    <script>
+        var jz = function () {
+            var tabFun = function () {
+                //tab slide
+                var tabsSwiper = new Swiper('#tabSwiper .swiper-container', {
+                    speed: 500,
+                    calculateHeight: true,
+                    onSlideChangeStart: function () {
+                        $(".tab .active").removeClass('active')
+                        $(".tab a").eq(tabsSwiper.activeIndex).addClass('active')
+                    }
+                })
+                $(".tab a").on('touchstart mousedown', function (e) {
+                    e.preventDefault()
+                    $(".tab .active").removeClass('active')
+                    $(this).addClass('active')
+                    tabsSwiper.swipeTo($(this).index())
+                })
+                $(".tab a").click(function (e) {
+                    e.preventDefault();
+                })
+                $('.tab').find('a').eq(0).trigger('touchstart mousedown');
+            };
+            var jsonArr = @Html.Raw(JsonConvert.SerializeObject(this.ViewBag));
+            var dataArr = [];
+            var newsFragmentWriteFn = function (index, newsCont, pageCont, kdid, name) {
+                var totalRecords = 0,
+                    recordsPerPage = 20,
+                    initSetPagination = true,
+                    currentRecords = 0,
+                    setData = function (pageNum) {
+                        var str = '',
+                            // i = 0,
+                            end = dataArr[index].length;
+                        end = (end > currentRecords) ? currentRecords : end;
+                        for (i = (pageNum - 1) * end; i < end * (pageNum); i++) {
+                            str += '<li><span class="mode">【' + name + '】</span><a href="'
+                                + dataArr[index][i].url +
+                                '" target="_blank">'
+                                + dataArr[index][i].title +
+                                '</a><span class="time">[' + dataArr[index][i].data + ']</span></li>';
+                        }
+                        $(newsCont).html(str);
+                    },
+                    requestData = function (pageNum) {
+                        var data = jsonArr[kdid];
+                        dataArr[index] = data;
+                        totalRecords = data.length;
+                        currentRecords = recordsPerPage;
+                        setData(pageNum);
+                        if (initSetPagination) {
+                            setPagination(totalRecords, recordsPerPage);
+                            initSetPagination = false;
+                        }
+                    },
+                    setPagination = function (totalRecords, recordsPerPage) {
+                        $(pageCont)
+                            .smartpaginator({
+                                totalrecords: totalRecords,
+                                recordsperpage: recordsPerPage,
+                                length: 5,
+                                theme: '', 
+                                controlsalways: false,
+                                next: '>',
+                                prev: '<',
+                                first: 'Trang đầu',
+                                last: 'Trang cuối',
+                                go: 'Trang sau',
+                                onchange: function (newPage) {
+                                    setData(newPage);
+                                }
+                            });
+                    };
+                // init
+                requestData(1);
+            };
+
+            var fragment = function () {
+                newsFragmentWriteFn(0, '#allList', '#allPage', 'alls', 'Tất cả');
+                newsFragmentWriteFn(1, '#eventList', '#eventPage', 'events', 'Sự kiện');
+                newsFragmentWriteFn(2, '#actList', '#actPage', 'activities', 'Hoạt động');
+                newsFragmentWriteFn(3, '#guildList', '#guildPage', 'guilds', 'Hướng dẫn');
+            };
+            var init = function () {
+                tabFun();
+            };
+            return {
+                init: init,
+                fragment: fragment
+            }
+        }();
+        jz.init();
+        jz.fragment();
+    </script>
+}

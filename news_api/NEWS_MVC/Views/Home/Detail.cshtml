@@ -1,0 +1,64 @@
+﻿@using NEWS_MVC.Services.Interfaces;
+@inject IPostService postService  
+@{
+    var post = this.ViewBag.Post as Entity.PostsEntity;
+    var thumbnail = this.ViewBag.Thumbnail as string;
+    ViewData["Title"] = post.PostTitle;
+    ViewData["Description"] = post.PostExcerpt;
+    ViewData["Thumbnail"] = thumbnail;
+    Layout = "~/Views/Shared/_DetailLayout.cshtml";
+    var hots = postService.GetPosts().Alls.Take(6);
+}
+<div class="main-cont clearfix">
+    <div class="main-cont-title">
+        <h3>Chi tiết<span>INFOMATION</span></h3>
+        <p><span>Vị trí của bạn：</span><a href="/trang-chu">Trang chủ</a> > <a href="javascript:void(0);">Chi tiết</a></p>
+    </div>
+
+    <div class="container clearfix" id="main">
+        <h3>@post.PostTitle</h3>
+        <div class="cont-time">
+            <span>Ngày viết：@post.PostDate.ToString("dd/MM/yyyy")</span><i>|</i>
+            <span>Ngày sửa：@post.PostModified.ToString("dd/MM/yyyy")</span><i>|</i>
+            <span>Tác giả： @post.Author?.DisplayName</span>
+        </div>
+        <div class="article">
+            <style>
+                .article img {
+                    width: 100%;
+                    height: auto;
+                }
+            </style>
+            @Html.Raw(post.PostContent)
+
+            <div class="pages">
+            </div>
+        </div>
+    </div>
+    <div id="news" class="news-sec">
+        <h4>Nổi bật</h4>
+        <div class="notice clearfix">
+            <div class="n-left">
+                <ul>
+                    @foreach (var item in hots)
+                    {
+                        <li><a href="/chi-tiet/@item.PostName"><span>[@item.PostModified.ToString("dd/MM")]</span>@item.PostTitle</a></li>
+                    }
+
+                </ul>
+            </div>
+            <div class="n-right">
+                <div class="myxb">
+
+                    <a class="hot" href="javascript:void(0);" title="@post.PostTitle">
+                        <img src="@thumbnail" alt="@post.PostTitle">
+                        <p class="name">
+                            @post.Author?.DisplayName
+                        </p>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

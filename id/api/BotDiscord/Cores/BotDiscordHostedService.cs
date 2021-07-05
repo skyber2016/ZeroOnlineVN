@@ -66,6 +66,7 @@ namespace API.Cores
             var eventLog = new EventLog("Security");
             eventLog.EnableRaisingEvents = true;
             eventLog.EntryWritten += EventLog_EntryWritten;
+            
         }
 
         private int Index { get; set; }
@@ -223,6 +224,9 @@ namespace API.Cores
                         builder.AppendLine($"**Thời gian  :**: {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")}");
                         user.WebMoney += webmoney;
                         user.CheckSum = user.GetCheckSum();
+                        user.Wheel += webmoney / 50000;
+                        builder.AppendLine($"**Vòng quay được cộng:**: {webmoney / 50000}");
+                        builder.AppendLine($"**Tổng vòng quay:**: {user.Wheel}");
                         await this.AccountService.UpdateAsync(user, tran);
                         await this.BotMessageService.AddAsync(new BotMessageEntity
                         {

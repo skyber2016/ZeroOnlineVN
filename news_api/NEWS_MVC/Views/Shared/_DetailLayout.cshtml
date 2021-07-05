@@ -1,0 +1,79 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    if (Env.IsDevelopment())
+    {
+        <link rel="stylesheet" href="~/css/sub.css" asp-append-version="true" />
+    }
+    else
+    {
+        <link rel="stylesheet" href="~/css/sub.min.css" asp-append-version="true" />
+    }
+}
+<div class="full-bg">
+    <!--header-->
+    @await Html.PartialAsync("~/Views/Home/_Header.cshtml")
+    <!--/header-->
+
+    <div class="main">
+        <div class="wrapper clearfix">
+            <div class="sidebar clearfix">
+                @await Html.PartialAsync("~/Views/Home/_Left.cshtml")
+                <div class="device">
+                    @await Html.PartialAsync("~/Views/Home/_Banner.cshtml")
+                </div>
+            </div>
+            @RenderBody()
+        </div>
+    </div>
+    <!-- footer -->
+    <div class="footer">
+        <div class="wrapper"></div>
+    </div>
+</div>
+<div id="goto-top" class="goto-top"></div>
+@section Scripts {
+    <script>
+        new Swiper('#subLunbo', {
+            pagination: '.pagination',
+            autoplay: 3000,
+            loop: true,
+            paginationClickable: true
+        });
+        //返回顶部
+        var scrollBar = function (obj, width, objH) {
+            $(window).bind("scroll resize", function () {
+                var ie6 = $.browser.msie && parseInt($.browser.version) <= 6;
+                var _h1 = $(window).height();
+                var _h2 = $(window).scrollTop();
+                var _h3 = $(document).height();
+                var _h4 = 500;
+                var _h5 = $(obj).height();
+                if ($(window).width() > 1200) {
+                    $(obj).css("left", ($(window).width() - width) / 2 + width);
+                    if (_h2 > 500) {
+                        if (!ie6) {
+                            if (_h3 - _h2 - _h1 <= _h4) { $(obj).css("bottom", _h4) }
+                            else { $(obj).css("bottom", 200) }
+                        }
+                        else {
+                            if (_h3 - _h2 - _h1 < _h4) { $(obj).css("top", _h3 - _h4 - _h5) }
+                            else { $(obj).css("top", _h1 + _h2 - _h5) }
+                        }
+                        $(obj).fadeIn();
+                    }
+                    else { $(obj).fadeOut() }
+                }
+                else $(obj).hide()
+            })
+            $(obj).click(function () {
+                $("html,body").stop().animate({ scrollTop: 0 }, 300)
+            })
+        }
+        scrollBar(".goto-top", 1200, ".news-sec");
+
+    </script>
+    @RenderSection("DetailScripts", required: false)
+}
+

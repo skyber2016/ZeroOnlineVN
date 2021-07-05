@@ -1,0 +1,10 @@
+﻿{
+  "profiles": {
+    "AutoBackupCloud": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

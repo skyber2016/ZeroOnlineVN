@@ -1,0 +1,125 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"] - Zero Online Việt Nam</title>
+    <meta name="keywords" content="Đại chiến Robots, trang web chính thức của Zero Online duy nhất tại Việt Nam" />
+    @{
+        var desc = ViewData["Description"] as string;
+        if (!string.IsNullOrEmpty(desc))
+        {
+            <meta name="description" content="@desc" />
+        }
+        else
+        {
+            <meta name="description" content="Trò chơi trực tuyến 2.5D 'Machine Warfare' được phát triển bởi Tianqing Digital trong nhiều năm và thu thập trí tuệ của vô số người chơi trò chơi trực tuyến. Trò chơi dựa trên chủ đề cơ khí, phác họa hoàn hảo một thế giới tương lai rất đương đại và thâm nhập vào các yếu tố như vậy như cuộc chiến công nghệ cao giữa các hành tinh gây ra bởi tài nguyên và lãnh thổ là chế độ chơi chính. Phần phim mở rộng mới nhất Zerg Havoc vào ngày 17 tháng 5 năm 2012 đã trình bày hoàn hảo về sự kiện lớn của cuộc xâm lược của người ngoài hành tinh." />
+        }
+    }
+    <meta http-equiv="x-ua-compatible" content="ie=7" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    @*<meta property="fb:app_id" content="946692825507723" />*@
+    <meta property="og:image:width" content="600">
+    <meta property="og:image:height" content="400">
+    <meta property="og:url" content="https://zeroonlinevn.com/">
+    <meta property="og:type" content="website">
+    @{
+        var title = @ViewData["Title"] as string;
+        if (!string.IsNullOrEmpty(title))
+        {
+            <meta property="og:title" content="@title">
+        }
+        else
+        {
+            <meta property="og:title" content="Đại chiến Robots, Zero Online duy nhất tại Việt Nam">
+        }
+    }
+    @{
+        if (!string.IsNullOrEmpty(desc))
+        {
+            <meta property="og:description" content="@desc">
+        }
+        else
+        {
+            <meta property="og:description" content="Khai mở máy chủ mới Gemini, tham gia ngay để trải nghiệm và nhận những phần hấp dẫn mỗi ngày">
+        }
+    }
+    @{
+        var thumbnail = ViewData["Thumbnail"] as string;
+        if (!string.IsNullOrEmpty(thumbnail))
+        {
+            <meta property="og:image" content="@thumbnail">
+        }
+        else
+        {
+            <meta property="og:image" content="https://zeroonlinevn.com/images/sub-banner.png">
+        }
+    }
+    <meta property="og:site_name" content="zeroonlinevn.com">
+   
+    <script type="application/ld+json">
+        {
+          "@@context": "https://schema.org",
+          "@@type": "BreadcrumbList",
+          "itemListElement": [{
+            "@@type": "ListItem",
+            "position": 1,
+            "name": "Zero Online Việt Nam",
+            "item": "https://zeroonlinevn.com"
+          },{
+            "@@type": "ListItem",
+            "position": 2,
+            "name": "ZeroOnlineVN.COM ✅ (Đã Xác Minh)",
+            "item": "https://ZeroOnlineVN.COM"
+          }]
+        }
+    </script>
+
+
+
+    <link rel="stylesheet" href="~/css/idangerous.swiper.min.css" asp-append-version="true" />
+    <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300;400;500;600;700&display=swap" async rel="stylesheet" />
+    <style>
+        body {
+            font-family: 'Jura', sans-serif;
+            margin: 0;
+        }
+    </style>
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-C9J35JMGF8"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-C9J35JMGF8');
+    </script>
+</head>
+<body>
+    @RenderBody()
+    @{
+        var renderScripts = ViewData["RenderScript"] as string ?? "1";
+        if (renderScripts == "1")
+        {
+            if (Env.IsDevelopment())
+            {
+                <script src="~/js/g_topmenu.js" asp-append-version="true"></script>
+                <script src="~/js/public.js" asp-append-version="true"></script>
+                <script src="~/js/jquery-1.8.3.min.js" asp-append-version="true"></script>
+                <script src="~/js/idangerous.swiper2.7.6.min.js" asp-append-version="true"></script>
+                <script src="~/js/custom.js" asp-append-version="true"></script>
+            }
+            else
+            {
+                <script src="~/js/g_topmenu.min.js" asp-append-version="true"></script>
+                <script src="~/js/public.min.js" asp-append-version="true"></script>
+                <script src="~/js/jquery-1.8.3.min.js" asp-append-version="true"></script>
+                <script src="~/js/idangerous.swiper2.7.6.min.js" asp-append-version="true"></script>
+                <script src="~/js/custom.min.js" asp-append-version="true"></script>
+            }
+        }
+    }
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

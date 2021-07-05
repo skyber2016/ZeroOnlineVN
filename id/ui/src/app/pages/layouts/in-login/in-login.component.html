@@ -157,6 +157,20 @@
                               </li>
                             </ul>
                           </li>
+                          <li class="cat-item">
+																		<span>
+																			<i class="fa fa-shopping-cart"></i>&emsp;&emsp;Cửa hàng
+																			<i class="fas fa-angle-down"></i>
+																		</span>
+                            <ul class="sub-menu">
+                              <li class="sub-item">
+                                <a routerLink="/cua-hang">Vật phẩm</a>
+                              </li>
+                              <li class="sub-item" *ngIf="isAdmin">
+                                <a routerLink="/cua-hang/quan-ly">Quản lý cửa hàng</a>
+                              </li>
+                            </ul>
+                          </li>
 
                           <li class="cat-item">
 																		<span>

@@ -35,12 +35,14 @@ namespace API
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
+            this.Env = env;
         }
 
         public IConfiguration Configuration { get; }
+        public IWebHostEnvironment Env { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -70,8 +72,10 @@ namespace API
                 .AddControllersAsServices()
                 .AddXmlSerializerFormatters()
             ;
-
-            ConfigSwagger(services);
+            if (Env.IsDevelopment())
+            {
+                //ConfigSwagger(services);
+            }
 
             var mapperConfig = new MapperConfiguration(mc =>
             {
@@ -100,19 +104,18 @@ namespace API
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c =>
-                {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1");
-                    c.RoutePrefix = string.Empty;
-                });
-                app.UseMiddleware<AutomationLoginMiddleware>();
+                //app.UseDeveloperExceptionPage();
+                //app.UseSwagger();
+                //app.UseSwaggerUI(c =>
+                //{
+                //    c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1");
+                //    c.RoutePrefix = string.Empty;
+                //});
+                //app.UseMiddleware<AutomationLoginMiddleware>();
             }
-            //app.UseMiddleware<CryptoMiddleware>();
             app.UseCors("MyPolicy");
             app.UseRouting();
-
+            app.UseStaticFiles();
             app.UseAuthentication();
             app.UseAuthorization();
 

@@ -14,6 +14,9 @@ namespace API.Entities
         [Column("created_date")]
         public DateTime CreatedDate { get; set; }
 
+        [Column("char_name")]
+        public string CharName { get; set; }
+
         [Column("account_id")]
         public int AccountId { get; set; }
     }

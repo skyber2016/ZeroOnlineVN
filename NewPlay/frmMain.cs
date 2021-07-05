@@ -1,16 +1,10 @@
-﻿using NewPlay.Properties;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace NewPlay
@@ -19,6 +13,8 @@ namespace NewPlay
     {
         private string PathAutoP = AppDomain.CurrentDomain.BaseDirectory + "AutoP.exe";
         private string FileName = AppDomain.CurrentDomain.BaseDirectory + "Zero.exe";
+        private string FileLEConfig = AppDomain.CurrentDomain.BaseDirectory + "Zero.exe.le.config";
+        private string FileLEPoc = AppDomain.CurrentDomain.BaseDirectory + "LEProc.exe";
         private string FileVersion = AppDomain.CurrentDomain.BaseDirectory + "version.dat";
         private string Office = "http://zeroonlinevn.com";
         private string Reg = "http://id.zeroonlinevn.com";
@@ -26,7 +22,6 @@ namespace NewPlay
         {
             InitializeComponent();
         }
-
         private void btnStart_Click(object sender, EventArgs e)
         {
             if (File.Exists(this.PathAutoP))
@@ -100,8 +95,28 @@ namespace NewPlay
                 this.lblVersion.Text = "0";
             }
         }
+        private void StartGame()
+        {
+            if(File.Exists(this.FileLEPoc) && File.Exists(this.FileLEConfig))
+            {
+                Process.Start(this.FileLEPoc, "Zero.exe");
+            }
+            else
+            {
+                MessageBox.Show("Không tìm thấy file cài đặt ngôn ngữ");
+                Process.Start(this.FileName, "blacknull");
+            }
+            Thread.Sleep(1000);
+            Application.Exit();
+        }
         private void frmMain_Load(object sender, EventArgs e)
         {
+            var isStart = Environment.GetCommandLineArgs().LastOrDefault() == "blacknull";
+            if (isStart)
+            {
+                this.StartGame();
+                return;
+            }
             this.MouseDown += FrmMain_MouseDown;
             this.LoadVersion();
 

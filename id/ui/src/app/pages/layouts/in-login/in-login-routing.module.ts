@@ -46,6 +46,10 @@ const routes: Routes = [
       {
         path: 'vong-quay',
         loadChildren: () => import('../../wheel/wheel.module').then(m => m.WheelModule)
+      },
+      {
+        path: 'cua-hang',
+        loadChildren: () => import('../../web-shop/web-shop.module').then(m => m.WebShopModule)
       }
 
     ]

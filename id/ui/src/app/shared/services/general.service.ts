@@ -13,6 +13,18 @@ export class GeneralService {
   post(obj: any): Observable<any> {
     return this.http.post(this.apiName, obj);
   }
+  put(obj: any): Observable<any> {
+    return this.http.put(this.apiName, obj);
+  }
+  delete(obj: any): Observable<any> {
+    let params = new HttpParams();
+    Object.keys(obj).forEach(item => {
+      if(obj[item] != null){
+        params = params.set(item, obj[item]);
+      }
+    });
+    return this.http.delete(this.apiName, {params});
+  }
 
   get<T>(obj: any): Observable<T>{
     let params = new HttpParams();

@@ -1,39 +1,46 @@
-<div class="main-head">
-  <div class="breadcrumbs1">
-    <a [routerLink]="['/']" class="tooltipstered">Trang Chủ</a>
-    <a class="tooltipstered">Vòng quay may mắn</a>
+<div class="wheel">
+  <div class="main-head">
+    <div class="breadcrumbs1">
+      <a [routerLink]="['/']" class="tooltipstered">Trang Chủ</a>
+      <a class="tooltipstered">Vòng quay may mắn</a>
+    </div>
+    <h1 class="module-title">Vòng quay may mắn</h1>
   </div>
-  <h1 class="module-title">Vòng quay may mắn</h1>
-</div>
+  <div class="alert alert-primary">
+    <p class="alert-caption">Lưu ý</p>
+    <ul class="noted in-left-10">
+      <li>Khi bạn nạp <strong>tối thiểu cứ</strong> mỗi <strong>50.000</strong> thì sẽ được tặng 1 lượt quay.</li>
+      <li>Các vật phẩm khi quay trúng vui lòng đến nhận tại <strong>NPC</strong></li>
+    </ul>
+  </div>
+  <div class="main-page">
+    <div class="main-left">
+      <div class="main-body">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-6">
+              <section class="rotation">
+                <div class="play-spin">
+                  <a class="ani-zoom" id="start-played" (click)="onWheel()">
+                    <img src="/assets/images/wheel_start.png"
+                         alt="Play Center"></a>
+                  <img src="/assets/images/vongquaymayman.png" alt="Play"
+                       id="rotate-play">
 
-<div class="main-page">
-  <div class="main-left">
-    <div class="main-body">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-6">
-            <section class="rotation">
-              <div class="play-spin">
-                <a  class="ani-zoom" id="start-played" (click)="onWheel()">
-                  <img src="https://shopthocon.vn/public/img/IMG_3478.png"
-                       alt="Play Center"></a>
-                <img src="https://shopthocon.vn/public/img/80392642_2349970065313144_8529806836562395136_n.png" alt="Play"
-                     id="rotate-play">
+                </div>
 
-              </div>
+                <div class="text-center">
+                  <h3 class="num-play">Bạn còn <span>{{wheelCount}}</span> lượt quay.</h3>
+                </div>
 
-              <div class="text-center">
-                <h3 class="num-play">Bạn còn <span>0</span> lượt quay.</h3>
-              </div>
+              </section>
+            </div>
+            <div class="col-md-6">
+              <div class="in-20 font-14 text-semibold">
 
-            </section>
-          </div>
-          <div class="col-md-6">
-            <div class="in-20 font-14 text-semibold">
-
-              <div class="table-responsive">
-                <table class="table table-striped table-red">
-                  <thead>
+                <div class="table-responsive">
+                  <table class="table table-striped table-red">
+                    <thead>
                     <tr>
                       <th>#</th>
                       <th>Tên nhân vật</th>
@@ -41,18 +48,24 @@
                       <th><font color="green">Thời gian</font></th>
 
                     </tr>
-                  </thead>
-                  <tbody>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let history of histories; let i = index;">
+                      <td>{{i + 1}}</td>
+                      <td>{{history.charName}}</td>
+                      <td>{{history.desc}}</td>
+                      <td>{{history.createdDate | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
 
-                  </tbody>
-                </table>
               </div>
-
             </div>
           </div>
         </div>
       </div>
     </div>
-
   </div>
+
 </div>

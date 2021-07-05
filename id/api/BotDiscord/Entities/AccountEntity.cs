@@ -50,6 +50,9 @@ namespace API.Entities
         [Column("check_sum")]
         public string CheckSum { get; set; }
 
+        [Column("wheel")]
+        public int Wheel { get; set; }
+
         public AccountEntity()
         {
             this.RegDate = DateTime.Now;

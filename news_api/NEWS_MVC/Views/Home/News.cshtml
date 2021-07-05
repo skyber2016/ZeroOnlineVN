@@ -1,0 +1,29 @@
+﻿@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment env;
+@{
+    ViewData["Title"] = "Trang web chính thức của Zero Online duy nhất tại Việt Nam";
+
+
+}
+@{ if (Env.IsDevelopment())
+    {
+        <link href="~/css/style.css" rel="stylesheet" asp-append-version="true" />
+    }
+    else
+    {
+        <link href="~/css/style.min.css" rel="stylesheet" asp-append-version="true" />
+    }
+}
+<div class="full-bg">
+    <!--header-->
+    @await Html.PartialAsync("_Header")
+    <!--/header-->
+    @await Html.PartialAsync("_Main1")
+    @await Html.PartialAsync("_Main2")
+    @await Html.PartialAsync("_Main3")
+
+
+    <!-- footer -->
+    <div class="footer">
+        <div class="wrapper"></div>
+    </div>
+</div>
