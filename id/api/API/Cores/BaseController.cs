@@ -9,7 +9,7 @@ using API.Security;
 
 namespace API.Cores
 {
-    [Cors]
+    [TypeFilter(typeof(CorsAttribute))]
     [TypeFilter(typeof(ErrorHandlingAttribute))]
     [ApiController]
     [Route("api/[controller]")]
