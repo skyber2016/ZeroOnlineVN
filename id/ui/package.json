@@ -1,6 +1,6 @@
 {
   "name": "id",
-  "version": "1.28.0",
+  "version": "1.30.1",
   "scripts": {
     "ng": "ng",
     "start": "npm --no-git-tag-version version patch && ng serve",

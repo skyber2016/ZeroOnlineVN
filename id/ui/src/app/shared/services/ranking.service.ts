@@ -12,4 +12,7 @@ export class RankingService {
   power():Observable<any[]>{
     return this.http.get<any[]>('Ranking/Power');
   }
+  syndicate():Observable<any[]>{
+    return this.http.get<any[]>('Ranking/Syndicate');
+  }
 }

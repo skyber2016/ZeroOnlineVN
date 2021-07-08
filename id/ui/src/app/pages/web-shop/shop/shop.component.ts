@@ -4,6 +4,7 @@ import {ShopItemService} from "../../../shared/services/shop-item.service";
 import {environment} from "../../../../environments/environment";
 import {MessageService} from "../../../shared/services/message.service";
 import * as moment from 'moment';
+
 @Component({
   selector: 'app-shop',
   templateUrl: './shop.component.html',
@@ -31,12 +32,15 @@ export class ShopComponent implements OnInit {
   }
 
   buyItem(item): void {
-    this.shopService.post({
-      itemId: item.id
-    }).subscribe(()=>{
-      this.messageService.success('Mua thành công');
-      this.initData();
+    this.messageService.confirm(`Bạn có chắc muốn mua ${item.name} với giá ${item.priceStr}`).then(() => {
+      this.shopService.post({
+        itemId: item.id
+      }).subscribe(() => {
+        this.messageService.success('Mua thành công');
+        this.initData();
+      })
     })
+
   }
 
   fromNow(time): string {

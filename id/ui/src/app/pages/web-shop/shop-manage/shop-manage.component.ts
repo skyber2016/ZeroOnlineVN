@@ -59,21 +59,21 @@ export class ShopManageComponent implements OnInit {
     })
   }
 
-  onUpload(): void {
+  updateItem(): void {
     if (!this.actionId || !this.name || !this.price || !this.qty || !this.imageUrl) {
       return;
     }
     if (!this.isUpdate) {
       return;
     }
-    const formData = new FormData();
-    formData.append('image', this.imageUrl.trim());
-    formData.append('id', this.actionId.toString().trim());
-    formData.append('name', this.name.trim());
-    formData.append('qty', this.qty.toString().trim());
-    formData.append('price', this.price.toString().trim());
 
-    this.shopItemService.put(formData).subscribe(() => {
+    this.shopItemService.put({
+      image: this.imageUrl.trim(),
+      id: +this.actionId,
+      name: this.name.trim(),
+      qty: +this.qty,
+      price: +this.price
+    }).subscribe(() => {
       this.messageService.success();
       this.initItem();
     })
@@ -87,6 +87,13 @@ export class ShopManageComponent implements OnInit {
     this.qty = item.qty;
     this.image = null;
     this.imageUrl = item.image;
+  }
+
+  onDelete(id): void {
+    this.shopItemService.delete({id}).subscribe(() => {
+      this.messageService.success();
+      this.initItem();
+    })
   }
 
 }

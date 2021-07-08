@@ -54,7 +54,7 @@
       <div class="act-btn">
         <button class="btn btn-primary btn-lg btn-block" type="button" (click)="onCreate()">Tạo vật phẩm
         </button>
-        <button class="btn btn-secondary btn-lg btn-block" type="button" (click)="onUpload()">Cập nhật vật phẩm
+        <button class="btn btn-secondary btn-lg btn-block" type="button" (click)="updateItem()">Cập nhật vật phẩm
         </button>
       </div>
     </div>
@@ -77,12 +77,12 @@
             <td>{{i + 1}}</td>
             <td>{{item.id}}</td>
             <td>{{item.name}}</td>
-            <td>{{item.price}}</td>
+            <td>{{item.priceStr}}</td>
             <td>{{item.qty}}</td>
             <td><img width="50" src="{{host}}{{item.image}}" alt=""></td>
             <td>
               <div class="btn btn-primary mr-2" title="Sửa" (click)="onEdit(item)"><i class="fa fa-pencil"></i></div>
-              <div class="btn btn-danger" title="Xóa"><i class="fa fa-trash"></i></div>
+              <div class="btn btn-danger" title="Xóa" (click)="onDelete(item.id)"><i class="fa fa-trash"></i></div>
             </td>
           </tr>
           </tbody>

@@ -12,10 +12,8 @@ namespace API.DTO.WebShopItem.Responses
 
         public string Image { get; set; }
 
-        [JsonIgnore]
         public int Price { get; set; }
 
-        [JsonPropertyName("price")]
         public string PriceStr
         {
             get

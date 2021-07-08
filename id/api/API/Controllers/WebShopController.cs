@@ -32,7 +32,7 @@ namespace API.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var logs = await this.GeneralService.FindBy().OrderByDesc("id").Limit(50).GetAsync<WebShopEntity>();
+            var logs = await this.GeneralService.FindBy().OrderByDesc("id").Limit(28).GetAsync<WebShopEntity>();
             var response = logs.Select(x => {
                 var map = Mapper.Map<WebShopGetResponse>(x);
                 map.CharName = map.CharName.Base64Decode();

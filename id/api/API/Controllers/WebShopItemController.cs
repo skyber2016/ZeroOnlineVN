@@ -84,8 +84,7 @@ namespace API.Controllers
 
         [HttpPut]
         [Admin]
-
-        public async Task<IActionResult> Update([FromForm]WebShopItemUpdateRequest request)
+        public async Task<IActionResult> Update(WebShopItemUpdateRequest request)
         {
             var entity =  await this.GeneralService.SingleBy(new
             {

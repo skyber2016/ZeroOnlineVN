@@ -21,7 +21,7 @@
             <div class="row">
               <div class="col-md-8">
                 <main>
-                  <div class="container-fluid bg-trasparent my-4 p-3" style="position: relative;">
+                  <div class="container-fluid bg-trasparent" style="position: relative;">
                     <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3">
                       <div class="col-md-4 mb-4" *ngFor="let item of items">
                         <div class="card h-100 shadow-lg"><img
@@ -29,7 +29,7 @@
                           class="card-img-top" alt="...">
                           <div class="card-body">
                             <div class="clearfix mb-3"> <span
-                              class="float-end price-hp">{{item.price}} VNĐ</span><span
+                              class="float-end price-hp">{{item.priceStr}} VNĐ</span><span
                               class="float-start badge rounded-pill ml-2" [ngClass]="item.qty > 0 ? 'bg-primary' : 'bg-secondary'"> Còn lại: {{item.qty}}</span></div>
                             <h5 class="card-title">{{item.name}}</h5>
                             <div class="text-center my-4"><a href="javascript:void(0);" style="border-radius:100px" class="btn btn-secondary" *ngIf="item.qty == 0">Hết hàng</a></div>

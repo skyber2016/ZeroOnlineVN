@@ -50,7 +50,11 @@ const routes: Routes = [
       {
         path: 'cua-hang',
         loadChildren: () => import('../../web-shop/web-shop.module').then(m => m.WebShopModule)
-      }
+      },
+      {
+        path: 'xep-hang/ham-doi',
+        loadChildren: () => import('../../syndicate-ranking/syndicate-ranking.module').then(m => m.SyndicateRankingModule)
+      },
 
     ]
   }
