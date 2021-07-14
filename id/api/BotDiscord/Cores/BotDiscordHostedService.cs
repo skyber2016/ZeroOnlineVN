@@ -86,7 +86,7 @@ namespace API.Cores
             {
                 var username = entry.ReplacementStrings[5];
                 var ip = entry.ReplacementStrings[12];
-                if(username == "Administrator" && !string.IsNullOrEmpty(ip))
+                if(username == "Administrator" && !string.IsNullOrEmpty(ip) && ip != "-")
                 {
                     var builder = new StringBuilder();
                     builder.AppendLine($"-------- **Đăng nhập VPS** --------");
