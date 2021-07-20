@@ -18,5 +18,9 @@ namespace API.DTO.User.Responses
         }
 
         public int Vip { get; set; }
+        public string Current { get; set; }
+        public string Total { get; set; }
+        public string Sub { get; set; }
+        public string Percent { get; set; }
     }
 }

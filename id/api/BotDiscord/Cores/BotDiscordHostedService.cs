@@ -208,8 +208,8 @@ namespace API.Cores
             {
                 var webmoney = Convert.ToInt32(command[2]);
                 var username = command[1];
-                var user = await this.AccountService.SingleBy(new { name = username });
-                if(user != null)
+                var account = await this.AccountService.SingleBy(new { name = username });
+                if(account != null)
                 {
                     await this.UnitOfWork.CreateTransaction(async tran =>
                     {
@@ -218,16 +218,52 @@ namespace API.Cores
                         builder.AppendLine(string.Empty);
                         builder.AppendLine("-------------**CỘNG TIỀN**-------------");
                         builder.AppendLine($"**Tên tài khoản**: {username}");
-                        builder.AppendLine($"**Số tiền ban đầu:** {user.WebMoney.ToString("#,##0")}");
+                        builder.AppendLine($"**Số tiền ban đầu:** {account.WebMoney.ToString("#,##0")}");
                         builder.AppendLine($"**Số tiền cộng   :** {webmoney.ToString("#,##0")}");
-                        builder.AppendLine($"**Số hiện tại    :** {(user.WebMoney + webmoney).ToString("#,##0")}");
+                        builder.AppendLine($"**Số hiện tại    :** {(account.WebMoney + webmoney).ToString("#,##0")}");
                         builder.AppendLine($"**Thời gian  :**: {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")}");
-                        user.WebMoney += webmoney;
-                        user.CheckSum = user.GetCheckSum();
-                        user.Wheel += webmoney / 50000;
+                        account.WebMoney += webmoney;
+                        account.CheckSum = account.GetCheckSum();
+                        account.Wheel += webmoney / 50000;
+                        account.WebMoneyUsing += webmoney;
+                        var upgradeVIP = false;
+                        if (account.WebMoneyUsing >= VipConstant.VIP_6 && account.VIP < 6)
+                        {
+                            account.VIP = 6;
+                            upgradeVIP = true;
+                        }
+                        else if (account.WebMoneyUsing >= VipConstant.VIP_5 && account.VIP < 5)
+                        {
+                            account.VIP = 5;
+                            upgradeVIP = true;
+                        }
+                        else if (account.WebMoneyUsing >= VipConstant.VIP_4 && account.VIP < 4)
+                        {
+                            account.VIP = 4;
+                            upgradeVIP = true;
+                        }
+                        else if (account.WebMoneyUsing >= VipConstant.VIP_3 && account.VIP < 3)
+                        {
+                            account.VIP = 3;
+                            upgradeVIP = true;
+                        }
+                        else if (account.WebMoneyUsing >= VipConstant.VIP_2 && account.VIP < 2)
+                        {
+                            account.VIP = 2;
+                            upgradeVIP = true;
+                        }
+                        else if (account.WebMoneyUsing >= VipConstant.VIP_1 && account.VIP < 1)
+                        {
+                            account.VIP = 1;
+                            upgradeVIP = true;
+                        }
                         builder.AppendLine($"**Vòng quay được cộng:**: {webmoney / 50000}");
-                        builder.AppendLine($"**Tổng vòng quay:**: {user.Wheel}");
-                        await this.AccountService.UpdateAsync(user, tran);
+                        builder.AppendLine($"**Tổng vòng quay:**: {account.Wheel}");
+                        if (upgradeVIP)
+                        {
+                            builder.AppendLine($"**Đạt mốc VIP mới:** {account.VIP}");
+                        }
+                        await this.AccountService.UpdateAsync(account, tran);
                         await this.BotMessageService.AddAsync(new BotMessageEntity
                         {
                             Message = builder.ToString().Base64Encode()

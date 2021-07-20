@@ -96,7 +96,7 @@ namespace API.Services
             return result;
         }
 
-        public async Task Delete(TEntity entity, IDbTransaction transaction = null)
+        public async Task DeleteAsync(TEntity entity, IDbTransaction transaction = null)
         {
             await this.Context.Factory.Query(this.TableName).Where("id", entity.Id).DeleteAsync(transaction);
         }

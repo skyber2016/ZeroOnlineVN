@@ -35,6 +35,7 @@ namespace AutoBackupCloud
 
         public void Error(string message)
         {
+            Console.WriteLine(message);
             _logFile.Error(message);
         }
         public void Debug(string message)
@@ -44,6 +45,7 @@ namespace AutoBackupCloud
 
         public void Info(string message)
         {
+            Console.WriteLine(message);
             _logFile.Info(message);
         }
 

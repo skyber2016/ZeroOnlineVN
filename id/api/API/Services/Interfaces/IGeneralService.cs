@@ -18,6 +18,6 @@ namespace API.Services.Interfaces
 
         Task<TEntity> SingleBy(object predicate, IDbTransaction transaction = null);
 
-        Task Delete(TEntity entity, IDbTransaction transaction = null);
+        Task DeleteAsync(TEntity entity, IDbTransaction transaction = null);
     }
 }

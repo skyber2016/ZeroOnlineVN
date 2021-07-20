@@ -41,31 +41,51 @@ namespace AutoBackupCloud
                 XmlConfigurator.Configure(repo, log4netConfig["log4net"]);
             }
         }
-
+        private void WriteLog(Exception ex)
+        {
+            if(ex.InnerException != null)
+            {
+                WriteLog(ex.InnerException);
+            }
+            else
+            {
+            }
+            Logger.Error(ex.Message);
+            Logger.Error(ex.StackTrace);
+        }
+        private CancellationToken StoppingToken { get; set; }
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
+            this.StoppingToken = stoppingToken;
             while (!stoppingToken.IsCancellationRequested)
             {
+                string newPath = string.Empty;
+                string zipPath = string.Empty;
                 try
                 {
                     this.Service = this.GetService();
                     Logger.Info($"Worker running at: {DateTimeOffset.Now}");
-                    var newPath = this.BackupFile();
+                    newPath = this.BackupFile();
                     Logger.Info("newPath: " + newPath);
                     if(newPath == null)
                     {
                         throw new Exception("Khong tim thay thu muc");
                     }
-                    var zipPath = this.CreateZip(newPath);
+                    zipPath = this.CreateZip(newPath);
                     Logger.Info("new zip: " + zipPath);
-                    this.UploadDrive(zipPath, new FileInfo(zipPath).Name);
-                    this.RemoveFolder(newPath);
-                    this.RemoveFile(zipPath);
+                    await this.UploadDrive(zipPath, new FileInfo(zipPath).Name);
+                    
                 }
                 catch (Exception ex)
                 {
                     Logger.Error(ex.Message);
                     Logger.Error(ex.StackTrace);
+                }
+                finally
+                {
+                    this.RemoveFolder(newPath);
+                    this.RemoveFile(zipPath);
+                    Logger.Info("End session!!!!!!!!!");
                 }
                 await Task.Delay(this.AppSetting.Timer, stoppingToken);
             }
@@ -171,12 +191,12 @@ namespace AutoBackupCloud
             
         }
 
-        private void UploadDrive(string path, string fileName)
+        private async Task UploadDrive(string path, string fileName)
         {
             try
             {
                 Logger.Info("Begin upload drive");
-                this.CleanDrive();
+                await this.CleanDrive();
                 var driveService = this.Service;
                 var folderId = "root";
                 var fileMetadata = new Google.Apis.Drive.v3.Data.File()
@@ -198,8 +218,9 @@ namespace AutoBackupCloud
 
                     // Cấu hình thông tin lấy về là ID
                     request.Fields = "id";
+                    request.ProgressChanged += Request_ProgressChanged;
                     // thực hiện Upload
-                    request.Upload();
+                    await request.UploadAsync(this.StoppingToken);
                 }
 
                 // Trả về thông tin file đã được upload lên Google Drive
@@ -219,37 +240,34 @@ namespace AutoBackupCloud
 
         }
 
+        private void Request_ProgressChanged(Google.Apis.Upload.IUploadProgress obj)
+        {
+            Logger.Info("byte send: " + obj.BytesSent.ToString("#,##0"));
+        }
 
-        private void CleanDrive()
+        private async Task CleanDrive()
         {
             try
             {
                 Logger.Info("Begin clean drive");
                 FilesResource.ListRequest listRequest = this.Service.Files.List();
-                listRequest.PageSize = 10;
+                listRequest.PageSize = 500;
                 listRequest.OrderBy = "modifiedTime";
                 listRequest.Fields = "nextPageToken, files(id, name, modifiedTime)";
 
                 // List files.
-                IList<Google.Apis.Drive.v3.Data.File> files = listRequest.Execute()
-                    .Files.Where(x => {
-                        if (!x.Name.EndsWith(".zip"))
-                        {
-                            return false;
-                        }
-                        var time = (DateTime.Now - x.ModifiedTime.Value).TotalDays > this.AppSetting.Days;
-                        return time;
-                    })
+                IList<Google.Apis.Drive.v3.Data.File> files = (await listRequest.ExecuteAsync(this.StoppingToken))
+                    .Files
+                    .OrderByDescending(x=>x.ModifiedTime)
                     .ToList()
                     ;
-                if (files.Any())
-                {
-                    Logger.Info($"Clear {files.Count} files");
-                }
-                foreach (var item in files)
+                Logger.Info($"Total {files.Count} files");
+                var fileClear = files.Skip(30).ToList();
+                foreach (var item in fileClear)
                 {
                     var deleteRequest = this.Service.Files.Delete(item.Id);
-                    deleteRequest.Execute();
+                    Logger.Info($"Delete file {item.Name} {item.Id}");
+                    await deleteRequest.ExecuteAsync(this.StoppingToken);
                 }
             }
             catch (Exception ex)

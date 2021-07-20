@@ -50,9 +50,11 @@
 ">
 													</form>
 												</span>
-                  <span data-toggle="tooltip" data-placement="bottom" title="" id="vip" *ngIf="vip > 0"
-                        data-original-title="VIP hiện tại">
+                  <span data-toggle="tooltip" data-placement="bottom" title="" id="vip" *ngIf="vip > 0 && this.sub"
+                        [attr.data-original-title]="getTitle()">
+
 													<img [src]="getUrlVip()" alt="" height="30px">
+                    <span class="badge badge-primary" style="background-color: #007bff">{{percent}}%</span>
 												</span>
                   <span data-toggle="tooltip" data-placement="bottom" title="" id="head_wcoin"
                         data-original-title="ZCoin hiện có">
@@ -168,6 +170,12 @@
                               </li>
                               <li class="sub-item" *ngIf="isAdmin">
                                 <a routerLink="/cua-hang/quan-ly">Quản lý cửa hàng</a>
+                              </li>
+                              <li class="sub-item">
+                                <a routerLink="/tich-luy-tieu-phi">Tích lũy tiêu phí</a>
+                              </li>
+                              <li class="sub-item"  *ngIf="isAdmin">
+                                <a routerLink="/tich-luy-tieu-phi/vat-pham">Quản lý tiêu phí</a>
                               </li>
                             </ul>
                           </li>

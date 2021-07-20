@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {BaseComponent} from '../../shared/components/base.component';
+import {UserService} from "../../shared/services/user.service";
 
 @Component({
   selector: 'app-home',
@@ -8,9 +9,21 @@ import {BaseComponent} from '../../shared/components/base.component';
 })
 export class HomeComponent extends BaseComponent implements OnInit {
   username = localStorage.getItem('fullName');
-  constructor() { super() }
+  data:any;
+  constructor(private userService: UserService) { super() }
 
   ngOnInit(): void {
+    this.userService.getMoney().subscribe(resp => {
+      this.data = resp;
+    });
   }
 
+  getVIP(vip: number)
+  {
+    if(vip >= 6)
+    {
+      vip = 6;
+    }
+    return `/assets/images/vip/vip${vip}.png`;
+  }
 }

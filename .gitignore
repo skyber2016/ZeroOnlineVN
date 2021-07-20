@@ -37,3 +37,7 @@ news_api/NEWS_API/obj/
 news_api/NEWS_API/bin/
 NewPlay/Play/.vs/
 id/api/.idea/
+.vs/
+Code_Structure/NEWS_API/obj/
+id/api/API/wwwRoot/images-upload/
+news_api/MinFile/obj/

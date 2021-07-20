@@ -90,6 +90,10 @@ namespace API.Controllers
             {
                 throw new UnAuthorizeException();
             }
+            if(account.VIP > 6)
+            {
+                throw new BadRequestException("VIP không hợp lệ");
+            }
             var rewards = await this.GeneralService.FindBy(new
             {
                 user_id = user.Id,

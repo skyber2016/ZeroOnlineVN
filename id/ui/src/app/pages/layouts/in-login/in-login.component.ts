@@ -18,7 +18,11 @@ export class InLoginComponent extends BaseComponent implements OnInit, AfterView
   routerContant = RouterConstant;
   money = 0;
   vip = 0;
+  percent = 0.0;
   isAdmin = false;
+  current = 0;
+  total = 0;
+  sub = 0;
   constructor(private authService: AuthService, private router: Router, private userService: UserService) {
     super();
   }
@@ -33,10 +37,17 @@ export class InLoginComponent extends BaseComponent implements OnInit, AfterView
     this.userService.getMoney().subscribe(resp => {
       this.money = resp.webMoney;
       this.vip = resp.vip;
+      this.percent = resp.percent;
+      this.current = resp.current;
+      this.total = resp.total;
+      this.sub = resp.sub;
     });
   }
 
   getUrlVip() {
+    if(this.vip > 6){
+      this.vip = 6;
+    }
     return `/assets/images/vip/vip${this.vip}.png`;
   }
 
@@ -99,4 +110,8 @@ export class InLoginComponent extends BaseComponent implements OnInit, AfterView
     });
   }
 
+  getTitle()
+  {
+    return `Cần ${this.sub} để đạt cấp độ tiếp theo`;
+  }
 }

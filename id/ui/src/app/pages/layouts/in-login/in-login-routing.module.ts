@@ -55,6 +55,10 @@ const routes: Routes = [
         path: 'xep-hang/ham-doi',
         loadChildren: () => import('../../syndicate-ranking/syndicate-ranking.module').then(m => m.SyndicateRankingModule)
       },
+      {
+        path: 'tich-luy-tieu-phi',
+        loadChildren: () => import('../../reward-shop/reward-shop.module').then(m => m.RewardShopModule)
+      },
 
     ]
   }

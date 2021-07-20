@@ -112,7 +112,7 @@ namespace API.Controllers
             {
                 throw new BadRequestException("Vật phẩm này không tồn tại");
             }
-            await this.GeneralService.Delete(entity);
+            await this.GeneralService.DeleteAsync(entity);
             return Response();
         }
     }

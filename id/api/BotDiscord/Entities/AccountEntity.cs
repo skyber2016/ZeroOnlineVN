@@ -47,18 +47,18 @@ namespace API.Entities
         [Column("sdt")]
         public string Sdt { get; set; }
 
+        [Column("web_money_using")]
+        public long WebMoneyUsing { get; set; }
+
         [Column("check_sum")]
         public string CheckSum { get; set; }
 
         [Column("wheel")]
         public int Wheel { get; set; }
-
         public AccountEntity()
         {
             this.RegDate = DateTime.Now;
         }
-
-
 
         public string GetCheckSum()
         {

@@ -38,8 +38,49 @@ namespace API.Controllers
         public async Task<IActionResult> Money()
         {
             var currentUser = this.UserService.GetCurrentUser();
-            var user = await this.AccountService.SingleBy(new { id = currentUser.Id });
-            return Response<UserGetMoneyResponse>(user);
+            var account = await this.AccountService.SingleBy(new { id = currentUser.Id });
+            var map = Mapper.Map<UserGetMoneyResponse>(account);
+
+            int nextVip = 1;
+            long total = 1;
+            long min = 0;
+            if(account.VIP == 6)
+            {
+                nextVip = 6;
+            }
+            else
+            {
+                nextVip = account.VIP + 1;
+            }
+            if (nextVip > 6) nextVip = 6;
+            total = VipConstant.VIP[nextVip];
+            if (nextVip == 1)
+            {
+                min = 0;
+            }
+            else
+            {
+                min = VipConstant.VIP[nextVip - 1];
+            }
+            
+            map.Sub = (total - account.WebMoneyUsing).ToString("#,##0");
+            var conLai = ( account.WebMoneyUsing - min);
+            if(conLai < 0)
+            {
+                conLai = 0;
+            }
+            map.Current = conLai.ToString("#,##0");
+            map.Total = (total - min).ToString("#,##0");
+
+            if (account.WebMoneyUsing <= total)
+            {
+                map.Percent = ((float)conLai / (total-min) * 100).ToString("#,##0.00");
+            }
+            else
+            {
+                map.Percent = "100";
+            }
+            return Response(map);
         }
 
         [HttpPost]
@@ -74,37 +115,7 @@ namespace API.Controllers
                 builder.AppendLine($"**Số tiền đổi:** {request.Money.Value.ToString("#,##0")}");
                 builder.AppendLine($"**ZCoin hiện có:** {account.WebMoney.ToString("#,##0")}");
                 account.WebMoney -= request.Money.Value;
-                account.WebMoneyUsing += request.Money.Value;
-                if (account.WebMoneyUsing >= 12000000 && account.VIP < 6)
-                {
-                    account.VIP = 6;
-                    upgradeVIP = true;
-                }
-                else if(account.WebMoneyUsing >= 8000000 && account.VIP < 5)
-                {
-                    account.VIP = 5;
-                    upgradeVIP = true;
-                }
-                else if(account.WebMoneyUsing >= 6000000 && account.VIP < 4)
-                {
-                    account.VIP = 4;
-                    upgradeVIP = true;
-                }
-                else if(account.WebMoneyUsing >= 2000000 && account.VIP < 3)
-                {
-                    account.VIP = 3;
-                    upgradeVIP = true;
-                }
-                else if(account.WebMoneyUsing >= 1000000 && account.VIP < 2)
-                {
-                    account.VIP = 2;
-                    upgradeVIP = true;
-                }
-                else if(account.WebMoneyUsing >= 500000 && account.VIP < 1)
-                {
-                    account.VIP = 1;
-                    upgradeVIP = true;
-                }
+                
                 var user = await this.AuthService.GetCQUser(tran);
                 if(user == null)
                 {
