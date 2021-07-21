@@ -258,6 +258,7 @@ namespace AutoBackupCloud
                 // List files.
                 IList<Google.Apis.Drive.v3.Data.File> files = (await listRequest.ExecuteAsync(this.StoppingToken))
                     .Files
+                    .Where(x=>x.Name.EndsWith(".zip"))
                     .OrderByDescending(x=>x.ModifiedTime)
                     .ToList()
                     ;

@@ -114,11 +114,11 @@ namespace API.Controllers
                 builder.AppendLine($"**Code:** {itemRand.Code}");
                 builder.AppendLine($"**Tên:** {itemRand.Name}");
                 builder.AppendLine($"**Thời gian:** {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")}");
-                await this.BotService.AddAsync(new BotMessageEntity
-                {
-                    Channel = ChannelConstant.WHEEL.ToString(),
-                    Message = builder.ToString().Base64Encode()
-                });
+                //await this.BotService.AddAsync(new BotMessageEntity
+                //{
+                //    Channel = ChannelConstant.WHEEL.ToString(),
+                //    Message = builder.ToString().Base64Encode()
+                //});
             }
             
             var histories = await this.WheelLogService.FindBy().OrderByDesc("id").Limit(22).GetAsync<WheelLogEntity>();
