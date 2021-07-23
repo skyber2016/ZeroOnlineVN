@@ -3,7 +3,7 @@
     <div class="form-2">
       <h1>Đăng kí ngay</h1>
       <div class="form-box">
-        <input type="text" class="form-input" id="username" autocomplete="off"  maxlength="12" required="required" [(ngModel)]="username" autofocus="true" [ngModelOptions]="{standalone: true}">
+        <input type="text" class="form-input" id="username" autocomplete="off"  maxlength="12" required="required" [(ngModel)]="username" (ngModelChange)="username = username.toLowerCase()" autofocus="true" [ngModelOptions]="{standalone: true}">
         <label for="username">Tài khoản</label>
       </div>
 
