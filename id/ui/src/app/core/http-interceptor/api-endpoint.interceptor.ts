@@ -1,4 +1,11 @@
-import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpEvent,
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest
+} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {environment} from 'src/environments/environment';
 import {catchError, finalize, switchMap} from 'rxjs/operators';
@@ -18,7 +25,9 @@ export class ApiEndpointInterceptor implements HttpInterceptor {
     private router: Router,
     private toastr: MessageService,
     private authService: AuthService,
-    private loaderService: LoaderService) {
+    private loaderService: LoaderService,
+    private http: HttpClient
+  ) {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -74,7 +83,12 @@ export class ApiEndpointInterceptor implements HttpInterceptor {
   }
 
   refreshTokenAndRetry(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    return this.authService.RefreshToken()
+    const refreshToken = localStorage.getItem('refreshToken') || '';
+    if(refreshToken == ''){
+      this.authService.redirectToLogin();
+      return throwError('Not found refresh token');
+    }
+    return this.http.post<any>('auth/refreshToken', {refreshToken: localStorage.getItem('refreshToken')})
       .pipe(
         switchMap(result => {
           localStorage.setItem('token', result.token);

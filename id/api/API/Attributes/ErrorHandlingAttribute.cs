@@ -20,18 +20,14 @@ namespace API.Attributes
         }
         public override void OnException(ExceptionContext context)
         {
-            if(this.context.Factory.Connection.State == System.Data.ConnectionState.Open)
-            {
-                this.context.Factory.Connection.Close();
-            }
             var exception = context.Exception;
-            Logging(exception);
             if (exception is NotFoundException)
             {
                 context.Result = new NotFoundResult();
             } 
             else if(exception is BadRequestException)
             {
+                Logger.Error(exception.Message);
                 context.Result = new JsonResult(new Error400Response
                 {
                     Message = exception.Message
@@ -46,10 +42,12 @@ namespace API.Attributes
             } 
             else if(exception is ForbidenException)
             {
+                Logging(exception);
                 context.Result = new ForbidResult();
             }
             else
             {
+                Logging(exception);
                 context.Result = new JsonResult(new Error400Response
                 {
                     Message = "Hệ thống tạm thời ngưng phục vụ"
@@ -57,7 +55,6 @@ namespace API.Attributes
                 {
                     StatusCode = StatusCodes.Status400BadRequest
                 };
-                Logger.Error(exception.StackTrace);
             }
         }
         private void Logging(Exception ex)

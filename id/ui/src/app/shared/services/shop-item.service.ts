@@ -14,6 +14,6 @@ export class ShopItemService extends GeneralService {
   }
 
   public upload(formData: FormData): Observable<any> {
-    return this.http.post<any>(this.apiName + '/upload', formData);
+    return this.httpPost<any>(this.apiName + '/upload', formData);
   }
 }

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {WheelService} from "../../shared/services/wheel.service";
 import {MessageService} from "../../shared/services/message.service";
-
+import { version } from '../../../../package.json';
 declare const $: any;
 
 @Component({
@@ -10,6 +10,7 @@ declare const $: any;
   styleUrls: ['./wheel.component.css']
 })
 export class WheelComponent implements OnInit {
+  version = version;
   private hieu_ung = {
     el: '#rotate-play',		//Set element
     stop_point: null,

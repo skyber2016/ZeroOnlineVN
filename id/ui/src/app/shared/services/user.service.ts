@@ -14,13 +14,13 @@ export class  UserService extends GeneralService{
   }
 
   getMoney():Observable<any>{
-    return this.http.get<any>(this.apiName +'/Money');
+    return this.httpGet<any>(this.apiName +'/Money');
   }
 
   coinToZP(coin): Observable<any>{
-    return this.http.post(this.apiName + '/CoinToZP', {money: coin});
+    return this.httpPost(this.apiName + '/CoinToZP', {money: coin});
   }
   changePassword(params): Observable<any>{
-    return this.http.post(this.apiName + '/ChangePassword', params);
+    return this.httpPost(this.apiName + '/ChangePassword', params);
   }
 }

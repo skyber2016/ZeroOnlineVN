@@ -31,10 +31,16 @@ namespace API.Controllers
         public async Task<IActionResult> Get()
         {
             var items = await this.ItemService.GetAll();
+            items = items.OrderBy(x => x.CreatedDate);
             var time = DateTime.Now;
-            DayOfWeek day = CultureInfo.InvariantCulture.Calendar.GetDayOfWeek(time);
-            var monday = time.AddDays(-((int)day - 1)).Date;
+            DayOfWeek today = CultureInfo.InvariantCulture.Calendar.GetDayOfWeek(time);
+            var monday = time.AddDays(-((int)today - 1)).Date;
             var sunday = monday.AddDays(7).Date.AddSeconds(-1);
+            if(today == DayOfWeek.Sunday)
+            {
+                sunday = DateTime.Now.Date.AddDays(1).AddSeconds(-1);
+                monday = sunday.Date.AddDays(-6);
+            }
             var currentUser = this.UserService.GetCurrentUser();
             var money = await WebShopService.FindBy(new
             {
@@ -59,7 +65,7 @@ namespace API.Controllers
 
                 if (totalMoney >= RewardShopConstant.Reward[x.Key])
                 {
-                    if (his.Any(a => a.ItemId == x.Key))
+                    if (his.Any(a => a.ItemId == x.Key && a.UserId == currentUser.Id))
                     {
                         status = 1;
                     }
@@ -95,9 +101,14 @@ namespace API.Controllers
         public async Task<IActionResult> Create(RewardShopCreateRequest request)
         {
             var time = DateTime.Now;
-            DayOfWeek day = CultureInfo.InvariantCulture.Calendar.GetDayOfWeek(time);
-            var monday = time.AddDays(-((int)day - 1)).Date;
+            DayOfWeek today = CultureInfo.InvariantCulture.Calendar.GetDayOfWeek(time);
+            var monday = time.AddDays(-((int)today - 1)).Date;
             var sunday = monday.AddDays(7).Date.AddSeconds(-1);
+            if (today == DayOfWeek.Sunday)
+            {
+                sunday = DateTime.Now.Date.AddDays(1).AddSeconds(-1);
+                monday = sunday.Date.AddDays(-6);
+            }
             var currentUser = this.UserService.GetCurrentUser();
             var money = await WebShopService.FindBy(new
             {

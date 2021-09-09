@@ -16,6 +16,7 @@ export class SignInComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    localStorage.clear();
   }
 
   onSignIn() {

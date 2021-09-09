@@ -7,6 +7,7 @@ using Unity;
 using API.Configurations;
 using API.Database;
 using API.Helpers;
+using System.Threading;
 
 namespace API.Cores
 {
@@ -29,10 +30,13 @@ namespace API.Cores
             this.Logger = Logger;
             this.AppSettings = AppSettings;
         }
+
+        private static SemaphoreSlim SemaphoreSlim = new SemaphoreSlim(1, 1);
         public async Task CreateTransaction(Func<IDbTransaction,Task> action)
         {
             try
             {
+                await SemaphoreSlim.WaitAsync();
                 this.Logger.Info($"Begin transaction");
                 this.DatabaseContext.Factory.Connection.Open();
                 using (IDbTransaction transaction = this.DatabaseContext.Factory.Connection.BeginTransaction(IsolationLevel.ReadCommitted))
@@ -61,6 +65,7 @@ namespace API.Cores
                 {
                     this.DatabaseContext.Factory.Connection.Close();
                 }
+                SemaphoreSlim.Release();
             }
             
         }

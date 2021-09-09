@@ -7,6 +7,7 @@ using Unity;
 using API.Configurations;
 using API.Database;
 using API.Helpers;
+using System.Threading;
 
 namespace API.Cores
 {
@@ -35,40 +36,33 @@ namespace API.Cores
         {
             DatabaseContext = db;
         }
-        public async Task CreateTransaction(Func<IDbTransaction,Task> action)
+        private static SemaphoreSlim SemaphoreSlim = new SemaphoreSlim(1, 1);
+        public async Task CreateTransaction(Func<IDbTransaction, Task> action)
         {
             try
             {
+                await SemaphoreSlim.WaitAsync();
                 this.Logger.Info($"Begin transaction");
-                this.DatabaseContext.Factory.Connection.Open();
-                using (IDbTransaction transaction = this.DatabaseContext.Factory.Connection.BeginTransaction(IsolationLevel.ReadCommitted))
+                try
                 {
-                    try
-                    {
-                        await action(transaction);
-                        transaction.Commit();
-                        this.Logger.Info($"Transaction commit success");
-                    }
-                    catch (Exception ex)
-                    {
-                        this.Logger.Error($"Transaction rollback: {ex.Message}");
-                        transaction.Rollback();
-                        throw;
-                    }
-                    finally
-                    {
-                        this.Logger.Info($"End transaction");
-                    }
+                    await action(null);
+                    this.Logger.Info($"Transaction commit success");
+                }
+                catch (Exception ex)
+                {
+                    this.Logger.Error($"Transaction rollback: {ex.Message}");
+                    throw;
+                }
+                finally
+                {
+                    this.Logger.Info($"End transaction");
                 }
             }
             finally
             {
-                if(this.DatabaseContext.Factory.Connection.State == ConnectionState.Open)
-                {
-                    this.DatabaseContext.Factory.Connection.Close();
-                }
+                SemaphoreSlim.Release();
             }
-            
+
         }
     }
 }

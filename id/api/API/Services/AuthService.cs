@@ -63,7 +63,7 @@ namespace API.Services.Authenticate
                 var jwt = JwtService.GenerateJwtToken(userPrincipal);
                 var refreshToken = JwtService.GenerateRefreshToken();
                 refreshToken.UserId = user.Id.Value;
-                var rfTokens = (await RefreshTokenService.FindBy(new { user_id = user.Id }).GetAsync<RefreshTokenEntity>(tran));
+                var rfTokens = (await RefreshTokenService.FindBy(new { user_id = user.Id }).GetAsync<RefreshTokenEntity>(tran)).Where(x=>x.IsActive).ToList();
                 foreach (var rfToken in rfTokens)
                 {
                     if (!rfToken.IsActive)
