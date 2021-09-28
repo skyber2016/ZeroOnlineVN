@@ -1,13 +1,13 @@
 ﻿using API.Configurations;
 using API.Cores;
 using Microsoft.Extensions.Options;
-using MiddlewareTCP.Entities;
+using AutoAnswer.Entities;
 using SimpleTCP;
 using System;
 using System.Collections.Generic;
 using System.Net.Sockets;
 
-namespace MiddlewareTCP.Services
+namespace AutoAnswer.Services
 {
     public class MiddlewareService : IDisposable
     {

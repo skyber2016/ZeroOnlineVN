@@ -1,5 +1,6 @@
 ﻿using API.Configurations;
 using API.Helpers;
+using AutoAnswer.Services.Interfaces;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -16,6 +17,7 @@ namespace API.Cores
         IOptions<AppSettings> AppSettings { get; set; }
         T GetInstance<T>();
         IMemoryCache Cache { get; set; }
+        IAnswerService AnswerService { get; set; }
     }
     public class UnitOfWork : IUnitOfWork
     {
@@ -23,9 +25,12 @@ namespace API.Cores
         public ILoggerManager Logger { get; set; }
         public IServiceProvider ServicesProvider { get; set; }
         public IMemoryCache Cache { get; set; }
+        public IAnswerService AnswerService { get; set; }
 
-        public UnitOfWork(IOptions<AppSettings> AppSettings, ILoggerManager Logger, IServiceProvider services, IMemoryCache caching)
+
+        public UnitOfWork(IOptions<AppSettings> AppSettings, ILoggerManager Logger, IServiceProvider services, IMemoryCache caching, IAnswerService answerService)
         {
+            this.AnswerService = answerService;
             this.Cache = caching;
             this.ServicesProvider = services;
             this.Logger = Logger;

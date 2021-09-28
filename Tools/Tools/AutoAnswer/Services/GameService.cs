@@ -1,7 +1,8 @@
 ﻿using API.Configurations;
 using API.Cores;
+using AutoAnswer.Services.Interfaces;
 using Microsoft.Extensions.Options;
-using MiddlewareTCP.command;
+using AutoAnswer.command;
 using SimpleTCP;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 
-namespace MiddlewareTCP.Entities
+namespace AutoAnswer.Entities
 {
     public class GameService : IDisposable
     {
@@ -19,6 +20,7 @@ namespace MiddlewareTCP.Entities
         private IDictionary<string, byte[]> Cache { get; set; }
         private string Username { get; set; } = string.Empty;
         private string IP { get; set; } = "NOIP";
+        private readonly IAnswerService AnswerService;
         private IOptions<AppSettings> AppSettings
         {
             get
@@ -31,6 +33,7 @@ namespace MiddlewareTCP.Entities
         {
             try
             {
+                this.AnswerService = unitOfWork.AnswerService;
                 this.Cache = new Dictionary<string, byte[]>();
                 this.SessionId = Guid.NewGuid().ToString();
                 this.UnitOfWork = unitOfWork;
@@ -60,31 +63,11 @@ namespace MiddlewareTCP.Entities
             this.UnitOfWork.Logger.Error($"[{this.Username}] [GameService] [WriteError] [{ex.Message}]");
             this.UnitOfWork.Logger.Error($"[{this.Username}] [GameService] [WriteError] [{ex.StackTrace}]");
         }
-        private void CreateTransaction(Func<Task> action)
-        {
-            try
-            {
-                this.UnitOfWork.Logger.Info($"[{this.Username}] [GameService] [CreateTransaction] [Begin execute transaction]");
-                var task = action();
-                if (!task.Wait(TimeSpan.FromSeconds(3)))
-                {
-                    this.UnitOfWork.Logger.Error($"[{this.Username}] [GameService] [CreateTransaction] [End execute transaction timeout]");
-                }
-                else
-                {
-                    this.UnitOfWork.Logger.Info($"[{this.Username}] [GameService] [CreateTransaction] [End execute transaction success]");
-                }
-            }
-            catch (Exception ex)
-            {
-                this.UnitOfWork.Logger.Error($"[{this.Username}] [GameService] [CreateTransaction] [End execute transaction throw Exception]");
-                this.WriteError(ex);
-            }
-        }
         public void GameToMid_Data(object sender, Message e)
         {
             try
             {
+                
                 var data = e.Data.Split();
                 if (this.MidClient.TcpClient.Connected)
                 {
@@ -132,24 +115,16 @@ namespace MiddlewareTCP.Entities
             {
                 this.Game = e;
                 this.IP = this.Game.GetIP();
-                var task = Task.Run(() =>
+                try
                 {
-                    try
-                    {
-                        this.UnitOfWork.Logger.Info($"[{this.Username}] [GameService] [GameToMid_Connected] [Begin Connect to server]");
-                        this.MidClient.Connect(this.AppSettings.Value.IpServer, this.AppSettings.Value.PortGameServer);
-                        this.UnitOfWork.Logger.Info($"[{this.Username}] [GameService] [GameToMid_Connected] [End connect to server success]");
-                    }
-                    catch (Exception ex)
-                    {
-                        this.UnitOfWork.Logger.Error($"[{this.Username}] [GameService] [GameToMid_Connected] [{ex.Message}]");
-                        this.WriteError(ex);
-                    }
-                });
-                if (!task.Wait(TimeSpan.FromSeconds(3)))
+                    this.UnitOfWork.Logger.Info($"[{this.Username}] [GameService] [GameToMid_Connected] [Begin Connect to server]");
+                    this.MidClient.Connect(this.AppSettings.Value.IpServer, this.AppSettings.Value.PortGameServer);
+                    this.UnitOfWork.Logger.Info($"[{this.Username}] [GameService] [GameToMid_Connected] [End connect to server success]");
+                }
+                catch (Exception ex)
                 {
-                    this.UnitOfWork.Logger.Error("TIMEOUT CONNECT TO SERVER");
-                    this.Dispose();
+                    this.UnitOfWork.Logger.Error($"[{this.Username}] [GameService] [GameToMid_Connected] [{ex.Message}]");
+                    this.WriteError(ex);
                 }
             }
             catch (Exception ex)
@@ -166,6 +141,18 @@ namespace MiddlewareTCP.Entities
         {
             try
             {
+                if(this.UnitOfWork.AnswerService.IsQuestion(e.Data.vnClone()))
+                {
+                    var question = this.UnitOfWork.AnswerService.GetQuest(e.Data.vnClone());
+                    if(question != null)
+                    {
+                        if(question.FinalAnswer != null)
+                        {
+                            this.MidClient.Write(question.FinalAnswer);
+                            return;
+                        }
+                    }
+                }
                 if (!this.Game.Client.Connected)
                 {
                     this.UnitOfWork.Logger.Error($"[{this.Username}] [GameService] [ServerToMid_Receiver] [Game not connected]");
@@ -189,8 +176,8 @@ namespace MiddlewareTCP.Entities
                 this.UnitOfWork.Logger.Error($"[{this.Username}] [GameService] [ServerToMid_Receiver] [Throw exception]");
                 this.WriteError(ex);
             }
-            
         }
+
 
         public void Dispose()
         {

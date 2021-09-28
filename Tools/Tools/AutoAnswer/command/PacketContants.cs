@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace MiddlewareTCP.command
+namespace AutoAnswer.command
 {
     public static class PacketContants
     {
@@ -56,5 +56,16 @@ namespace MiddlewareTCP.command
             return source.Split().Equals(des.Split());
         }
         public static Dictionary<string, string> SecretKey = new Dictionary<string, string>();
+
+        public static byte[] ANSWER_A = new byte[] { 16, 0, 240, 7, 0, 0, 0, 0, 0, 0, 0, 101, 0, 0, 0, 0 };
+        public static byte[] ANSWER_B = new byte[] { 16, 0, 240, 7, 0, 0, 0, 0, 0, 0, 1, 101, 0, 0, 0, 0 };
+        public static byte[] ANSWER_C = new byte[] { 16, 0, 240, 7, 0, 0, 0, 0, 0, 0, 2, 101, 0, 0, 0, 0 };
+        public static byte CONG = 0x2B;
+        public static byte TRU = 0x2D;
+        public static byte[] QUESTION_PARTERN = new byte[] { 0xF0, 0x07 };
+        public static byte[] ANSWER_PARTERN = new byte[] { 0x14, 0x00, 0xF0, 0x07 };
+        public static byte[] ANSWER_SEND_PARTERN = new byte[] { 16, 0, 240, 7 };
+        public const int QESTION_LENGTH = 0x1E;
+        public const int ANSWER_LENGTH = 0x14;
     }
 }

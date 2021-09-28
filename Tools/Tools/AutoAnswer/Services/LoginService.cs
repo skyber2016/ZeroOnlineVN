@@ -1,14 +1,14 @@
 ﻿using API.Configurations;
 using API.Cores;
 using Microsoft.Extensions.Options;
-using MiddlewareTCP.command;
+using AutoAnswer.command;
 using SimpleTCP;
 using System;
 using System.Linq;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 
-namespace MiddlewareTCP.Entities
+namespace AutoAnswer.Entities
 {
     public class LoginService : IDisposable
     {
@@ -61,13 +61,11 @@ namespace MiddlewareTCP.Entities
                 {
                     this.UnitOfWork.Logger.Info($"[{this.Username}] [LoginService] [GameToMid_DataReceiver] [Begin get username]");
                     this.Username = e.Data.Skip(8).Take(32).Where(x => x != 0x0).ToArray().ConvertToString();
-                    this.UnitOfWork.Logger.Info($"[{this.Username}] [LoginService] [GameToMid_DataReceiver] [End get username success]");
                 }
                 if (this.MidClient.TcpClient.Connected)
                 {
                     this.UnitOfWork.Logger.Info($"[{this.Username}] [LoginService] [GameToMid_DataReceiver] [Begin send data to mid client]");
                     this.MidClient.Write(e.Data);
-                    this.UnitOfWork.Logger.Info($"[{this.Username}] [LoginService] [GameToMid_DataReceiver] [End send data to mid client success]");
                 }
                 else
                 {
@@ -88,24 +86,15 @@ namespace MiddlewareTCP.Entities
             try
             {
                 this.Game = e;
-                var task = Task.Run(() =>
+                try
                 {
-                    try
-                    {
-                        this.UnitOfWork.Logger.Info($"[{this.Username}] [LoginService] [GameToMid_Connected] [Begin connect to server]");
-                        this.MidClient.Connect(this.AppSettings.Value.IpServer, this.AppSettings.Value.PortLoginServer);
-                        this.UnitOfWork.Logger.Info($"[{this.Username}] [LoginService] [GameToMid_Connected] [End connect to server success]");
-                    }
-                    catch (Exception ex)
-                    {
-                        this.UnitOfWork.Logger.Error($"[{ip}] [{this.Username}] [LoginService] [GameToMid_Connected] [End connect to server timeout]");
-                        this.WriteError(ex);
-                    }
-                });
-                if(!Task.WaitAll(new Task[] { task }, TimeSpan.FromSeconds(3)))
+                    this.UnitOfWork.Logger.Info($"[{this.Username}] [LoginService] [GameToMid_Connected] [Begin connect to server]");
+                    this.MidClient.Connect(this.AppSettings.Value.IpServer, this.AppSettings.Value.PortLoginServer);
+                }
+                catch (Exception ex)
                 {
-                    this.UnitOfWork.Logger.Error("TIMEOUT CONNECT TO SERVER");
-                    this.Dispose();
+                    this.UnitOfWork.Logger.Error($"[{ip}] [{this.Username}] [LoginService] [GameToMid_Connected] [End connect to server timeout]");
+                    this.WriteError(ex);
                 }
             }
             catch (Exception ex)
@@ -137,8 +126,8 @@ namespace MiddlewareTCP.Entities
                     {
                         dataSend = data.Replace(portLoginServer, portLoginMid).Split(' ').Select(x => Convert.ToByte(x)).ToArray();
                         dataSend = dataSend.Replace(ipServer.ToByte(), ipMid.ToByte());
-                        this.UnitOfWork.Logger.Error($"[{ip}] [{this.Username}] [LoginService] [ServerToMid_Receiver] [Change port {portLoginServer} to {portLoginMid}]");
-                        this.UnitOfWork.Logger.Error($"[{ip}] [{this.Username}] [LoginService] [ServerToMid_Receiver] [Change IP {ipServer} to {ipMid}]");
+                        this.UnitOfWork.Logger.Info($"[{ip}] [{this.Username}] [LoginService] [ServerToMid_Receiver] [Change port {portLoginServer} to {portLoginMid}]");
+                        this.UnitOfWork.Logger.Info($"[{ip}] [{this.Username}] [LoginService] [ServerToMid_Receiver] [Change IP {ipServer} to {ipMid}]");
 
                     }
                 }

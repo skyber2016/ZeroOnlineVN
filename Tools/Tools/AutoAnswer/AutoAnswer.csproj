@@ -30,6 +30,5 @@
 
   <ItemGroup>
     <Folder Include="Database\" />
-    <Folder Include="Services\Interfaces\" />
   </ItemGroup>
 </Project>
