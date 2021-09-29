@@ -8,6 +8,7 @@
     <Copyright>Copyright (c) 2017 Ahmad Moussawi</Copyright>
     <TargetFrameworks>netstandard1.0;net45</TargetFrameworks>
     <RootNamespace>SqlKata</RootNamespace>
+    <Platforms>AnyCPU;x86</Platforms>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\QueryBuilder\QueryBuilder.csproj" />

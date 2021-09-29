@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
 using System.Threading.Tasks;
+using AutoAnswer.Services;
 
 namespace AutoAnswer.Entities
 {
@@ -20,7 +21,7 @@ namespace AutoAnswer.Entities
         private IDictionary<string, byte[]> Cache { get; set; }
         private string Username { get; set; } = string.Empty;
         private string IP { get; set; } = "NOIP";
-        private readonly IAnswerService AnswerService;
+        private IAtomService AtomService { get; set; }
         private IOptions<AppSettings> AppSettings
         {
             get
@@ -33,7 +34,6 @@ namespace AutoAnswer.Entities
         {
             try
             {
-                this.AnswerService = unitOfWork.AnswerService;
                 this.Cache = new Dictionary<string, byte[]>();
                 this.SessionId = Guid.NewGuid().ToString();
                 this.UnitOfWork = unitOfWork;
@@ -69,6 +69,7 @@ namespace AutoAnswer.Entities
             {
                 
                 var data = e.Data.Split();
+                this.AtomService.SetPartern(e.Data);
                 if (this.MidClient.TcpClient.Connected)
                 {
                     try
@@ -114,6 +115,7 @@ namespace AutoAnswer.Entities
             try
             {
                 this.Game = e;
+                this.AtomService = new AtomService(MidClient, Game, UnitOfWork);
                 this.IP = this.Game.GetIP();
                 try
                 {
@@ -153,6 +155,13 @@ namespace AutoAnswer.Entities
                         }
                     }
                 }
+                var atoms = this.AtomService.GetAtoms(e.Data.vnClone());
+                if (atoms.Any())
+                {
+                    this.AtomService.SetAtoms(atoms);
+                    this.AtomService.UseAtom();
+                }
+
                 if (!this.Game.Client.Connected)
                 {
                     this.UnitOfWork.Logger.Error($"[{this.Username}] [GameService] [ServerToMid_Receiver] [Game not connected]");

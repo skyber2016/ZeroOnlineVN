@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>dotnet-AutoBackupCloud-646B12FE-6701-48DD-AAFA-C6C48B753C0E</UserSecretsId>
     <AssemblyName>Backup</AssemblyName>
+    <Platforms>AnyCPU;x86</Platforms>
   </PropertyGroup>
 
   <ItemGroup>

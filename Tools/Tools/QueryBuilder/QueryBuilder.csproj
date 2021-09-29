@@ -10,5 +10,6 @@
     <TargetFrameworks>netstandard1.0;net45</TargetFrameworks>
     <RootNamespace>SqlKata</RootNamespace>
     <AssemblyName>SqlKata</AssemblyName>
+    <Platforms>AnyCPU;x86</Platforms>
   </PropertyGroup>
 </Project>
