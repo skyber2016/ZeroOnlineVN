@@ -5,6 +5,9 @@
     <UserSecretsId>dotnet-AutoAnswer-FED2A675-F652-4777-A81D-69E4A0C8BD4D</UserSecretsId>
     <AssemblyName>AutoAnswer</AssemblyName>
     <Platforms>AnyCPU;x86</Platforms>
+    <ApplicationIcon />
+    <OutputType>Exe</OutputType>
+    <StartupObject />
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

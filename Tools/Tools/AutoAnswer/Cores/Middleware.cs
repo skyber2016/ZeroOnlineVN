@@ -46,7 +46,6 @@ namespace AutoAnswer
 
                 XmlConfigurator.Configure(repo, log4netConfig["log4net"]);
             }
-            //this.Test();
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)

@@ -6,6 +6,7 @@ using AutoAnswer.Services.Interfaces;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace AutoAnswer
 {
@@ -13,12 +14,12 @@ namespace AutoAnswer
     {
         public static void Main(string[] args)
         {
+            Console.WriteLine("ok");
             CreateHostBuilder(args).Build().Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .UseWindowsService()
                 .ConfigureServices((hostContext, services) =>
                 {
                     services.AddHostedService<Middleware>();
