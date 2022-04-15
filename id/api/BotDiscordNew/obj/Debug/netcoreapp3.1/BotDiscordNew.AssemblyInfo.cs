@@ -11,7 +11,6 @@
 using System;
 using System.Reflection;
 
-[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("dotnet-BotDiscordNew-AA0D1722-1FFC-4F71-8D12-3397F4BA5F7D")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("BotDiscord")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
