@@ -8,12 +8,10 @@ using Discord;
 using Discord.WebSocket;
 using log4net;
 using log4net.Config;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using SqlKata.Execution;
 using System;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -21,7 +19,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
-using Unity;
 
 namespace API.Cores
 {
@@ -63,46 +60,10 @@ namespace API.Cores
 
                 XmlConfigurator.Configure(repo, log4netConfig["log4net"]);
             }
-            var eventLog = new EventLog("Security");
-            eventLog.EnableRaisingEvents = true;
-            eventLog.EntryWritten += EventLog_EntryWritten;
             
         }
 
-        private int Index { get; set; }
 
-        private void EventLog_EntryWritten(object sender, EntryWrittenEventArgs e)
-        {
-            if(e.Entry.Index > this.Index)
-            {
-                this.Index = e.Entry.Index;
-            }
-            else
-            {
-                return;
-            }
-            var entry = e.Entry;
-            if(entry.InstanceId == 4648 && entry.EntryType == EventLogEntryType.SuccessAudit)
-            {
-                var username = entry.ReplacementStrings[5];
-                var ip = entry.ReplacementStrings[12];
-                if(username == "Administrator" && !string.IsNullOrEmpty(ip) && ip != "-")
-                {
-                    var builder = new StringBuilder();
-                    builder.AppendLine($"-------- **Đăng nhập VPS** --------");
-                    builder.AppendLine($"**Tên đăng nhập:** {username}");
-                    builder.AppendLine($"**IP:** {ip}");
-                    builder.AppendLine($"**Thời gian:** {entry.TimeWritten.ToString("dd/MM/yyyy HH:mm:ss")}");
-                    var message = this.BotMessageService.AddAsync(new BotMessageEntity
-                    {
-                        Channel = ChannelConstant.LOGIN_VPS.ToString(),
-                        Message = builder.ToString().Base64Encode()
-                    });
-                    message.Wait();
-                }
-                
-            }
-        }
 
         private bool ClientReady { get; set; }
         private async Task Client_Ready()
@@ -122,9 +83,11 @@ namespace API.Cores
                         this.Client = new DiscordSocketClient();
                         this.Client.Ready += async () => await this.Client_Ready();
                         this.Client.MessageReceived += Client_MessageReceived;
+                        this.Logger.Info("BOT BEGIN LOGIN");
                         await this.Client.StartAsync();
                         await this.Client.LoginAsync(Discord.TokenType.Bot, this.AppSettings.BotToken);
                         await this.Client.SetStatusAsync(Discord.UserStatus.Online);
+                        this.Logger.Info("BOT LOGIN SUCCESS");
                     }
                     if (this.ClientReady)
                     {
@@ -140,6 +103,7 @@ namespace API.Cores
             }
             
         }
+
 
         private async Task Client_MessageReceived(SocketMessage arg)
         {

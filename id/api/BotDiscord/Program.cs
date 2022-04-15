@@ -5,14 +5,8 @@ using API.Helpers;
 using API.Services;
 using API.Services.Interfaces;
 using Discord.WebSocket;
-using log4net;
-using log4net.Config;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Xml;
 
 namespace BotDiscord
 {
@@ -25,7 +19,7 @@ namespace BotDiscord
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .UseWindowsService()
+                .UseSystemd()
                 .ConfigureServices((hostContext, services) =>
                 {
                     services.AddHostedService<BotDiscordHostedService>();
@@ -36,7 +30,6 @@ namespace BotDiscord
                     services.AddSingleton<ILoggerManager, LoggerHelper>();
                     services.AddSingleton(typeof(IGeneralService<>), typeof(GeneralService<>));
                     services.AddSingleton<IUnitOfWork, UnitOfWork>();
-                    
                 });
     }
 }

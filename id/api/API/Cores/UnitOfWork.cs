@@ -42,21 +42,7 @@ namespace API.Cores
             try
             {
                 await SemaphoreSlim.WaitAsync();
-                this.Logger.Info($"Begin transaction");
-                try
-                {
-                    await action(null);
-                    this.Logger.Info($"Transaction commit success");
-                }
-                catch (Exception ex)
-                {
-                    this.Logger.Error($"Transaction rollback: {ex.Message}");
-                    throw;
-                }
-                finally
-                {
-                    this.Logger.Info($"End transaction");
-                }
+                await action(null);
             }
             finally
             {

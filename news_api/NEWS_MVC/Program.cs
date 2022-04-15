@@ -16,7 +16,7 @@ namespace NEWS_MVC
                 .UseUnityServiceProvider()
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseIIS();
+                    webBuilder.UseKestrel();
                     webBuilder.UseStartup<Startup>();
                 });
     }

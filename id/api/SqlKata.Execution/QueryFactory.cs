@@ -15,6 +15,9 @@ namespace SqlKata.Execution
         public IDbConnection Connection { get; set; }
         public Compiler Compiler { get; set; }
         public Action<SqlResult> Logger = result => { };
+        public static Action<string> HttpLoggerError = message => { };
+        public static Action<string> HttpLoggerInfo = message => { };
+        public static string DbAPI { get; set; }
         private bool disposedValue;
 
         public int QueryTimeout { get; set; } = 30;
@@ -26,6 +29,13 @@ namespace SqlKata.Execution
             Connection = connection;
             Compiler = compiler;
             QueryTimeout = timeout;
+        }
+
+        public QueryFactory(IDbConnection connection, Compiler compiler, string dbAPI)
+        {
+            Connection = connection;
+            Compiler = compiler;
+            DbAPI = dbAPI;
         }
 
         public Query Query()
@@ -74,13 +84,13 @@ namespace SqlKata.Execution
         public IEnumerable<T> Get<T>(Query query, IDbTransaction transaction = null, int? timeout = null)
         {
             var compiled = CompileAndLog(query);
-
-            var result = this.Connection.Query<T>(
-                compiled.Sql,
-                compiled.NamedBindings,
-                transaction: transaction,
-                commandTimeout: timeout ?? this.QueryTimeout
-            ).ToList();
+            var result = compiled.Call<IEnumerable<T>>().WaitAsync();
+            //var result = this.Connection.Query<T>(
+            //    compiled.Sql,
+            //    compiled.NamedBindings,
+            //    transaction: transaction,
+            //    commandTimeout: timeout ?? this.QueryTimeout
+            //).ToList();
 
             result = handleIncludes<T>(query, result).ToList();
 
@@ -90,13 +100,13 @@ namespace SqlKata.Execution
         public async Task<IEnumerable<T>> GetAsync<T>(Query query, IDbTransaction transaction = null, int? timeout = null)
         {
             var compiled = CompileAndLog(query);
-
-            var result = (await this.Connection.QueryAsync<T>(
-                compiled.Sql,
-                compiled.NamedBindings,
-                transaction: transaction,
-                commandTimeout: timeout ?? this.QueryTimeout
-            )).ToList();
+            var result = await compiled.Call<IEnumerable<T>>();
+            //var result = (await this.Connection.QueryAsync<T>(
+            //    compiled.Sql,
+            //    compiled.NamedBindings,
+            //    transaction: transaction,
+            //    commandTimeout: timeout ?? this.QueryTimeout
+            //)).ToList();
 
             result = (await handleIncludesAsync(query, result)).ToList();
 
@@ -204,13 +214,18 @@ namespace SqlKata.Execution
         )
         {
             var compiled = CompileAndLog(query);
-
-            return this.Connection.Execute(
-                compiled.Sql,
-                compiled.NamedBindings,
-                transaction,
-                timeout ?? this.QueryTimeout
-            );
+            var result = compiled.Call<ExecuteQuery>().WaitAsync();
+            if (result.InsertId > 0)
+            {
+                return result.InsertId;
+            }
+            return result.AffectedRows;
+            //return this.Connection.Execute(
+            //    compiled.Sql,
+            //    compiled.NamedBindings,
+            //    transaction,
+            //    timeout ?? this.QueryTimeout
+            //);
         }
 
         public async Task<int> ExecuteAsync(
@@ -220,13 +235,18 @@ namespace SqlKata.Execution
         )
         {
             var compiled = CompileAndLog(query);
-
-            return await this.Connection.ExecuteAsync(
-                compiled.Sql,
-                compiled.NamedBindings,
-                transaction,
-                timeout ?? this.QueryTimeout
-            );
+            var result = await compiled.Call<ExecuteQuery>();
+            if(result.InsertId > 0)
+            {
+                return result.InsertId;
+            }
+            return result.AffectedRows;
+            //return await this.Connection.ExecuteAsync(
+            //    compiled.Sql,
+            //    compiled.NamedBindings,
+            //    transaction,
+            //    timeout ?? this.QueryTimeout
+            //);
         }
 
         public T ExecuteScalar<T>(Query query, IDbTransaction transaction = null, int? timeout = null)

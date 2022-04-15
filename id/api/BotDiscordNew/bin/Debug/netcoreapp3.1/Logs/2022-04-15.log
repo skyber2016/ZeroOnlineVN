@@ -1,0 +1,221 @@
+[2022-04-15 09:14:53,380] [INFO] [43KW1il1] BOT BEGIN LOGIN 
+[2022-04-15 09:14:53,442] [INFO] [43KW1il1] BOT LOGIN SUCCESS 
+[2022-04-15 09:14:56,233] [INFO] [43KW1il1] BOT ARE READY 
+[2022-04-15 09:14:58,690] [INFO] [43KW1il1] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2022-04-15 09:14:58,722] [INFO] [43KW1il1] Start call http://localhost:3000/query2json with body {"sql":"SELECT * FROM `bot_message` WHERE `is_sent` = ?;","payload":[0]} 
+[2022-04-15 09:15:02,369] [INFO] [43KW1il1] SELECT * FROM `account` WHERE `name` = 'fanh'; 
+[2022-04-15 09:15:02,467] [INFO] [43KW1il1] Start call http://localhost:3000/query2json with body {"sql":"SELECT * FROM `account` WHERE `name` = ?;","payload":["fanh"]} 
+[2022-04-15 09:15:04,808] [ERROR] [43KW1il1] No connection could be made because the target machine actively refused it. 
+[2022-04-15 09:15:04,883] [ERROR] [43KW1il1]    at System.Net.Http.ConnectHelper.ConnectAsync(String host, Int32 port, CancellationToken cancellationToken) 
+[2022-04-15 09:15:04,883] [ERROR] [43KW1il1] No connection could be made because the target machine actively refused it. 
+[2022-04-15 09:15:04,918] [ERROR] [43KW1il1]    at System.Net.Http.ConnectHelper.ConnectAsync(String host, Int32 port, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean allowHttp2, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.GetHttpConnectionAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithRetryAsync(HttpRequestMessage request, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.FinishSendAsyncBuffered(Task`1 sendTask, HttpRequestMessage request, CancellationTokenSource cts, Boolean disposeCts)
+   at SqlKata.Execution.QueryExtension.Call[T](SqlResult query) in D:\projects\06.Zero\ZeroOnlineV3\id\api\SqlKata.Execution\QueryExtension.cs:line 79
+   at SqlKata.Execution.QueryFactory.GetAsync[T](Query query, IDbTransaction transaction, Nullable`1 timeout) in D:\projects\06.Zero\ZeroOnlineV3\id\api\SqlKata.Execution\QueryFactory.cs:line 103
+   at SqlKata.Execution.QueryExtensions.GetAsync[T](Query query, IDbTransaction transaction, Nullable`1 timeout) in D:\projects\06.Zero\ZeroOnlineV3\id\api\SqlKata.Execution\Query.Extensions.cs:line 17
+   at API.Cores.BotDiscordHostedService.Process() in D:\projects\06.Zero\ZeroOnlineV3\id\api\BotDiscordNew\Cores\BotDiscordHostedService.cs:line 266
+   at API.Cores.BotDiscordHostedService.ExecuteAsync(CancellationToken stoppingToken) in D:\projects\06.Zero\ZeroOnlineV3\id\api\BotDiscordNew\Cores\BotDiscordHostedService.cs:line 94 
+[2022-04-15 09:16:04,112] [INFO] [8KOjeRfu] BOT BEGIN LOGIN 
+[2022-04-15 09:16:04,194] [INFO] [8KOjeRfu] BOT LOGIN SUCCESS 
+[2022-04-15 09:16:06,584] [INFO] [8KOjeRfu] BOT ARE READY 
+[2022-04-15 09:16:11,205] [INFO] [8KOjeRfu] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2022-04-15 09:16:11,205] [INFO] [8KOjeRfu] SELECT * FROM `account` WHERE `name` = 'fanh'; 
+[2022-04-15 09:16:11,219] [INFO] [8KOjeRfu] Start call http://localhost:3000/query2json with body {"sql":"SELECT * FROM `bot_message` WHERE `is_sent` = ?;","payload":[0]} 
+[2022-04-15 09:16:11,288] [INFO] [8KOjeRfu] Start call http://localhost:3000/query2json with body {"sql":"SELECT * FROM `account` WHERE `name` = ?;","payload":["fanh"]} 
+[2022-04-15 09:16:11,461] [INFO] [8KOjeRfu] http://localhost:3000/query2json response status code OK 
+[2022-04-15 09:16:11,477] [INFO] [8KOjeRfu] http://localhost:3000/query2json response status code OK 
+[2022-04-15 09:16:16,804] [INFO] [8KOjeRfu] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2022-04-15 09:16:17,457] [INFO] [8KOjeRfu] Start call http://localhost:3000/query2json with body {"sql":"SELECT * FROM `bot_message` WHERE `is_sent` = ?;","payload":[0]} 
+[2022-04-15 09:24:12,826] [ERROR] [8KOjeRfu] A task was canceled. 
+[2022-04-15 09:24:25,769] [INFO] [8KOjeRfu] UPDATE `account` SET `name` = 'fanh', `is_admin` = false, `VIP` = 3, `netbar_ip` = '::1', `ip_mask` = '::1', `webmoney` = 255000, `Money` = 0, `password` = 'b780ea0216e02559cf9d8e6e46fdf225', `reg_date` = '2021-06-22 18:07:26', `Question1` = '1', `Answer1` = 'fanhfanh', `email` = 'fanh@gnail.com', `sdt` = '1234567890', `web_money_using` = 3030000, `check_sum` = 'd6ec87199a130620d6516911f6a7fdd4', `wheel` = 5, `id` = 1001328861 WHERE `id` = 1001328861; 
+[2022-04-15 09:24:25,769] [ERROR] [8KOjeRfu]    at System.Net.Http.HttpConnectionResponseContent.SerializeToStreamAsync(Stream stream, TransportContext context, CancellationToken cancellationToken)
+   at System.Net.Http.HttpContent.LoadIntoBufferAsyncCore(Task serializeToStreamTask, MemoryStream tempBuffer)
+   at System.Net.Http.HttpClient.FinishSendAsyncBuffered(Task`1 sendTask, HttpRequestMessage request, CancellationTokenSource cts, Boolean disposeCts)
+   at SqlKata.Execution.QueryExtension.Call[T](SqlResult query) in D:\projects\06.Zero\ZeroOnlineV3\id\api\SqlKata.Execution\QueryExtension.cs:line 79
+   at SqlKata.Execution.QueryFactory.GetAsync[T](Query query, IDbTransaction transaction, Nullable`1 timeout) in D:\projects\06.Zero\ZeroOnlineV3\id\api\SqlKata.Execution\QueryFactory.cs:line 103
+   at SqlKata.Execution.QueryExtensions.GetAsync[T](Query query, IDbTransaction transaction, Nullable`1 timeout) in D:\projects\06.Zero\ZeroOnlineV3\id\api\SqlKata.Execution\Query.Extensions.cs:line 17
+   at API.Cores.BotDiscordHostedService.Process() in D:\projects\06.Zero\ZeroOnlineV3\id\api\BotDiscordNew\Cores\BotDiscordHostedService.cs:line 266
+   at API.Cores.BotDiscordHostedService.ExecuteAsync(CancellationToken stoppingToken) in D:\projects\06.Zero\ZeroOnlineV3\id\api\BotDiscordNew\Cores\BotDiscordHostedService.cs:line 94 
+[2022-04-15 09:24:26,903] [INFO] [8KOjeRfu] Start call http://localhost:3000/query2json with body {"sql":"UPDATE `account` SET `name` = ?, `is_admin` = ?, `VIP` = ?, `netbar_ip` = ?, `ip_mask` = ?, `webmoney` = ?, `Money` = ?, `password` = ?, `reg_date` = ?, `Question1` = ?, `Answer1` = ?, `email` = ?, `sdt` = ?, `web_money_using` = ?, `check_sum` = ?, `wheel` = ?, `id` = ? WHERE `id` = ?;","payload":["fanh",0,3,"::1","::1",255000,0,"b780ea0216e02559cf9d8e6e46fdf225","2021-06-22T18:07:26Z","1","fanhfanh","fanh@gnail.com","1234567890",3030000,"d6ec87199a130620d6516911f6a7fdd4",5,1001328861,1001328861]} 
+[2022-04-15 09:24:27,014] [INFO] [8KOjeRfu] http://localhost:3000/query2json response status code OK 
+[2022-04-15 09:24:29,438] [INFO] [8KOjeRfu] INSERT INTO `bot_message` (`message`, `created_date`, `is_sent`, `image`, `channel`, `id`) VALUES ('DQotLS0tLS0tLS0tLS0tKipD4buYTkcgVEnhu4BOKiotLS0tLS0tLS0tLS0tDQoqKlTDqm4gdMOgaSBraG/huqNuKio6IGZhbmgNCioqU+G7kSB0aeG7gW4gYmFuIMSR4bqndToqKiAyNDUsMDAwDQoqKlPhu5EgdGnhu4FuIGPhu5luZyAgIDoqKiAxMCwwMDANCioqU+G7kSBoaeG7h24gdOG6oWkgICAgOioqIDI1NSwwMDANCioqVGjhu51pIGdpYW4gIDoqKjogMTUvMDQvMjAyMiAwOToyNDoxMg0KKipWw7JuZyBxdWF5IMSRxrDhu6NjIGPhu5luZzoqKjogMA0KKipU4buVbmcgdsOybmcgcXVheToqKjogNQ0K', '2022-04-15 09:24:29', false, NULL, NULL, NULL); 
+[2022-04-15 09:24:29,574] [INFO] [8KOjeRfu] Start call http://localhost:3000/query2json with body {"sql":"INSERT INTO `bot_message` (`message`, `created_date`, `is_sent`, `image`, `channel`, `id`) VALUES (?, ?, ?, ?, ?, ?);","payload":["DQotLS0tLS0tLS0tLS0tKipD4buYTkcgVEnhu4BOKiotLS0tLS0tLS0tLS0tDQoqKlTDqm4gdMOgaSBraG/huqNuKio6IGZhbmgNCioqU+G7kSB0aeG7gW4gYmFuIMSR4bqndToqKiAyNDUsMDAwDQoqKlPhu5EgdGnhu4FuIGPhu5luZyAgIDoqKiAxMCwwMDANCioqU+G7kSBoaeG7h24gdOG6oWkgICAgOioqIDI1NSwwMDANCioqVGjhu51pIGdpYW4gIDoqKjogMTUvMDQvMjAyMiAwOToyNDoxMg0KKipWw7JuZyBxdWF5IMSRxrDhu6NjIGPhu5luZzoqKjogMA0KKipU4buVbmcgdsOybmcgcXVheToqKjogNQ0K","2022-04-15T09:24:29.4314778+07:00",0,null,null,null]} 
+[2022-04-15 09:24:29,647] [INFO] [8KOjeRfu] http://localhost:3000/query2json response status code OK 
+[2022-04-15 09:24:39,668] [ERROR] [8KOjeRfu] The ConnectionString property has not been initialized. 
+[2022-04-15 09:24:39,668] [INFO] [8KOjeRfu] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2022-04-15 09:24:39,669] [INFO] [8KOjeRfu] Start call http://localhost:3000/query2json with body {"sql":"SELECT * FROM `bot_message` WHERE `is_sent` = ?;","payload":[0]} 
+[2022-04-15 09:24:39,696] [ERROR] [8KOjeRfu]    at System.Data.Odbc.OdbcConnection.PermissionDemand()
+   at System.Data.Odbc.OdbcConnectionFactory.PermissionDemand(DbConnection outerConnection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionInternal.OpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory)
+   at System.Data.Odbc.OdbcConnection.Open()
+   at System.Data.Common.DbConnection.OpenAsync(CancellationToken cancellationToken)
+--- End of stack trace from previous location where exception was thrown ---
+   at Dapper.SqlMapper.ExecuteScalarImplAsync[T](IDbConnection cnn, CommandDefinition command) in C:\projects\dapper\Dapper\SqlMapper.Async.cs:line 1217
+   at API.Services.GeneralService`1.AddAsync(TEntity entity, IDbTransaction transaction) in D:\projects\06.Zero\ZeroOnlineV3\id\api\BotDiscordNew\Services\GeneralService.cs:line 44
+   at API.Cores.BotDiscordHostedService.<>c__DisplayClass37_0.<<CongTien>b__0>d.MoveNext() in D:\projects\06.Zero\ZeroOnlineV3\id\api\BotDiscordNew\Cores\BotDiscordHostedService.cs:line 231
+--- End of stack trace from previous location where exception was thrown ---
+   at API.Cores.UnitOfWork.CreateTransaction(Func`2 action) in D:\projects\06.Zero\ZeroOnlineV3\id\api\BotDiscordNew\Cores\UnitOfWork.cs:line 37
+   at API.Cores.BotDiscordHostedService.CongTien(String[] command, IMessageChannel channel) in D:\projects\06.Zero\ZeroOnlineV3\id\api\BotDiscordNew\Cores\BotDiscordHostedService.cs:line 178 
+[2022-04-15 09:24:39,720] [INFO] [8KOjeRfu] http://localhost:3000/query2json response status code OK 
+[2022-04-15 09:24:39,724] [INFO] [8KOjeRfu] BOT SCAN: 1 
+[2022-04-15 09:24:40,449] [INFO] [8KOjeRfu] UPDATE `bot_message` SET `message` = 'DQotLS0tLS0tLS0tLS0tKipD4buYTkcgVEnhu4BOKiotLS0tLS0tLS0tLS0tDQoqKlTDqm4gdMOgaSBraG/huqNuKio6IGZhbmgNCioqU+G7kSB0aeG7gW4gYmFuIMSR4bqndToqKiAyNDUsMDAwDQoqKlPhu5EgdGnhu4FuIGPhu5luZyAgIDoqKiAxMCwwMDANCioqU+G7kSBoaeG7h24gdOG6oWkgICAgOioqIDI1NSwwMDANCioqVGjhu51pIGdpYW4gIDoqKjogMTUvMDQvMjAyMiAwOToyNDoxMg0KKipWw7JuZyBxdWF5IMSRxrDhu6NjIGPhu5luZzoqKjogMA0KKipU4buVbmcgdsOybmcgcXVheToqKjogNQ0K', `created_date` = '2022-04-15 02:24:29', `is_sent` = true, `image` = NULL, `channel` = NULL, `id` = 3106 WHERE `id` = 3106; 
+[2022-04-15 09:24:40,782] [INFO] [8KOjeRfu] Start call http://localhost:3000/query2json with body {"sql":"UPDATE `bot_message` SET `message` = ?, `created_date` = ?, `is_sent` = ?, `image` = ?, `channel` = ?, `id` = ? WHERE `id` = ?;","payload":["DQotLS0tLS0tLS0tLS0tKipD4buYTkcgVEnhu4BOKiotLS0tLS0tLS0tLS0tDQoqKlTDqm4gdMOgaSBraG/huqNuKio6IGZhbmgNCioqU+G7kSB0aeG7gW4gYmFuIMSR4bqndToqKiAyNDUsMDAwDQoqKlPhu5EgdGnhu4FuIGPhu5luZyAgIDoqKiAxMCwwMDANCioqU+G7kSBoaeG7h24gdOG6oWkgICAgOioqIDI1NSwwMDANCioqVGjhu51pIGdpYW4gIDoqKjogMTUvMDQvMjAyMiAwOToyNDoxMg0KKipWw7JuZyBxdWF5IMSRxrDhu6NjIGPhu5luZzoqKjogMA0KKipU4buVbmcgdsOybmcgcXVheToqKjogNQ0K","2022-04-15T02:24:29Z",1,null,null,3106,3106]} 
+[2022-04-15 09:24:40,887] [INFO] [8KOjeRfu] http://localhost:3000/query2json response status code OK 
+[2022-04-15 09:24:42,308] [INFO] [8KOjeRfu] BOT ARE READY 
+[2022-04-15 09:24:45,892] [INFO] [8KOjeRfu] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2022-04-15 09:24:45,893] [INFO] [8KOjeRfu] Start call http://localhost:3000/query2json with body {"sql":"SELECT * FROM `bot_message` WHERE `is_sent` = ?;","payload":[0]} 
+[2022-04-15 09:24:45,943] [INFO] [8KOjeRfu] http://localhost:3000/query2json response status code OK 
+[2022-04-15 09:24:56,484] [INFO] [8KOjeRfu] SELECT * FROM `account` WHERE `name` = 'fanh'; 
+[2022-04-15 09:24:56,484] [INFO] [8KOjeRfu] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2022-04-15 09:24:56,485] [INFO] [8KOjeRfu] Start call http://localhost:3000/query2json with body {"sql":"SELECT * FROM `bot_message` WHERE `is_sent` = ?;","payload":[0]} 
+[2022-04-15 09:24:56,542] [INFO] [8KOjeRfu] Start call http://localhost:3000/query2json with body {"sql":"SELECT * FROM `account` WHERE `name` = ?;","payload":["fanh"]} 
+[2022-04-15 09:24:56,610] [INFO] [8KOjeRfu] http://localhost:3000/query2json response status code OK 
+[2022-04-15 09:24:56,632] [INFO] [8KOjeRfu] http://localhost:3000/query2json response status code OK 
+[2022-04-15 09:24:56,638] [INFO] [8KOjeRfu] UPDATE `account` SET `name` = 'fanh', `is_admin` = false, `VIP` = 3, `netbar_ip` = '::1', `ip_mask` = '::1', `webmoney` = 265000, `Money` = 0, `password` = 'b780ea0216e02559cf9d8e6e46fdf225', `reg_date` = '2021-06-22 11:07:26', `Question1` = '1', `Answer1` = 'fanhfanh', `email` = 'fanh@gnail.com', `sdt` = '1234567890', `web_money_using` = 3040000, `check_sum` = '6eda9090919fcf6db6286e89c855afdd', `wheel` = 5, `id` = 1001328861 WHERE `id` = 1001328861; 
+[2022-04-15 09:24:57,705] [INFO] [8KOjeRfu] Start call http://localhost:3000/query2json with body {"sql":"UPDATE `account` SET `name` = ?, `is_admin` = ?, `VIP` = ?, `netbar_ip` = ?, `ip_mask` = ?, `webmoney` = ?, `Money` = ?, `password` = ?, `reg_date` = ?, `Question1` = ?, `Answer1` = ?, `email` = ?, `sdt` = ?, `web_money_using` = ?, `check_sum` = ?, `wheel` = ?, `id` = ? WHERE `id` = ?;","payload":["fanh",0,3,"::1","::1",265000,0,"b780ea0216e02559cf9d8e6e46fdf225","2021-06-22T11:07:26Z","1","fanhfanh","fanh@gnail.com","1234567890",3040000,"6eda9090919fcf6db6286e89c855afdd",5,1001328861,1001328861]} 
+[2022-04-15 09:24:57,762] [INFO] [8KOjeRfu] http://localhost:3000/query2json response status code OK 
+[2022-04-15 09:25:01,888] [INFO] [8KOjeRfu] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2022-04-15 09:25:02,230] [INFO] [8KOjeRfu] Start call http://localhost:3000/query2json with body {"sql":"SELECT * FROM `bot_message` WHERE `is_sent` = ?;","payload":[0]} 
+[2022-04-15 09:25:05,190] [INFO] [8KOjeRfu] http://localhost:3000/query2json response status code OK 
+[2022-04-15 09:25:15,523] [INFO] [8KOjeRfu] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2022-04-15 09:25:16,932] [INFO] [8KOjeRfu] Start call http://localhost:3000/query2json with body {"sql":"SELECT * FROM `bot_message` WHERE `is_sent` = ?;","payload":[0]} 
+[2022-04-15 09:25:23,051] [INFO] [8KOjeRfu] http://localhost:3000/query2json response status code OK 
+[2022-04-15 09:25:29,104] [INFO] [8KOjeRfu] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2022-04-15 09:25:29,728] [INFO] [8KOjeRfu] Start call http://localhost:3000/query2json with body {"sql":"SELECT * FROM `bot_message` WHERE `is_sent` = ?;","payload":[0]} 
+[2022-04-15 09:25:33,214] [INFO] [8KOjeRfu] http://localhost:3000/query2json response status code OK 
+[2022-04-15 09:25:46,723] [INFO] [8KOjeRfu] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2022-04-15 09:25:46,744] [INFO] [8KOjeRfu] Start call http://localhost:3000/query2json with body {"sql":"SELECT * FROM `bot_message` WHERE `is_sent` = ?;","payload":[0]} 
+[2022-04-15 09:25:49,602] [INFO] [8KOjeRfu] http://localhost:3000/query2json response status code OK 
+[2022-04-15 09:25:56,041] [INFO] [8KOjeRfu] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2022-04-15 09:25:56,064] [INFO] [8KOjeRfu] Start call http://localhost:3000/query2json with body {"sql":"SELECT * FROM `bot_message` WHERE `is_sent` = ?;","payload":[0]} 
+[2022-04-15 09:26:07,054] [INFO] [8KOjeRfu] http://localhost:3000/query2json response status code OK 
+[2022-04-15 09:26:13,858] [INFO] [8KOjeRfu] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2022-04-15 09:26:14,782] [INFO] [8KOjeRfu] Start call http://localhost:3000/query2json with body {"sql":"SELECT * FROM `bot_message` WHERE `is_sent` = ?;","payload":[0]} 
+[2022-04-15 09:26:15,041] [INFO] [8KOjeRfu] http://localhost:3000/query2json response status code OK 
+[2022-04-15 09:26:22,175] [INFO] [8KOjeRfu] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2022-04-15 09:26:24,158] [INFO] [8KOjeRfu] Start call http://localhost:3000/query2json with body {"sql":"SELECT * FROM `bot_message` WHERE `is_sent` = ?;","payload":[0]} 
+[2022-04-15 09:26:29,051] [INFO] [8KOjeRfu] http://localhost:3000/query2json response status code OK 
+[2022-04-15 09:26:31,296] [INFO] [8KOjeRfu] INSERT INTO `bot_message` (`message`, `created_date`, `is_sent`, `image`, `channel`, `id`) VALUES ('DQotLS0tLS0tLS0tLS0tKipD4buYTkcgVEnhu4BOKiotLS0tLS0tLS0tLS0tDQoqKlTDqm4gdMOgaSBraG/huqNuKio6IGZhbmgNCioqU+G7kSB0aeG7gW4gYmFuIMSR4bqndToqKiAyNTUsMDAwDQoqKlPhu5EgdGnhu4FuIGPhu5luZyAgIDoqKiAxMCwwMDANCioqU+G7kSBoaeG7h24gdOG6oWkgICAgOioqIDI2NSwwMDANCioqVGjhu51pIGdpYW4gIDoqKjogMTUvMDQvMjAyMiAwOToyNDo1Ng0KKipWw7JuZyBxdWF5IMSRxrDhu6NjIGPhu5luZzoqKjogMA0KKipU4buVbmcgdsOybmcgcXVheToqKjogNQ0K', '2022-04-15 09:25:02', false, NULL, NULL, NULL); 
+[2022-04-15 09:26:35,979] [INFO] [8KOjeRfu] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2022-04-15 09:26:38,837] [INFO] [8KOjeRfu] Start call http://localhost:3000/query2json with body {"sql":"SELECT * FROM `bot_message` WHERE `is_sent` = ?;","payload":[0]} 
+[2022-04-15 09:26:48,951] [INFO] [8KOjeRfu] Start call http://localhost:3000/query2json with body {"sql":"INSERT INTO `bot_message` (`message`, `created_date`, `is_sent`, `image`, `channel`, `id`) VALUES (?, ?, ?, ?, ?, ?);","payload":["DQotLS0tLS0tLS0tLS0tKipD4buYTkcgVEnhu4BOKiotLS0tLS0tLS0tLS0tDQoqKlTDqm4gdMOgaSBraG/huqNuKio6IGZhbmgNCioqU+G7kSB0aeG7gW4gYmFuIMSR4bqndToqKiAyNTUsMDAwDQoqKlPhu5EgdGnhu4FuIGPhu5luZyAgIDoqKiAxMCwwMDANCioqU+G7kSBoaeG7h24gdOG6oWkgICAgOioqIDI2NSwwMDANCioqVGjhu51pIGdpYW4gIDoqKjogMTUvMDQvMjAyMiAwOToyNDo1Ng0KKipWw7JuZyBxdWF5IMSRxrDhu6NjIGPhu5luZzoqKjogMA0KKipU4buVbmcgdsOybmcgcXVheToqKjogNQ0K","2022-04-15T09:25:02.2298297+07:00",0,null,null,null]} 
+[2022-04-15 09:26:48,961] [INFO] [8KOjeRfu] http://localhost:3000/query2json response status code OK 
+[2022-04-15 09:26:50,912] [INFO] [8KOjeRfu] http://localhost:3000/query2json response status code OK 
+[2022-04-15 09:26:59,957] [INFO] [8KOjeRfu] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2022-04-15 09:26:59,958] [INFO] [8KOjeRfu] Start call http://localhost:3000/query2json with body {"sql":"SELECT * FROM `bot_message` WHERE `is_sent` = ?;","payload":[0]} 
+[2022-04-15 09:27:00,032] [INFO] [8KOjeRfu] http://localhost:3000/query2json response status code OK 
+[2022-04-15 09:27:01,219] [INFO] [8KOjeRfu] BOT SCAN: 1 
+[2022-04-15 09:27:01,501] [ERROR] [8KOjeRfu] An existing connection was forcibly closed by the remote host. 
+[2022-04-15 09:27:01,501] [ERROR] [8KOjeRfu]  
+[2022-04-15 09:27:01,502] [ERROR] [8KOjeRfu] Unable to read data from the transport connection: An existing connection was forcibly closed by the remote host.. 
+[2022-04-15 09:27:01,504] [ERROR] [8KOjeRfu]    at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.GetResult(Int16 token)
+   at System.Net.Security.SslStream.<FillBufferAsync>g__InternalFillBufferAsync|215_0[TReadAdapter](TReadAdapter adap, ValueTask`1 task, Int32 min, Int32 initial)
+   at System.Net.Security.SslStream.ReadAsyncInternal[TReadAdapter](TReadAdapter adapter, Memory`1 buffer)
+   at System.Net.Http.HttpConnection.SendAsyncCore(HttpRequestMessage request, CancellationToken cancellationToken) 
+[2022-04-15 09:27:01,505] [ERROR] [8KOjeRfu] An error occurred while sending the request. 
+[2022-04-15 09:27:01,519] [ERROR] [8KOjeRfu]    at System.Net.Http.HttpConnection.SendAsyncCore(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithNtConnectionAuthAsync(HttpConnection connection, HttpRequestMessage request, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithRetryAsync(HttpRequestMessage request, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.DecompressionHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.FinishSendAsyncBuffered(Task`1 sendTask, HttpRequestMessage request, CancellationTokenSource cts, Boolean disposeCts)
+   at Discord.Net.Rest.DefaultRestClient.SendInternalAsync(HttpRequestMessage request, CancellationToken cancelToken, Boolean headerOnly)
+   at Discord.Net.Rest.DefaultRestClient.SendAsync(String method, String endpoint, String json, CancellationToken cancelToken, Boolean headerOnly, String reason)
+   at Discord.Net.Queue.JsonRestRequest.SendAsync()
+   at Discord.Net.Queue.RequestBucket.SendAsync(RestRequest request)
+   at Discord.Net.Queue.RequestQueue.SendAsync(RestRequest request)
+   at Discord.API.DiscordRestApiClient.SendInternalAsync(String method, String endpoint, RestRequest request)
+   at Discord.API.DiscordRestApiClient.SendJsonAsync[TResponse](String method, String endpoint, Object payload, BucketId bucketId, ClientBucketType clientBucket, RequestOptions options)
+   at Discord.API.DiscordRestApiClient.CreateMessageAsync(UInt64 channelId, CreateMessageParams args, RequestOptions options)
+   at Discord.Rest.ChannelHelper.SendMessageAsync(IMessageChannel channel, BaseDiscordClient client, String text, Boolean isTTS, Embed embed, AllowedMentions allowedMentions, MessageReference messageReference, MessageComponent components, ISticker[] stickers, RequestOptions options, Embed[] embeds, MessageFlags flags)
+   at Discord.WebSocket.SocketTextChannel.Discord.IMessageChannel.SendMessageAsync(String text, Boolean isTTS, Embed embed, RequestOptions options, AllowedMentions allowedMentions, MessageReference messageReference, MessageComponent components, ISticker[] stickers, Embed[] embeds, MessageFlags flags)
+   at API.Cores.BotDiscordHostedService.Process() in D:\projects\06.Zero\ZeroOnlineV3\id\api\BotDiscordNew\Cores\BotDiscordHostedService.cs:line 291 
+[2022-04-15 09:27:01,759] [ERROR] [8KOjeRfu] The ConnectionString property has not been initialized. 
+[2022-04-15 09:27:01,760] [ERROR] [8KOjeRfu]    at System.Data.Odbc.OdbcConnection.PermissionDemand()
+   at System.Data.Odbc.OdbcConnectionFactory.PermissionDemand(DbConnection outerConnection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionInternal.OpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory)
+   at System.Data.Odbc.OdbcConnection.Open()
+   at System.Data.Common.DbConnection.OpenAsync(CancellationToken cancellationToken)
+--- End of stack trace from previous location where exception was thrown ---
+   at Dapper.SqlMapper.ExecuteScalarImplAsync[T](IDbConnection cnn, CommandDefinition command) in C:\projects\dapper\Dapper\SqlMapper.Async.cs:line 1217
+   at API.Services.GeneralService`1.AddAsync(TEntity entity, IDbTransaction transaction) in D:\projects\06.Zero\ZeroOnlineV3\id\api\BotDiscordNew\Services\GeneralService.cs:line 44
+   at API.Cores.BotDiscordHostedService.<>c__DisplayClass37_0.<<CongTien>b__0>d.MoveNext() in D:\projects\06.Zero\ZeroOnlineV3\id\api\BotDiscordNew\Cores\BotDiscordHostedService.cs:line 231
+--- End of stack trace from previous location where exception was thrown ---
+   at API.Cores.UnitOfWork.CreateTransaction(Func`2 action) in D:\projects\06.Zero\ZeroOnlineV3\id\api\BotDiscordNew\Cores\UnitOfWork.cs:line 37
+   at API.Cores.BotDiscordHostedService.CongTien(String[] command, IMessageChannel channel) in D:\projects\06.Zero\ZeroOnlineV3\id\api\BotDiscordNew\Cores\BotDiscordHostedService.cs:line 178 
+[2022-04-15 09:27:06,526] [INFO] [8KOjeRfu] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2022-04-15 09:27:06,526] [INFO] [8KOjeRfu] Start call http://localhost:3000/query2json with body {"sql":"SELECT * FROM `bot_message` WHERE `is_sent` = ?;","payload":[0]} 
+[2022-04-15 09:27:06,593] [INFO] [8KOjeRfu] http://localhost:3000/query2json response status code OK 
+[2022-04-15 09:27:06,598] [INFO] [8KOjeRfu] BOT SCAN: 1 
+[2022-04-15 09:27:07,180] [INFO] [8KOjeRfu] UPDATE `bot_message` SET `message` = 'DQotLS0tLS0tLS0tLS0tKipD4buYTkcgVEnhu4BOKiotLS0tLS0tLS0tLS0tDQoqKlTDqm4gdMOgaSBraG/huqNuKio6IGZhbmgNCioqU+G7kSB0aeG7gW4gYmFuIMSR4bqndToqKiAyNTUsMDAwDQoqKlPhu5EgdGnhu4FuIGPhu5luZyAgIDoqKiAxMCwwMDANCioqU+G7kSBoaeG7h24gdOG6oWkgICAgOioqIDI2NSwwMDANCioqVGjhu51pIGdpYW4gIDoqKjogMTUvMDQvMjAyMiAwOToyNDo1Ng0KKipWw7JuZyBxdWF5IMSRxrDhu6NjIGPhu5luZzoqKjogMA0KKipU4buVbmcgdsOybmcgcXVheToqKjogNQ0K', `created_date` = '2022-04-15 02:25:02', `is_sent` = true, `image` = NULL, `channel` = NULL, `id` = 3107 WHERE `id` = 3107; 
+[2022-04-15 09:27:07,478] [INFO] [8KOjeRfu] Start call http://localhost:3000/query2json with body {"sql":"UPDATE `bot_message` SET `message` = ?, `created_date` = ?, `is_sent` = ?, `image` = ?, `channel` = ?, `id` = ? WHERE `id` = ?;","payload":["DQotLS0tLS0tLS0tLS0tKipD4buYTkcgVEnhu4BOKiotLS0tLS0tLS0tLS0tDQoqKlTDqm4gdMOgaSBraG/huqNuKio6IGZhbmgNCioqU+G7kSB0aeG7gW4gYmFuIMSR4bqndToqKiAyNTUsMDAwDQoqKlPhu5EgdGnhu4FuIGPhu5luZyAgIDoqKiAxMCwwMDANCioqU+G7kSBoaeG7h24gdOG6oWkgICAgOioqIDI2NSwwMDANCioqVGjhu51pIGdpYW4gIDoqKjogMTUvMDQvMjAyMiAwOToyNDo1Ng0KKipWw7JuZyBxdWF5IMSRxrDhu6NjIGPhu5luZzoqKjogMA0KKipU4buVbmcgdsOybmcgcXVheToqKjogNQ0K","2022-04-15T02:25:02Z",1,null,null,3107,3107]} 
+[2022-04-15 09:27:07,538] [INFO] [8KOjeRfu] http://localhost:3000/query2json response status code OK 
+[2022-04-15 09:27:12,547] [INFO] [8KOjeRfu] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2022-04-15 09:27:12,548] [INFO] [8KOjeRfu] Start call http://localhost:3000/query2json with body {"sql":"SELECT * FROM `bot_message` WHERE `is_sent` = ?;","payload":[0]} 
+[2022-04-15 09:27:12,597] [INFO] [8KOjeRfu] http://localhost:3000/query2json response status code OK 
+[2022-04-15 09:27:17,615] [INFO] [8KOjeRfu] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2022-04-15 09:27:17,616] [INFO] [8KOjeRfu] Start call http://localhost:3000/query2json with body {"sql":"SELECT * FROM `bot_message` WHERE `is_sent` = ?;","payload":[0]} 
+[2022-04-15 09:27:17,671] [INFO] [8KOjeRfu] http://localhost:3000/query2json response status code OK 
+[2022-04-15 09:27:26,981] [INFO] [8KOjeRfu] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2022-04-15 09:27:26,981] [INFO] [8KOjeRfu] SELECT * FROM `account` WHERE `name` = 'fanh'; 
+[2022-04-15 09:27:26,986] [INFO] [8KOjeRfu] Start call http://localhost:3000/query2json with body {"sql":"SELECT * FROM `bot_message` WHERE `is_sent` = ?;","payload":[0]} 
+[2022-04-15 09:27:27,062] [INFO] [8KOjeRfu] Start call http://localhost:3000/query2json with body {"sql":"SELECT * FROM `account` WHERE `name` = ?;","payload":["fanh"]} 
+[2022-04-15 09:27:27,119] [INFO] [8KOjeRfu] http://localhost:3000/query2json response status code OK 
+[2022-04-15 09:27:28,398] [INFO] [8KOjeRfu] http://localhost:3000/query2json response status code OK 
+[2022-04-15 09:27:38,533] [INFO] [8KOjeRfu] UPDATE `account` SET `name` = 'fanh', `is_admin` = false, `VIP` = 3, `netbar_ip` = '::1', `ip_mask` = '::1', `webmoney` = 275000, `Money` = 0, `password` = 'b780ea0216e02559cf9d8e6e46fdf225', `reg_date` = '2021-06-22 04:07:26', `Question1` = '1', `Answer1` = 'fanhfanh', `email` = 'fanh@gnail.com', `sdt` = '1234567890', `web_money_using` = 3050000, `check_sum` = 'e5f3e224f49bb6b38131603ee22f99ce', `wheel` = 5, `id` = 1001328861 WHERE `id` = 1001328861; 
+[2022-04-15 09:27:41,149] [INFO] [8KOjeRfu] Start call http://localhost:3000/query2json with body {"sql":"UPDATE `account` SET `name` = ?, `is_admin` = ?, `VIP` = ?, `netbar_ip` = ?, `ip_mask` = ?, `webmoney` = ?, `Money` = ?, `password` = ?, `reg_date` = ?, `Question1` = ?, `Answer1` = ?, `email` = ?, `sdt` = ?, `web_money_using` = ?, `check_sum` = ?, `wheel` = ?, `id` = ? WHERE `id` = ?;","payload":["fanh",0,3,"::1","::1",275000,0,"b780ea0216e02559cf9d8e6e46fdf225","2021-06-22T04:07:26Z","1","fanhfanh","fanh@gnail.com","1234567890",3050000,"e5f3e224f49bb6b38131603ee22f99ce",5,1001328861,1001328861]} 
+[2022-04-15 09:27:41,198] [INFO] [8KOjeRfu] http://localhost:3000/query2json response status code OK 
+[2022-04-15 09:27:57,065] [INFO] [8KOjeRfu] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2022-04-15 09:27:57,070] [INFO] [8KOjeRfu] Start call http://localhost:3000/query2json with body {"sql":"SELECT * FROM `bot_message` WHERE `is_sent` = ?;","payload":[0]} 
+[2022-04-15 09:27:59,530] [INFO] [8KOjeRfu] INSERT INTO `bot_message` (`message`, `created_date`, `is_sent`, `image`, `channel`, `id`) VALUES ('DQotLS0tLS0tLS0tLS0tKipD4buYTkcgVEnhu4BOKiotLS0tLS0tLS0tLS0tDQoqKlTDqm4gdMOgaSBraG/huqNuKio6IGZhbmgNCioqU+G7kSB0aeG7gW4gYmFuIMSR4bqndToqKiAyNjUsMDAwDQoqKlPhu5EgdGnhu4FuIGPhu5luZyAgIDoqKiAxMCwwMDANCioqU+G7kSBoaeG7h24gdOG6oWkgICAgOioqIDI3NSwwMDANCioqVGjhu51pIGdpYW4gIDoqKjogMTUvMDQvMjAyMiAwOToyNzozOA0KKipWw7JuZyBxdWF5IMSRxrDhu6NjIGPhu5luZzoqKjogMA0KKipU4buVbmcgdsOybmcgcXVheToqKjogNQ0K', '2022-04-15 09:27:59', false, NULL, NULL, NULL); 
+[2022-04-15 09:27:59,530] [INFO] [8KOjeRfu] http://localhost:3000/query2json response status code OK 
+[2022-04-15 09:30:10,865] [INFO] [B5ZvtkXK] BOT BEGIN LOGIN 
+[2022-04-15 09:30:10,944] [INFO] [B5ZvtkXK] BOT LOGIN SUCCESS 
+[2022-04-15 09:30:13,713] [INFO] [B5ZvtkXK] BOT ARE READY 
+[2022-04-15 09:30:41,385] [INFO] [yr40MiXM] BOT BEGIN LOGIN 
+[2022-04-15 09:30:41,446] [INFO] [yr40MiXM] BOT LOGIN SUCCESS 
+[2022-04-15 09:30:43,858] [INFO] [yr40MiXM] BOT ARE READY 
+[2022-04-15 09:30:46,535] [INFO] [yr40MiXM] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2022-04-15 09:30:46,549] [INFO] [yr40MiXM] Start call http://localhost:3000/query2json with body {"sql":"SELECT * FROM `bot_message` WHERE `is_sent` = ?;","payload":[0]} 
+[2022-04-15 09:30:46,646] [INFO] [yr40MiXM] http://localhost:3000/query2json response status code OK 
+[2022-04-15 09:30:56,302] [INFO] [yr40MiXM] SELECT * FROM `account` WHERE `name` = 'fanh'; 
+[2022-04-15 09:30:56,376] [INFO] [yr40MiXM] Start call http://localhost:3000/query2json with body {"sql":"SELECT * FROM `account` WHERE `name` = ?;","payload":["fanh"]} 
+[2022-04-15 09:30:56,437] [INFO] [yr40MiXM] http://localhost:3000/query2json response status code OK 
+[2022-04-15 09:30:56,456] [INFO] [yr40MiXM] UPDATE `account` SET `name` = 'fanh', `is_admin` = false, `VIP` = 3, `netbar_ip` = '::1', `ip_mask` = '::1', `webmoney` = 285000, `Money` = 0, `password` = 'b780ea0216e02559cf9d8e6e46fdf225', `reg_date` = '2021-06-21 21:07:26', `Question1` = '1', `Answer1` = 'fanhfanh', `email` = 'fanh@gnail.com', `sdt` = '1234567890', `web_money_using` = 3060000, `check_sum` = '2bde5060e05d1d3499a80acfa42289a2', `wheel` = 5, `id` = 1001328861 WHERE `id` = 1001328861; 
+[2022-04-15 09:30:57,623] [INFO] [yr40MiXM] Start call http://localhost:3000/query2json with body {"sql":"UPDATE `account` SET `name` = ?, `is_admin` = ?, `VIP` = ?, `netbar_ip` = ?, `ip_mask` = ?, `webmoney` = ?, `Money` = ?, `password` = ?, `reg_date` = ?, `Question1` = ?, `Answer1` = ?, `email` = ?, `sdt` = ?, `web_money_using` = ?, `check_sum` = ?, `wheel` = ?, `id` = ? WHERE `id` = ?;","payload":["fanh",0,3,"::1","::1",285000,0,"b780ea0216e02559cf9d8e6e46fdf225","2021-06-21T21:07:26Z","1","fanhfanh","fanh@gnail.com","1234567890",3060000,"2bde5060e05d1d3499a80acfa42289a2",5,1001328861,1001328861]} 
+[2022-04-15 09:30:57,684] [INFO] [yr40MiXM] http://localhost:3000/query2json response status code OK 
+[2022-04-15 09:30:58,976] [INFO] [yr40MiXM] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2022-04-15 09:30:58,977] [INFO] [yr40MiXM] Start call http://localhost:3000/query2json with body {"sql":"SELECT * FROM `bot_message` WHERE `is_sent` = ?;","payload":[0]} 
+[2022-04-15 09:30:58,996] [INFO] [yr40MiXM] INSERT INTO `bot_message` (`message`, `created_date`, `is_sent`, `image`, `channel`, `id`) VALUES ('DQotLS0tLS0tLS0tLS0tKipD4buYTkcgVEnhu4BOKiotLS0tLS0tLS0tLS0tDQoqKlTDqm4gdMOgaSBraG/huqNuKio6IGZhbmgNCioqU+G7kSB0aeG7gW4gYmFuIMSR4bqndToqKiAyNzUsMDAwDQoqKlPhu5EgdGnhu4FuIGPhu5luZyAgIDoqKiAxMCwwMDANCioqU+G7kSBoaeG7h24gdOG6oWkgICAgOioqIDI4NSwwMDANCioqVGjhu51pIGdpYW4gIDoqKjogMTUvMDQvMjAyMiAwOTozMDo1Ng0KKipWw7JuZyBxdWF5IMSRxrDhu6NjIGPhu5luZzoqKjogMA0KKipU4buVbmcgdsOybmcgcXVheToqKjogNQ0K', '2022-04-15 09:30:58', false, NULL, NULL, NULL); 
+[2022-04-15 09:30:59,116] [INFO] [yr40MiXM] http://localhost:3000/query2json response status code OK 
+[2022-04-15 09:30:59,147] [INFO] [yr40MiXM] Start call http://localhost:3000/query2json with body {"sql":"INSERT INTO `bot_message` (`message`, `created_date`, `is_sent`, `image`, `channel`, `id`) VALUES (?, ?, ?, ?, ?, ?);","payload":["DQotLS0tLS0tLS0tLS0tKipD4buYTkcgVEnhu4BOKiotLS0tLS0tLS0tLS0tDQoqKlTDqm4gdMOgaSBraG/huqNuKio6IGZhbmgNCioqU+G7kSB0aeG7gW4gYmFuIMSR4bqndToqKiAyNzUsMDAwDQoqKlPhu5EgdGnhu4FuIGPhu5luZyAgIDoqKiAxMCwwMDANCioqU+G7kSBoaeG7h24gdOG6oWkgICAgOioqIDI4NSwwMDANCioqVGjhu51pIGdpYW4gIDoqKjogMTUvMDQvMjAyMiAwOTozMDo1Ng0KKipWw7JuZyBxdWF5IMSRxrDhu6NjIGPhu5luZzoqKjogMA0KKipU4buVbmcgdsOybmcgcXVheToqKjogNQ0K","2022-04-15T09:30:58.9765033+07:00",0,null,null,null]} 
+[2022-04-15 09:30:59,226] [INFO] [yr40MiXM] http://localhost:3000/query2json response status code OK 
+[2022-04-15 09:31:01,616] [INFO] [yr40MiXM] 
+-------------**CỘNG TIỀN**-------------
+**Tên tài khoản**: fanh
+**Số tiền ban đầu:** 275,000
+**Số tiền cộng   :** 10,000
+**Số hiện tại    :** 285,000
+**Thời gian  :**: 15/04/2022 09:30:56
+**Vòng quay được cộng:**: 0
+**Tổng vòng quay:**: 5
+ 
+[2022-04-15 09:31:05,296] [INFO] [yr40MiXM] SELECT * FROM `bot_message` WHERE `is_sent` = false; 
+[2022-04-15 09:31:06,898] [INFO] [yr40MiXM] Start call http://localhost:3000/query2json with body {"sql":"SELECT * FROM `bot_message` WHERE `is_sent` = ?;","payload":[0]} 
+[2022-04-15 09:31:08,336] [INFO] [yr40MiXM] http://localhost:3000/query2json response status code OK 
+[2022-04-15 09:31:08,341] [INFO] [yr40MiXM] BOT SCAN: 1 
+[2022-04-15 09:31:08,918] [INFO] [yr40MiXM] UPDATE `bot_message` SET `message` = 'DQotLS0tLS0tLS0tLS0tKipD4buYTkcgVEnhu4BOKiotLS0tLS0tLS0tLS0tDQoqKlTDqm4gdMOgaSBraG/huqNuKio6IGZhbmgNCioqU+G7kSB0aeG7gW4gYmFuIMSR4bqndToqKiAyNzUsMDAwDQoqKlPhu5EgdGnhu4FuIGPhu5luZyAgIDoqKiAxMCwwMDANCioqU+G7kSBoaeG7h24gdOG6oWkgICAgOioqIDI4NSwwMDANCioqVGjhu51pIGdpYW4gIDoqKjogMTUvMDQvMjAyMiAwOTozMDo1Ng0KKipWw7JuZyBxdWF5IMSRxrDhu6NjIGPhu5luZzoqKjogMA0KKipU4buVbmcgdsOybmcgcXVheToqKjogNQ0K', `created_date` = '2022-04-15 02:30:58', `is_sent` = true, `image` = NULL, `channel` = NULL, `id` = 3108 WHERE `id` = 3108; 
+[2022-04-15 09:31:11,594] [INFO] [yr40MiXM] Start call http://localhost:3000/query2json with body {"sql":"UPDATE `bot_message` SET `message` = ?, `created_date` = ?, `is_sent` = ?, `image` = ?, `channel` = ?, `id` = ? WHERE `id` = ?;","payload":["DQotLS0tLS0tLS0tLS0tKipD4buYTkcgVEnhu4BOKiotLS0tLS0tLS0tLS0tDQoqKlTDqm4gdMOgaSBraG/huqNuKio6IGZhbmgNCioqU+G7kSB0aeG7gW4gYmFuIMSR4bqndToqKiAyNzUsMDAwDQoqKlPhu5EgdGnhu4FuIGPhu5luZyAgIDoqKiAxMCwwMDANCioqU+G7kSBoaeG7h24gdOG6oWkgICAgOioqIDI4NSwwMDANCioqVGjhu51pIGdpYW4gIDoqKjogMTUvMDQvMjAyMiAwOTozMDo1Ng0KKipWw7JuZyBxdWF5IMSRxrDhu6NjIGPhu5luZzoqKjogMA0KKipU4buVbmcgdsOybmcgcXVheToqKjogNQ0K","2022-04-15T02:30:58Z",1,null,null,3108,3108]} 
+[2022-04-15 09:31:11,662] [INFO] [yr40MiXM] http://localhost:3000/query2json response status code OK 

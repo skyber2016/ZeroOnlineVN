@@ -1,0 +1,261 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\projects\\06.Zero\\ZeroOnlineV3\\id\\api\\BotDiscordNew\\BotDiscordNew.csproj": {}
+  },
+  "projects": {
+    "D:\\projects\\06.Zero\\ZeroOnlineV3\\id\\api\\BotDiscordNew\\BotDiscordNew.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\projects\\06.Zero\\ZeroOnlineV3\\id\\api\\BotDiscordNew\\BotDiscordNew.csproj",
+        "projectName": "BotDiscord",
+        "projectPath": "D:\\projects\\06.Zero\\ZeroOnlineV3\\id\\api\\BotDiscordNew\\BotDiscordNew.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "D:\\projects\\06.Zero\\ZeroOnlineV3\\id\\api\\BotDiscordNew\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "http://10.22.126.27:8081/repository/dvnh-nuget/": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {
+              "D:\\projects\\06.Zero\\ZeroOnlineV3\\id\\api\\QueryBuilder\\QueryBuilder.csproj": {
+                "projectPath": "D:\\projects\\06.Zero\\ZeroOnlineV3\\id\\api\\QueryBuilder\\QueryBuilder.csproj"
+              },
+              "D:\\projects\\06.Zero\\ZeroOnlineV3\\id\\api\\SqlKata.Execution\\SqlKata.Execution.csproj": {
+                "projectPath": "D:\\projects\\06.Zero\\ZeroOnlineV3\\id\\api\\SqlKata.Execution\\SqlKata.Execution.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[11.0.1, )"
+            },
+            "Discord.Net.Core": {
+              "target": "Package",
+              "version": "[3.5.0, )"
+            },
+            "Discord.Net.WebSocket": {
+              "target": "Package",
+              "version": "[3.5.0, )"
+            },
+            "Microsoft.Extensions.Hosting": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Microsoft.Extensions.Hosting.Systemd": {
+              "target": "Package",
+              "version": "[3.1.24, )"
+            },
+            "System.Data.Odbc": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "Unity": {
+              "target": "Package",
+              "version": "[5.11.10, )"
+            },
+            "log4net": {
+              "target": "Package",
+              "version": "[2.0.14, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.200\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\projects\\06.Zero\\ZeroOnlineV3\\id\\api\\QueryBuilder\\QueryBuilder.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\projects\\06.Zero\\ZeroOnlineV3\\id\\api\\QueryBuilder\\QueryBuilder.csproj",
+        "projectName": "SqlKata",
+        "projectPath": "D:\\projects\\06.Zero\\ZeroOnlineV3\\id\\api\\QueryBuilder\\QueryBuilder.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "D:\\projects\\06.Zero\\ZeroOnlineV3\\id\\api\\QueryBuilder\\obj\\",
+        "projectStyle": "PackageReference",
+        "crossTargeting": true,
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net45",
+          "netstandard1.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "http://10.22.126.27:8081/repository/dvnh-nuget/": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net45": {
+            "targetAlias": "net45",
+            "projectReferences": {}
+          },
+          "netstandard1.0": {
+            "targetAlias": "netstandard1.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net45": {
+          "targetAlias": "net45",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.200\\RuntimeIdentifierGraph.json"
+        },
+        "netstandard1.0": {
+          "targetAlias": "netstandard1.0",
+          "dependencies": {
+            "NETStandard.Library": {
+              "target": "Package",
+              "version": "[1.6.1, )",
+              "autoReferenced": true
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.200\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\projects\\06.Zero\\ZeroOnlineV3\\id\\api\\SqlKata.Execution\\SqlKata.Execution.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\projects\\06.Zero\\ZeroOnlineV3\\id\\api\\SqlKata.Execution\\SqlKata.Execution.csproj",
+        "projectName": "SqlKata.Execution",
+        "projectPath": "D:\\projects\\06.Zero\\ZeroOnlineV3\\id\\api\\SqlKata.Execution\\SqlKata.Execution.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "D:\\projects\\06.Zero\\ZeroOnlineV3\\id\\api\\SqlKata.Execution\\obj\\",
+        "projectStyle": "PackageReference",
+        "crossTargeting": true,
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net451",
+          "netstandard1.3"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "http://10.22.126.27:8081/repository/dvnh-nuget/": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net451": {
+            "targetAlias": "net451",
+            "projectReferences": {
+              "D:\\projects\\06.Zero\\ZeroOnlineV3\\id\\api\\QueryBuilder\\QueryBuilder.csproj": {
+                "projectPath": "D:\\projects\\06.Zero\\ZeroOnlineV3\\id\\api\\QueryBuilder\\QueryBuilder.csproj"
+              }
+            }
+          },
+          "netstandard1.3": {
+            "targetAlias": "netstandard1.3",
+            "projectReferences": {
+              "D:\\projects\\06.Zero\\ZeroOnlineV3\\id\\api\\QueryBuilder\\QueryBuilder.csproj": {
+                "projectPath": "D:\\projects\\06.Zero\\ZeroOnlineV3\\id\\api\\QueryBuilder\\QueryBuilder.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net451": {
+          "targetAlias": "net451",
+          "dependencies": {
+            "Humanizer.Core": {
+              "target": "Package",
+              "version": "[2.6.2, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.3, )"
+            },
+            "dapper": {
+              "target": "Package",
+              "version": "[1.50.5, )"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.200\\RuntimeIdentifierGraph.json"
+        },
+        "netstandard1.3": {
+          "targetAlias": "netstandard1.3",
+          "dependencies": {
+            "Humanizer.Core": {
+              "target": "Package",
+              "version": "[2.6.2, )"
+            },
+            "NETStandard.Library": {
+              "target": "Package",
+              "version": "[1.6.1, )",
+              "autoReferenced": true
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.3, )"
+            },
+            "dapper": {
+              "target": "Package",
+              "version": "[1.50.5, )"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.200\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

@@ -98,8 +98,8 @@ namespace API.Services.Authenticate
                 throw new BadRequestException(MessageConstants.GetMessage(Message.UserNameExist));
             }
             user = Mapper.Map<AccountEntity>(request);
-            user.NetbarIP = this.Context.HttpContext.Connection.RemoteIpAddress.ToString();
-            user.IPMask = this.Context.HttpContext.Connection.RemoteIpAddress.ToString();
+            user.NetbarIP = HttpHelper.GetIP(Context);
+            user.IPMask = HttpHelper.GetIP(Context);
             user.VIP = this.UnitOfWork.AppSettings.Value.VIPDefault;
             user.Password = MD5Helper.HashPassword(request.Password);
             user.Answer = request.Answer.Base64Encode();

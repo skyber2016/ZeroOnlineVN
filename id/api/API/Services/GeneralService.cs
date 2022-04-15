@@ -43,8 +43,7 @@ namespace API.Services
         }
         public async Task<TEntity> AddAsync(TEntity entity, IDbTransaction transaction = null)
         {
-            await Context.Factory.Query(this.TableName).InsertAsync(entity, transaction);
-            var id = await Context.Factory.Connection.ExecuteScalarAsync<int>("SELECT last_insert_id() as Id", transaction: transaction);
+            var id = await Context.Factory.Query(this.TableName).InsertAsync(entity, transaction);
             entity.Id = id;
             return entity;
         }

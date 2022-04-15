@@ -20,7 +20,7 @@ namespace API.Helpers
         public LoggerHelper(IHttpContextAccessor accessor)
         {
             Accessor = accessor;
-            this.IPAddress = Accessor.HttpContext?.Connection?.RemoteIpAddress?.ToString();
+            this.IPAddress = HttpHelper.GetIP(Accessor);
             this.ThreadId = GenerateThreadID(8);
         }
         private string GenerateThreadID(int length)

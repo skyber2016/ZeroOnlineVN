@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -19,11 +20,9 @@ using NEWS_MVC.Helpers;
 using NEWS_MVC.Services;
 using NEWS_MVC.Services.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using System.Xml;
 using Unity;
 using WebMarkupMin.AspNetCore2;
@@ -50,7 +49,7 @@ namespace NEWS_MVC
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.Configure<IISServerOptions>(options =>
+            services.Configure<KestrelServerOptions>(options =>
             {
                 options.AllowSynchronousIO = true;
             });

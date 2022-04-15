@@ -2,6 +2,6 @@
 {
     public class ConnectionSetting
     {
-        public string DefaultConnection { get; set; }
+        public string DbAPI { get; set; }
     }
 }
