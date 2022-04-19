@@ -22,7 +22,7 @@ namespace API.Controllers
         [Route("Power")]
         public async Task<IActionResult> Power()
         {
-            var users = await this.UserEntService.FindBy().LeftJoin("account", "cq_user.account_id","account.id").Select("cq_user.*", "account.VIP").OrderByDesc("Battle_lev").Limit(110).GetAsync<UserEntity>();
+            var users = await this.UserEntService.FindBy().Join("account", "cq_user.account_id","account.id").Select("cq_user.*", "account.VIP").OrderByDesc("Battle_lev").Limit(110).GetAsync<UserEntity>();
             return Response<RankingPowerGetResponse>(users.Where(x=>!x.Name.EndsWith("[PM]")).Take(100));
         }
 

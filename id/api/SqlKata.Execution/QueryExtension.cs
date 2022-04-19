@@ -44,55 +44,65 @@ namespace SqlKata.Execution
     {
         public static async Task<T> Call<T>(this SqlResult query)
         {
-            var dbAPI = QueryFactory.DbAPI;
-            using(var http = new HttpClient())
+            var loggingMessage = string.Empty;
+            try
             {
-                var payload = JsonConvert.SerializeObject(new
+                var dbAPI = QueryFactory.DbAPI;
+                using (var http = new HttpClient())
                 {
-                    sql = query.Sql,
-                    payload = query.Bindings.Select(x=>
+                    var payload = JsonConvert.SerializeObject(new
                     {
-                        try
+                        sql = query.Sql,
+                        payload = query.Bindings.Select(x =>
                         {
-                            if(x == null)
+                            try
                             {
-                                return null;
+                                if (x == null)
+                                {
+                                    return null;
+                                }
+                                if ((bool)x == false)
+                                {
+                                    x = 0;
+                                }
+                                else if ((bool)x == true)
+                                {
+                                    x = 1;
+                                }
                             }
-                            if ((bool)x == false)
+                            catch (Exception)
                             {
-                                x = 0;
-                            }
-                            else if((bool)x == true)
-                            {
-                                x = 1;
-                            }
-                        }
-                        catch (Exception)
-                        {
 
-                        }
-                        return x;
-                    })
-                });
-                QueryFactory.HttpLoggerInfo($"Start call {dbAPI} with body {payload}");
-                var body = new StringContent(payload, Encoding.UTF8, "application/json");
-                var resp = await http.PostAsync(dbAPI, body);
-                QueryFactory.HttpLoggerInfo($"{dbAPI} response status code {resp.StatusCode}");
-                if (resp.IsSuccessStatusCode)
-                {
-                    var jsonString = await resp.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<T>(jsonString, 
-                    new JsonSerializerSettings() {
-                        ContractResolver = new MyContractResolver()
+                            }
+                            return x;
+                        })
                     });
-                }
-                else
-                {
-                    var message = await resp.Content.ReadAsStringAsync();
-                    QueryFactory.HttpLoggerError($"{dbAPI} response error {message}");
-                    return default;
+                    loggingMessage = $"Start call {dbAPI} with body {payload}";
+                    var body = new StringContent(payload, Encoding.UTF8, "application/json");
+                    var resp = await http.PostAsync(dbAPI, body);
+                    loggingMessage = $"{dbAPI} response status code {resp.StatusCode}";
+                    if (resp.IsSuccessStatusCode)
+                    {
+                        var jsonString = await resp.Content.ReadAsStringAsync();
+                        return JsonConvert.DeserializeObject<T>(jsonString,
+                        new JsonSerializerSettings()
+                        {
+                            ContractResolver = new MyContractResolver()
+                        });
+                    }
+                    else
+                    {
+                        var message = await resp.Content.ReadAsStringAsync();
+                        loggingMessage = $"{dbAPI} response error {message}";
+                        return default;
+                    }
                 }
             }
+            finally
+            {
+                QueryFactory.HttpLoggerError(loggingMessage);
+            }
+            
         }
     }
     public static class TaskExtension
