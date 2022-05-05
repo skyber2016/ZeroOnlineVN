@@ -6,6 +6,7 @@ using Unity;
 
 namespace NEWS_MVC.Cores
 {
+    [TypeFilter(typeof(DomainAttribute))]
     [TypeFilter(typeof(ErrorHandlingAttribute))]
     public class BaseController : Controller
     {

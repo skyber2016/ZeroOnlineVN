@@ -3,7 +3,7 @@
 @inject IPostService postsService; 
 
 @{ 
-    var domainID = "http://id.zeroonline-vietnam.tk";
+    var domainID = ViewBag.ID_Domain;
     var detail = "/chi-tiet";
 
     var data = postsService.GetPosts();
@@ -43,7 +43,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="http://download.zeroonline-vietnam.tk" target="_blank">
+                    <a href="@ViewBag.Download_Domain" target="_blank">
                         <p>Tải game</p>
                     </a>
                 </li>
@@ -90,8 +90,8 @@
                 </li>
                 <li class="nologo"><a href="javascript:void(0);" class=""></a></li>
                 <li>
-                    <a target="_blank" href="http://www.zeroonline-vietnam.tk/details/huong-dan/184" class="">Cài đặt</a>
-                    <a target="_blank" href="http://www.zeroonline-vietnam.tk/details/huong-dan/sua-loi-man-hinh-bao-flash">Sửa lỗi Flash</a>
+                    <a target="_blank" href="@ViewBag.WWW_Domain/details/huong-dan/184" class="">Cài đặt</a>
+                    <a target="_blank" href="@ViewBag.WWW_Domain/details/huong-dan/sua-loi-man-hinh-bao-flash">Sửa lỗi Flash</a>
                 </li>
                 <li>
                     @foreach (var post in images)
@@ -107,7 +107,7 @@
                 <li>
                     <a target="_blank" href="https://www.facebook.com/ZeroSeverVN/" class="">Fanpage</a>
                     <a target="_blank" href="https://www.facebook.com/groups/ZeroOnlineVN" class="">Group</a>
-                    <a target="_blank" href="https://discord.gg/jxSnEe9c" class="">Discord</a>
+                    <a target="_blank" href="https://discord.gg/pyKUHjpJBD" class="">Discord</a>
                     
                 </li>
             </ul>

@@ -22,5 +22,6 @@ namespace NEWS_MVC.Helpers
             }
             return Accessor.HttpContext.Request.Headers[key].ToString();
         }
+
     }
 }

@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Net.Http;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
@@ -63,7 +64,7 @@ namespace AutoBackupCloud
                 string zipPath = string.Empty;
                 try
                 {
-                    this.Service = this.GetService();
+                    //this.Service = this.GetService();
                     Logger.Info($"Worker running at: {DateTimeOffset.Now}");
                     newPath = this.BackupFile();
                     Logger.Info("newPath: " + newPath);
@@ -73,7 +74,8 @@ namespace AutoBackupCloud
                     }
                     zipPath = this.CreateZip(newPath);
                     Logger.Info("new zip: " + zipPath);
-                    await this.UploadDrive(zipPath, new FileInfo(zipPath).Name);
+                    await this.PostSaveFile(zipPath);
+                    //await this.UploadDrive(zipPath, new FileInfo(zipPath).Name);
                     
                 }
                 catch (Exception ex)
@@ -92,6 +94,26 @@ namespace AutoBackupCloud
         }
         private string[] Scopes = { DriveService.Scope.DriveFile, DriveService.Scope.Drive, DriveService.Scope.DriveReadonly  };
         private string ApplicationName = "Drive API .NET Quickstart";
+        
+        private async Task PostSaveFile(string pathToFile)
+        {
+            using(var stream = new FileStream(pathToFile, FileMode.Open))
+            {
+                using (var mem = new MemoryStream())
+                {
+                    stream.CopyTo(mem);
+                    using (var http = new HttpClient())
+                    {
+                        MultipartFormDataContent form = new MultipartFormDataContent();
+
+                        form.Add(new StringContent("QWERTY"), "secretKey");
+                        form.Add(new ByteArrayContent(mem.ToArray()), "file", System.IO.Path.GetFileName(pathToFile));
+                        var resp = await http.PostAsync(this.AppSetting.API, form);
+                        Logger.Info($"{this.AppSetting.API} file length {mem.Length.ToString("#,##0")} response {resp.StatusCode}");
+                    }
+                }
+            }
+        }
         private void RemoveFile(string path)
         {
             if (File.Exists(path))
@@ -151,7 +173,8 @@ namespace AutoBackupCloud
                 }
                 var newPath = AppDomain.CurrentDomain.BaseDirectory + DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss");
                 Directory.CreateDirectory(newPath);
-                foreach (var file in Directory.GetFiles(path, "*.*", SearchOption.AllDirectories))
+                var files = Directory.GetFiles(path, "*.*", SearchOption.AllDirectories);
+                foreach (var file in files)
                 {
                     var combine = Path.Combine(newPath, Path.GetFileName(file));
                     File.Copy(file, combine, true);

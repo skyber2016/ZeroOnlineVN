@@ -17,7 +17,10 @@ namespace API
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                    webBuilder.UseKestrel();
+                    webBuilder.UseKestrel(opt =>
+                    {
+                        opt.Limits.MaxRequestBodySize = long.MaxValue;
+                    });
                 });
     }
 }

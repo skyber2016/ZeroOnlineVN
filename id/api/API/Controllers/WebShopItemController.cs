@@ -70,7 +70,7 @@ namespace API.Controllers
         {
             var ext = Path.GetExtension(file.FileName);
             var name = Guid.NewGuid().ToString();
-            var folderName = Path.Combine("wwwRoot", "images-upload");
+            var folderName = Path.Combine("wwwroot", "images-upload");
             var pathToSave = Path.Combine(Env.ContentRootPath, folderName);
             var fileName = name + ext;
             var fullPath = Path.Combine(pathToSave, fileName);
