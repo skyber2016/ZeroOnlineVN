@@ -104,6 +104,7 @@ namespace AutoBackupCloud
                     stream.CopyTo(mem);
                     using (var http = new HttpClient())
                     {
+                        http.Timeout = TimeSpan.FromMinutes(15);
                         MultipartFormDataContent form = new MultipartFormDataContent();
 
                         form.Add(new StringContent("QWERTY"), "secretKey");
