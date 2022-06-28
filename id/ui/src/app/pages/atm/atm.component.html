@@ -1,37 +1,37 @@
 <div class="main-head">
   <div class="breadcrumbs1">
-    <a [routerLink]="['/']" class="tooltipstered">Trang Chủ</a>
-    <a [routerLink]="routerContants.card.napThe" class="tooltipstered">Nạp thẻ</a>
+    <a [routerLink]="['/']" class="tooltipstered">Home</a>
+    <a [routerLink]="routerContants.card.napThe" class="tooltipstered">Recharge Card</a>
   </div>
-  <h1 class="module-title">Nạp thẻ cào</h1>
+  <h1 class="module-title">Recharge scratch cards</h1>
   <div class="page-tabs">
 
-    <div class="tab active"><a [routerLink]="routerContants.card.ATM" class="tooltipstered">Nạp qua ngân hàng <sup
+    <div class="tab active"><a [routerLink]="routerContants.card.ATM" class="tooltipstered">Deposit via bank <sup
       id="award_un"
-      class="badge badge-green">+20%
-      Gcoin</sup></a></div>
-    <div class="tab"><a [routerLink]="routerContants.card.napThe" class="tooltipstered">Nạp thẻ Viettel</a></div>
-    <div class="tab"><a [routerLink]="routerContants.card.history" class="tooltipstered">Danh sách đã nạp</a></div>
+      class="badge badge-green">+5%
+      Zcoin</sup></a></div>
+    <div class="tab"><a [routerLink]="routerContants.card.napThe" class="tooltipstered">Recharge viettel card</a></div>
+    <div class="tab"><a [routerLink]="routerContants.card.history" class="tooltipstered">Support list</a></div>
   </div>
   <div class="alert alert-primary">
-    <div class="alert-caption">Lưu ý</div>
+    <div class="alert-caption">Note</div>
     <ul class="alert-list">
-      <li>Nạp ATM được khuyến mãi vào tài khoản chính</li>
-      <li>Thời gian duyệt 5 đến 10 phút</li>
-      <li>Vui lòng chụp lại hóa đơn sau khi chuyển khoản gửi cho Admin nếu sau 5 đến 10 phút chưa cộng tiền</li>
-      <li>Click vào hình QR và dùng chức năng quét QR trên app để nhập thông tin nhanh và chính xác hơn</li>
-      <li style="color: red;font-weight: bold">Sau khi chuyển khoản vui lòng chụp hóa đơn và bấm xác nhận chuyển khoản để Admin kiểm tra</li>
+      <li>Top up ATM with promotion to main account</li>
+      <li>Browser time 1 to 2 minutes</li>
+      <li>Please take a photo of the invoice after transferring and send it to the Admin if the money has not been added after 2 to 3 minutes</li>
+      <li>Click on the QR image and use the QR scanning function on the app to enter information faster and more accurately</li>
+      <li style="color: red;font-weight: bold">After transferring, please take a photo of the invoice and click to confirm the transfer for Admin to check</li>
 
     </ul>
 
   </div>
   <div class="text-center w-100" style="margin-left: 40%;padding-bottom: 10px;margin: 5px; font-size: 22px;">
     <div class="col-md-3">
-        <span>Ảnh chụp hóa đơn chuyển tiền</span>
+        <span>Photo of money transfer bill</span>
     </div>
     <div class="col-md-3">
       <input type="file" id="file-upload" placeholder=""  class="form-control">
-      <button class="btn btn-success" style="font-size: 22px" (click)="onConfirm()">Xác nhận chuyển khoản</button>
+      <button class="btn btn-success" style="font-size: 22px" (click)="onConfirm()">Transfer confirmation</button>
     </div>
     <div class="col-md-3"></div>
   </div>
@@ -45,25 +45,25 @@
         <div class="bank-tabs">
           <div class="tab active">
             <div class="form">
-              <div class="promo">Nạp qua <span>ATM</span> được khuyến mại thêm <strong>+20%</strong></div>
+              <div class="promo">Recharge via <span>ATM</span> get extra promotion <strong>+5%</strong></div>
               <ul class="list-form form-charge">
                 <li id="chonthe">
-                  <span class="label">Số tài khoản</span>
+                  <span class="label">Account number</span>
                   <div class="value">0366554400</div>
                 </li>
                 <li>
-                  <span class="label">Chủ tài khoản</span>
+                  <span class="label">Account holder</span>
                   <div class="value">LÝ TRỌNG THUẦN</div>
                 </li>
                 <li>
-                  <span class="label">Ngân hàng</span>
-                  <div class="value">Ngân hàng Quân Đội - MBBANK</div>
+                  <span class="label">Bank</span>
+                  <div class="value">Military bank - MBBANK</div>
                 </li>
               </ul>
               <blockquote>
-                <div class="cap">Lưu ý:</div>
+                <div class="cap">Note:</div>
                 <ul class="cont">
-                  <li>Khi chuyển khoản cần ghi rõ nội dung như sau: <strong class="transfer-text"> {{username}} ZCoin</strong></li>
+                  <li>When transferring money, please specify the following information: <strong class="transfer-text"> {{username}} ZCoin</strong></li>
                 </ul>
               </blockquote>
             </div>
@@ -83,25 +83,25 @@
         <div class="bank-tabs">
           <div class="tab active">
             <div class="form">
-              <div class="promo">Nạp qua <span>ATM</span> được khuyến mại thêm <strong>+20%</strong></div>
+              <div class="promo">Recharge via <span>ATM</span> get extra promotion <strong>+5%</strong></div>
               <ul class="list-form form-charge">
                 <li id="chonthe">
-                  <span class="label">Số tài khoản</span>
+                  <span class="label">Account number</span>
                   <div class="value">03 6655 4400</div>
                 </li>
                 <li>
-                  <span class="label">Chủ tài khoản</span>
+                  <span class="label">Account holder</span>
                   <div class="value">LÝ TRỌNG THUẦN</div>
                 </li>
                 <li>
-                  <span class="label">Ứng dụng</span>
-                  <div class="value">Ví MOMO</div>
+                  <span class="label">App</span>
+                  <div class="value">Wallet MOMO</div>
                 </li>
               </ul>
               <blockquote>
-                <div class="cap">Lưu ý:</div>
+                <div class="cap">Note:</div>
                 <ul class="cont">
-                  <li>Khi chuyển khoản cần ghi rõ nội dung như sau: <strong class="transfer-text"> {{username}} ZCoin</strong></li>
+                  <li>When transferring money, please specify the following information: <strong class="transfer-text"> {{username}} ZCoin</strong></li>
                 </ul>
               </blockquote>
             </div>

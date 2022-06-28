@@ -27,7 +27,7 @@ export class ATMComponent extends BaseComponent implements OnInit {
       if (file.files.length > 0) {
         const fileByte = file.files[0];
         this.cardService.confirmATM(fileByte).toPromise().then(resp => {
-          this.toastrService.success('Đã gửi yêu cầu thành công, vui lòng đợi 5-10p');
+          this.toastrService.success('Request sent successfully, please wait 1-2 minutes');
         }).finally(() =>{
           const element:any = document.getElementById('file-upload');
           element.value = '';

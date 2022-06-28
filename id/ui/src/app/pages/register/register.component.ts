@@ -35,7 +35,7 @@ export class RegisterComponent extends BaseComponent implements OnInit {
       answer: this.answer,
       email: this.email
     }).subscribe( resp => {
-      alert('Đăng ký tài khoản thành công');
+      alert('Register successfully');
       this.router.navigate([RouterConstant.auth.login]).then();
     })
   }

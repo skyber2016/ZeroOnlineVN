@@ -1,17 +1,17 @@
 <div class="main-head">
   <div class="breadcrumbs1">
-    <a [routerLink]="['/']" class="tooltipstered">Trang Chủ</a>
-    <a [routerLink]="routerContants.card.napThe" class="tooltipstered">Nạp thẻ</a>
+    <a [routerLink]="['/']" class="tooltipstered">Home</a>
+    <a [routerLink]="routerContants.card.napThe" class="tooltipstered">Recharge cards</a>
   </div>
-  <h1 class="module-title">Danh sách thẻ nạp</h1>
+  <h1 class="module-title">List recharge cards</h1>
   <div class="page-tabs">
 
-    <div class="tab"><a [routerLink]="routerContants.card.ATM" class="tooltipstered">Nạp qua ngân hàng <sup id="award_un"
-                                                                                                class="badge badge-green">+20%
-      Gcoin</sup></a></div>
+    <div class="tab"><a [routerLink]="routerContants.card.ATM" class="tooltipstered">Bank deposit <sup id="award_un"
+                                                                                                class="badge badge-green">+5%
+      Zcoin</sup></a></div>
     <div class="tab ">
-      <a [routerLink]="routerContants.card.napThe" class="tooltipstered">Nạp thẻ Viettel</a></div>
-    <div class="tab active"><a [routerLink]="routerContants.card.history" class="tooltipstered">Danh sách đã nạp</a></div>
+      <a [routerLink]="routerContants.card.napThe" class="tooltipstered">Recharge cards</a></div>
+    <div class="tab active"><a [routerLink]="routerContants.card.history" class="tooltipstered">Support list</a></div>
   </div>
 </div>
 
@@ -25,12 +25,12 @@
         <thead>
         <tr>
           <th>#</th>
-          <th>Mã giao dịch</th>
+          <th>Trading code</th>
           <th>Serial</th>
-          <th>Mã thẻ</th>
-          <th>Mệnh giá</th>
-          <th>Trạng thái</th>
-          <th>Thời gian</th>
+          <th>Card code</th>
+          <th>Denominations</th>
+          <th>Status</th>
+          <th>Time</th>
         </tr>
         </thead>
         <tbody>

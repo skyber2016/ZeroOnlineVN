@@ -24,13 +24,13 @@
                        data-original-title="Truy cập nhanh"></i>
                   </button>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuQuickAction">
-                    <a class="dropdown-item" routerLink="/doi-mat-khau">Đổi mật khẩu</a>
+                    <a class="dropdown-item" routerLink="/doi-mat-khau">Change Password</a>
                   </div>
                 </div>
               </div>
               <div class="acc-info-content">
                 <div class="aic-top">
-                  <span class="label-name">Tài khoản:</span>
+                  <span class="label-name">Account:</span>
                   <a href="#acc_manager">
                     <span class="name"> {{fullName}}</span>
                   </a>
@@ -39,7 +39,7 @@
                   <i class="fas fa-sign-out-alt"></i>
                   <span>
 											<form>
-													<input type="button" (click)="onLogout()" name="submit" value="Thoát"
+													<input type="button" (click)="onLogout()" name="submit" value="Exit"
                                  style="
     background: #ffffff00;
     color: #ffbf00;
@@ -57,7 +57,7 @@
                     <span class="badge badge-primary" style="background-color: #007bff">{{percent}}%</span>
 												</span>
                   <span data-toggle="tooltip" data-placement="bottom" title="" id="head_wcoin"
-                        data-original-title="ZCoin hiện có">
+                        data-original-title="Zcoin is available">
 													<i class="ic ic-w"></i>
 													<span> {{money}}</span>
 												</span>
@@ -68,13 +68,13 @@
             <div class="acc-action">
               <div class="links">
                 <a href="https://zeroonlinevn.com" target="_blank">
-                  <i class=" fa fa-home"></i> Trang chủ
+                  <i class=" fa fa-home"></i> Home
                 </a>
                 <a href="http://download.zeroonlinevn.com" target="_blank">
-                  <i class="fal fa-download"></i> Tải game
+                  <i class="fal fa-download"></i> Download
                 </a>
                 <a href="https://zeroonlinevn.com" target="_blank">
-                  <i class=" fa fa-comments"></i> Tin tức
+                  <i class=" fa fa-comments"></i> News
                 </a>
                 <a href="https://www.facebook.com/ZeroSeverVN" target="_blank">
                   <i class="fab fa-facebook-square"></i>
@@ -111,7 +111,7 @@
                       <ul>
                         <div clas="text-center">
                           <a href="#">
-                            <strong>Hỗ trợ</strong>
+                            <strong>Support</strong>
                             <span class="tag1 tag1-time">03 6655 4400</span>
                           </a>
                         </div>
@@ -127,55 +127,53 @@
 																		</span>
                             <ul class="sub-menu">
                               <li class="sub-item" *ngIf="isAdmin">
-                                <a routerLink="/gift-code/create">Tạo GiftCode</a>
+                                <a routerLink="/gift-code/create">Create GiftCode</a>
                               </li>
                               <li class="sub-item">
-                                <a routerLink="/gift-code">Nhận phần thưởng
+                                <a routerLink="/gift-code">Get reward
                                   GiftCode</a>
                               </li>
                               <li class="sub-item">
-                                <a routerLink="/gift-code/lich-su">Lịch sử GiftCode</a>
+                                <a routerLink="/gift-code/lich-su">Giftcode history</a>
                               </li>
                             </ul>
                           </li>
                           <li class="cat-item">
 																		<span>
-																			<i class="fa fa-edit"></i>&emsp;&emsp;Tài khoản
+																			<i class="fa fa-edit"></i>&emsp;&emsp;Account
 																			<i
                                         class="fas fa-angle-down"></i>
 																		</span>
                             <ul class="sub-menu">
                               <li class="sub-item">
-                                <a routerLink="/doi-mat-khau">Đổi mật khẩu
+                                <a routerLink="/doi-mat-khau">Change Password
                                   Game</a>
                               </li>
                               <li class="sub-item">
-                                <a href="#acc_manager&act=changesdt_sms" rel="ajax">Đổi số điện
-                                  thoại</a>
+                                <a href="#acc_manager&act=changesdt_sms" rel="ajax">Change phone number</a>
                               </li>
                               <li class="sub-item">
-                                <a href="#acc_manager&act=changequest" rel="ajax">Đổi câu hỏi bí
-                                  mật</a>
+                                <a href="#acc_manager&act=changequest" rel="ajax">Change secret question</a>
                               </li>
                             </ul>
                           </li>
                           <li class="cat-item">
 																		<span>
-																			<i class="fa fa-shopping-cart"></i>&emsp;&emsp;Cửa hàng
+																			<i class="fa fa-shopping-cart"></i>&emsp;&emsp;Web Store
 																			<i class="fas fa-angle-down"></i>
 																		</span>
                             <ul class="sub-menu">
                               <li class="sub-item">
-                                <a routerLink="/cua-hang">Vật phẩm</a>
+                                <a routerLink="/web-shop">Items</a>
                               </li>
                               <li class="sub-item" *ngIf="isAdmin">
-                                <a routerLink="/cua-hang/quan-ly">Quản lý cửa hàng</a>
+                                <a routerLink="/store-manager">Store Manager</a>
                               </li>
                               <li class="sub-item">
-                                <a routerLink="/tich-luy-tieu-phi">Tích lũy tiêu phí</a>
+                                <a routerLink="/cumulative-gift">Cumulative gift</a>
                               </li>
                               <li class="sub-item"  *ngIf="isAdmin">
-                                <a routerLink="/tich-luy-tieu-phi/vat-pham">Quản lý tiêu phí</a>
+                                <a routerLink="/expenses-manager/items"> Expenses Manager</a>
                               </li>
                             </ul>
                           </li>
@@ -187,78 +185,78 @@
 																		</span>
                             <ul class="sub-menu">
                               <li class="sub-item">
-                                <a [routerLink]="['nhan-thuong-vip']" rel="ajax">Nhận thưởng mốc VIP</a>
+                                <a [routerLink]="['receive-vip-gifts']" rel="ajax">Receive VIP Gifts</a>
                               </li>
                               <li class="sub-item">
-                                <a href="#questdaily" rel="ajax">Nhiệm vụ Hằng Ngày</a>
+                                <a href="#questdaily" rel="ajax">VIP Progress</a>
                               </li>
                               <li class="sub-item">
-                                <a href="#event&act=event_topcard" rel="ajax">Vinh Hoa Phú Quý</a>
+                                <a href="#event&act=event_topcard" rel="ajax">Level VIP</a>
                               </li>
                             </ul>
                           </li>
                           <li class="cat-item">
 																		<span>
-																			<i class="fal fa-donate"></i>&emsp;&emsp;Ngân hàng
+																			<i class="fal fa-donate"></i>&emsp;&emsp;Bank
 																			<i
                                         class="fas fa-angle-down"></i>
 																		</span>
                             <ul class="sub-menu">
                               <li class="sub-item">
-                                <a [routerLink]="['/doi-tien']">Đổi ZCoin sang ZPs</a>
+                                <a [routerLink]="['/convert-zcoin']">Convert Zcoin to Zps</a>
                               </li>
                             </ul>
                           </li>
                           <li class="cat-item">
 																		<span>
-																			<i class="fal fa-university"></i>&emsp;&emsp;Nạp Thẻ
+																			<i class="fal fa-university"></i>&emsp;&emsp;Card Recharge 
 																			<i class="fas fa-angle-down"></i>
 																		</span>
                             <ul class="sub-menu">
                               <li class="sub-item">
-                                <a [routerLink]="routerContant.card.ATM">Nạp ATM
+                                <a [routerLink]="routerContant.card.ATM">Recharge ATM
                                   <span
-                                    class="badge badge-green">+ 20 %</span>
+                                    class="badge badge-green">+ 5 %</span>
                                 </a>
                               </li>
                               <li class="sub-item">
-                                <a [routerLink]="routerContant.card.ATM">Nạp Ví MOMO
+                                <a [routerLink]="routerContant.card.ATM">Wallet MOMO
                                   <span
-                                    class="badge badge-green">+ 20 %</span>
+                                    class="badge badge-green">+ 5 %</span>
                                 </a>
                               </li>
                               <li class="sub-item">
-                                <a [routerLink]="[routerContant.card.napThe]">Nạp thẻ</a>
+                                <a [routerLink]="[routerContant.card.napThe]">Card Recharge</a>
                               </li>
                               <li class="sub-item">
-                                <a [routerLink]="routerContant.card.history">Lịch sử nạp thẻ</a>
+                                <a [routerLink]="routerContant.card.history">Card recharge history</a>
                               </li>
                             </ul>
                           </li>
                           <li class="cat-item">
 																		<span>
-																			<i class="fal fa-calendar-star"></i>&emsp;&emsp;Giải Trí
+																			<i class="fal fa-calendar-star"></i>&emsp;&emsp;Entertainment
 																			<i
                                         class="fas fa-angle-down"></i>
 																		</span>
                             <ul class="sub-menu">
                               <li class="sub-item">
-                                <a routerLink="/vong-quay">Vòng Quay May Mắn</a>
+                                <a routerLink="/bonus-spins">Bonus Spins</a>
                               </li>
                             </ul>
                           </li>
                           <li class="cat-item">
 																		<span>
-																			<i class="fa fa-trophy"></i>&emsp;&emsp;Xếp Hạng
+																			<i class="fa fa-trophy"></i>&emsp;&emsp;Ratings
 																			<i
                                         class="fas fa-angle-down"></i>
 																		</span>
                             <ul class="sub-menu">
                               <li class="sub-item">
-                                <a [routerLink]="['xep-hang/luc-chien']">BXH Lực Chiến</a>
+                                <a [routerLink]="['top-pottency']">TOP Potency</a>
                               </li>
                               <li class="sub-item">
-                                <a routerLink="/xep-hang/ham-doi">BXH Hạm Đội</a>
+                                <a routerLink="/top-fleet">TOP Fleet</a>
                               </li>
                             </ul>
                           </li>

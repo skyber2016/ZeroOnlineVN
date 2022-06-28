@@ -21,22 +21,22 @@ export class ChangePasswordComponent implements OnInit {
 
   changePassword(): void {
     if (!this.oldPassword || !this.newPassword || !this.rePassword) {
-      this.message.error('Vui lòng nhập đầy đủ thông tin');
+      this.message.error('Please enter full information');
       return;
     }
     if (this.newPassword != this.rePassword) {
-      this.message.error('Nhập lại mật khẩu mới không khớp');
+      this.message.error('Re-enter new password does not match');
       return;
     }
     if (this.oldPassword == this.newPassword) {
-      this.message.error('Mật khẩu mới và mật khẩu cũ không được trùng nhau');
+      this.message.error('New password and old password cannot be the same');
       return;
     }
     this.userService.changePassword({
       oldPassword: this.oldPassword,
       newPassword: this.newPassword
     }).subscribe(async ()=>{
-      alert('Đổi mật khẩu thành công, vui lòng đăng nhập lại');
+      alert('Change password successfully, please login again');
       await this.router.navigate(['/auth/login']);
     })
   }

@@ -12,31 +12,31 @@
           <section id="content">
             <form class="form-login" action="" id="login" method="post">
 
-              <h1>Đăng Nhập</h1>
+              <h1>Log in</h1>
 
               <div>
-                <input type="text" class="form-input" name="username" id="username" placeholder="Tên tài khoản" [(ngModel)]="username" [ngModelOptions]="{standalone: true}"
+                <input type="text" class="form-input" name="username" id="username" placeholder="Account name" [(ngModel)]="username" [ngModelOptions]="{standalone: true}"
                        autofocus required>
               </div>
               <div>
-                <input type="password" class="form-input" name="password" id="password" placeholder="Mật khẩu"[(ngModel)]="password" [ngModelOptions]="{standalone: true}"
+                <input type="password" class="form-input" name="password" id="password" placeholder="Password"[(ngModel)]="password" [ngModelOptions]="{standalone: true}"
                        required="">
               </div>
               <div>
-                <button class="btnn btnn-2 btnn-sep icon-send1" type="button" id="submit" name="submit" (click)="onSignIn()">Đăng nhập
+                <button class="btnn btnn-2 btnn-sep icon-send1" type="button" id="submit" name="submit" (click)="onSignIn()">Log in
                 </button>
                 <a [routerLink]="[routerContants.auth.register]" class="button button-blue tooltipstered">
                   <i class="fa fa-globe"></i>
-                  <strong>ĐĂNG KÍ</strong>
+                  <strong>REGISTER</strong>
                 </a>
                 <a [routerLink]="routerContants.auth.forgotPassword" class="button button-orange tooltipstered">
                   <i class="fa fa-clock-o"></i>
-                  <strong>Quên Mật Khẩu ?</strong>
+                  <strong>Forgot password ?</strong>
                 </a>
               </div>
             </form>
             <div class="button">
-              <a href="http://download.zeroonlinevn.com" target="_blank" class="tooltipstered">Tải game chơi ngay</a>
+              <a href="http://download.zeroonlinevn.com" target="_blank" class="tooltipstered">Download Game</a>
             </div>
           </section>
 

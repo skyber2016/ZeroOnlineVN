@@ -88,6 +88,18 @@ namespace API.Cores
                         await this.Client.LoginAsync(Discord.TokenType.Bot, this.AppSettings.BotToken);
                         await this.Client.SetStatusAsync(Discord.UserStatus.Online);
                         this.Logger.Info("BOT LOGIN SUCCESS");
+                        await Task.Delay(5000, stoppingToken);
+                        continue;
+                    }
+                    else {
+                        this.Logger.Info($"BOT STATE {this.Client.ConnectionState}");
+                    }
+
+                    if (this.Client.ConnectionState == ConnectionState.Disconnected)
+                    {
+                        this.ClientReady = false;
+                        this.Client.Dispose();
+                        this.Client = null;
                     }
                     if (this.ClientReady)
                     {

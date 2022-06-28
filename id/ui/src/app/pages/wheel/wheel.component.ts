@@ -113,7 +113,7 @@ export class WheelComponent implements OnInit {
       const self = this;
 
       setTimeout(function () {
-        self.message.success(resp.message, 'Bạn nhận được');
+        self.message.success(resp.message, 'You receive');
         $('#p-overlay').removeClass('active');
         self.wheelCount = resp.wheelRemain;
         self.histories = resp.histories;

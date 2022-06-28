@@ -25,7 +25,7 @@ export class RewardVipComponent implements OnInit {
     if (reward.status === 2) {
       this.rewardVipService.post({id: reward.id}).subscribe(resp => {
         this.onInitData();
-        this.toastrService.success('Nhận quà thành công');
+        this.toastrService.success('Successfully received gifts');
       });
     }
   }

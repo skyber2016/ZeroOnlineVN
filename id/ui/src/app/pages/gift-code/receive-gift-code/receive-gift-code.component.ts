@@ -22,7 +22,7 @@ export class ReceiveGiftCodeComponent implements OnInit {
     this.giftCodeService.receive({
       giftCode: this.giftCode
     }).subscribe(() => {
-      alert('Nhận vật phẩm thành công, vui lòng đến NPC để nhận');
+      alert('Item received successfully, please go to NPC to receive');
       this.giftCode = '';
     })
   }

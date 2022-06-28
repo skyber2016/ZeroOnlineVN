@@ -1,15 +1,15 @@
 <div class="main-head">
   <div class="breadcrumbs1">
-    <a [routerLink]="['/']" class="tooltipstered">Trang Chủ</a>
+    <a [routerLink]="['/']" class="tooltipstered">Home</a>
     <a  class="tooltipstered">Gift Code</a>
   </div>
-  <h1 class="module-title">Tạo Gift Code</h1>
+  <h1 class="module-title">Create Gift Code</h1>
 </div>
 <div class="alert alert-primary">
-  <p class="alert-caption">Lưu ý</p>
+  <p class="alert-caption">Note</p>
   <ul class="noted in-left-10">
-    <li>Sau khi nhận phần thưởng Gift Code thì sẽ được chuyển vật phẩm đến <strong>cq_bonus</strong></li>
-    <li>Action Id là <strong>action_id</strong> trong bảng <strong>cq_bonus</strong></li>
+    <li>After receiving the Gift Code reward, the item will be delivered to <strong>cq_bonus</strong></li>
+    <li>Action Id to be <strong>action_id</strong> in the table <strong>cq_bonus</strong></li>
   </ul>
 </div>
 <div class="main-page">
@@ -39,7 +39,7 @@
 
       <span class="break"></span>
       <div class="act-btn">
-        <button class="btn btn-primary btn-lg btn-block" type="button" (click)="create()">Tạo Gift Code
+        <button class="btn btn-primary btn-lg btn-block" type="button" (click)="create()">Create Gift Code
         </button>
       </div>
     </div>
@@ -49,20 +49,20 @@
           <thead>
           <tr>
             <th>#</th>
-            <th>Mã Gift Code</th>
-            <th>Loại</th>
+            <th>GiftCode</th>
+            <th>Type</th>
             <th>Action Id</th>
-            <th>Trạng thái</th>
-            <th>Thời gian</th>
+            <th>Status</th>
+            <th>Time</th>
           </tr>
           </thead>
           <tbody>
             <tr *ngFor="let gift of giftCodes">
               <td>{{gift.id}}</td>
               <td>{{gift.code}}</td>
-              <td>{{gift.type == 1 ? '1 cho 1' : '1 cho tất cả'}}</td>
+              <td>{{gift.type == 1 ? '1 give 1' : '1 give all'}}</td>
               <td>{{gift.itemId}}</td>
-              <td>{{gift.isUsed ? 'Đã sử dụng' : 'Chưa sử dụng'}}</td>
+              <td>{{gift.isUsed ? 'Used' : 'Not used yet'}}</td>
               <td>{{gift.createdDate | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
             </tr>
           </tbody>

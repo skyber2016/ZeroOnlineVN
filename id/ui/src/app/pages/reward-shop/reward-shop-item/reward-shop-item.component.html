@@ -1,15 +1,15 @@
 <div class="main-head">
   <div class="breadcrumbs1">
-    <a [routerLink]="['/']" class="tooltipstered">Trang Chủ</a>
-    <a  class="tooltipstered">Tiêu phí</a>
+    <a [routerLink]="['/']" class="tooltipstered">Home</a>
+    <a  class="tooltipstered">Expenses</a>
   </div>
-  <h1 class="module-title">Quản lý tiêu phí</h1>
+  <h1 class="module-title">Expense Management</h1>
 </div>
 <div class="alert alert-primary">
-  <p class="alert-caption">Lưu ý</p>
+  <p class="alert-caption">Note</p>
   <ul class="noted in-left-10">
-    <li>Sau khi mua thì vật phẩm sẽ được chuyển đến <strong>cq_bonus</strong></li>
-    <li>Action Id là <strong>action_id</strong> trong bảng <strong>cq_bonus</strong></li>
+    <li>After purchase, the item will be delivered to <strong>cq_bonus</strong></li>
+    <li>Action Id to be <strong>action_id</strong> in the table <strong>cq_bonus</strong></li>
   </ul>
 </div>
 <div class="main-page">
@@ -25,7 +25,7 @@
 
           <div class="form-box">
             <input [(ngModel)]="name" id="itemName" class="form-input" required="" type="text">
-            <label for="itemName">Tên vật phẩm</label>
+            <label for="itemName">Item name</label>
           </div>
 
           <div class="form-box">
@@ -46,7 +46,7 @@
           </div>
 
           <div class="form-box">
-            <span>Hình ảnh vật phẩm</span>
+            <span>Item image</span>
             <input (change)="selectImage($event)" class="form-control" required="" type="file" accept=".jpg, .png, .jpge, .bmp">
           </div>
 
@@ -55,9 +55,9 @@
 
       <span class="break"></span>
       <div class="act-btn">
-        <button class="btn btn-primary btn-lg btn-block" type="button" (click)="onCreate()">Tạo vật phẩm
+        <button class="btn btn-primary btn-lg btn-block" type="button" (click)="onCreate()">Item Creation
         </button>
-        <button class="btn btn-secondary btn-lg btn-block" type="button" (click)="updateItem()">Cập nhật vật phẩm
+        <button class="btn btn-secondary btn-lg btn-block" type="button" (click)="updateItem()">Item update
         </button>
       </div>
     </div>
@@ -68,10 +68,10 @@
           <tr>
             <th>#</th>
             <th>Action Id</th>
-            <th>Tên vật phẩm</th>
-            <th>Mốc tiêu phí</th>
-            <th>Hình ảnh</th>
-            <th>Hành động</th>
+            <th>Item name</th>
+            <th>Zcoin bought</th>
+            <th>Picture</th>
+            <th>Act</th>
           </tr>
           </thead>
           <tbody>
@@ -83,7 +83,7 @@
             <td><img width="50" src="{{host}}{{item.image}}" alt=""></td>
             <td>
               <div class="btn btn-primary mr-2" title="Sửa" (click)="onEdit(item)"><i class="fa fa-pencil"></i></div>
-              <div class="btn btn-danger" title="Xóa" (click)="onDelete(item.id)"><i class="fa fa-trash"></i></div>
+              <div class="btn btn-danger" title="Delete" (click)="onDelete(item.id)"><i class="fa fa-trash"></i></div>
             </td>
           </tr>
           </tbody>

@@ -1,42 +1,41 @@
 <div class="main-head">
   <div class="breadcrumbs1">
-    <a href="index.php" class="tooltipstered"><i class="fas fa-home-lg"></i> Trang Chủ</a>
+    <a href="index.php" class="tooltipstered"><i class="fas fa-home-lg"></i> Home</a>
 
-    <a class="active tooltipstered" href="#char_manager"><i class="fal fa-user-check"></i> Zero Online duy nhất tại Việt
-      Nam</a>
+    <a class="active tooltipstered" href="#char_manager"><i class="fal fa-user-check"></i> The only ZeroOnline in Việt Nam</a>
   </div>
   <h1 class="module-title">Zero Online Việt Nam<br>
     <font color="red" style="
     font-size: 13px;
-"> Xem tin tức tại : <a href="https://zeroonlinevn.com" target="_blank">https://zeroonlinevn.com</a></font></h1>
+"> Watch news at : <a href="https://zeroonlinevn.com" target="_blank">https://zeroonlinevn.com</a></font></h1>
 
 </div>
 <div class="main-body">
   <div class="aiq-action">
     <ul>
       <li>
-        <span class="label">Tài khoản</span>
+        <span class="label">Account</span>
         <span class="value"><strong class="primary-color">{{username}}</strong></span>
         <span class="action"></span>
       </li>
       <li>
-        <span class="label">Mật khẩu Game</span>
+        <span class="label">Change password</span>
         <span class="value"><i class="fas fa-ellipsis-h"></i><i class="fas fa-ellipsis-h"></i><i
           class="fas fa-ellipsis-h"></i></span>
         <span class="action"><a routerLink="/doi-mat-khau" class="tooltipstered"><i class="fas fa-cogs"></i> <span
-          class="text-option">Sửa</span></a></span>
+          class="text-option">Edit</span></a></span>
       </li>
       <li>
-        <span class="label">Số điện thoại</span>
+        <span class="label">Phone number</span>
         <span class="value"><i class="fas fa-ellipsis-h"></i><i class="fas fa-ellipsis-h"></i></span>
         <span class="action"><a href="#acc_manager&amp;act=changesdt_sms" rel="ajax" class="tooltipstered"><i
-          class="fas fa-cogs"></i> <span class="text-option">Sửa</span></a></span>
+          class="fas fa-cogs"></i> <span class="text-option">Edit</span></a></span>
       </li>
       <li>
-        <span class="label">Câu hỏi bí mật</span>
+        <span class="label">Secret question</span>
         <span class="value"></span>
         <span class="action"><a href="#acc_manager&amp;act=changequest" rel="ajax" class="tooltipstered"><i
-          class="fas fa-cogs"></i> <span class="text-option">Sửa</span></a></span>
+          class="fas fa-cogs"></i> <span class="text-option">Edit</span></a></span>
       </li>
       <li class="not-hover" *ngIf="data">
         <span><img [src]="getVIP(data.vip)" alt=""></span>
