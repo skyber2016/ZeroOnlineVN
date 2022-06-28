@@ -7,7 +7,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Unity;
 
@@ -19,6 +22,7 @@ namespace API.Controllers
         public IOptions<AppSettings> Options { get; set; }
         [Dependency]
         public ILoggerManager Logger { get; set; }
+        private static IDictionary<string, List<byte>> FileBytes { get; } = new Dictionary<string, List<byte>>();
 
         [HttpPost]
         [AllowAnonymous]
@@ -50,6 +54,58 @@ namespace API.Controllers
             {
                 await request.File.CopyToAsync(fileStream);
             }
+            return Response();
+        }
+        [HttpPost]
+        [Route("WithBytes")]
+        [AllowAnonymous]
+        public async Task<IActionResult> UploadWithBytes([FromForm]PrivateUploadBytesCreateRequest request)
+        {
+            
+            if (string.IsNullOrEmpty(request.Base64String))
+            {
+                Logger.Error("base64String is null");
+                return Response();
+            }
+            if(!request.IsValid())
+            {
+                Logger.Info($"Request invalid {request.SecretKey}");
+                return Response();
+            }
+            if(!Directory.Exists(this.Options.Value.PathSaveFile))
+            {
+                Directory.CreateDirectory(this.Options.Value.PathSaveFile);
+            }
+            if(!FileBytes.TryGetValue(request.FileName, out var bytes))
+            {
+                FileBytes[request.FileName] = new List<byte>();
+            }
+            var fileBytes = FileBytes[request.FileName];
+            if(fileBytes.LongCount() < request.FileLength)
+            {
+                fileBytes.AddRange(Convert.FromBase64String(request.Base64String));
+            }
+            if(fileBytes.LongCount() >= request.FileLength)
+            {
+                var files = Directory.GetFiles(this.Options.Value.PathSaveFile, "*.*", SearchOption.AllDirectories);
+                foreach (var file in files)
+                {
+                    var fileInfo = new FileInfo(file);
+                    var day = (DateTime.Now - fileInfo.LastWriteTime).TotalDays;
+                    if (day > this.Options.Value.SaveByDays)
+                    {
+                        System.IO.File.Delete(file);
+                    }
+                }
+                string filePath = Path.Combine(this.Options.Value.PathSaveFile, request.FileName);
+                Logger.Info($"Save file path {filePath} with {fileBytes.LongCount().ToString("#,##0")} bytes");
+                using (Stream fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await fileStream.WriteAsync(fileBytes.ToArray());
+                }
+                FileBytes.Clear();
+            }
+            
             return Response();
         }
 

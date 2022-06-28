@@ -80,6 +80,7 @@ namespace AutoBackupCloud
                 }
                 catch (Exception ex)
                 {
+                    ex = ex.GetBaseException();
                     Logger.Error(ex.Message);
                     Logger.Error(ex.StackTrace);
                 }
