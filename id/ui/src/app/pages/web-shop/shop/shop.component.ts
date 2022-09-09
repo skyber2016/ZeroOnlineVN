@@ -32,11 +32,11 @@ export class ShopComponent implements OnInit {
   }
 
   buyItem(item): void {
-    this.messageService.confirm(`Bạn có chắc muốn mua ${item.name} với giá ${item.priceStr}`).then(() => {
+    this.messageService.confirm(`Are you sure to buy ${item.name} with price ${item.priceStr}`).then(() => {
       this.shopService.post({
         itemId: item.id
       }).subscribe(() => {
-        this.messageService.success('Mua thành công');
+        this.messageService.success('Successfully purchase');
         this.initData();
       })
     })

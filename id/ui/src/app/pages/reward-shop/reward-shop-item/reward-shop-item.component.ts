@@ -97,7 +97,7 @@ export class RewardShopItemComponent implements OnInit {
   }
 
   onDelete(id): void {
-    const isOk = confirm('Bạn chắc chắn xóa');
+    const isOk = confirm('You definitely delete');
     if(!isOk)
     {
       return;

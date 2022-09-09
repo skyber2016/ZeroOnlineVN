@@ -71,7 +71,7 @@
                   <i class=" fa fa-home"></i> Home
                 </a>
                 <a href="http://download.zeroonlinevn.com" target="_blank">
-                  <i class="fal fa-download"></i> Download
+                  <i class="fal fa-download"></i> Đownload
                 </a>
                 <a href="https://zeroonlinevn.com" target="_blank">
                   <i class=" fa fa-comments"></i> News
@@ -150,7 +150,8 @@
                                   Game</a>
                               </li>
                               <li class="sub-item">
-                                <a href="#acc_manager&act=changesdt_sms" rel="ajax">Change phone number</a>
+                                <a href="#acc_manager&act=changesdt_sms" rel="ajax">Change phone number
+                                  thoại</a>
                               </li>
                               <li class="sub-item">
                                 <a href="#acc_manager&act=changequest" rel="ajax">Change secret question</a>
@@ -164,16 +165,16 @@
 																		</span>
                             <ul class="sub-menu">
                               <li class="sub-item">
-                                <a routerLink="/web-shop">Items</a>
+                                <a routerLink="/cua-hang">Items</a>
                               </li>
                               <li class="sub-item" *ngIf="isAdmin">
-                                <a routerLink="/store-manager">Store Manager</a>
+                                <a routerLink="/cua-hang/quan-ly">Store Manager</a>
                               </li>
                               <li class="sub-item">
-                                <a routerLink="/cumulative-gift">Cumulative gift</a>
+                                <a routerLink="/tich-luy-tieu-phi">Cumulative gift</a>
                               </li>
                               <li class="sub-item"  *ngIf="isAdmin">
-                                <a routerLink="/expenses-manager/items"> Expenses Manager</a>
+                                <a routerLink="/tich-luy-tieu-phi/vat-pham">Expenses Manager</a>
                               </li>
                             </ul>
                           </li>
@@ -185,7 +186,7 @@
 																		</span>
                             <ul class="sub-menu">
                               <li class="sub-item">
-                                <a [routerLink]="['receive-vip-gifts']" rel="ajax">Receive VIP Gifts</a>
+                                <a [routerLink]="['nhan-thuong-vip']" rel="ajax">Receive VIP Gifts</a>
                               </li>
                               <li class="sub-item">
                                 <a href="#questdaily" rel="ajax">VIP Progress</a>
@@ -195,21 +196,10 @@
                               </li>
                             </ul>
                           </li>
+
                           <li class="cat-item">
 																		<span>
-																			<i class="fal fa-donate"></i>&emsp;&emsp;Bank
-																			<i
-                                        class="fas fa-angle-down"></i>
-																		</span>
-                            <ul class="sub-menu">
-                              <li class="sub-item">
-                                <a [routerLink]="['/convert-zcoin']">Convert Zcoin to Zps</a>
-                              </li>
-                            </ul>
-                          </li>
-                          <li class="cat-item">
-																		<span>
-																			<i class="fal fa-university"></i>&emsp;&emsp;Card Recharge 
+																			<i class="fal fa-university"></i>&emsp;&emsp;Card Recharge
 																			<i class="fas fa-angle-down"></i>
 																		</span>
                             <ul class="sub-menu">
@@ -241,7 +231,7 @@
 																		</span>
                             <ul class="sub-menu">
                               <li class="sub-item">
-                                <a routerLink="/bonus-spins">Bonus Spins</a>
+                                <a routerLink="/vong-quay">Rotation luck</a>
                               </li>
                             </ul>
                           </li>
@@ -253,10 +243,10 @@
 																		</span>
                             <ul class="sub-menu">
                               <li class="sub-item">
-                                <a [routerLink]="['top-pottency']">TOP Potency</a>
+                                <a [routerLink]="['xep-hang/luc-chien']">TOP Potency</a>
                               </li>
                               <li class="sub-item">
-                                <a routerLink="/top-fleet">TOP Fleet</a>
+                                <a routerLink="/xep-hang/ham-doi">TOP Fleet</a>
                               </li>
                             </ul>
                           </li>

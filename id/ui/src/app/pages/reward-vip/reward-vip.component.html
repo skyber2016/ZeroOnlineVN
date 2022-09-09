@@ -39,9 +39,9 @@
         <td align="center">
           <div class="group-popup2">
             <div class="box-popup box-popup-red" ></div>
-            <input *ngIf="reward.status === 0" value="Chưa đạt" disabled="disabled" class="btn_tichluythe btn btn-green btn-block btn-lg" type="button">
-            <input *ngIf="reward.status === 1" value="Đã nhận" disabled="disabled" class="btn_tichluythe btn btn-green btn-block btn-lg" type="button">
-            <input *ngIf="reward.status === 2" value="Nhận thưởng"  class="btn_tichluythe btn btn-green btn-block btn-lg" type="button" (click)="onSubmit(reward)">
+            <input *ngIf="reward.status === 0" value="Not reached" disabled="disabled" class="btn_tichluythe btn btn-green btn-block btn-lg" type="button">
+            <input *ngIf="reward.status === 1" value="Received the reward" disabled="disabled" class="btn_tichluythe btn btn-green btn-block btn-lg" type="button">
+            <input *ngIf="reward.status === 2" value="Get rewarded"  class="btn_tichluythe btn btn-green btn-block btn-lg" type="button" (click)="onSubmit(reward)">
           </div>
         </td>
       </tr>

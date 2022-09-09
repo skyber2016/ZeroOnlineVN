@@ -33,7 +33,7 @@ export class RewardShopComponent implements OnInit {
     if (reward.status === 2) {
       this.rewardShopService.post({group: reward.group}).subscribe(resp => {
         this.onInitData();
-        this.toastrService.success('Nhận quà thành công');
+        this.toastrService.success('Receiving gifts successful');
       });
     }
   }

@@ -35,7 +35,7 @@ export class RegisterComponent extends BaseComponent implements OnInit {
       answer: this.answer,
       email: this.email
     }).subscribe( resp => {
-      alert('Register successfully');
+      alert('Successful account registration');
       this.router.navigate([RouterConstant.auth.login]).then();
     })
   }

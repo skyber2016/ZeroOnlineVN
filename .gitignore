@@ -53,3 +53,5 @@ AutoZero/AutoZero/bin/
 AutoZero/AutoZero/obj/
 AutoZero/packages/
 news_api/MinFile/bin/
+Middleware/FwdAccServer/bin/
+Middleware/FwdAccServer/obj/

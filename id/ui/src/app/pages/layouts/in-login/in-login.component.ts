@@ -112,6 +112,6 @@ export class InLoginComponent extends BaseComponent implements OnInit, AfterView
 
   getTitle()
   {
-    return `Cần ${this.sub} để đạt cấp độ tiếp theo`;
+    return `Need ${this.sub} to reach the next level`;
   }
 }
