@@ -9,8 +9,8 @@ export class RankingService {
 
   constructor(private http:HttpClient) { }
 
-  power():Observable<any[]>{
-    return this.http.get<any[]>('Ranking/Power');
+  power():Observable<any>{
+    return this.http.get<any>('Ranking/Power');
   }
   syndicate():Observable<any[]>{
     return this.http.get<any[]>('Ranking/Syndicate');

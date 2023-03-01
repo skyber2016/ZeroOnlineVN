@@ -7,9 +7,9 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 const port = 3000;
 var con = mysql.createPool({
-	connectionLimit : 10,
+	connectionLimit : 20,
 	acquireTimeout  : 10000,
-	host: "103.173.226.204",
+	host: "103.188.166.96",
 	user: "admin",
 	password: "Thuan@2022",
 	database: 'Idgame'

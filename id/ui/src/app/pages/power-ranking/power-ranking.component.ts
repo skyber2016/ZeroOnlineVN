@@ -8,11 +8,14 @@ import {RankingService} from '../../shared/services/ranking.service';
 })
 export class PowerRankingComponent implements OnInit {
   rankings = [];
+  columns = [];
   constructor(private rankingService: RankingService) { }
 
   ngOnInit(): void {
     this.rankingService.power().subscribe(resp => {
-      this.rankings = resp;
+      const {rankings, columns} = resp;
+      this.rankings = rankings;
+      this.columns = columns;
     })
   }
 

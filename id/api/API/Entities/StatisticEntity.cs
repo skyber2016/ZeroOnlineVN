@@ -12,7 +12,7 @@ namespace API.Entities
         [Column("event_type")]
         public int EventType { get; set; }
         [Column("DATA")]
-        public int Data { get; set; }
+        public long Data { get; set; }
         [Column("eventime")]
         public int EventTime { get; set; }
         [Column("ownertype")]

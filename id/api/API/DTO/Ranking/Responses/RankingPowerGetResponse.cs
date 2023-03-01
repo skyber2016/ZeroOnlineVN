@@ -1,4 +1,6 @@
-﻿using System.Text.Json.Serialization;
+﻿using API.Configurations;
+using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace API.DTO.Ranking.Responses
 {
@@ -26,5 +28,7 @@ namespace API.DTO.Ranking.Responses
                 return this.Donation.ToString("#,##0");
             }
         }
+
+        public List<StatisticSetting> Statistics { get; set; }
     }
 }

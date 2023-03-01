@@ -26,6 +26,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Annotations;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -103,6 +104,7 @@ namespace API
             services.Configure<CryptoSettings>(Configuration.GetSection("CryptoSettings"));
             services.Configure<ConnectionSetting>(Configuration.GetSection("ConnectionStrings"));
             services.Configure<WheelSetting>(Configuration.GetSection("WheelSetting"));
+            services.Configure<List<StatisticSetting>>(Configuration.GetSection("Statistics"));
             services.AddScoped<DatabaseContext>();
             services.AddSingleton<DiscordSocketClient>();
             services.AddScoped<ILoggerManager, LoggerHelper>();

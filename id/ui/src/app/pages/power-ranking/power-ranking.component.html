@@ -20,8 +20,8 @@
           <th>Tên nhân vật</th>
           <th><font color="#AA8052">Lực chiến</font></th>
           <th><font color="green">VIP</font></th>
-          <th>Điểm cống hiến</th>
-
+          <th  class="text-right">Điểm cống hiến</th>
+          <th *ngFor="let column of columns;"  class="text-right">{{column.name}}</th>
         </tr>
         </thead>
         <tbody>
@@ -32,8 +32,9 @@
           <td align="center" *ngIf="i > 2">{{i + 1}}</td>
           <td align="center">{{ranking.name}}</td>
           <td><font color="blue">{{ranking.battleLev}}</font></td>
-          <td><font color="#AA8052">{{ranking.vip}}</font></td>
-          <td>{{ranking.donation}}</td>
+          <td><font color="#AA8052" >{{ranking.vip}}</font></td>
+          <td  class="text-right">{{ranking.donation}}</td>
+          <td *ngFor="let statistic of ranking.statistics;" class="text-right">{{statistic.dataFormat}}</td>
         </tr>
         </tbody>
       </table>
