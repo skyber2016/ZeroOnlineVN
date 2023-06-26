@@ -1,4 +1,4 @@
-using API.Configurations;
+﻿using API.Configurations;
 using API.Cores;
 using API.Database;
 using API.Helpers;
@@ -7,10 +7,6 @@ using API.Services.Interfaces;
 using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BotDiscordNew
 {
@@ -21,6 +17,7 @@ namespace BotDiscordNew
             CreateHostBuilder(args).Build().Run();
         }
 
+
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .UseSystemd()
@@ -29,6 +26,7 @@ namespace BotDiscordNew
                     //services.AddHostedService<Worker>();
                     services.AddHostedService<BotDiscordHostedService>();
                     services.Configure<AppSettings>(hostContext.Configuration.GetSection("AppSettings"));
+                    services.Configure<TrackingLogSetting>(hostContext.Configuration.GetSection("TrackingLog"));
                     services.Configure<ConnectionSetting>(hostContext.Configuration.GetSection("ConnectionStrings"));
                     services.AddSingleton<DatabaseContext>();
                     services.AddSingleton<DiscordSocketClient>();

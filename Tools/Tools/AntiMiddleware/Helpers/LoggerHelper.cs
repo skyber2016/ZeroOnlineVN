@@ -1,17 +1,18 @@
 ﻿using log4net;
 using System;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace API.Helpers
 {
     public interface ILoggerManager
     {
-        void Info(string message);
-        void Debug(string message);
-        void Error(string message);
-        void Data(string message);
-        void Queries(string message);
-        void Status(string message);
+        void Info(string message, [CallerMemberName] string memberName = "");
+        void Debug(string message, [CallerMemberName] string memberName = "");
+        void Error(string message, [CallerMemberName] string memberName = "");
+        void Data(string message, [CallerMemberName] string memberName = "");
+        void Queries(string message, [CallerMemberName] string memberName = "");
+        void Status(string message, [CallerMemberName] string memberName = "");
     }
 
     public class LoggerHelper : ILoggerManager
@@ -32,34 +33,35 @@ namespace API.Helpers
             return new string(Enumerable.Repeat(chars, length)
               .Select(s => s[random.Next(s.Length)]).ToArray());
         }
-
-        public void Error(string message)
+        private int PadLeft = 16;
+        public void Error(string message, [CallerMemberName] string memberName = "")
         {
-            _logFile.Error(message);
+            var msg = $"[{memberName.PadLeft(PadLeft)}] -> {message}";
+            _logFile.Error(msg);
         }
-        public void Debug(string message)
+        public void Debug(string message, [CallerMemberName] string memberName = "")
         {
-            _logFile.Debug(message);
-        }
-
-        public void Info(string message)
-        {
-            _logFile.Info(message);
+            _logFile.Debug($"[{memberName.PadLeft(PadLeft)}] -> {message}");
         }
 
-        public void Data(string message)
+        public void Info(string message, [CallerMemberName] string memberName = "")
         {
-            _logData.Info(message);
+            _logFile.Info($"[{memberName.PadLeft(PadLeft)}] -> {message}");
         }
 
-        public void Queries(string message)
+        public void Data(string message, [CallerMemberName] string memberName = "")
         {
-            _logQueries.Info(message);
+            _logData.Info($"[{memberName.PadLeft(PadLeft)}] -> {message}");
         }
 
-        public void Status(string message)
+        public void Queries(string message, [CallerMemberName] string memberName = "")
         {
-            _logStatus.Info(message);
+            _logQueries.Info($"[{memberName.PadLeft(PadLeft)}] -> {message}");
+        }
+
+        public void Status(string message, [CallerMemberName] string memberName = "")
+        {
+            _logStatus.Info($"[{memberName.PadLeft(PadLeft)}] -> {message}");
         }
     }
 

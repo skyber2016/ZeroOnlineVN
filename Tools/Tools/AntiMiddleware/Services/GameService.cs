@@ -1,17 +1,14 @@
 ﻿using API.Configurations;
 using API.Cores;
-using API.Services.Interfaces;
-using BotDiscord;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
 using MiddlewareTCP.command;
+using Newtonsoft.Json.Linq;
 using SimpleTCP;
-using SqlKata.Execution;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace MiddlewareTCP.Entities
@@ -32,12 +29,10 @@ namespace MiddlewareTCP.Entities
             }
         }
         private TcpClient Game { get; set; }
-        private IGeneralService<LoginHistoryEntity> LoginHistoryService { get; set; }
         public GameService(IUnitOfWork unitOfWork)
         {
             try
             {
-                this.LoginHistoryService = unitOfWork.GetInstance<IGeneralService<LoginHistoryEntity>>();
                 this.Cache = new Dictionary<string, byte[]>();
                 this.SessionId = Guid.NewGuid().ToString();
                 this.UnitOfWork = unitOfWork;
@@ -67,44 +62,33 @@ namespace MiddlewareTCP.Entities
             this.UnitOfWork.Logger.Error($"[{this.Username}] [GameService] [WriteError] [{ex.Message}]");
             this.UnitOfWork.Logger.Error($"[{this.Username}] [GameService] [WriteError] [{ex.StackTrace}]");
         }
-        private void CreateTransaction(Func<Task> action)
-        {
-            try
-            {
-                lock (Middleware.Locking)
-                {
-                    this.UnitOfWork.Logger.Info($"[{this.Username}] [GameService] [CreateTransaction] [Begin execute transaction]");
-                    var task = action();
-                    if (!task.Wait(TimeSpan.FromSeconds(3)))
-                    {
-                        this.UnitOfWork.Logger.Error($"[{this.Username}] [GameService] [CreateTransaction] [End execute transaction timeout]");
-                    }
-                    else
-                    {
-                        this.UnitOfWork.Logger.Info($"[{this.Username}] [GameService] [CreateTransaction] [End execute transaction success]");
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                this.UnitOfWork.Logger.Error($"[{this.Username}] [GameService] [CreateTransaction] [End execute transaction throw Exception]");
-                this.WriteError(ex);
-            }
-        }
+        
         public void GameToMid_Data(object sender, Message e)
         {
             try
             {
                 var data = e.Data.Split();
+                
                 if (e.Data.GetPacketType(2).vnEquals(PacketContants.ARM))
                 {
                     this.UnitOfWork.Logger.Data($"[GameToMid_Data] [{this.Username}] [{data}]");
+                    var length = BitConverter.ToInt16(e.Data.Take(2), 0);
+                    this.UnitOfWork.Logger.Queries($"[{this.IP}] [{this.Username}] Detected change ARM request -> {string.Join(" ", e.Data)}");
+                    if (e.Data.Length != length)
+                    {
+                        this.UnitOfWork.Logger.Queries($"[{this.IP}] [{this.Username}] Detected packet length invalid -> {string.Join(" ", e.Data)}");
+                    }
+                    if (e.Data.Length > 24)
+                    {
+                        this.UnitOfWork.Logger.Error($"[{this.IP}] [{this.Username}] Detected bug lag ARM -> {string.Join(" ", e.Data)}");
+                        return;
+                    }
                     var key = "ChangeARM" + this.SessionId;
                     object obj;
                     this.UnitOfWork.Cache.TryGetValue(key, out obj);
                     if (obj == null)
                     {
-                        this.UnitOfWork.Cache.Set(key, true, TimeSpan.FromSeconds(1));
+                        this.UnitOfWork.Cache.Set(key, true, TimeSpan.FromSeconds(2));
                     }
                     else
                     {
@@ -141,20 +125,7 @@ namespace MiddlewareTCP.Entities
                         var username = PacketContants.SecretKey[secretKey];
                         this.UnitOfWork.Logger.Info($"[{e.TcpClient.GetIP()}] [{username}] login success");
                         this.Username = username;
-                        this.CreateTransaction(() =>
-                        {
-                            return Task.Run(() =>
-                            {
-                                this.UnitOfWork.Logger.Info($"[{this.Username}] [GameService] [GameToMid_Data] [JoinGameRequest] [Begin insert new login history success]");
-                                this.LoginHistoryService.AddAsync(new LoginHistoryEntity
-                                {
-                                    Username = username,
-                                    LoginTime = DateTime.Now,
-                                    SessionId = this.SessionId
-                                }).WaitTask();
-                                this.UnitOfWork.Logger.Info($"[{this.Username}] [GameService] [GameToMid_Data] [JoinGameRequest] [Insert new login history success]");
-                            });
-                        });
+                        
                     }
                     this.UnitOfWork.Logger.Info($"[{this.Username}] [GameService] [GameToMid_Data] [End join game request]");
                 }
@@ -242,18 +213,6 @@ namespace MiddlewareTCP.Entities
                 this.MidClient.Disconnect();
                 this.MidClient.Dispose();
                 this.UnitOfWork.Logger.Info($"[{this.Username}] [GameService] [Dispose] [End Logout client]");
-                this.CreateTransaction(() =>
-                {
-                    return Task.Run(() =>
-                    {
-                        this.UnitOfWork.Logger.Info($"[{this.Username}] [GameService] [Dispose] [Begin update logout time]");
-                        this.UnitOfWork.DatabaseContext.Factory.Query("login_history").Where("session_id", this.SessionId).Update(new
-                        {
-                            logout_time = DateTime.Now
-                        });
-                        this.UnitOfWork.Logger.Info($"[{this.Username}] [GameService] [Dispose] [End update logout time success]");
-                    });
-                });
             }
             catch (Exception ex)
             {

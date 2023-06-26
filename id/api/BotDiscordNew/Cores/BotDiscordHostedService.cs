@@ -4,6 +4,7 @@ using API.Entities;
 using API.Helpers;
 using API.Services.Interfaces;
 using BotDiscord;
+using BotDiscordNew;
 using Discord;
 using Discord.WebSocket;
 using log4net;
@@ -12,8 +13,10 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using SqlKata.Execution;
 using System;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Reflection;
 using System.Text;
 using System.Threading;
@@ -26,8 +29,11 @@ namespace API.Cores
     {
         public IGeneralService<BotMessageEntity> BotMessageService { get; set; }
         public AppSettings AppSettings { get; set; }
+        public ConnectionSetting ConnectionSetting { get; set; }
+        public TrackingLogSetting TrackingLogSetting { get; set; }
         public ILoggerManager Logger { get; set; }
         public IGeneralService<AccountEntity> AccountService { get; set; }
+        public IGeneralService<UserEntity> UserService { get; set; }
         public IUnitOfWork UnitOfWork { get; set; }
         private DiscordSocketClient Client { get; set; }
         public IGeneralService<GiftCodeEntity> GiftCodeService { get; set; }
@@ -38,7 +44,10 @@ namespace API.Cores
             ILoggerManager logger,
             IGeneralService<BotMessageEntity> botMessageService,
             IGeneralService<AccountEntity> accountService,
-            IGeneralService<GiftCodeEntity> giftCodeService
+            IGeneralService<GiftCodeEntity> giftCodeService,
+            IGeneralService<UserEntity> userService,
+            IOptions<TrackingLogSetting> trackingLogSetting,
+            IOptions<ConnectionSetting> connectionSettting
             )
         {
             this.AppSettings = options.Value;
@@ -47,6 +56,9 @@ namespace API.Cores
             this.BotMessageService = botMessageService;
             this.AccountService = accountService;
             this.GiftCodeService = giftCodeService;
+            this.UserService = userService;
+            this.TrackingLogSetting = trackingLogSetting.Value;
+            this.ConnectionSetting = connectionSettting.Value;
             Console.WriteLine(AppDomain.CurrentDomain.BaseDirectory);
             XmlDocument log4netConfig = new XmlDocument();
 
@@ -105,6 +117,7 @@ namespace API.Cores
                     {
                         await this.Process();
                     }
+                    await this.TrackingLog();
                 }
                 catch (Exception ex)
                 {
@@ -116,7 +129,103 @@ namespace API.Cores
             
         }
 
+        private async Task TrackingLog()
+        {
+            using var http = new HttpClient();
+            var host = ConnectionSetting.LogAPI;
+            var fileName = $"emoney_cost {DateTime.Now.ToString("yyyy-M-d")}.log";
+            var response = await http.GetAsync($"{host}/{fileName}?time={DateTime.Now.Ticks}");
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                var lastLines = GetLastLineNumber(fileName);
+                var allLines = content.Split('\n').Select(x=>x.Trim()).Where(x=>!string.IsNullOrEmpty(x));
+                var lines = allLines.Skip(lastLines).ToList();
+                var totalLines = allLines.Count();
+                if (totalLines > lastLines)
+                {
+                    foreach (var line in lines)
+                    {
+                        try
+                        {
+                            await Tracking(line);
+                            lastLines += 1;
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.GetBaseException().Message);
+                        }
+                        finally
+                        {
+                            var pathToFile = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), fileName);
+                            using (var w = new StreamWriter(pathToFile, false))
+                            {
+                                w.Write(lastLines.ToString());
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
+        private async Task Tracking(string plainText)
+        {
+            var formats = plainText.Split(',');
+            if (formats.Length == 12)
+            {
+                var userId = formats[1];
+                var price = formats[2];
+                var itemId = formats[4];
+                var emoney = formats[10];
+                var lastStr = formats[11];
+                var itemTracking = this.TrackingLogSetting.Items.FirstOrDefault(x => x.ItemId == itemId);
+                if (itemTracking != null)
+                {
+                    var user = await this.UserService.SingleBy(new
+                    {
+                        id = userId,
+                    });
+                    string dateString = lastStr.Split("--").LastOrDefault();
+                    string format = "ddd MMM dd HH:mm:ss yyyy";
+                    var msg = $"";
+                    if (DateTime.TryParseExact(dateString?.Trim(), format, CultureInfo.InvariantCulture, DateTimeStyles.None, out var result))
+                    {
+                        msg = $"[{result.ToString("dd/MM/yyyy HH:mm:ss")}]";
+                    }
+                    else
+                    {
+                        msg = $"[{dateString}]";
+                    }
+                    msg = $"{msg} {user?.Name ?? userId} vừa mua {itemId} ({itemTracking.Name}) giá: {price}, zps còn lại: {Convert.ToInt32(emoney).ToString("#,##0")}";
+                    await this.BotMessageService.AddAsync(new BotMessageEntity
+                    {
+                        Channel = ChannelConstant.ATOM.ToString(),
+                        Message = msg.Base64Encode(),
+                        CreatedDate = DateTime.Now,
+                        IsSent = false
+                    });
+                }
+            }
+        }
+
+        private int GetLastLineNumber(string fileName)
+        {
+            try
+            {
+                var pathToFile = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), fileName);
+                if (File.Exists(pathToFile))
+                {
+                    var text = File.ReadAllText(pathToFile);
+                    return Convert.ToInt32(text);
+                }
+                return 0;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
         private async Task Client_MessageReceived(SocketMessage arg)
         {
             try
@@ -200,7 +309,7 @@ namespace API.Cores
                         builder.AppendLine($"**Thời gian  :**: {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")}");
                         account.WebMoney += webmoney;
                         account.CheckSum = account.GetCheckSum();
-                        account.Wheel += webmoney / 50000;
+                        account.Wheel += webmoney / AppSettings.MoneyToWheel;
                         account.WebMoneyUsing += webmoney;
                         var upgradeVIP = false;
                         if (account.WebMoneyUsing >= VipConstant.VIP_6 && account.VIP < 6)
@@ -233,7 +342,7 @@ namespace API.Cores
                             account.VIP = 1;
                             upgradeVIP = true;
                         }
-                        builder.AppendLine($"**Vòng quay được cộng:**: {webmoney / 50000}");
+                        builder.AppendLine($"**Vòng quay được cộng:**: {webmoney / AppSettings.MoneyToWheel}");
                         builder.AppendLine($"**Tổng vòng quay:**: {account.Wheel}");
                         if (upgradeVIP)
                         {

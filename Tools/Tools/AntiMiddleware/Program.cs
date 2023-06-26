@@ -2,18 +2,11 @@ using API.Configurations;
 using API.Cores;
 using API.Database;
 using API.Helpers;
-using API.Services;
-using API.Services.Interfaces;
 using Discord.WebSocket;
-using log4net;
-using log4net.Config;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Xml;
+using System;
 
 namespace BotDiscord
 {
@@ -21,6 +14,8 @@ namespace BotDiscord
     {
         public static void Main(string[] args)
         {
+            var bytes = new byte[] { 24, 0, 91, 4, 237, 14, 76, 0, 4, 0, 0, 0, 60, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0 };
+            var hex = BitConverter.ToString(bytes);
             CreateHostBuilder(args).Build().Run();
         }
 
@@ -31,11 +26,9 @@ namespace BotDiscord
                 {
                     services.AddHostedService<Middleware>();
                     services.Configure<AppSettings>(hostContext.Configuration.GetSection("AppSettings"));
-                    services.Configure<ConnectionSetting>(hostContext.Configuration.GetSection("ConnectionStrings"));
                     services.AddSingleton<DatabaseContext>();
                     services.AddSingleton<DiscordSocketClient>();
                     services.AddSingleton<ILoggerManager, LoggerHelper>();
-                    services.AddSingleton(typeof(IGeneralService<>), typeof(GeneralService<>));
                     services.AddSingleton<IUnitOfWork, UnitOfWork>();
                     services.AddSingleton<IMemoryCache, MemoryCache>();
                 });

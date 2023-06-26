@@ -58,8 +58,8 @@ namespace BotDiscord
                 {
                     if (this.MiddlewareService == null)
                     {
-                        this.Logger.Status("Middleware started ");
                         this.MiddlewareService = new MiddlewareService(UnitOfWork);
+                        this.Logger.Status("Middleware started ");
                     }
                     else if (!this.MiddlewareService.GameServer.IsStarted && !this.MiddlewareService.LoginServer.IsStarted)
                     {

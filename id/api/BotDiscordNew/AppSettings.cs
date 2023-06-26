@@ -7,5 +7,6 @@ namespace API.Configurations
         public int VIPDefault { get; set; }
         public string BotToken { get; set; }
         public string PathToImage { get; set; }
+        public int MoneyToWheel { get; set; }
     }
 }

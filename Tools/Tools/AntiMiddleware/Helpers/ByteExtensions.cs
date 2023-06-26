@@ -49,5 +49,25 @@ namespace MiddlewareTCP
             var d = des.Split();
             return s.Contains(d);
         }
+
+        public static bool FindPattern(this byte[] source, string[] des) 
+        {
+            if(source.Length != des.Length)
+            {
+                return false;
+            }
+            for (int i = 0; i < des.Length; i++)
+            {
+                var sourceIndex = source[i];
+                var desIndex = des[i];
+                if (desIndex == "?") continue;
+                var desByte = Convert.ToInt32(desIndex);
+                if(sourceIndex != desByte)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 }

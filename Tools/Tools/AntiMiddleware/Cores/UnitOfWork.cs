@@ -1,14 +1,12 @@
-﻿using AutoMapper;
+﻿using API.Configurations;
+using API.Database;
+using API.Helpers;
+using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using System;
 using System.Data;
 using System.Threading.Tasks;
-using Unity;
-using API.Configurations;
-using API.Database;
-using API.Helpers;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Caching.Memory;
 
 namespace API.Cores
 {
