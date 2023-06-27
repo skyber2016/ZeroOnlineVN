@@ -1,7 +1,7 @@
-import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
-import {environment} from 'src/environments/environment';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
 // @ts-ignore
-import {version} from '../../../../package.json';
+import { version } from '../../../../package.json';
 
 @Component({
   selector: 'app-base',
@@ -13,7 +13,6 @@ export class BaseComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private scriptsOfComponent: Array<string> = [];
   private _scripts: string[] = [
-    '/assets/HT/js/jquery.min.js',
     '/assets/HT/js/popper.min.js',
     '/assets/HT/js/jquery-ui.min.js',
     '/assets/HT/js/bootstrap.min.js',

@@ -14,8 +14,6 @@ namespace BotDiscord
     {
         public static void Main(string[] args)
         {
-            var bytes = new byte[] { 24, 0, 91, 4, 237, 14, 76, 0, 4, 0, 0, 0, 60, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0 };
-            var hex = BitConverter.ToString(bytes);
             CreateHostBuilder(args).Build().Run();
         }
 
