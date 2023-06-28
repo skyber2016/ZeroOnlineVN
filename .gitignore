@@ -57,3 +57,13 @@ Middleware/FwdAccServer/bin/
 Middleware/FwdAccServer/obj/
 query2json/node_modules/
 query2json/
+AntiBugArm/built-in/
+AntiBugArm/Core/bin/
+AntiBugArm/Core/obj/
+AntiBugArm/GameServer/obj/
+AntiBugArm/GameServeral/bin/
+AntiBugArm/GameServeral/obj/
+AntiBugArm/LoginServer/bin/
+AntiBugArm/LoginServer/obj/
+AntiBugArm/packages/
+AntiBugArm/GameServer/bin/
