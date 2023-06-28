@@ -29,7 +29,6 @@ namespace LoginServer
         public void Listen()
         {
             var settings = Settings.GetSettings();
-            Console.WriteLine($"Connect to {settings.PortLoginServer}");
             var task = Task.Run(() =>
             {
                 _client.Connect(settings.IpServer, settings.PortLoginServer);
@@ -38,6 +37,10 @@ namespace LoginServer
             {
                 Logging.Write()("TIMEOUT CONNECT TO SERVER");
                 this.Dispose();
+            }
+            else
+            {
+                Logging.Write()(GetMessage($"Connect successfully {settings.IpServer}:{settings.PortGameServer}"));
             }
         }
 
@@ -140,7 +143,9 @@ namespace LoginServer
         {
             try
             {
+                Logging.Write()(GetMessage("Disconecting to game..."));
                 Game.Close();
+                Logging.Write()(GetMessage("Disconecting to client..."));
                 this._client.Disconnect();
                 this._client.Dispose();
                 this.OnDispose();

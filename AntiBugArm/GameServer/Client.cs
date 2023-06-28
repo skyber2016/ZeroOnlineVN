@@ -3,9 +3,9 @@ using Core.Utils;
 using SimpleTCP;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Net.Sockets;
+using System.Runtime;
 using System.Runtime.Caching;
 using System.Threading.Tasks;
 
@@ -23,13 +23,19 @@ namespace GameServer
             Game = tcpClient;
             _client = new SimpleTcpClient();
             _client.DataReceived += ServerSendDataToMid;
+            Logging.Write()(GetMessage($"Logout at {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")}"));
+        }
+        public Client(TcpClient tcpClient, string username) : this(tcpClient)
+        {
+            this.Username = username;
+            Logging.Write()(GetMessage($"Logout at {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")}"));
         }
 
         public void Listen()
         {
+            var settings = Settings.GetSettings();
             var task = Task.Run(() =>
             {
-                var settings = Settings.GetSettings();
                 _client.Connect(settings.IpServer, settings.PortGameServer);
             });
             if (!Task.WaitAll(new Task[] { task }, TimeSpan.FromSeconds(3)))
@@ -37,11 +43,15 @@ namespace GameServer
                 Logging.Write()("TIMEOUT CONNECT TO SERVER");
                 this.Dispose();
             }
+            else
+            {
+                Logging.Write()(GetMessage($"Connect successfully {settings.IpServer}:{settings.PortGameServer}"));
+            }
         }
 
         private string GetMessage(string message)
         {
-            return $"[{Game?.Client?.RemoteEndPoint}] [{Username?.PadLeft(16)}] -> {message}";
+            return $"[{Game?.Client?.RemoteEndPoint}] [{(Username ?? string.Empty).PadLeft(16)}] -> {message}";
         }
 
         public void GameSendDataToMid(object sender, Message e)
@@ -62,7 +72,7 @@ namespace GameServer
                 var dataARM = datas.Where(x => x.GetPacketType(2).vnEquals(PacketContants.ARM)).ToList();
                 foreach (var dataChecking in dataARM)
                 {
-                    Logging.WriteData(GetMessage(data));
+                    Logging.WriteData()(GetMessage(data));
                     if (dataChecking.Length > 24)
                     {
                         Logging.Write()($"Detected bug lag ARM -> {string.Join(" ", e.Data)}");
@@ -133,6 +143,7 @@ namespace GameServer
         {
             try
             {
+                Logging.Write()(GetMessage($"Logout at {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")}"));
                 this._client.Disconnect();
                 this._client.Dispose();
                 Game.Close();

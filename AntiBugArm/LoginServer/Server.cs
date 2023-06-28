@@ -3,8 +3,6 @@ using Core.Utils;
 using SimpleTCP;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Reflection;
 using System.Threading.Tasks;
 
 namespace LoginServer
@@ -18,13 +16,11 @@ namespace LoginServer
         public static void Start()
         {
             var settings = Settings.GetSettings();
-            Console.WriteLine($"Server starting on {settings.PortLoginMid}");
             Users = new Dictionary<string, Client>();
             _server = TcpService.GetServer();
             _server.ClientConnected += Server_ClientConnected;
             _server.ClientDisconnected += Server_ClientDisconnected;
             _server.DataReceived += Server_DataReceived;
-            Console.WriteLine($"Server starting on {settings.PortLoginMid}");
             _server.Start(settings.PortLoginMid);
             Console.WriteLine($"Server started on {settings.PortLoginMid}");
         }
@@ -47,6 +43,7 @@ namespace LoginServer
             var sessionId = e.GetSessionId();
             if (Users.TryGetValue(sessionId, out Client client))
             {
+                Logging.Write()($"Disposing client {sessionId}");
                 client.Dispose();
                 Users.Remove(sessionId);
             }
@@ -62,6 +59,7 @@ namespace LoginServer
                 {
                     if (Users.TryGetValue(sessionId, out Client c))
                     {
+                        Logging.Write()("Removing connection...");
                         Users.Remove(sessionId);
                     }
                 });
