@@ -41,7 +41,7 @@ namespace MiddlewareTCP.Entities
             }
             catch (Exception ex)
             {
-                this.UnitOfWork.Logger.Error($"[{this.Username}] [GameService] [Contructor] [{ex.Message}]");
+                this.UnitOfWork.Logger.Error($"[{this.Username}] -> {ex.Message}");
                 WriteError(ex);
             }
             
@@ -49,7 +49,7 @@ namespace MiddlewareTCP.Entities
 
         public void GameToMid_Disconnected(object sender, TcpClient e)
         {
-            this.UnitOfWork.Logger.Error($"[{this.Username}] [GameService] [GameToMid_Disconnected] [Game disconnected]");
+            this.UnitOfWork.Logger.Error($"[{this.Username}] -> Game disconnected");
             this.Dispose();
         }
 
@@ -59,8 +59,8 @@ namespace MiddlewareTCP.Entities
             {
                 this.WriteError(ex.InnerException);
             }
-            this.UnitOfWork.Logger.Error($"[{this.Username}] [GameService] [WriteError] [{ex.Message}]");
-            this.UnitOfWork.Logger.Error($"[{this.Username}] [GameService] [WriteError] [{ex.StackTrace}]");
+            this.UnitOfWork.Logger.Error($"[{this.Username}] [GameService] [WriteError] [{ex.GetBaseException().Message}]");
+            this.UnitOfWork.Logger.Error($"[{this.Username}] [GameService] [WriteError] [{ex.GetBaseException().StackTrace}]");
         }
         
         public void GameToMid_Data(object sender, Message e)
@@ -68,19 +68,19 @@ namespace MiddlewareTCP.Entities
             try
             {
                 var data = e.Data.Split();
-                
+                var length = BitConverter.ToInt16(e.Data.Take(2), 0);
                 if (e.Data.GetPacketType(2).vnEquals(PacketContants.ARM))
                 {
-                    this.UnitOfWork.Logger.Data($"[GameToMid_Data] [{this.Username}] [{data}]");
-                    var length = BitConverter.ToInt16(e.Data.Take(2), 0);
-                    this.UnitOfWork.Logger.Queries($"[{this.IP}] [{this.Username}] Detected change ARM request -> {string.Join(" ", e.Data)}");
+                    this.UnitOfWork.Logger.Data($"[{this.Username}] [{data}]");
+
+                    this.UnitOfWork.Logger.Queries($"[{this.IP}] [{this.Username}] -> Detected change ARM request -> {string.Join(" ", e.Data)}");
                     if (e.Data.Length != length)
                     {
-                        this.UnitOfWork.Logger.Queries($"[{this.IP}] [{this.Username}] Detected packet length invalid -> {string.Join(" ", e.Data)}");
+                        this.UnitOfWork.Logger.Queries($"[{this.IP}] [{this.Username}] -> Detected packet length invalid -> {string.Join(" ", e.Data)}");
                     }
                     if (e.Data.Length > 24)
                     {
-                        this.UnitOfWork.Logger.Error($"[{this.IP}] [{this.Username}] Detected bug lag ARM -> {string.Join(" ", e.Data)}");
+                        this.UnitOfWork.Logger.Error($"[{this.IP}] [{this.Username}] -> Detected bug lag ARM -> {string.Join(" ", e.Data)}");
                         return;
                     }
                     var key = "ChangeARM" + this.SessionId;
@@ -92,47 +92,36 @@ namespace MiddlewareTCP.Entities
                     }
                     else
                     {
-                        this.UnitOfWork.Logger.Error($"[{this.IP}] [{this.Username}] pendding change arm");
-                        this.UnitOfWork.Logger.Data($"[{this.IP}] [{this.Username}] pendding change arm");
+                        this.UnitOfWork.Logger.Error($"[{this.IP}] [{this.Username}] -> pendding change arm");
                         return;
                     }
                 }
-                if (this.MidClient.TcpClient.Connected)
+                try
                 {
-                    try
-                    {
-                        this.MidClient.Write(e.Data);
-                    }
-                    catch (Exception ex)
-                    {
-                        this.UnitOfWork.Logger.Error($"[{this.Username}] [GameService] [GameToMid_Data] [Dispose] [Mid client throw abort connection]");
-                        this.WriteError(ex);
-                        this.Dispose();
-                    }
+                    this.MidClient.Write(e.Data);
                 }
-                else
+                catch (Exception ex)
                 {
-                    this.UnitOfWork.Logger.Error($"[{this.Username}] [GameService] [GameToMid_Data] [Dispose] [Client disconnected]");
+                    this.UnitOfWork.Logger.Error($"[{this.Username}] -> Mid client throw abort connection");
+                    this.WriteError(ex);
                     this.Dispose();
-                    return;
                 }
                 if (e.Data.GetPacketType(2).vnEquals(PacketContants.JoinGameRequest))
                 {
-                    this.UnitOfWork.Logger.Info($"[{this.Username}] [GameService] [GameToMid_Data] [Begin join game request]");
+                    this.UnitOfWork.Logger.Info($"[{this.Username}] [GameService] -> Begin join game request");
                     var secretKey = e.Data.Skip(8).Take(4).ToArray().Split();
                     if (PacketContants.SecretKey.ContainsKey(secretKey))
                     {
                         var username = PacketContants.SecretKey[secretKey];
-                        this.UnitOfWork.Logger.Info($"[{e.TcpClient.GetIP()}] [{username}] login success");
+                        this.UnitOfWork.Logger.Info($"[{e.TcpClient.GetIP()}] [{username}] -> login success");
                         this.Username = username;
-                        
+
                     }
-                    this.UnitOfWork.Logger.Info($"[{this.Username}] [GameService] [GameToMid_Data] [End join game request]");
                 }
             }
             catch (Exception ex)
             {
-                this.UnitOfWork.Logger.Error($"[{this.Username}] [GameService] [GameToMid_Data] [Throw Exception]");
+                this.UnitOfWork.Logger.Error($"[{this.Username}] [GameService] -> Throw Exception");
                 this.WriteError(ex);
             }
         }
@@ -147,13 +136,12 @@ namespace MiddlewareTCP.Entities
                 {
                     try
                     {
-                        this.UnitOfWork.Logger.Info($"[{this.Username}] [GameService] [GameToMid_Connected] [Begin Connect to server]");
+                        this.UnitOfWork.Logger.Info($"[{this.Username}] [GameService] [GameToMid_Connected] -> Begin Connect to server");
                         this.MidClient.Connect(this.AppSettings.Value.IpServer, this.AppSettings.Value.PortGameServer);
-                        this.UnitOfWork.Logger.Info($"[{this.Username}] [GameService] [GameToMid_Connected] [End connect to server success]");
                     }
                     catch (Exception ex)
                     {
-                        this.UnitOfWork.Logger.Error($"[{this.Username}] [GameService] [GameToMid_Connected] [{ex.Message}]");
+                        this.UnitOfWork.Logger.Error($"[{this.Username}] [GameService] [GameToMid_Connected] -> {ex.GetBaseException().Message}");
                         this.WriteError(ex);
                     }
                 });
@@ -177,19 +165,13 @@ namespace MiddlewareTCP.Entities
         {
             try
             {
-                if (!this.Game.Client.Connected)
-                {
-                    this.UnitOfWork.Logger.Error($"[{this.Username}] [GameService] [ServerToMid_Receiver] [Game not connected]");
-                    this.Dispose();
-                    return;
-                }
                 try
                 {
                     this.Game.Client.Send(e.Data);
                 }
                 catch (Exception ex)
                 {
-                    this.UnitOfWork.Logger.Error($"[{this.Username}] [GameService] [ServerToMid_Receiver] [Game throw abort connection]");
+                    this.UnitOfWork.Logger.Error($"[{this.Username}] [GameService]  -> Game throw abort connection");
                     this.WriteError(ex);
                     this.Dispose();
                 }
@@ -197,7 +179,7 @@ namespace MiddlewareTCP.Entities
             }
             catch (Exception ex)
             {
-                this.UnitOfWork.Logger.Error($"[{this.Username}] [GameService] [ServerToMid_Receiver] [Throw exception]");
+                this.UnitOfWork.Logger.Error($"[{this.Username}] [GameService] -> Throw exception");
                 this.WriteError(ex);
             }
             
@@ -207,16 +189,15 @@ namespace MiddlewareTCP.Entities
         {
             try
             {
-                this.UnitOfWork.Logger.Info($"[{this.Username}] [GameService] [Dispose] [Begin Logout client]");
+                this.UnitOfWork.Logger.Info($"[{this.Username}] [GameService] -> Begin Logout client");
                 this.Game.Close();
                 this.Game.Dispose();
                 this.MidClient.Disconnect();
                 this.MidClient.Dispose();
-                this.UnitOfWork.Logger.Info($"[{this.Username}] [GameService] [Dispose] [End Logout client]");
             }
             catch (Exception ex)
             {
-                this.UnitOfWork.Logger.Error($"[{this.Username}] [GameService] [Dispose] [{ex.Message}]");
+                this.UnitOfWork.Logger.Error($"[{this.Username}] [GameService] -> {ex.GetBaseException().Message}");
                 this.WriteError(ex);
             }
             
