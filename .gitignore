@@ -67,3 +67,5 @@ AntiBugArm/LoginServer/bin/
 AntiBugArm/LoginServer/obj/
 AntiBugArm/packages/
 AntiBugArm/GameServer/bin/
+/AntiBugArm/GameServer.Core/bin
+/AntiBugArm/GameServer.Core/obj
