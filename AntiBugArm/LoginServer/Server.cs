@@ -1,8 +1,11 @@
 ﻿using Core;
 using Core.Utils;
+using Renci.SshNet;
 using SimpleTCP;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace LoginServer
@@ -11,6 +14,7 @@ namespace LoginServer
     {
 
         public static IDictionary<string, Client> Users;
+        public static SshClient SshClient { get; set; }
         private static SimpleTcpServer _server { get; set; }
         private static readonly Logging Logging = Program.Logging;
         public static void Start()
@@ -22,6 +26,14 @@ namespace LoginServer
             _server.ClientDisconnected += Server_ClientDisconnected;
             _server.DataReceived += Server_DataReceived;
             _server.Start(settings.PortLoginMid);
+            var pathToPrivateKey = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "zr-ssh");
+            var username = "root";
+            var ip = settings.IpMid;
+            var pk = new PrivateKeyFile(pathToPrivateKey);
+            var keyFiles = new[] { pk };
+            var methods = new List<AuthenticationMethod>() { new PrivateKeyAuthenticationMethod(username, keyFiles) };
+            var con = new ConnectionInfo(ip, username, methods.ToArray());
+            SshClient = new SshClient(con);
             Console.WriteLine($"Server started on {settings.PortLoginMid}");
         }
 

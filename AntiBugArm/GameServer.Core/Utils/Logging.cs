@@ -3,7 +3,7 @@ using System.IO;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
-namespace Core.Utils
+namespace GameServer.Core.Utils
 {
     public class Logging
     {
@@ -87,9 +87,7 @@ namespace Core.Utils
                 {
                     Directory.CreateDirectory(dir);
                 }
-#if DEBUG
                 Console.WriteLine(format);
-#endif
                 lock (o)
                 {
                     using (StreamWriter writer = new StreamWriter(Path.Combine(dir, fileName), true))

@@ -1,11 +1,7 @@
-﻿using Core;
-using Core.Utils;
-using GameServeral;
+﻿using GameServer.Core.Utils;
 using SimpleTCP;
-using System;
-using System.Collections.Generic;
 
-namespace GameServer
+namespace GameServer.Core
 {
     public static class Server
     {
@@ -17,18 +13,14 @@ namespace GameServer
 
             try
             {
-                Console.WriteLine($"username -> {username} port -> {port}");
                 _username = username;
                 Users = new Dictionary<string, Client>();
                 var server = new SimpleTcpServer();
-                Console.WriteLine($"username -> {username} port -> {port}");
                 server.ClientConnected += Server_ClientConnected;
                 server.ClientDisconnected += Server_ClientDisconnected;
                 server.DataReceived += Server_DataReceived;
                 server.Start(port);
-                Console.WriteLine($"username -> {username} port -> {port}");
                 Logging.Write()($"Server started on {port}");
-                Console.WriteLine($"Server started on {port}");
             }
             catch (Exception ex)
             {
@@ -64,8 +56,7 @@ namespace GameServer
             var ip = e.GetIP();
             try
             {
-                var client = new Client(e);
-                client.Username = _username;
+                var client = new Client(e, _username);
                 Users.Add(e.GetSessionId(), client);
                 client.Listen();
             }

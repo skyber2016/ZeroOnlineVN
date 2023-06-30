@@ -1,10 +1,12 @@
 ﻿using Core;
 using Core.Utils;
+using Renci.SshNet;
 using SimpleTCP;
 using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Sockets;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -81,6 +83,42 @@ namespace LoginServer
             }
         }
 
+        private bool UseLinuxServer()
+        {
+            var users = new string[] { "duynh1" };
+            return users.Contains(this._username);
+        }
+        private int GetPort()
+        {
+#if DEBUG
+            return 5816;
+#else
+            if (UseLinuxServer())
+            {
+                if (!Server.SshClient.IsConnected)
+                {
+                    Server.SshClient.Connect();
+                }
+                var portAvai = 0;
+                using (var command = Server.SshClient.RunCommand("/home/anti-bug-arm/get-port.sh"))
+                {
+                    if (string.IsNullOrEmpty(command.Error))
+                    {
+                        portAvai = Convert.ToInt32(command.Result);
+                    }
+                }
+                return portAvai;
+            }
+            else
+            {
+                var listener = new TcpListener(IPAddress.Any, 0);
+                listener.Start();
+                var port = ((IPEndPoint)listener.LocalEndpoint).Port;
+                listener.Stop();
+                return port;
+            }
+#endif
+        }
         private void ServerSendDataToMid(object sender, Message e)
         {
             byte[] dataSend = e.Data;
@@ -93,8 +131,7 @@ namespace LoginServer
                     var secretKey = e.Data.Skip(8).Take(4).ToArray();
                     var data = string.Join(" ", e.Data);
                     var portLoginServer = string.Join(" ", BitConverter.GetBytes(setting.PortGameServer));
-                    var avaiablePort = TcpService.GetRandomUnusedPort();
-                    //var avaiablePort = 62664;
+                    var avaiablePort = GetPort();
                     var portLoginMid = string.Join(" ", BitConverter.GetBytes(avaiablePort));
                     var ipServer = setting.IpServer;
                     var ipMid = setting.IpMid;
@@ -104,24 +141,57 @@ namespace LoginServer
                         dataSend = dataSend.Replace(ipServer.ToByte(), ipMid.ToByte());
                         Logging.Write()(GetMessage($"Change port {portLoginServer} to {portLoginMid}"));
                         Logging.Write()(GetMessage($"Change IP {ipServer} to {ipMid}"));
-                        var pathToFile = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "GameServer.exe");
-                        if (File.Exists(pathToFile))
+                        if(UseLinuxServer())
                         {
-                            var process = new Process();
-                            process.StartInfo.FileName = pathToFile;
-                            process.StartInfo.Arguments = $"{_username} {avaiablePort}";
-                            process.StartInfo.CreateNoWindow = true;
-                            process.StartInfo.RedirectStandardOutput = true;
-                            process.StartInfo.RedirectStandardError = true;
-                            process.StartInfo.UseShellExecute = false;
-                            process.EnableRaisingEvents = true;
-                            process.Start();
-                            Logging.Write()(GetMessage($"Create server game with port {avaiablePort}"));
+                            Logging.Write()("Use linux server");
+                            if (!Server.SshClient.IsConnected)
+                            {
+                                Server.SshClient.Connect();
+                            }
+                            if (Server.SshClient.IsConnected)
+                            {
+                                if (Server.SshClient.IsConnected && avaiablePort != 0)
+                                {
+                                    var message = GetMessage($"Disconnected to GameServer {setting.IpMid}:{avaiablePort}");
+                                    var messageStart = GetMessage($"Connect to GameServer {setting.IpMid}:{avaiablePort}");
+                                    var _user = _username;
+                                    Task.Run(() =>
+                                    {
+                                        Logging.Write()(messageStart);
+                                        Server.SshClient.RunCommand($"cd /home/anti-bug-arm && ./startup.sh {_user} {avaiablePort}").Dispose();
+                                        Logging.Write()(message);
+                                    });
+                                }
+                            }
+                            else
+                            {
+                                Logging.Write()("SshClient could not connected");
+                            }
                         }
                         else
                         {
-                            Logging.Write()($"Not found {pathToFile}");
+                            Logging.Write()("Use window server");
+                            var pathToFile = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "GameServer.exe");
+                            if (File.Exists(pathToFile))
+                            {
+                                var process = new Process();
+                                process.StartInfo.FileName = pathToFile;
+                                process.StartInfo.Arguments = $"{_username} {avaiablePort}";
+                                process.StartInfo.CreateNoWindow = true;
+                                process.StartInfo.RedirectStandardOutput = true;
+                                process.StartInfo.RedirectStandardError = true;
+                                process.StartInfo.UseShellExecute = false;
+                                process.EnableRaisingEvents = true;
+                                process.Start();
+                                Logging.Write()(GetMessage($"Create server game with port {avaiablePort}"));
+                            }
+                            else
+                            {
+                                Logging.Write()($"Not found {pathToFile}");
+                            }
                         }
+
+
                     }
                     
                 }

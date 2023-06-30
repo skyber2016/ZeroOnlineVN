@@ -7,7 +7,6 @@ namespace LoginServer
 {
     public class Program
     {
-        private static int _counterUser = 0;
         public static readonly Logging Logging = Logging.Instance;
         static void Main(string[] args)
         {

@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <ApplicationIcon>636163145966192964.ico</ApplicationIcon>
+    <SignAssembly>False</SignAssembly>
+    <BaseOutputPath>..\built-in</BaseOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="636163145966192964.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="636163145966192964.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="SimpleTCP.Core" Version="1.0.4" />
+    <PackageReference Include="System.Runtime.Caching" Version="7.0.0" />
+  </ItemGroup>
+
+</Project>

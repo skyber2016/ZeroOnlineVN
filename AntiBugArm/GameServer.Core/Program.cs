@@ -1,17 +1,12 @@
-﻿using Core.Utils;
-using System;
-using System.Collections.Generic;
+﻿using GameServer.Core.Utils;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace GameServeral
+namespace GameServer
 {
-    internal class Program
+    public static class Program
     {
+
         public static Logging Logging;
         public static readonly Stopwatch Watch = Stopwatch.StartNew();
         static void Main(string[] args)
@@ -21,6 +16,7 @@ namespace GameServeral
                 if (args.Length != 2)
                 {
                     Console.WriteLine("Not found args");
+                    Thread.Sleep(10000);
                     return;
                 }
                 Logging = new Logging();
@@ -28,9 +24,9 @@ namespace GameServeral
                 Logging.LogAllExceptions();
                 var username = args[0];
                 var port = args[1];
-
+                
                 Logging.Setup(Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().Location) + "_user" + username);
-                GameServer.Server.Starting(Convert.ToInt32(port), username);
+                GameServer.Core.Server.Starting(Convert.ToInt32(port), username);
                 var timeout = TimeSpan.FromMinutes(1);
                 var task = Task.Run(async () =>
                 {

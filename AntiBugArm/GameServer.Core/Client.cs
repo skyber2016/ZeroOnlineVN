@@ -1,16 +1,10 @@
-﻿using Core;
-using Core.Utils;
-using GameServeral;
+﻿using GameServer.Core;
+using GameServer.Core.Utils;
 using SimpleTCP;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using System.Net.Sockets;
 using System.Runtime.Caching;
-using System.Threading.Tasks;
 
-namespace GameServer
+namespace GameServer.Core
 {
     public class Client : IDisposable
     {
@@ -24,13 +18,19 @@ namespace GameServer
             Game = tcpClient;
             _client = new SimpleTcpClient();
             _client.DataReceived += ServerSendDataToMid;
+            Logging.Write()(GetMessage($"Logout at {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")}"));
+        }
+        public Client(TcpClient tcpClient, string username) : this(tcpClient)
+        {
+            this.Username = username;
+            Logging.Write()(GetMessage($"Logout at {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")}"));
         }
 
         public void Listen()
         {
+            var settings = Settings.GetSettings();
             var task = Task.Run(() =>
             {
-                var settings = Settings.GetSettings();
                 _client.Connect(settings.IpServer, settings.PortGameServer);
             });
             if (!Task.WaitAll(new Task[] { task }, TimeSpan.FromSeconds(3)))
@@ -38,24 +38,28 @@ namespace GameServer
                 Logging.Write()("TIMEOUT CONNECT TO SERVER");
                 this.Dispose();
             }
+            else
+            {
+                Logging.Write()(GetMessage($"Connect successfully {settings.IpServer}:{settings.PortGameServer}"));
+            }
         }
 
         private string GetMessage(string message)
         {
-            return $"[{Game?.Client?.RemoteEndPoint}] [{Username?.PadLeft(16)}] -> {message}";
+            return $"[{Game?.Client?.RemoteEndPoint}] [{(Username ?? string.Empty).PadLeft(16)}] -> {message}";
         }
 
         public void GameSendDataToMid(object sender, Message e)
         {
             try
             {
-                var data = e.Data.vnJoin();
-                var length = BitConverter.ToInt16(e.Data.Take(2), 0);
+                var data = GameServer.Core.ByteExtensions.vnJoin(e.Data);
+                var length = BitConverter.ToInt16(e.Data.Take(2).ToArray(), 0);
                 var tempData = e.Data;
                 var datas = new List<byte[]>();
                 while (tempData.Any()) 
                 {
-                    var l = BitConverter.ToInt16(tempData.Take(2), 0);
+                    var l = BitConverter.ToInt16(tempData.Take(2).ToArray(), 0);
                     var addData = tempData.Skip(0).Take(l).ToArray();
                     datas.Add(addData);
                     tempData = tempData.Skip(l).ToArray();
@@ -63,7 +67,7 @@ namespace GameServer
                 var dataARM = datas.Where(x => x.GetPacketType(2).vnEquals(PacketContants.ARM)).ToList();
                 foreach (var dataChecking in dataARM)
                 {
-                    Logging.WriteData(GetMessage(data));
+                    Logging.WriteData()(GetMessage(data));
                     if (dataChecking.Length > 24)
                     {
                         Logging.Write()($"Detected bug lag ARM -> {string.Join(" ", e.Data)}");
@@ -74,6 +78,7 @@ namespace GameServer
                     if (obj == null)
                     {
                         MemoryCache.Default.Add(key, e.Data, DateTime.Now.AddSeconds(2));
+                        Logging.Write()($"Add to cache {e.Data.vnJoin()}");
                     }
                     else
                     {
@@ -134,6 +139,7 @@ namespace GameServer
         {
             try
             {
+                Logging.Write()(GetMessage($"Logout at {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")}"));
                 this._client.Disconnect();
                 this._client.Dispose();
                 Game.Close();
