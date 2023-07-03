@@ -67,3 +67,7 @@ AntiBugArm/LoginServer/bin/
 AntiBugArm/LoginServer/obj/
 AntiBugArm/packages/
 AntiBugArm/GameServer/bin/
+AntiBugArm/DetectDupeItem/obj/
+AntiBugArm/GameServer.Core/bin/
+AntiBugArm/GameServer.Core/obj/
+AntiBugArm/DetectDupeItem/bin/
