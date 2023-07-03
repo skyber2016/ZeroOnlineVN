@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {WheelService} from "../../shared/services/wheel.service";
-import {MessageService} from "../../shared/services/message.service";
+import { Component, OnInit } from '@angular/core';
+import { WheelService } from "../../shared/services/wheel.service";
+import { MessageService } from "../../shared/services/message.service";
 import { version } from '../../../../package.json';
+import * as moment from 'moment';
 declare const $: any;
 
 @Component({
@@ -40,22 +41,22 @@ export class WheelComponent implements OnInit {
       let element = this.el;
       let v_this = this;
 
-      $(this.el).animate({transform: v_stop}, {
-          step: function (now, fx) {
-            const current = parseInt((now / 45).toString());
-            if(!v_this.played[current]){
-              v_this.played[current] = true;
-              v_this.playSound();
-            }
-            fx.start = v_old;
-            if (now >= v_old) {
-              $(this).css('-webkit-transform', 'rotate(' + now + 'deg)');
-              $(this).css('-moz-transform', 'rotate(' + now + 'deg)');
-              $(this).css('transform', 'rotate(' + now + 'deg)');
-            }
-          },
-          duration: 5000
-        }, 'ease-out'
+      $(this.el).animate({ transform: v_stop }, {
+        step: function (now, fx) {
+          const current = parseInt((now / 45).toString());
+          if (!v_this.played[current]) {
+            v_this.played[current] = true;
+            v_this.playSound();
+          }
+          fx.start = v_old;
+          if (now >= v_old) {
+            $(this).css('-webkit-transform', 'rotate(' + now + 'deg)');
+            $(this).css('-moz-transform', 'rotate(' + now + 'deg)');
+            $(this).css('transform', 'rotate(' + now + 'deg)');
+          }
+        },
+        duration: 5000
+      }, 'ease-out'
       );
       //},0)
 
@@ -98,7 +99,11 @@ export class WheelComponent implements OnInit {
   initWheel(): void {
     this.wheelService.get<any>({}).subscribe(resp => {
       this.wheelCount = resp.wheelCount;
-      this.histories = resp.histories;
+      this.histories = resp.histories.map(item => {
+        const time: Date = new Date(item.createdDate);
+        item.time = this.fromNow(time);
+        return item;
+      });
     })
   }
 
@@ -122,6 +127,11 @@ export class WheelComponent implements OnInit {
       }, 5500);
     });
 
+  }
+
+  fromNow(time: Date): string {
+    moment.locale('vi');
+    return moment(time, 'yyyy-MM-DD HH:mm:ss').fromNow();
   }
 
 }
