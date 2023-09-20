@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DetectDupeItem", "DetectDupeItem\DetectDupeItem.csproj", "{A42E7A0D-5890-4B00-909B-4D25703BC7B7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DetectDupeItemCore", "DetectDupeItemCore\DetectDupeItemCore.csproj", "{767B591D-D982-4E25-9DE0-3D1BF540A461}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,16 +45,6 @@ Global
 		{B87C6060-51FB-4F56-B6F9-36CBDE5A4CD9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B87C6060-51FB-4F56-B6F9-36CBDE5A4CD9}.Release|x86.ActiveCfg = Release|x86
 		{B87C6060-51FB-4F56-B6F9-36CBDE5A4CD9}.Release|x86.Build.0 = Release|x86
-<<<<<<< Updated upstream
-=======
-		{776831BA-B378-4646-8248-2C134B0E64B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{776831BA-B378-4646-8248-2C134B0E64B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{776831BA-B378-4646-8248-2C134B0E64B1}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{776831BA-B378-4646-8248-2C134B0E64B1}.Debug|x86.Build.0 = Debug|Any CPU
-		{776831BA-B378-4646-8248-2C134B0E64B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{776831BA-B378-4646-8248-2C134B0E64B1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{776831BA-B378-4646-8248-2C134B0E64B1}.Release|x86.ActiveCfg = Release|Any CPU
-		{776831BA-B378-4646-8248-2C134B0E64B1}.Release|x86.Build.0 = Release|Any CPU
 		{A42E7A0D-5890-4B00-909B-4D25703BC7B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A42E7A0D-5890-4B00-909B-4D25703BC7B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A42E7A0D-5890-4B00-909B-4D25703BC7B7}.Debug|x86.ActiveCfg = Debug|Any CPU
@@ -61,7 +53,14 @@ Global
 		{A42E7A0D-5890-4B00-909B-4D25703BC7B7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A42E7A0D-5890-4B00-909B-4D25703BC7B7}.Release|x86.ActiveCfg = Release|Any CPU
 		{A42E7A0D-5890-4B00-909B-4D25703BC7B7}.Release|x86.Build.0 = Release|Any CPU
->>>>>>> Stashed changes
+		{767B591D-D982-4E25-9DE0-3D1BF540A461}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{767B591D-D982-4E25-9DE0-3D1BF540A461}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{767B591D-D982-4E25-9DE0-3D1BF540A461}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{767B591D-D982-4E25-9DE0-3D1BF540A461}.Debug|x86.Build.0 = Debug|Any CPU
+		{767B591D-D982-4E25-9DE0-3D1BF540A461}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{767B591D-D982-4E25-9DE0-3D1BF540A461}.Release|Any CPU.Build.0 = Release|Any CPU
+		{767B591D-D982-4E25-9DE0-3D1BF540A461}.Release|x86.ActiveCfg = Release|Any CPU
+		{767B591D-D982-4E25-9DE0-3D1BF540A461}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  host: 'https://id.zeroonlinevn.com/api/',
+  host: 'http://localhost:5000/api/',
   image_upload: 'http://localhost:5000'
 };
 
