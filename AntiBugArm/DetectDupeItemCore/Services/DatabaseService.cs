@@ -36,6 +36,7 @@ namespace DetectDupeItem.Services
         {
             var resp = await Execute(data, async mes =>
             {
+                _logger.Info($"Http response {data.Sql} [status={mes.StatusCode}]");
                 if (mes.IsSuccessStatusCode)
                 {
                     var jsonContent = await mes.Content.ReadAsStringAsync();

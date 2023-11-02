@@ -21,6 +21,7 @@ internal class CoreMerged
     {
         if (_encoding == null)
         {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             _encoding = Encoding.GetEncoding("GB2312");
         }
         if (!File.Exists(e.FullPath))
@@ -28,11 +29,13 @@ internal class CoreMerged
             _logger.Error((object)("Cannot found file " + e.FullPath));
             return;
         }
+        Console.WriteLine($"Begin tracking {e.FullPath}");
         string pathToFile = e.FullPath;
         int lineNumbers = await GetLastLineNumber(e);
         IEnumerator<string> lines = File.ReadLines(pathToFile, _encoding).Skip(lineNumbers).GetEnumerator();
         while (lines.MoveNext())
         {
+            Console.WriteLine(lines.Current);
             int num = lineNumbers + 1;
             lineNumbers = num;
             string current = lines.Current;
@@ -119,12 +122,9 @@ internal class CoreMerged
         stringBuilder.Append("**Account_ID:**".PadRight(totalWidth)).AppendLine(user?.AccountId.ToString() ?? "Không xác định");
         stringBuilder.Append("**User_ID:**".PadRight(totalWidth)).AppendLine(user?.UserId.ToString() ?? "Không xác định");
         stringBuilder.Append("**Robot_ID:**".PadRight(totalWidth)).AppendLine(item.RobotId.ToString() ?? "Không xác định");
-        stringBuilder.Append("**Item chính:**".PadRight(totalWidth)).AppendLine(item.PrimaryId.ToString() ?? "Không xác định");
-        stringBuilder.Append("**Loại item chính:**".PadRight(totalWidth)).AppendLine(item.PrimaryTypeId.ToString() ?? "Không xác định");
-        stringBuilder.Append("**Item phụ:**".PadRight(totalWidth)).AppendLine(item.SecondId.ToString() ?? "Không xác định");
-        stringBuilder.Append("**Loại item phụ:**".PadRight(totalWidth)).AppendLine(item.SecondTypeId.ToString() ?? "Không xác định");
+        stringBuilder.Append("**Item chính:**".PadRight(totalWidth)).AppendLine($"[ID={item.PrimaryId} TYPE={item.PrimaryTypeId}]");
+        stringBuilder.Append("**Item phụ:**".PadRight(totalWidth)).AppendLine($"[ID={item.SecondId} TYPE={item.SecondTypeId}]");
         stringBuilder.Append("**Thời gian:**".PadRight(totalWidth)).AppendLine(item.CreatedDate.ToString("dd/MM/yyyy HH:mm:ss") ?? "Không xác định");
-        stringBuilder.Append("**Nguyên nhân:**".PadRight(totalWidth)).AppendLine("Sử dụng item [id=" + item.SecondId + " type=" + item.SecondTypeId + "] trùng lặp do hack/bug/dupe");
         return stringBuilder.ToString();
     }
 
