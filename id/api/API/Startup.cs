@@ -24,6 +24,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Prometheus;
 using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Collections.Generic;
@@ -134,8 +135,9 @@ namespace API
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => endpoints.MapControllers());
-            
-
+            app.UseHttpMetrics();
+            app.UseMetricServer();
+            app.UseMiddleware<PrometheusMiddleware>();
         }
 
         #region Configuration

@@ -71,3 +71,6 @@ AntiBugArm/DetectDupeItem/obj/
 AntiBugArm/GameServer.Core/bin/
 AntiBugArm/GameServer.Core/obj/
 AntiBugArm/DetectDupeItem/bin/
+HexEditor/HexEditor/bin/
+HexEditor/HexEditor/obj/
+HexEditor/packages/

@@ -1,6 +1,7 @@
 ﻿using DetectDupeItem.Properties;
 using DetectDupeItem.Services;
 using System;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -19,7 +20,31 @@ namespace DetectDupeItem
         private static string GetCoreMergedName() => $"{CoreMergedLog} {DateTime.Now.AddDays(-1).ToString("yyyy-M-d")}.log";
         static void Main(string[] args)
         {
-            var dirLog = Settings.Default.DirLog;
+            var dirLog = string.Empty;
+            if (!args.Any())
+            {
+                var processes = Process.GetProcessesByName("MSGServer");
+                if (processes.Length == 1)
+                {
+                    var process = processes.FirstOrDefault();
+                    dirLog = Path.Combine(Path.GetDirectoryName(process.MainModule.FileName), "GMLOG");
+                }
+                else
+                {
+                    foreach (var process in processes)
+                    {
+                        Console.WriteLine($"{process.Id} - {process.ProcessName} - {process.MainModule.FileName}");
+                    }
+                    Console.Write($"Vui lòng chọn ứng dụng: ");
+                    var pid = Convert.ToInt32(Console.ReadLine());
+                    dirLog = Path.Combine(Path.GetDirectoryName(Process.GetProcessById(pid).MainModule.FileName), "GMLOG");
+                }
+            }
+            else
+            {
+                dirLog = args.FirstOrDefault();
+            }
+            Console.Title = dirLog;
             //ItemAddition.Tracking(new FileSystemEventArgs(WatcherChangeTypes.Changed, dirLog, "itemaddition_log 2023-7-3.log")).Wait();
             CoreMerged.Tracking(new FileSystemEventArgs(WatcherChangeTypes.Changed, dirLog, GetCoreMergedName())).Wait();
             Console.WriteLine(dirLog);
@@ -35,7 +60,7 @@ namespace DetectDupeItem
                 Path = path,
                 /* Watch for changes in LastAccess and LastWrite times, and 
                    the renaming of files or directories. */
-                NotifyFilter =  NotifyFilters.LastWrite,
+                NotifyFilter = NotifyFilters.LastWrite,
                 // Only watch text files.
                 Filter = "*.log"
             };
@@ -50,11 +75,11 @@ namespace DetectDupeItem
 
         private static void Watcher_Changed(object sender, FileSystemEventArgs e)
         {
-            if(e.ChangeType != WatcherChangeTypes.Changed)
+            if (e.ChangeType != WatcherChangeTypes.Changed)
             {
                 return;
             }
-            if(e.Name.StartsWith(ItemAdditionLog))
+            if (e.Name.StartsWith(ItemAdditionLog))
             {
                 ItemAddition.Tracking(e).Wait();
                 return;
