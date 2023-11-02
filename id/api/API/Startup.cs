@@ -113,7 +113,7 @@ namespace API
             this.Register(services);
             this.LoggerConfigure();
         }
-        
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -130,20 +130,25 @@ namespace API
             }
             app.UseCors("MyPolicy");
             app.UseRouting();
-            app.UseStaticFiles();
             app.UseAuthentication();
             app.UseAuthorization();
-
-            app.UseEndpoints(endpoints => endpoints.MapControllers());
-            app.UseHttpMetrics();
             app.UseMetricServer();
-            app.UseMiddleware<PrometheusMiddleware>();
+            app.UseHttpMetrics();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapMetrics();
+                endpoints.MapControllers();
+            });
+
+
+            app.UseStaticFiles();
+
         }
 
         #region Configuration
         public void ConfigureContainer(IUnityContainer container)
         {
-            
+
         }
 
         private void ConfigSwagger(IServiceCollection services)
