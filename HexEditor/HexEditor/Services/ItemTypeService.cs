@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using HexEditor.Structures;
+using Newtonsoft.Json;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -6,20 +7,20 @@ using System.Windows.Forms;
 
 namespace HexEditor.Services
 {
-    internal class WorldService
+    internal class ItemTypeService
     {
         private readonly OpenFileDialog OpenDialogService = new OpenFileDialog();
         private readonly SaveFileDialog SaveDialogService = new SaveFileDialog();
         public void ImportDat()
         {
-            this.OpenDialogService.FileName = "worlds.dat";
+            this.OpenDialogService.FileName = "itemtype.dat";
             this.OpenDialogService.Filter = "All files (*.dat) | *.dat";
             if (this.OpenDialogService.ShowDialog() == DialogResult.OK)
             {
                 var ext = Path.GetExtension(this.OpenDialogService.FileName);
                 if (!".dat".Equals(ext))
                 {
-                    MessageBox.Show("Vui lòng chọn đúng file worlds.dat", "Thông báo!!!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Vui lòng chọn đúng file itemtype.dat", "Thông báo!!!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     this.OpenDialogService.Reset();
                     return;
                 }
@@ -35,11 +36,11 @@ namespace HexEditor.Services
 
         private void ExportToJson(byte[] sourceBytes)
         {
-            var serverList = ServerList.Initialize(sourceBytes);
-            var json = JsonConvert.SerializeObject(serverList, Formatting.Indented);
+            var wrapper = ITEM_TYPE_WRAPPER.Initialize(sourceBytes);
+            var json = JsonConvert.SerializeObject(wrapper, Formatting.Indented);
             this.SaveDialogService.Filter = "All files (*.*) | *.json";
             this.SaveDialogService.Title = "Save a file";
-            this.SaveDialogService.FileName = "worlds.json";
+            this.SaveDialogService.FileName = "itemtype.json";
             this.SaveDialogService.OverwritePrompt = true;
             if (this.SaveDialogService.ShowDialog() == DialogResult.OK)
             {
@@ -51,14 +52,14 @@ namespace HexEditor.Services
 
         public void ImportJson()
         {
-            this.OpenDialogService.FileName = "worlds.json";
+            this.OpenDialogService.FileName = "itemtype.json";
             this.OpenDialogService.Filter = "All files (*.json) | *.json";
             if (this.OpenDialogService.ShowDialog() == DialogResult.OK)
             {
                 var ext = Path.GetExtension(this.OpenDialogService.FileName);
                 if (!".json".Equals(ext))
                 {
-                    MessageBox.Show("Vui lòng chọn đúng file worlds.json", "Thông báo!!!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Vui lòng chọn đúng file itemtype.json", "Thông báo!!!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     this.OpenDialogService.Reset();
                     return;
                 }
@@ -75,9 +76,9 @@ namespace HexEditor.Services
         private void ExportToDat(byte[] byteSources)
         {
             var json = Encoding.UTF8.GetString(byteSources);
-            var serverList = JsonConvert.DeserializeObject<ServerList>(json);
-            this.SaveDialogService.FileName = "worlds.dat";
-            var convertBytes = serverList.Build();
+            var wrapper = JsonConvert.DeserializeObject<ITEM_TYPE_WRAPPER>(json);
+            this.SaveDialogService.FileName = "itemtype.dat";
+            var convertBytes = wrapper.Build();
             if (convertBytes.Any())
             {
                 if (this.SaveDialogService.ShowDialog() == DialogResult.OK)

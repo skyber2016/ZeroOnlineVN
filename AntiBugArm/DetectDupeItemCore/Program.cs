@@ -19,37 +19,21 @@ namespace DetectDupeItem
         private static string GetCoreMergedName() => $"{CoreMergedLog} {DateTime.Now.AddDays(-1).ToString("yyyy-M-d")}.log";
         static void Main(string[] args)
         {
-            LoggerConfigure();
-            Console.OutputEncoding = Encoding.UTF8;
-            var dirLog = string.Empty;
-            if (!args.Any())
+            if (args.Length != 2)
             {
-                var processes = Process.GetProcessesByName("MSGServer");
-                if (processes.Length == 1)
-                {
-                    var process = processes.FirstOrDefault();
-                    dirLog = Path.Combine(Path.GetDirectoryName(process.MainModule.FileName), "GMLOG");
-                }
-                else if(processes.Length >1)
-                {
-                    foreach (var process in processes)
-                    {
-                        Console.WriteLine($"{process.Id} - {process.ProcessName} - {process.MainModule.FileName}");
-                    }
-                    Console.Write($"Vui lòng chọn ứng dụng: ");
-                    var pid = Convert.ToInt32(Console.ReadLine());
-                    dirLog = Path.Combine(Path.GetDirectoryName(Process.GetProcessById(pid).MainModule.FileName), "GMLOG");
-                }
-                else
-                {
-                    Console.Write("Nhập đường dẫn tới thư mục GMLOG: ");
-                    dirLog = Console.ReadLine();
-                }
+                Console.WriteLine("Usage: DetectDupeItemCore.dll <input_directory> <api_url>");
+                return;
             }
             else
             {
-                dirLog = args.FirstOrDefault();
+                for (int i = 0; i < args.Length; i++)
+                {
+                    Console.WriteLine($"ARG-{i}: {args[i]}");
+                }
             }
+            LoggerConfigure();
+            Console.OutputEncoding = Encoding.UTF8;
+            var dirLog = args[0];
             if(!Directory.Exists(dirLog))
             {
                 Console.WriteLine($"Đường dẫn {dirLog} không tồn tại.");

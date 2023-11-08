@@ -11,7 +11,7 @@ namespace DetectDupeItem.Services
     {
         private static readonly log4net.ILog _logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private static string PathQuery = "http://103.188.166.95:3000/query2json";
+        private static string PathQuery => Environment.GetCommandLineArgs()[2] + "/query2json";
         public static async Task<T> Execute<T>(QueryPayload data, Func<HttpResponseMessage, Task<T>> callback)
         {
             using (var http = new HttpClient())

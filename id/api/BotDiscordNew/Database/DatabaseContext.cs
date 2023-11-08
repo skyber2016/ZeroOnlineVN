@@ -22,7 +22,10 @@ namespace API.Database
                 DbAPI = configuration.GetConnectionString("DbAPI");
             }
             this.Factory = new QueryFactory(new OdbcConnection(), new MySqlCompiler(), DbAPI);
-            this.Factory.Logger = result => logger.Info(result.ToString());
+            this.Factory.Logger = result =>
+            {
+                //logger.Info(result.ToString());
+            };
             QueryFactory.HttpLoggerError = message =>
             {
                 logger.Error(message);

@@ -26,7 +26,6 @@ namespace BotDiscordNew
                     //services.AddHostedService<Worker>();
                     services.AddHostedService<BotDiscordHostedService>();
                     services.Configure<AppSettings>(hostContext.Configuration.GetSection("AppSettings"));
-                    services.Configure<TrackingLogSetting>(hostContext.Configuration.GetSection("TrackingLog"));
                     services.Configure<ConnectionSetting>(hostContext.Configuration.GetSection("ConnectionStrings"));
                     services.AddSingleton<DatabaseContext>();
                     services.AddSingleton<DiscordSocketClient>();

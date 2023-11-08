@@ -1,6 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿using HexEditor.Structures;
+using Newtonsoft.Json;
 using System;
 using System.IO;
+using System.Text;
 using System.Windows.Forms;
 
 namespace HexEditor
@@ -13,6 +15,10 @@ namespace HexEditor
         [STAThread]
         static void Main()
         {
+            var source = File.ReadAllBytes(@"C:\Users\duynh2\Downloads\Shop.dat");
+            var wrapper = SHOP_WRAPPER.Initialize(source);
+            var json = JsonConvert.SerializeObject(wrapper, Formatting.Indented);
+            File.WriteAllText("shop.json", json, Encoding.GetEncoding("gb2312"));
             Logging.LogAllExceptions();
             AppDomain.CurrentDomain.ProcessExit += CurrentDomain_ProcessExit;
             Application.EnableVisualStyles();
@@ -24,5 +30,7 @@ namespace HexEditor
         {
             IntPtrHelper.Release();
         }
+
+        
     }
 }

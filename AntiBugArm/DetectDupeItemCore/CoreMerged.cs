@@ -36,6 +36,7 @@ internal class CoreMerged
         while (lines.MoveNext())
         {
             Console.WriteLine(lines.Current);
+            _logger.Info($"Tracking {lines.Current}");
             int num = lineNumbers + 1;
             lineNumbers = num;
             string current = lines.Current;

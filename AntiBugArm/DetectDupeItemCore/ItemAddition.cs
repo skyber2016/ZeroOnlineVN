@@ -35,6 +35,7 @@ internal static class ItemAddition
         for (int i = await GetLastLineNumber(e); i < lines.Length; i++)
         {
             Console.WriteLine(lines[i]);
+            _logger.Info($"Tracking {lines[i]}");
             string input = lines[i];
             Item item = GetItem(input);
             UserInfo user = null;

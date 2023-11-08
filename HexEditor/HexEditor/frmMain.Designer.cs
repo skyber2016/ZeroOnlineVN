@@ -31,16 +31,24 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tab_worlds_dat = new System.Windows.Forms.TabPage();
-            this.tabShop = new System.Windows.Forms.TabPage();
-            this.btnWorldsDat = new System.Windows.Forms.Button();
             this.btnWorldsJson = new System.Windows.Forms.Button();
+            this.btnWorldsDat = new System.Windows.Forms.Button();
+            this.tabItemType = new System.Windows.Forms.TabPage();
+            this.btnItemTypeJson = new System.Windows.Forms.Button();
+            this.btnItemTypeDat = new System.Windows.Forms.Button();
+            this.tabShop = new System.Windows.Forms.TabPage();
+            this.btnShopJson = new System.Windows.Forms.Button();
+            this.btnShopDat = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.tab_worlds_dat.SuspendLayout();
+            this.tabItemType.SuspendLayout();
+            this.tabShop.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
             // 
             this.tabControl.Controls.Add(this.tab_worlds_dat);
+            this.tabControl.Controls.Add(this.tabItemType);
             this.tabControl.Controls.Add(this.tabShop);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
@@ -63,16 +71,15 @@
             this.tab_worlds_dat.Text = "worlds.dat";
             this.tab_worlds_dat.UseVisualStyleBackColor = true;
             // 
-            // tabShop
+            // btnWorldsJson
             // 
-            this.tabShop.Location = new System.Drawing.Point(4, 23);
-            this.tabShop.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.tabShop.Name = "tabShop";
-            this.tabShop.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.tabShop.Size = new System.Drawing.Size(299, 67);
-            this.tabShop.TabIndex = 1;
-            this.tabShop.Text = "shop.dat";
-            this.tabShop.UseVisualStyleBackColor = true;
+            this.btnWorldsJson.Location = new System.Drawing.Point(152, 6);
+            this.btnWorldsJson.Name = "btnWorldsJson";
+            this.btnWorldsJson.Size = new System.Drawing.Size(138, 51);
+            this.btnWorldsJson.TabIndex = 1;
+            this.btnWorldsJson.Text = "worlds.json";
+            this.btnWorldsJson.UseVisualStyleBackColor = true;
+            this.btnWorldsJson.Click += new System.EventHandler(this.btnWorldsJson_Click);
             // 
             // btnWorldsDat
             // 
@@ -84,15 +91,69 @@
             this.btnWorldsDat.UseVisualStyleBackColor = true;
             this.btnWorldsDat.Click += new System.EventHandler(this.btnWorldsDat_Click);
             // 
-            // btnWorldsJson
+            // tabItemType
             // 
-            this.btnWorldsJson.Location = new System.Drawing.Point(152, 6);
-            this.btnWorldsJson.Name = "btnWorldsJson";
-            this.btnWorldsJson.Size = new System.Drawing.Size(138, 51);
-            this.btnWorldsJson.TabIndex = 1;
-            this.btnWorldsJson.Text = "worlds.json";
-            this.btnWorldsJson.UseVisualStyleBackColor = true;
-            this.btnWorldsJson.Click += new System.EventHandler(this.btnWorldsJson_Click);
+            this.tabItemType.Controls.Add(this.btnItemTypeJson);
+            this.tabItemType.Controls.Add(this.btnItemTypeDat);
+            this.tabItemType.Location = new System.Drawing.Point(4, 23);
+            this.tabItemType.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.tabItemType.Name = "tabItemType";
+            this.tabItemType.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.tabItemType.Size = new System.Drawing.Size(299, 67);
+            this.tabItemType.TabIndex = 1;
+            this.tabItemType.Text = "itemtype.dat";
+            this.tabItemType.UseVisualStyleBackColor = true;
+            // 
+            // btnItemTypeJson
+            // 
+            this.btnItemTypeJson.Location = new System.Drawing.Point(152, 8);
+            this.btnItemTypeJson.Name = "btnItemTypeJson";
+            this.btnItemTypeJson.Size = new System.Drawing.Size(138, 51);
+            this.btnItemTypeJson.TabIndex = 3;
+            this.btnItemTypeJson.Text = "itemtype.json";
+            this.btnItemTypeJson.UseVisualStyleBackColor = true;
+            this.btnItemTypeJson.Click += new System.EventHandler(this.btnItemTypeJson_Click);
+            // 
+            // btnItemTypeDat
+            // 
+            this.btnItemTypeDat.Location = new System.Drawing.Point(8, 8);
+            this.btnItemTypeDat.Name = "btnItemTypeDat";
+            this.btnItemTypeDat.Size = new System.Drawing.Size(138, 51);
+            this.btnItemTypeDat.TabIndex = 2;
+            this.btnItemTypeDat.Text = "itemtype.dat";
+            this.btnItemTypeDat.UseVisualStyleBackColor = true;
+            this.btnItemTypeDat.Click += new System.EventHandler(this.btnItemTypeDat_Click);
+            // 
+            // tabShop
+            // 
+            this.tabShop.Controls.Add(this.btnShopJson);
+            this.tabShop.Controls.Add(this.btnShopDat);
+            this.tabShop.Location = new System.Drawing.Point(4, 23);
+            this.tabShop.Name = "tabShop";
+            this.tabShop.Size = new System.Drawing.Size(299, 67);
+            this.tabShop.TabIndex = 2;
+            this.tabShop.Text = "shop.dat";
+            this.tabShop.UseVisualStyleBackColor = true;
+            // 
+            // btnShopJson
+            // 
+            this.btnShopJson.Location = new System.Drawing.Point(152, 8);
+            this.btnShopJson.Name = "btnShopJson";
+            this.btnShopJson.Size = new System.Drawing.Size(138, 51);
+            this.btnShopJson.TabIndex = 3;
+            this.btnShopJson.Text = "shop.json";
+            this.btnShopJson.UseVisualStyleBackColor = true;
+            this.btnShopJson.Click += new System.EventHandler(this.btnShopJson_Click);
+            // 
+            // btnShopDat
+            // 
+            this.btnShopDat.Location = new System.Drawing.Point(8, 8);
+            this.btnShopDat.Name = "btnShopDat";
+            this.btnShopDat.Size = new System.Drawing.Size(138, 51);
+            this.btnShopDat.TabIndex = 2;
+            this.btnShopDat.Text = "shop.dat";
+            this.btnShopDat.UseVisualStyleBackColor = true;
+            this.btnShopDat.Click += new System.EventHandler(this.btnShopDat_Click);
             // 
             // frmMain
             // 
@@ -109,6 +170,8 @@
             this.Text = "Tool Hex Editor";
             this.tabControl.ResumeLayout(false);
             this.tab_worlds_dat.ResumeLayout(false);
+            this.tabItemType.ResumeLayout(false);
+            this.tabShop.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -118,8 +181,13 @@
         private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage tab_worlds_dat;
         private System.Windows.Forms.Button btnWorldsDat;
-        private System.Windows.Forms.TabPage tabShop;
+        private System.Windows.Forms.TabPage tabItemType;
         private System.Windows.Forms.Button btnWorldsJson;
+        private System.Windows.Forms.Button btnItemTypeJson;
+        private System.Windows.Forms.Button btnItemTypeDat;
+        private System.Windows.Forms.TabPage tabShop;
+        private System.Windows.Forms.Button btnShopJson;
+        private System.Windows.Forms.Button btnShopDat;
     }
 }
 

@@ -76,7 +76,7 @@ namespace SqlKata.Execution
                 });
                 var body = new StringContent(payload, Encoding.UTF8, "application/json");
                 var resp = await http.PostAsync(dbAPI, body);
-                QueryFactory.HttpLoggerInfo($"{dbAPI} {payload} response status code {resp.StatusCode}");
+                //QueryFactory.HttpLoggerInfo($"{dbAPI} {payload} response status code {resp.StatusCode}");
                 if (resp.IsSuccessStatusCode)
                 {
                     var jsonString = await resp.Content.ReadAsStringAsync();
