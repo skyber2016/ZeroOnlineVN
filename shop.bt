@@ -1,0 +1,46 @@
+//------------------------------------------------
+//--- 010 Editor v14.0 Binary Template
+//
+//      File: 
+//   Authors: 
+//   Version: 
+//   Purpose: 
+//  Category: 
+// File Mask: 
+//  ID Bytes: 
+//   History: 
+//------------------------------------------------
+
+    
+struct ITEM {
+    unsigned int id;
+    unsigned short shape;
+    unsigned byte un0;
+    unsigned byte x <bgcolor=cLtGreen>;
+    unsigned byte y <bgcolor=cLtGreen>;
+    unsigned byte un2;
+    unsigned byte un3;
+    unsigned byte un4;
+};
+struct SHOP {
+    byte offset;
+    unsigned byte height;
+    unsigned byte width;
+    unsigned byte count;
+    ITEM item[count] ;
+};
+
+struct WRAPPER_SHOP {
+    unsigned int shop_id;
+    char shop_name[16];
+    unsigned int un0;
+    //unsigned int un0;
+    unsigned int total_page;
+    
+    SHOP shop_pages[total_page] <optimize=false>;    
+};
+
+
+unsigned int number;
+
+WRAPPER_SHOP shop[number] <optimize=false>;

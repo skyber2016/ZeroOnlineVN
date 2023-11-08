@@ -1,0 +1,63 @@
+//------------------------------------------------
+//--- 010 Editor v14.0 Binary Template
+//
+//      File: itemtype.dat
+//   Authors: Nguyen Hoang Duy
+//   Version: 1.0.0
+//   Purpose: 
+//  Category: 
+// File Mask: 
+//  ID Bytes: 
+//   History: 
+//------------------------------------------------
+struct STRUCT_ITEM_TYPE {
+        int totalItemTypes;
+                int list_id[totalItemTypes];
+                
+                struct ITEM_TYPE {
+                    int id;
+                    char name[41];
+                    unsigned byte level;
+                    short weight;
+                    int price;
+                    int id_action;
+                    int life;
+                    int max_en;
+                    int charge_en;
+                    int max_power;
+                    int charge_power;
+                    int amount_limit;
+                    int ident;
+                    int equip_type;
+                    unsigned byte equip_level;
+                    unsigned byte equip_skill;
+                    unsigned short gem1;
+                    unsigned short gem2;
+                    unsigned short gem3;
+                    unsigned int magic1;
+                    unsigned int magic2;
+                    unsigned int magic3;
+                    unsigned short max_range;
+                    unsigned short atk_speed;
+                    short nicety;
+                    short pack_size;
+                    short pack_width;
+                    unsigned short max_atk;
+                    unsigned short min_atk;
+                    unsigned short hot_atk;
+                    unsigned short shake_atk;
+                    unsigned short sting_atk;
+                    short decay_atk;
+                    unsigned short defence_max;
+                    short defence_percent;
+                    unsigned short hot_def;
+                    unsigned short shake_def;
+                    unsigned short cold_def;
+                    unsigned short light_def;
+                    unsigned short electric_def;
+                    unsigned int shape;
+                    unsigned short Emoney;
+                    int Req_Engine;
+                    char desc[514];
+                } item[totalItemTypes] <bgcolor=cLtGreen>;
+    } wrapper;
