@@ -1,0 +1,10 @@
+﻿{
+  "profiles": {
+    "DetectDupeItemWorker": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

@@ -150,6 +150,11 @@ namespace HexEditor.Structures
                 this.ShopPagePtr = MarshalHelper.BytesToPointer(byteArray);
             }
         }
+
+        public byte[] Build()
+        {
+
+        }
     }
 
     [StructLayout(LayoutKind.Sequential)]

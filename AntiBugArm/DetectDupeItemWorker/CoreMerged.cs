@@ -30,24 +30,21 @@ internal class CoreMerged
         {
             Console.WriteLine(lines.Current);
             _logger.Info($"Tracking {lines.Current}");
-            int num = lineNumbers + 1;
-            lineNumbers = num;
+            ++lineNumbers;
             string current = lines.Current;
             if (!current.StartsWith("主法宝的"))
             {
                 continue;
             }
             lines.MoveNext();
-            num = lineNumbers + 1;
-            lineNumbers = num;
+            ++lineNumbers;
             string current2 = lines.Current;
             if (!current2.StartsWith("辅助法宝的"))
             {
                 continue;
             }
             lines.MoveNext();
-            num = lineNumbers + 1;
-            lineNumbers = num;
+            ++lineNumbers;
             if (!lines.Current.StartsWith("合成后主法宝的[玩家名字"))
             {
                 continue;

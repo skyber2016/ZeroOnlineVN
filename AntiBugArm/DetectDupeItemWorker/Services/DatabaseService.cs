@@ -30,21 +30,24 @@ namespace DetectDupeItem.Services
 
         public static async Task<bool> ExecuteNonResult(QueryPayload data)
         {
-            return await Execute(data, async mes => mes.IsSuccessStatusCode);
+            return await Execute(data, async mes => await Task.FromResult(mes.IsSuccessStatusCode));
         }
 
         public static async Task<List<T>> Execute<T>(QueryPayload data) where T : class, new()
         {
-            var resp = await Execute(data, async mes =>
+            var resp = await Execute(data, async response =>
             {
-                _logger.Info($"Http response {data.Sql} [status={mes.StatusCode}]");
-                if (mes.IsSuccessStatusCode)
+                if (!response.IsSuccessStatusCode)
                 {
-                    var jsonContent = await mes.Content.ReadAsStringAsync();
+                    _logger.Info($"Http response {data.Sql} [status={response.StatusCode}]");
+                }
+                if (response.IsSuccessStatusCode)
+                {
+                    var jsonContent = await response.Content.ReadAsStringAsync();
                     var model = JsonConvert.DeserializeObject<List<T>>(jsonContent);
                     return model;
                 }
-                _logger.Error($"Query server response status fail {mes.StatusCode}: {JsonConvert.SerializeObject(data)}");
+                _logger.Error($"Query server response status fail {response.StatusCode}: {JsonConvert.SerializeObject(data)}");
                 return new List<T>();
             });
             return resp;
