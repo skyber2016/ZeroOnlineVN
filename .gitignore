@@ -76,3 +76,5 @@ HexEditor/HexEditor/obj/
 HexEditor/packages/
 AntiBugArm/DetectDupeItemCore/bin/
 AntiBugArm/DetectDupeItemCore/obj/
+/AntiBugArm/DetectDupeItemWorker/bin
+/AntiBugArm/DetectDupeItemWorker/obj
