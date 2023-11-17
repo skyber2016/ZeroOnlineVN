@@ -13,7 +13,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DetectDupeItem", "DetectDup
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DetectDupeItemCore", "DetectDupeItemCore\DetectDupeItemCore.csproj", "{767B591D-D982-4E25-9DE0-3D1BF540A461}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DetectDupeItemWorker", "DetectDupeItemWorker\DetectDupeItemWorker.csproj", "{745396F4-249E-4B33-A208-925B9FFC6BC0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DetectDupeItemWorker", "DetectDupeItemWorker\DetectDupeItemWorker.csproj", "{745396F4-249E-4B33-A208-925B9FFC6BC0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReplaceUnicode", "ReplaceUnicode\ReplaceUnicode.csproj", "{02B2DB2D-8EBF-4738-8E77-4811361A4F96}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,6 +73,14 @@ Global
 		{745396F4-249E-4B33-A208-925B9FFC6BC0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{745396F4-249E-4B33-A208-925B9FFC6BC0}.Release|x86.ActiveCfg = Release|Any CPU
 		{745396F4-249E-4B33-A208-925B9FFC6BC0}.Release|x86.Build.0 = Release|Any CPU
+		{02B2DB2D-8EBF-4738-8E77-4811361A4F96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02B2DB2D-8EBF-4738-8E77-4811361A4F96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02B2DB2D-8EBF-4738-8E77-4811361A4F96}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{02B2DB2D-8EBF-4738-8E77-4811361A4F96}.Debug|x86.Build.0 = Debug|Any CPU
+		{02B2DB2D-8EBF-4738-8E77-4811361A4F96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02B2DB2D-8EBF-4738-8E77-4811361A4F96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02B2DB2D-8EBF-4738-8E77-4811361A4F96}.Release|x86.ActiveCfg = Release|Any CPU
+		{02B2DB2D-8EBF-4738-8E77-4811361A4F96}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

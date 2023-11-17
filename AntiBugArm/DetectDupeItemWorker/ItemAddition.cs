@@ -5,7 +5,6 @@ using log4net;
 using Newtonsoft.Json;
 using System;
 using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -26,8 +25,9 @@ internal static class ItemAddition
             _encoding = Encoding.GetEncoding("GB2312");
         }
         Console.WriteLine($"Begin tracking {fileName}");
-        string[] lines =  await GmLogService.GetLines(fileName, _encoding);
-        for (int i = await GetLastLineNumber(fileName); i < lines.Length; i++)
+        string[] lines = await GmLogService.GetLines(fileName, _encoding);
+        var lastLineNumber = await GetLastLineNumber(fileName);
+        for (int i = lastLineNumber; i < lines.Length; i++)
         {
             Console.WriteLine(lines[i]);
             _logger.Info($"Tracking {lines[i]}");
@@ -43,8 +43,7 @@ internal static class ItemAddition
                     {
                         continue;
                     }
-                    Item item2 = item;
-                    item2.IsValid = await ItemValid(item, user, fileName, i + 1);
+                    item.IsValid = await ItemValid(item, user, fileName, i + 1);
                     if (item.IsValid)
                     {
                         continue;

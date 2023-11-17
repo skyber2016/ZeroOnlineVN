@@ -2,7 +2,7 @@
 {
     internal class AppSettings
     {
-        public string GMLOG {  get; set; }
+        public string GMLOG { get; set; }
         public string DatabaseHost { get; set; }
     }
 }

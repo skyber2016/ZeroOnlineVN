@@ -35,6 +35,8 @@ namespace HexEditor.Structures
 
         [JsonIgnore] public int TotalBytes => Marshal.SizeOf(typeof(SHOP_ITEM));
 
+        public byte[] Build() => MarshalHelper.StructToBytes(this, Marshal.SizeOf(this));
+
     }
     [StructLayout(LayoutKind.Sequential)]
     public class SHOP_PAGE
@@ -64,24 +66,27 @@ namespace HexEditor.Structures
                     return Array.Empty<SHOP_ITEM>();
                 }
                 var lst = new List<SHOP_ITEM>();
+                var offset = 0;
                 for (int i = 0; i < Totals; i++)
                 {
-                    var offset = this.ItemPtr + (i * Marshal.SizeOf(typeof(SHOP_ITEM)));
-                    var shopItem = (SHOP_ITEM)Marshal.PtrToStructure(offset, typeof(SHOP_ITEM));
-                    if(shopItem.Unknow3 != 204)
-                    {
-
-                    }
+                    var shopItem = (SHOP_ITEM)Marshal.PtrToStructure(this.ItemPtr + offset, typeof(SHOP_ITEM));
                     lst.Add(shopItem);
+                    offset += shopItem.TotalBytes;
                 }
                 return lst.ToArray();
+            }
+            set
+            {
+                this.Totals = Convert.ToByte(value.Length);
+                var byteArray = value.SelectMany(item => item.Build()).ToArray();
+                this.ItemPtr = MarshalHelper.BytesToPointer(byteArray);
             }
         }
 
         public byte[] Build()
         {
             var bytes = MarshalHelper.StructToBytes(this, this.Offset).ToList();
-            var byteArray = this.Items.SelectMany(item => MarshalHelper.StructToBytes(item, Marshal.SizeOf(item))).ToList();
+            var byteArray = this.Items.SelectMany(item => item.Build()).ToList();
             bytes.AddRange(byteArray);
             return bytes.ToArray();
         }
@@ -106,20 +111,34 @@ namespace HexEditor.Structures
 
         [JsonIgnore] public int TotalBytes => Offset + this.Pages.Sum(x => x.TotalBytes);
 
-        
-        [JsonIgnore]
         public string Name
         {
             get
             {
-                var gb2312 = Encoding.GetEncoding("gb2312");
-                var text = gb2312.GetString(ShopNameByteArray);
-                return text;
+                try
+                {
+
+                    var gb2312 = Encoding.GetEncoding("gb2312");
+                    var text = gb2312.GetString(ShopNameByteArray);
+                    return text;
+                }
+                catch (Exception)
+                {
+                    return Encoding.UTF8.GetString(ShopNameByteArray);
+                }
             }
             set
             {
                 var gb2312 = Encoding.GetEncoding("gb2312");
-                this.ShopNameByteArray = gb2312.GetBytes(value);
+                var source = gb2312.GetBytes(value).Take(16).ToArray();
+                var dest = new byte[16];
+                var len = source.Length;
+                if(source.Length > 16)
+                {
+                    len = 16;
+                }
+                Array.Copy(source, dest, len);
+                this.ShopNameByteArray = dest;
             }
         }
 
@@ -146,14 +165,17 @@ namespace HexEditor.Structures
             set
             {
                 this.TotalPage = (uint)value.Length;
-                var byteArray = value.SelectMany(item => MarshalHelper.StructToBytes(item, Marshal.SizeOf(item))).ToArray();
+                var byteArray = value.SelectMany(item => item.Build()).ToArray();
                 this.ShopPagePtr = MarshalHelper.BytesToPointer(byteArray);
             }
         }
 
         public byte[] Build()
         {
-
+            var bytes = MarshalHelper.StructToBytes(this, this.Offset).ToList();
+            var byteArray = this.Pages.SelectMany(item => item.Build()).ToList();
+            bytes.AddRange(byteArray);
+            return bytes.ToArray();
         }
     }
 
@@ -198,9 +220,17 @@ namespace HexEditor.Structures
             set
             {
                 this.Total = value.Length;
-                var byteArray = value.SelectMany(item => MarshalHelper.StructToBytes(item, Marshal.SizeOf(item))).ToArray();
+                var byteArray = value.SelectMany(item => item.Build()).ToArray();
                 this.ShopPtr = MarshalHelper.BytesToPointer(byteArray);
             }
+        }
+
+        public byte[] Build()
+        {
+            var bytes = MarshalHelper.StructToBytes(this, this.Offset).ToList();
+            var byteArray = this.Shops.SelectMany(item => item.Build()).ToList();
+            bytes.AddRange(byteArray);
+            return bytes.ToArray();
         }
     }
 }

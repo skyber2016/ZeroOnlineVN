@@ -8,7 +8,7 @@ namespace DetectDupeItemCore
 {
     internal class Program
     {
-        
+
         static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
@@ -30,7 +30,7 @@ namespace DetectDupeItemCore
                  });
 
 
-        
+
 
     }
 }

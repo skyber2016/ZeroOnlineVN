@@ -9,6 +9,7 @@ namespace HexEditor
         private readonly WorldService WorldService = new WorldService();
         private readonly ItemTypeService ItemTypeService = new ItemTypeService();
         private readonly ShopService ShopService = new ShopService();
+        private readonly RobotTypeService RobotTypeService = new RobotTypeService();
         public frmMain()
         {
             InitializeComponent();
@@ -44,6 +45,16 @@ namespace HexEditor
         private void btnShopJson_Click(object sender, EventArgs e)
         {
             this.ShopService.ImportJson();
+        }
+
+        private void btnRobotTypeDat_Click(object sender, EventArgs e)
+        {
+            RobotTypeService.ImportDat();
+        }
+
+        private void btnRobotTypeJson_Click(object sender, EventArgs e)
+        {
+            RobotTypeService.ImportJson();
         }
     }
 }

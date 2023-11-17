@@ -39,10 +39,14 @@
             this.tabShop = new System.Windows.Forms.TabPage();
             this.btnShopJson = new System.Windows.Forms.Button();
             this.btnShopDat = new System.Windows.Forms.Button();
+            this.tabRobottype = new System.Windows.Forms.TabPage();
+            this.btnRobotTypeJson = new System.Windows.Forms.Button();
+            this.btnRobotTypeDat = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.tab_worlds_dat.SuspendLayout();
             this.tabItemType.SuspendLayout();
             this.tabShop.SuspendLayout();
+            this.tabRobottype.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -50,6 +54,7 @@
             this.tabControl.Controls.Add(this.tab_worlds_dat);
             this.tabControl.Controls.Add(this.tabItemType);
             this.tabControl.Controls.Add(this.tabShop);
+            this.tabControl.Controls.Add(this.tabRobottype);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -155,6 +160,37 @@
             this.btnShopDat.UseVisualStyleBackColor = true;
             this.btnShopDat.Click += new System.EventHandler(this.btnShopDat_Click);
             // 
+            // tabRobottype
+            // 
+            this.tabRobottype.Controls.Add(this.btnRobotTypeJson);
+            this.tabRobottype.Controls.Add(this.btnRobotTypeDat);
+            this.tabRobottype.Location = new System.Drawing.Point(4, 23);
+            this.tabRobottype.Name = "tabRobottype";
+            this.tabRobottype.Size = new System.Drawing.Size(299, 67);
+            this.tabRobottype.TabIndex = 3;
+            this.tabRobottype.Text = "robottype.dat";
+            this.tabRobottype.UseVisualStyleBackColor = true;
+            // 
+            // btnRobotTypeJson
+            // 
+            this.btnRobotTypeJson.Location = new System.Drawing.Point(152, 8);
+            this.btnRobotTypeJson.Name = "btnRobotTypeJson";
+            this.btnRobotTypeJson.Size = new System.Drawing.Size(138, 51);
+            this.btnRobotTypeJson.TabIndex = 5;
+            this.btnRobotTypeJson.Text = "robottype.json";
+            this.btnRobotTypeJson.UseVisualStyleBackColor = true;
+            this.btnRobotTypeJson.Click += new System.EventHandler(this.btnRobotTypeJson_Click);
+            // 
+            // btnRobotTypeDat
+            // 
+            this.btnRobotTypeDat.Location = new System.Drawing.Point(8, 8);
+            this.btnRobotTypeDat.Name = "btnRobotTypeDat";
+            this.btnRobotTypeDat.Size = new System.Drawing.Size(138, 51);
+            this.btnRobotTypeDat.TabIndex = 4;
+            this.btnRobotTypeDat.Text = "robottype.dat";
+            this.btnRobotTypeDat.UseVisualStyleBackColor = true;
+            this.btnRobotTypeDat.Click += new System.EventHandler(this.btnRobotTypeDat_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -172,6 +208,7 @@
             this.tab_worlds_dat.ResumeLayout(false);
             this.tabItemType.ResumeLayout(false);
             this.tabShop.ResumeLayout(false);
+            this.tabRobottype.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -188,6 +225,9 @@
         private System.Windows.Forms.TabPage tabShop;
         private System.Windows.Forms.Button btnShopJson;
         private System.Windows.Forms.Button btnShopDat;
+        private System.Windows.Forms.TabPage tabRobottype;
+        private System.Windows.Forms.Button btnRobotTypeJson;
+        private System.Windows.Forms.Button btnRobotTypeDat;
     }
 }
 

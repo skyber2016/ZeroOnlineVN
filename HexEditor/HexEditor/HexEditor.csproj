@@ -90,11 +90,13 @@
     <Compile Include="Logging.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\RobotTypeService.cs" />
     <Compile Include="Services\ShopService.cs" />
     <Compile Include="Services\ItemTypeService.cs" />
     <Compile Include="Services\WorldService.cs" />
     <Compile Include="Structures\Channel.cs" />
     <Compile Include="Structures\ItemType.cs" />
+    <Compile Include="Structures\RobotType.cs" />
     <Compile Include="Structures\Server.cs" />
     <Compile Include="Structures\ServerList.cs" />
     <Compile Include="Structures\Shop.cs" />

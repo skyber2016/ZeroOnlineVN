@@ -78,3 +78,7 @@ AntiBugArm/DetectDupeItemCore/bin/
 AntiBugArm/DetectDupeItemCore/obj/
 /AntiBugArm/DetectDupeItemWorker/bin
 /AntiBugArm/DetectDupeItemWorker/obj
+AntiBugArm/ReplaceUnicode/obj/Debug/ReplaceUnicode.csproj.AssemblyReference.cache
+AntiBugArm/ReplaceUnicode/obj/Debug/ReplaceUnicode.csproj.CoreCompileInputs.cache
+AntiBugArm/ReplaceUnicode/obj/
+AntiBugArm/ReplaceUnicode/bin/

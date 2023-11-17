@@ -19,7 +19,7 @@ namespace DetectDupeItemCore.Services
                 return Array.Empty<string>();
             }
             var text = encoding.GetString(byteArray);
-            return text.Split('\n').Where(x=> !string.IsNullOrEmpty(x) && x != "\r").ToArray();
+            return text.Split('\n').Where(x => !string.IsNullOrEmpty(x) && x != "\r").ToArray();
         }
     }
 }

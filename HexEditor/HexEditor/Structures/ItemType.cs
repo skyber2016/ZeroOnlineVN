@@ -165,6 +165,7 @@ namespace HexEditor.Structures
 
         public byte[] Build()
         {
+
             var builder = new List<byte>();
             builder.AddRange(BitConverter.GetBytes(this.Count));
             var itemIds = this.GetListIds;
@@ -175,7 +176,7 @@ namespace HexEditor.Structures
             var items = this.GetItems;
             foreach (var item in items)
             {
-                if(item.electric_def != 0)
+                if (item.electric_def != 0)
                 {
 
                 }

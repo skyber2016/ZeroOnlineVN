@@ -48,7 +48,7 @@ namespace DetectDupeItem.Models
                 Task.Run(async delegate
                {
                    await WinService.BlockIP(IP);
-                   await Task.Delay(60000);
+                   await Task.Delay(60000 * 2);
                    await WinService.UnblockIP(IP);
                });
             }

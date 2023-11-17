@@ -20,11 +20,12 @@ namespace DetectDupeItemCore
         private string ItemAdditionLog = "itemaddition_log";
         private string CoreMergedLog = "TrumpAssistantFunctionCombine";
         private string GetItemAddName() => $"{ItemAdditionLog} {DateTime.Now.ToString("yyyy-M-d")}.log";
-        private string GetCoreMergedName() => $"{CoreMergedLog} {DateTime.Now.AddDays(-1).ToString("yyyy-M-d")}.log";
+        private string GetCoreMergedName() => $"{CoreMergedLog} {DateTime.Now.ToString("yyyy-M-d")}.log";
         public Worker(IOptions<AppSettings> options)
         {
             GmLogService.BaseAddress = new Uri(options.Value.GMLOG);
             DatabaseService.BaseAddress = new Uri(options.Value.DatabaseHost);
+            WinService.BaseAddress = new Uri(options.Value.DatabaseHost);
             this.LoggerConfigure();
             _logger.Info($"Application started at {DateTime.Now}");
         }

@@ -1,92 +1,105 @@
-﻿using log4net;
+﻿using Newtonsoft.Json;
 using System;
-using System.Diagnostics;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
+using System.Net;
+using System.Net.Http;
 using System.Text;
 
 namespace DetectDupeItem
 {
+    internal class cq_action
+    {
+        public string id { get; set; }
+        public string id_next { get; set; }
+        public string id_nextfail { get; set; }
+        public string type { get; set; }
+        public string data { get; set; }
+        public string param { get; set; }
+        public static cq_action FromSqlInsert(string sqlInsert)
+        {
+            // Loại bỏ các ký tự không mong muốn từ câu lệnh SQL
+            sqlInsert = sqlInsert.Replace("INSERT INTO `cq_action_copy1` VALUES (", "").TrimEnd(')', '\r', ';');
+
+            // Tách các giá trị bằng dấu phẩy
+            string[] values = sqlInsert.Split(',').Select(x => x.Replace("'", string.Empty).Trim()).ToArray();
+
+            // Tạo một đối tượng cq_action từ giá trị của câu lệnh INSERT
+            var cqAction = new cq_action
+            {
+                id = values[0].Trim(),
+                id_next = values[1].Trim(),
+                id_nextfail = values[2].Trim(),
+                type = values[3],
+                data = values[4],
+                param = values[5].Trim('\'').Trim()
+            };
+
+            return cqAction;
+        }
+    }
     internal class Program
     {
-        private static readonly ILog _logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        private static string ItemAdditionLog = "itemaddition_log";
-        private static string CoreMergedLog = "TrumpAssistantFunctionCombine";
-        private static string GetItemAddName() => $"{ItemAdditionLog} {DateTime.Now.ToString("yyyy-M-d")}.log";
-        private static string GetCoreMergedName() => $"{CoreMergedLog} {DateTime.Now.AddDays(-1).ToString("yyyy-M-d")}.log";
         static void Main(string[] args)
         {
-            Console.OutputEncoding = Encoding.UTF8;
-            var dirLog = string.Empty;
-            if (!args.Any())
+            var list = new StringBuilder();
+            var allow = new string[] { "0101", "0102", "1010", "0125", "0126", "0130" };
+            foreach (var item in GetDatas())
             {
-                var processes = Process.GetProcessesByName("MSGServer");
-                if (processes.Length == 1)
+                if (allow.Contains(item.type))
                 {
-                    var process = processes.FirstOrDefault();
-                    dirLog = Path.Combine(Path.GetDirectoryName(process.MainModule.FileName), "GMLOG");
+                    //item.param = StringHelper.RemoveDiacritics(item.param);
+                    list.AppendLine($"UPDATE cq_action SET param = '{item.param}' WHERE id = {item.id};");
                 }
-                else if(processes.Length >1)
-                {
-                    foreach (var process in processes)
-                    {
-                        Console.WriteLine($"{process.Id} - {process.ProcessName} - {process.MainModule.FileName}");
-                    }
-                    Console.Write($"Vui lòng chọn ứng dụng: ");
-                    var pid = Convert.ToInt32(Console.ReadLine());
-                    dirLog = Path.Combine(Path.GetDirectoryName(Process.GetProcessById(pid).MainModule.FileName), "GMLOG");
-                }
-                else
-                {
-                    Console.Write("Nhập đường dẫn tới thư mục GMLOG: ");
-                    dirLog = Console.ReadLine();
-                }
+
             }
-            else
-            {
-                dirLog = args.FirstOrDefault();
-            }
-            if(!Directory.Exists(dirLog))
-            {
-                Console.WriteLine($"Đường dẫn {dirLog} không tồn tại.");
-                Console.Read();
-                Environment.Exit(1);
-            }
-            Console.Title = dirLog;
-            ItemAddition.Tracking(new FileSystemEventArgs(WatcherChangeTypes.Changed, dirLog, GetItemAddName())).Wait();
-            CoreMerged.Tracking(new FileSystemEventArgs(WatcherChangeTypes.Changed, dirLog, GetCoreMergedName())).Wait();
-            Console.WriteLine(dirLog);
-            CreateFileWatcher(dirLog);
-            Console.ReadLine();
+            File.WriteAllText("cq_action_dec.sql", list.ToString());
+
         }
 
-
-
-        private static void CreateFileWatcher(string path)
+        static string GetUnicodeString(string input)
         {
-            FileSystemWatcher fileSystemWatcher = new FileSystemWatcher();
-            fileSystemWatcher.Path = path;
-            fileSystemWatcher.NotifyFilter = NotifyFilters.LastWrite;
-            fileSystemWatcher.Filter = "*.log";
-            fileSystemWatcher.Changed += Watcher_Changed;
-            fileSystemWatcher.EnableRaisingEvents = true;
-            _logger.Info((object)("Added watching file " + path));
+            string unicodeString = "";
+            foreach (char c in input)
+            {
+                unicodeString += "\\u" + ((int)c).ToString("X4");
+            }
+            return unicodeString;
         }
 
-        private static void Watcher_Changed(object sender, FileSystemEventArgs e)
+        static IEnumerable<cq_action> GetDatas()
         {
-            if (e.ChangeType == WatcherChangeTypes.Changed)
+            var source = File.ReadAllText(@"C:\Users\duynh2\Downloads\cq_action_copy1.sql", Encoding.UTF8);
+            var gb2312 = Encoding.GetEncoding("gb2312");
+            var str = source;
+            var lines = str.Split('\n');
+            for (int i = 0; i < lines.Length; i++)
             {
-                if (e.Name.StartsWith(ItemAdditionLog))
-                {
-                    ItemAddition.Tracking(e).Wait();
-                }
-                else if (e.Name.StartsWith(CoreMergedLog))
-                {
-                    CoreMerged.Tracking(e).Wait();
-                }
+                yield return cq_action.FromSqlInsert(lines[i]);
             }
         }
+
+        static List<cq_action> Update(cq_action item)
+        {
+            using (var http = new HttpClient())
+            {
+                var json = JsonConvert.SerializeObject(new
+                {
+                    sql = "UPDATE cq_action set param = ? where id = ?",
+                    payload = new object[] { item.param, item.id }
+                });
+                var request = new StringContent(json, Encoding.UTF8, "application/json");
+                Console.Write($"{item.id}=");
+                var response = http.PostAsync("http://103.188.166.96:3001/query2json", request);
+                response.Wait();
+                Console.WriteLine(response.Result.StatusCode);
+                var content = response.Result.Content.ReadAsStringAsync();
+                content.Wait();
+                return JsonConvert.DeserializeObject<List<cq_action>>(content.Result);
+            }
+        }
+
+
     }
 }

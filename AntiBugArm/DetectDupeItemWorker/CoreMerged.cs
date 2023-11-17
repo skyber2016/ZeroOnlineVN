@@ -23,13 +23,17 @@ internal class CoreMerged
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             _encoding = Encoding.GetEncoding("GB2312");
         }
-        
+        Console.WriteLine($"Begin tracking {fileName}");
         int lineNumbers = await GetLastLineNumber(fileName);
         var lines = (await GmLogService.GetLines(fileName, _encoding)).Skip(lineNumbers).GetEnumerator();
         while (lines.MoveNext())
         {
-            Console.WriteLine(lines.Current);
-            _logger.Info($"Tracking {lines.Current}");
+            if (!lines.Current.Trim().StartsWith("--"))
+            {
+                Console.WriteLine(lines.Current);
+                _logger.Info($"Tracking {lines.Current}");
+            }
+
             ++lineNumbers;
             string current = lines.Current;
             if (!current.StartsWith("主法宝的"))
@@ -62,29 +66,21 @@ internal class CoreMerged
                         _logger.Error((object)("Could not be found user " + item.RobotId));
                         continue;
                     }
-                    Item item2 = item;
-                    item2.IsValid = await ItemValid(item, user, fileName, lineNumbers);
+                    item.IsValid = await ItemValid(item, user, fileName, lineNumbers);
                     if (item.IsValid)
                     {
                         continue;
                     }
-                    if (!user.AccountHasBanned())
+                    string notification = GetNotification(item, user, fileName, lineNumbers);
+                    _logger.Info((object)notification);
+                    await SendNotification(notification);
+                    if (await user.DoBannedAccount())
                     {
-                        string notification = GetNotification(item, user, fileName, lineNumbers);
-                        _logger.Info((object)notification);
-                        await SendNotification(notification);
-                        if (await user.DoBannedAccount())
-                        {
-                            _logger.Info((object)("Account " + user.Username + " has been banned"));
-                        }
-                        else
-                        {
-                            _logger.Info((object)("Account " + user.Username + " blocking with error"));
-                        }
+                        _logger.Info((object)("Account " + user.Username + " has been banned"));
                     }
                     else
                     {
-                        _logger.Info((object)(user?.Username + " has been banned"));
+                        _logger.Info((object)("Account " + user.Username + " blocking with error"));
                     }
                     continue;
                 }
