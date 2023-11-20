@@ -45,7 +45,7 @@ namespace DetectDupeItem.Models
             bool num = await DatabaseService.ExecuteNonResult(queryPayload);
             if (num)
             {
-                Task.Run(async delegate
+                var _ = Task.Run(async delegate
                {
                    await WinService.BlockIP(IP);
                    await Task.Delay(60000 * 2);
