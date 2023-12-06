@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>dotnet-AutoUpdateService-67c37d29-cecc-4365-8f32-cd2ace3e45e3</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="log4net.config" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="log4net.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.32" />
+	<PackageReference Include="log4net" Version="2.0.15" />
+	<PackageReference Include="Microsoft.Extensions.Hosting.Systemd" Version="3.1.32" />
+	<PackageReference Include="Minio" Version="6.0.1" />
+	<PackageReference Include="SimpleTCP.Core" Version="1.0.4" />
+  </ItemGroup>
+</Project>

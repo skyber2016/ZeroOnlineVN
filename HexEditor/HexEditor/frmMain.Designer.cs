@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.tabControl = new System.Windows.Forms.TabControl();
+            this.tabPatches = new System.Windows.Forms.TabPage();
+            this.btnUpload = new System.Windows.Forms.Button();
             this.tab_worlds_dat = new System.Windows.Forms.TabPage();
             this.btnWorldsJson = new System.Windows.Forms.Button();
             this.btnWorldsDat = new System.Windows.Forms.Button();
@@ -43,6 +45,7 @@
             this.btnRobotTypeJson = new System.Windows.Forms.Button();
             this.btnRobotTypeDat = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
+            this.tabPatches.SuspendLayout();
             this.tab_worlds_dat.SuspendLayout();
             this.tabItemType.SuspendLayout();
             this.tabShop.SuspendLayout();
@@ -51,6 +54,7 @@
             // 
             // tabControl
             // 
+            this.tabControl.Controls.Add(this.tabPatches);
             this.tabControl.Controls.Add(this.tab_worlds_dat);
             this.tabControl.Controls.Add(this.tabItemType);
             this.tabControl.Controls.Add(this.tabShop);
@@ -62,6 +66,26 @@
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(307, 94);
             this.tabControl.TabIndex = 0;
+            // 
+            // tabPatches
+            // 
+            this.tabPatches.Controls.Add(this.btnUpload);
+            this.tabPatches.Location = new System.Drawing.Point(4, 23);
+            this.tabPatches.Name = "tabPatches";
+            this.tabPatches.Size = new System.Drawing.Size(299, 67);
+            this.tabPatches.TabIndex = 4;
+            this.tabPatches.Text = "Auto Patches";
+            this.tabPatches.UseVisualStyleBackColor = true;
+            // 
+            // btnUpload
+            // 
+            this.btnUpload.Location = new System.Drawing.Point(8, 3);
+            this.btnUpload.Name = "btnUpload";
+            this.btnUpload.Size = new System.Drawing.Size(283, 56);
+            this.btnUpload.TabIndex = 0;
+            this.btnUpload.Text = "Upload file Patches";
+            this.btnUpload.UseVisualStyleBackColor = true;
+            this.btnUpload.Click += new System.EventHandler(this.btnUpload_Click);
             // 
             // tab_worlds_dat
             // 
@@ -205,6 +229,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tool Hex Editor";
             this.tabControl.ResumeLayout(false);
+            this.tabPatches.ResumeLayout(false);
             this.tab_worlds_dat.ResumeLayout(false);
             this.tabItemType.ResumeLayout(false);
             this.tabShop.ResumeLayout(false);
@@ -228,6 +253,8 @@
         private System.Windows.Forms.TabPage tabRobottype;
         private System.Windows.Forms.Button btnRobotTypeJson;
         private System.Windows.Forms.Button btnRobotTypeDat;
+        private System.Windows.Forms.TabPage tabPatches;
+        private System.Windows.Forms.Button btnUpload;
     }
 }
 

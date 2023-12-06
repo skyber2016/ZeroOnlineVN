@@ -18,6 +18,7 @@ namespace DetectDupeItemCore
 {
     internal class Worker : BackgroundService
     {
+        public static CancellationToken ApplicationCancellationToken { get; set; }
         private readonly ILog _logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private readonly string ItemAdditionLog = "itemaddition_log";
         private readonly string CayThongLog = "CAYTHONG.log";
@@ -69,6 +70,7 @@ namespace DetectDupeItemCore
         }
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
+            ApplicationCancellationToken = stoppingToken;
             while (!stoppingToken.IsCancellationRequested)
             {
                 var tasks = new List<Task>
@@ -77,7 +79,7 @@ namespace DetectDupeItemCore
                     ExecuteTimer(ItemAdditionTimerHandle, 5000, stoppingToken),
                     ExecuteTimer(CoreMergedTimerHandle, 5000, stoppingToken)
                 };
-                Task.WaitAll(tasks.ToArray());
+                await Task.WhenAll(tasks);
                 await Task.Delay(1000, stoppingToken);
             }
         }

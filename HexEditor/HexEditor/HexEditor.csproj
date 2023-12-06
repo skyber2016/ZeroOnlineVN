@@ -93,6 +93,7 @@
     <Compile Include="Services\RobotTypeService.cs" />
     <Compile Include="Services\ShopService.cs" />
     <Compile Include="Services\ItemTypeService.cs" />
+    <Compile Include="Services\UploadService.cs" />
     <Compile Include="Services\WorldService.cs" />
     <Compile Include="Structures\Channel.cs" />
     <Compile Include="Structures\ItemType.cs" />

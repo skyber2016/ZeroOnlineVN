@@ -26,7 +26,7 @@ namespace HexEditor
         public int LoginPort;
 
         public byte[] Build() => MarshalHelper.StructToBytes(this, Marshal.SizeOf(typeof(Channel)));
-        
+
     }
 
 }

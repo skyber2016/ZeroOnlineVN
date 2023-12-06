@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using DetectDupeItemCore;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -18,7 +19,7 @@ namespace DetectDupeItem.Services
             {
                 http.BaseAddress = BaseAddress;
                 var content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json");
-                var res = await http.PostAsync("/query2json", content);
+                var res = await http.PostAsync("/query2json", content, Worker.ApplicationCancellationToken);
                 if (res.StatusCode == System.Net.HttpStatusCode.BadRequest)
                 {
                     var contentErr = await res.Content.ReadAsStringAsync();

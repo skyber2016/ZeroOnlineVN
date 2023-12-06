@@ -1,11 +1,4 @@
-﻿using HexEditor.Structures;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
+﻿using System;
 using System.Windows.Forms;
 
 namespace HexEditor
@@ -34,6 +27,6 @@ namespace HexEditor
             IntPtrHelper.Release();
         }
 
-        
+
     }
 }

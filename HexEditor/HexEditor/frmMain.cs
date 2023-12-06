@@ -10,6 +10,7 @@ namespace HexEditor
         private readonly ItemTypeService ItemTypeService = new ItemTypeService();
         private readonly ShopService ShopService = new ShopService();
         private readonly RobotTypeService RobotTypeService = new RobotTypeService();
+        private readonly UploadService UploadService = new UploadService();
         public frmMain()
         {
             InitializeComponent();
@@ -55,6 +56,11 @@ namespace HexEditor
         private void btnRobotTypeJson_Click(object sender, EventArgs e)
         {
             RobotTypeService.ImportJson();
+        }
+
+        private void btnUpload_Click(object sender, EventArgs e)
+        {
+            UploadService.DoUpload();
         }
     }
 }

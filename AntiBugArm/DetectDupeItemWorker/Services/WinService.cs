@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using DetectDupeItemCore;
+using Newtonsoft.Json;
 using System;
 using System.Net.Http;
 using System.Text;
@@ -23,7 +24,7 @@ namespace DetectDupeItem.Services
                     {
                         ip
                     }), Encoding.UTF8, "application/json");
-                    var response = await http.PostAsync("/block", content);
+                    var response = await http.PostAsync("/block", content, Worker.ApplicationCancellationToken);
                     Console.WriteLine($"Block IP {ip} response {response.StatusCode}");
                     _logger.Info($"Block IP {ip} response {response.StatusCode}");
                     var respContent = await response.Content.ReadAsStringAsync();
@@ -56,7 +57,7 @@ namespace DetectDupeItem.Services
                     {
                         ip
                     }), Encoding.UTF8, "application/json");
-                    var response = await http.PostAsync("/unblock", content);
+                    var response = await http.PostAsync("/unblock", content, Worker.ApplicationCancellationToken);
                     Console.WriteLine($"UnBlock IP {ip} response {response.StatusCode}");
                     _logger.Info($"UnBlock IP {ip} response {response.StatusCode}");
                     var respContent = await response.Content.ReadAsStringAsync();

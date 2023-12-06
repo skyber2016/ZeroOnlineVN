@@ -82,3 +82,11 @@ AntiBugArm/ReplaceUnicode/obj/Debug/ReplaceUnicode.csproj.AssemblyReference.cach
 AntiBugArm/ReplaceUnicode/obj/Debug/ReplaceUnicode.csproj.CoreCompileInputs.cache
 AntiBugArm/ReplaceUnicode/obj/
 AntiBugArm/ReplaceUnicode/bin/
+AntiBugArm/out/
+AutoUpdateServer/AutoPatchesApi/bin/
+AutoUpdateServer/AutoPatchesApi/obj/
+AutoUpdateServer/AutoUpdateServer/obj/
+AutoUpdateServer/AutoUpdateService/bin/
+AutoUpdateServer/AutoUpdateService/obj/
+Gateway/node_modules/
+AutoUpdateServer/AutoUpdateServer/bin/

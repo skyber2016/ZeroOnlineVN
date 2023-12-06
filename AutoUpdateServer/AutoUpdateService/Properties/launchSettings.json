@@ -1,0 +1,10 @@
+﻿{
+  "profiles": {
+    "AutoUpdateService": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

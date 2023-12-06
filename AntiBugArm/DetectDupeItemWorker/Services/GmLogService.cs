@@ -13,13 +13,18 @@ namespace DetectDupeItemCore.Services
         {
             using var http = new HttpClient();
             http.BaseAddress = BaseAddress;
-            var byteArray = await http.GetByteArrayAsync(fileName);
-            if (!byteArray.Any())
+            var res = await http.GetAsync(fileName, Worker.ApplicationCancellationToken);
+            if (res.IsSuccessStatusCode)
             {
-                return Array.Empty<string>();
+                var byteArray = await res.Content.ReadAsByteArrayAsync();
+                var text = encoding.GetString(byteArray);
+                return text.Split('\n').Where(x => !string.IsNullOrEmpty(x) && x != "\r").ToArray();
             }
-            var text = encoding.GetString(byteArray);
-            return text.Split('\n').Where(x => !string.IsNullOrEmpty(x) && x != "\r").ToArray();
+            else
+            {
+                Console.WriteLine($"GET request {fileName} response {res.StatusCode}");
+            }
+            return Array.Empty<string>();
         }
     }
 }

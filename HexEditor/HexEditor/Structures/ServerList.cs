@@ -41,7 +41,7 @@ namespace HexEditor
         public IntPtr UpdateServer(params Server[] servers)
         {
             var bytes = new List<byte>();
-            
+
             foreach (var server in servers)
             {
                 bytes.AddRange(server.Build());

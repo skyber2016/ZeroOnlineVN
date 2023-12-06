@@ -82,7 +82,7 @@ namespace HexEditor
                 {
                     return Array.Empty<Channel>();
                 }
-                
+
             }
             set
             {

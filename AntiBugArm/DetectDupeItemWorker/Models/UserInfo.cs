@@ -1,4 +1,5 @@
 ﻿using DetectDupeItem.Services;
+using DetectDupeItemCore;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
 
@@ -48,7 +49,7 @@ namespace DetectDupeItem.Models
                 var _ = Task.Run(async delegate
                {
                    await WinService.BlockIP(IP);
-                   await Task.Delay(60000 * 2);
+                   await Task.Delay(60000 * 2, Worker.ApplicationCancellationToken);
                    await WinService.UnblockIP(IP);
                });
             }

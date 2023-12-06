@@ -23,12 +23,15 @@ namespace HexEditor.Services
                     this.OpenDialogService.Reset();
                     return;
                 }
-                var stream = this.OpenDialogService.OpenFile();
-                using (var mem = new MemoryStream())
+                using (var stream = this.OpenDialogService.OpenFile())
                 {
-                    stream.CopyTo(mem);
-                    this.ExportToJson(mem.ToArray());
+                    using (var mem = new MemoryStream())
+                    {
+                        stream.CopyTo(mem);
+                        this.ExportToJson(mem.ToArray());
+                    }
                 }
+
             }
             this.OpenDialogService.Reset();
         }
@@ -62,11 +65,13 @@ namespace HexEditor.Services
                     this.OpenDialogService.Reset();
                     return;
                 }
-                var stream = this.OpenDialogService.OpenFile();
-                using (var mem = new MemoryStream())
+                using (var stream = this.OpenDialogService.OpenFile())
                 {
-                    stream.CopyTo(mem);
-                    this.ExportToDat(mem.ToArray());
+                    using (var mem = new MemoryStream())
+                    {
+                        stream.CopyTo(mem);
+                        this.ExportToDat(mem.ToArray());
+                    }
                 }
             }
             this.OpenDialogService.Reset();

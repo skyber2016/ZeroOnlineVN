@@ -41,11 +41,11 @@ namespace HexEditor.Structures
 
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 17)]
         [JsonProperty("robotname_17_ky_tu")]
-        public string robotname; 
+        public string robotname;
 
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 259)]
         [JsonProperty("NONE_259_ky_tu")]
-        public string NONE; 
+        public string NONE;
         public uint exp_type;
 
         public byte[] Build() => MarshalHelper.StructToBytes(this, Marshal.SizeOf(this));
@@ -59,7 +59,7 @@ namespace HexEditor.Structures
         [JsonIgnore]
         public IntPtr IdPtr;
         [JsonIgnore]
-        public IntPtr RobotTypePtr =>  this.IdPtr + (Total * Marshal.SizeOf(typeof(int)));
+        public IntPtr RobotTypePtr => this.IdPtr + (Total * Marshal.SizeOf(typeof(int)));
 
         [JsonIgnore]
         public int[] Ids

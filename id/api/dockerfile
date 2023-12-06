@@ -12,7 +12,7 @@ WORKDIR /app
 COPY --from=build /app/out ./
 
 # Khai báo cổng mà ứng dụng lắng nghe
-EXPOSE 8082
-ENV ASPNETCORE_URLS http://*:8082
+EXPOSE 5000
+
 # Khởi chạy ứng dụng khi container được khởi động
-ENTRYPOINT ["dotnet", "API.dll"]
+ENTRYPOINT ["dotnet", "API.dll", "--urls", "http://*:5000"]

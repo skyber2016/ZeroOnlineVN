@@ -1,0 +1,18 @@
+# Sử dụng một ảnh .NET Core 3.1 SDK để xây dựng ứng dụng
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
+WORKDIR /app
+
+# Sao chép toàn bộ mã nguồn ứng dụng và thực hiện xây dựng
+COPY . .
+RUN dotnet publish -c Release AutoPatchesApi -o out
+
+# Sử dụng ảnh ASP.NET Core 3.1 Runtime để chạy ứng dụng
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS runtime
+WORKDIR /app
+COPY --from=build /app/out ./
+
+# Khai báo cổng mà ứng dụng lắng nghe
+EXPOSE 5000
+
+# Khởi chạy ứng dụng khi container được khởi động
+ENTRYPOINT ["dotnet", "AutoPatchesApi.dll", "--urls", "http://*:5000"]

@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 
@@ -97,9 +96,9 @@ namespace HexEditor.Structures
             {
                 // Ghi đè lên list_item_id
                 this.Count = items.Length;
-                byteArray = items.Select(x=>x.id).SelectMany(x => BitConverter.GetBytes(x)).ToList();
+                byteArray = items.Select(x => x.id).SelectMany(x => BitConverter.GetBytes(x)).ToList();
             }
-            var dumyBytes = items.SelectMany(x=> MarshalHelper.StructToBytes(x, Marshal.SizeOf(x))).ToArray();
+            var dumyBytes = items.SelectMany(x => MarshalHelper.StructToBytes(x, Marshal.SizeOf(x))).ToArray();
             byteArray.AddRange(dumyBytes);
             this.ListIdPtr = MarshalHelper.BytesToPointer(byteArray.ToArray());
         }
@@ -146,13 +145,13 @@ namespace HexEditor.Structures
                 {
                     var offset = i * Marshal.SizeOf(typeof(ITEM_TYPE));
                     var item = (ITEM_TYPE)Marshal.PtrToStructure(this.ItemPtr + offset, typeof(ITEM_TYPE));
-                    if(item.id == 0)
+                    if (item.id == 0)
                     {
                         return Array.Empty<ITEM_TYPE>();
                     }
 
-                    item.name = StringHelper.RemoveDiacritics(item.name);
-                    item.Description = StringHelper.RemoveDiacritics(item.Description);
+                    //item.name = StringHelper.RemoveDiacritics(item.name);
+                    //item.Description = StringHelper.RemoveDiacritics(item.Description);
                     datas.Add(item);
                 }
                 return datas.ToArray();
@@ -176,10 +175,6 @@ namespace HexEditor.Structures
             var items = this.GetItems;
             foreach (var item in items)
             {
-                if (item.electric_def != 0)
-                {
-
-                }
                 builder.AddRange(MarshalHelper.StructToBytes(item, Marshal.SizeOf(item)));
             }
             return builder.ToArray();

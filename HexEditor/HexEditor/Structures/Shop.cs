@@ -15,7 +15,7 @@ namespace HexEditor.Structures
 
         public ushort Shape;
 
-        [JsonProperty("chua_ro_0")] 
+        [JsonProperty("chua_ro_0")]
         public byte Unknow0;
 
         [JsonProperty("vi_tri_X")]
@@ -133,7 +133,7 @@ namespace HexEditor.Structures
                 var source = gb2312.GetBytes(value).Take(16).ToArray();
                 var dest = new byte[16];
                 var len = source.Length;
-                if(source.Length > 16)
+                if (source.Length > 16)
                 {
                     len = 16;
                 }

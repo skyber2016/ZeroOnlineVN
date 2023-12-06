@@ -28,11 +28,6 @@ internal class CoreMerged
         var lines = (await GmLogService.GetLines(fileName, _encoding)).Skip(lineNumbers).GetEnumerator();
         while (lines.MoveNext())
         {
-            if (!lines.Current.Trim().StartsWith("--"))
-            {
-                Console.WriteLine(lines.Current);
-                _logger.Info($"Tracking {lines.Current}");
-            }
 
             ++lineNumbers;
             string current = lines.Current;
@@ -53,6 +48,9 @@ internal class CoreMerged
             {
                 continue;
             }
+
+            Console.WriteLine(lines.Current);
+            _logger.Info($"Tracking {lines.Current}");
             UserInfo user = null;
             Item item = null;
             try
