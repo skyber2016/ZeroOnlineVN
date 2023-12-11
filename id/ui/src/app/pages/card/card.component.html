@@ -1,34 +1,34 @@
 <div class="main-head">
   <div class="breadcrumbs1">
-    <a [routerLink]="['/']" class="tooltipstered">Home</a>
-    <a [routerLink]="routerContants.card.napThe" class="tooltipstered">Card recharge</a>
+    <a [routerLink]="['/']" class="tooltipstered">Trang Chủ</a>
+    <a [routerLink]="routerContants.card.napThe" class="tooltipstered">Nạp thẻ</a>
   </div>
-  <h1 class="module-title">Card recharge</h1>
+  <h1 class="module-title">Nạp thẻ cào</h1>
   <div class="page-tabs">
 
-    <div class="tab"><a [routerLink]="routerContants.card.ATM" class="tooltipstered">Deposit via bank <sup
+    <div class="tab"><a [routerLink]="routerContants.card.ATM" class="tooltipstered">Nạp qua ngân hàng <sup
       id="award_un"
-      class="badge badge-green">+5%
-      Zcoin</sup></a></div>
-    <div class="tab active"><a [routerLink]="routerContants.card.napThe" class="tooltipstered">Card recharge Viettel</a></div>
-    <div class="tab"><a [routerLink]="routerContants.card.history" class="tooltipstered">Support list</a></div>
+      class="badge badge-green">+20%
+      Gcoin</sup></a></div>
+    <div class="tab active"><a [routerLink]="routerContants.card.napThe" class="tooltipstered">Nạp thẻ Viettel</a></div>
+    <div class="tab"><a [routerLink]="routerContants.card.history" class="tooltipstered">Danh sách đã nạp</a></div>
   </div>
 </div>
 
 <div class="main-page">
   <div class="main-left">
     <div class="alert alert-blue">
-      <h3 class="alert-caption">Note</h3>
+      <h3 class="alert-caption">Lưu ý</h3>
       <ul class="alert-list">
-        <li>Admin will not be responsible and will not deal with the cases of wrongly loaded face value</li>
-        <li>The top-up value will change every session, everyone before loading the card, please read this item every day !</li>
-        <li>If bad message system. Please reload after 1 minutes!</li>
-        <li>Waiting time for card approval: 1-2 minutes.</li>
+        <li>BQT sẽ không chịu trách nhiệm và không giải quyết với các trường hợp nạp sai mệnh giá</li>
+        <li>Mệnh giá nạp sẽ thay đổi luôn phiên , mọi người trước khi nạp thẻ lưu ý đọc mục này mỗi ngày !</li>
+        <li>Nếu hệ thống báo sai. Vui lòng nạp lại sau 1 phút!</li>
+        <li>Thời gian chờ duyệt thẻ: 5-30 phút.</li>
       </ul>
     </div>
     <div class="main-body">
       <p>
-        <span style="margin-right: 20px">Zcoin are available</span>
+        <span style="margin-right: 20px">Số Gcoin hiện có</span>
         <span data-toggle="tooltip" data-placement="bottom" title="" data-original-title="GCent"
               style="margin-right: 20px">
                     <i class="ic ic-g"></i>
@@ -44,12 +44,12 @@
 
           <div class="form-box">
             <input type="text" class="form-input" name="card_serial" id="card_serial" required="" [(ngModel)]="serial">
-            <label for="card_serial">Number serial</label>
+            <label for="card_serial">Nhập serial</label>
           </div>
 
           <div class="form-box">
             <input name="card_num" id="card_num" class="form-input" required="" [(ngModel)]="code">
-            <label for="card_num">Card code</label>
+            <label for="card_num">Nhập mã thẻ</label>
           </div>
           <div class="suggest">
             <div id="msg_card_num"></div>
@@ -66,29 +66,29 @@
 
           <div class="form-box">
             <select name="menhgia" id="menhgia" class="form-select" [(ngModel)]="value">
-              <option value="0" selected="selected">Choose denomination</option>
-              <option value="10000">10.000 VIETTEL</option>
-              <option value="20000">20.000 VIETTEL</option>
-              <option value="50000">50.000 VIETTEL</option>
-              <option value="100000">100.000 VIETTEL</option>
-              <option value="200000">200.000 VIETTEL</option>
-              <option value="300000">300.000 VIETTEL</option>
-              <option value="500000">500.000 VIETTEL</option>
-              <option value="1000000">1.000.000 VIETTEL</option>
+              <option value="0" selected="selected">Chọn mệnh giá</option>
+              <option value="10000">10.000 VNĐ</option>
+              <option value="20000">20.000 VNĐ</option>
+              <option value="50000">50.000 VNĐ</option>
+              <option value="100000">100.000 VNĐ</option>
+              <option value="200000">200.000 VNĐ</option>
+              <option value="300000">300.000 VNĐ</option>
+              <option value="500000">500.000 VNĐ</option>
+              <option value="1000000">1.000.000 VNĐ</option>
             </select>
           </div>
           <div class="suggest">
-            <div id="msg_menhgia">Wrong denomination will lose card</div>
+            <div id="msg_menhgia">Sai mệnh giá sẽ mất thẻ</div>
           </div>
           <div class="form-box" style="margin-bottom: 50px" >
             <div class="form-check">
               <label class="form-check-label">
-                <input type="radio" class="form-check-input" name="optradio" disabled >Fast recharge
+                <input type="radio" class="form-check-input" name="optradio" disabled >Nạp nhanh
               </label>
             </div>
             <div class="form-check" style="margin-left: 8rem">
               <label class="form-check-label">
-                <input type="radio" class="form-check-input" checked name="optradio" (click)="statusClick(1)">Slow recharge
+                <input type="radio" class="form-check-input" checked name="optradio" (click)="statusClick(1)">Nạp chậm (+10%)
               </label>
             </div>
           </div>
@@ -99,9 +99,9 @@
       <span class="break"></span>
       <div class="act-btn">
         <button class="btn btn-primary btn-lg btn-block" id="btn_napthe" type="button" name="submit"
-                (click)="onSubmit()">Recharge card
+                (click)="onSubmit()">Nạp thẻ
         </button>
-            </div>
+      </div>
       <br>
       <div id="msg_napthe"></div>
     </div>
@@ -109,20 +109,20 @@
   </div>
   <div class="main-right">
     <div class="alert alert-primary" role="alert">
-      <h3 class="alert-caption">Note</h3>
+      <h3 class="alert-caption">Lưu ý</h3>
       <ul class="alert-list">
-        <li>- After loading the card, keep the card carefully and not let anyone know until <a
-          href="#napthe&amp;act=listcard" rel="ajax" class="tooltipstered">TRIAL STATUS</a> đit is the correct/completed Card.
+        <li>- Sau khi nạp thẻ phải giữ thẻ cẩn thận không cho một ai biết cho đến khi nào <a
+          href="#napthe&amp;act=listcard" rel="ajax" class="tooltipstered">TÌNH TRẠNG THẺ</a> đó là Thẻ đúng/hoàn tất.
         </li>
-        <li>- If your card is stolen and lost by someone else, we are not responsible at all.</li>
+        <li>- Nếu không thẻ của bạn bị người khác lấy và nạp mất thì chúng tôi hoàn toàn không chịu trách nhiệm.</li>
       </ul>
     </div>
     <div class="alert alert-white-secondary" role="alert">
-      <h3 class="alert-caption">Number of top-up cards of the day</h3>
+      <h3 class="alert-caption">Số thẻ nạp trong ngày</h3>
       <ul class="alert-list-column">
         <li>
-          <div class="l">Reset &lt; 1 times</div>
-          <div class="v">100 card / day</div>
+          <div class="l">Reset &lt; 1 lần</div>
+          <div class="v">100 thẻ / ngày</div>
         </li>
 
       </ul>

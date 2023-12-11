@@ -11,7 +11,7 @@ declare const $: any;
   styleUrls: ['./wheel.component.css']
 })
 export class WheelComponent implements OnInit {
-  version = version;
+  version = Date.now();
   private hieu_ung = {
     el: '#rotate-play',		//Set element
     stop_point: null,

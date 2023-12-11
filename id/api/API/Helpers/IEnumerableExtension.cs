@@ -2,13 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace API
 {
     public static class IEnumerableExtension
     {
-        private static Random rng = new Random();
         private static List<WheelItem> Items { get; set; }
         public static void Shuffle<T>(this IList<T> list)
         {
@@ -16,7 +16,7 @@ namespace API
             while (n > 1)
             {
                 n--;
-                int k = rng.Next(n + 1);
+                int k = RandomNumberGenerator.GetInt32(0, n + 1);
                 T value = list[k];
                 list[k] = list[n];
                 list[n] = value;
@@ -25,7 +25,7 @@ namespace API
 
         public static T ItemRandom<T>(this IList<T> list)
         {
-            return list[rng.Next(0 ,list.Count - 1)];
+            return list[RandomNumberGenerator.GetInt32(0 ,list.Count - 1)];
         }
 
         public static List<WheelItem> GetItems(this List<WheelItem> items)

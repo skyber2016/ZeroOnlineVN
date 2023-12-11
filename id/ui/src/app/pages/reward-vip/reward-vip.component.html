@@ -1,18 +1,18 @@
 <div class="main-head">
   <div class="breadcrumbs1">
-    <a [routerLink]="['/']" class="tooltipstered">Home</a>
-    <a [routerLink]="['/']" class="tooltipstered">Event</a>
-    <a class="active tooltipstered" href="#">Receive VIP gifts</a>
+    <a [routerLink]="['/']" class="tooltipstered">Trang Chủ</a>
+    <a [routerLink]="['/']" class="tooltipstered">Sự kiện</a>
+    <a class="active tooltipstered" href="#">Nhận quà mốc VIP</a>
 
   </div>
-  <h1 class="module-title">Receive VIP gifts</h1>
+  <h1 class="module-title">Nhận quà mốc VIP</h1>
 </div>
 <div class="alert alert-primary">
-  <p class="alert-caption">Note</p>
+  <p class="alert-caption">Lưu ý</p>
   <ul class="noted in-left-10">
-    <li><strong>Condition</strong> : You must reach the corresponding VIP milestone to be able to receive the reward and can only receive it once</li>
-    <li><strong>After receiving the reward</strong> : Please come <strong><a href="./assets/images/huong-dan-nhan-tien.png" target="_blank" style="color: blue">NPC Get Reward</a></strong> to receive gifts</li>
-    <li><strong>Click for NPC</strong> : <strong><a href="./assets/images/huong-dan-nhan-tien.png" target="_blank" style="color: blue">NPC Get Reward</a></strong></li>
+    <li><strong>Điều kiện</strong> : Bạn phải đạt mốc VIP tương ướng thì mới có thể nhận được phần thưởng và chỉ nhận được 1 lần duy nhất</li>
+    <li><strong>Sau khi nhận thưởng</strong> : Vui lòng đến <strong><a href="./assets/images/huong-dan-nhan-tien.png" target="_blank" style="color: blue">NPC Nhận thưởng</a></strong> để nhận quà</li>
+    <li><strong>Click để biết NPC</strong> : <strong><a href="./assets/images/huong-dan-nhan-tien.png" target="_blank" style="color: blue">NPC Nhận thưởng</a></strong></li>
   </ul>
 </div>
 <div class="main-body">
@@ -21,9 +21,9 @@
       <thead>
 
       <tr bgcolor="#FFFFFF">
-        <th align="center"><b>Level VIP</b></th>
-        <th align="center" width="500"><b>Reward</b></th>
-        <th align="center"><b>Get rewarded</b></th>
+        <th align="center"><b>Mốc VIP</b></th>
+        <th align="center" width="500"><b>Phần Thưởng</b></th>
+        <th align="center"><b>Nhận thưởng</b></th>
       </tr>
 
       </thead>
@@ -39,9 +39,9 @@
         <td align="center">
           <div class="group-popup2">
             <div class="box-popup box-popup-red" ></div>
-            <input *ngIf="reward.status === 0" value="Not reached" disabled="disabled" class="btn_tichluythe btn btn-green btn-block btn-lg" type="button">
-            <input *ngIf="reward.status === 1" value="Received the reward" disabled="disabled" class="btn_tichluythe btn btn-green btn-block btn-lg" type="button">
-            <input *ngIf="reward.status === 2" value="Get rewarded"  class="btn_tichluythe btn btn-green btn-block btn-lg" type="button" (click)="onSubmit(reward)">
+            <input *ngIf="reward.status === 0" value="Chưa đạt" disabled="disabled" class="btn_tichluythe btn btn-green btn-block btn-lg" type="button">
+            <input *ngIf="reward.status === 1" value="Đã nhận" disabled="disabled" class="btn_tichluythe btn btn-green btn-block btn-lg" type="button">
+            <input *ngIf="reward.status === 2" value="Nhận thưởng"  class="btn_tichluythe btn btn-green btn-block btn-lg" type="button" (click)="onSubmit(reward)">
           </div>
         </td>
       </tr>

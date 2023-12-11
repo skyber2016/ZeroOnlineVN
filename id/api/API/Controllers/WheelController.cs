@@ -13,6 +13,7 @@ using SqlKata.Execution;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Unity;
@@ -21,7 +22,6 @@ namespace API.Controllers
 {
     public class WheelController : GeneralController<WheelLogEntity>
     {
-        private static Random Rand = new Random();
 
         [Dependency]
         public IOptions<WheelSetting> WheelSetting { get; set; }
@@ -126,7 +126,7 @@ namespace API.Controllers
             {
                 Message = itemRand.Name,
                 WheelRemain = acc.Wheel,
-                Deg = Rand.Next(minDeg, maxDeg),
+                Deg = RandomNumberGenerator.GetInt32(minDeg, maxDeg),
                 Histories = histories.Select(x =>
                 {
                     var map = Mapper.Map<WheelLogResponse>(x);

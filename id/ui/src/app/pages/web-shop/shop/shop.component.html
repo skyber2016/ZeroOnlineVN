@@ -1,16 +1,16 @@
 <div class="main-head">
   <div class="breadcrumbs1">
-    <a [routerLink]="['/']" class="tooltipstered">Home</a>
-    <a class="tooltipstered">Web Store</a>
+    <a [routerLink]="['/']" class="tooltipstered">Trang Chủ</a>
+    <a class="tooltipstered">Cửa hàng</a>
   </div>
-  <h1 class="module-title">Web Store</h1>
+  <h1 class="module-title">Cửa hàng</h1>
 </div>
 <div class="alert alert-primary">
-  <p class="alert-caption">Note</p>
+  <p class="alert-caption">Lưu ý</p>
   <ul class="noted in-left-10">
-    <li>After purchasing, please come and pick it up at <strong><a href="./assets/images/huong-dan-nhan-tien.png" target="_blank"
-      style="color: blue">NPC Received</a></strong></li>
-</ul>
+    <li>Sau khi mua vui lòng đến nhận tại <strong><a href="./assets/images/huong-dan-nhan-tien.png" target="_blank"
+                                                     style="color: blue">NPC Nhận thưởng</a></strong></li>
+  </ul>
 </div>
 <div class="main-page">
   <div class="main-left">
@@ -29,11 +29,11 @@
                           class="card-img-top" alt="...">
                           <div class="card-body">
                             <div class="clearfix mb-3"> <span
-                              class="float-end price-hp">{{item.priceStr}} Zcoin</span><span
-                              class="float-start badge rounded-pill ml-2" [ngClass]="item.qty > 0 ? 'bg-primary' : 'bg-secondary'"> Remaining: {{item.qty}}</span></div>
+                              class="float-end price-hp">{{item.priceStr}} VNĐ</span><span
+                              class="float-start badge rounded-pill ml-2" [ngClass]="item.qty > 0 ? 'bg-primary' : 'bg-secondary'"> Còn lại: {{item.qty}}</span></div>
                             <h5 class="card-title">{{item.name}}</h5>
-                            <div class="text-center my-4"><a href="javascript:void(0);" style="border-radius:100px" class="btn btn-secondary" *ngIf="item.qty == 0">Out of stock</a></div>
-                            <div class="text-center my-4"><a href="javascript:void(0);" (click)="buyItem(item)" title="Click to buy, no need to confirm" class="btn btn-warning" *ngIf="item.qty > 0">Buy now</a></div>
+                            <div class="text-center my-4"><a href="javascript:void(0);" style="border-radius:100px" class="btn btn-secondary" *ngIf="item.qty == 0">Hết hàng</a></div>
+                            <div class="text-center my-4"><a href="javascript:void(0);" (click)="buyItem(item)" title="Click là mua luôn, không cần xác nhận" class="btn btn-warning" *ngIf="item.qty > 0">Mua ngay</a></div>
                           </div>
                         </div>
                       </div>
