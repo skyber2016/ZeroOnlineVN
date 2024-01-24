@@ -25,6 +25,20 @@
 
   <ItemGroup>
     <None Include="bundleconfig.json" />
+    <None Include="Views\Home\Detail.cshtml" />
+    <None Include="Views\Home\Index.cshtml" />
+    <None Include="Views\Home\News.cshtml" />
+    <None Include="Views\Home\_Banner.cshtml" />
+    <None Include="Views\Home\_Header.cshtml" />
+    <None Include="Views\Home\_Left.cshtml" />
+    <None Include="Views\Home\_Main1.cshtml" />
+    <None Include="Views\Home\_Main2.cshtml" />
+    <None Include="Views\Home\_Main3.cshtml" />
+    <None Include="Views\News\Index.cshtml" />
+    <None Include="Views\Shared\Error.cshtml" />
+    <None Include="Views\Shared\_DetailLayout.cshtml" />
+    <None Include="Views\Shared\_Layout.cshtml" />
+    <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
   </ItemGroup>
 
   <ItemGroup>

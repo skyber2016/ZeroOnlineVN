@@ -6,8 +6,10 @@ const path = require('path');
 const winston = require('winston');  require('winston-daily-rotate-file');
 const {mid} = require('./mid');
 const {fnAuthentication} = require('./authentication');
+const cors = require('cors');
 
 const app = express();
+app.use(cors());
 const port = 3000;
 // Tạo một đối tượng transport DailyRotateFile
 const dailyRotateFileTransport = new winston.transports.DailyRotateFile({
@@ -32,7 +34,7 @@ app.use(bodyParser.json());
 
 // Middleware to log requests
 app.use((req, res, next) => {
-  console.log(`FROM ${req.method} ${req.url} ${JSON.stringify(req.body)}`);
+  console.log(`REQUEST ${req.method} ${req.url} ${JSON.stringify(req.body)}`);
   next();
 });
 
@@ -51,8 +53,25 @@ app.post('/', (req, res) => {
   if (!decData) {
     return res.sendStatus(415);
   }
-  const { clientPublicKey } = decData;
-  return res.json(cryptoService.encrypt(decData, clientPublicKey));
+  const { clientPublicKey, request } = decData;
+  console.log({mid, request});
+  if(mid[decData.mid]){
+    const midInfo = mid[decData.mid];
+    axios({
+      method: midInfo.method,
+      url: midInfo.url,
+      data: request
+    }).then(response => {
+      const enc = cryptoService.encrypt({code: response.status, message: 'SUCCESS', data: response.data}, clientPublicKey);
+      return res.status(200).json(enc);
+    }, error => {
+      logger.error(error.message);
+      const enc = cryptoService.encrypt({code: 500, message: 'System error'}, clientPublicKey);
+      return res.status(200).json(enc);
+    })
+  } else{
+    return res.sendStatus(404);
+  }
 });
 
 app.post('/auth/login', (req, res) => {

@@ -7,10 +7,9 @@ const cryptoService = {
         // Tạo một đôi khóa mới (đôi khóa RSA với độ dài 1024 bits)
         const keyPair = forge.pki.rsa.generateKeyPair(1024);
         // Trích xuất khóa công khai
-        const publicKeyPem = forge.pki.publicKeyToPem(keyPair.publicKey);
-        return forge.util.encode64(publicKeyPem);
+        return forge.pki.publicKeyToPem(keyPair.publicKey);
     },
-    encrypt: (json, publicKeyBase64) => {
+    encrypt: (json, publicKeyPEM) => {
         try {
             // Step 1: Gen aes-256 key và iv (dạng binary)
             const aesKey = forge.random.getBytesSync(32);
@@ -29,8 +28,7 @@ const cryptoService = {
             const encryptedData = Buffer.concat([Buffer.from(iv, 'binary'), Buffer.from(cipher.output.data, 'binary')]);
       
             // convert dữ liệu finalBytes ra base64
-            const PEM = forge.util.decode64(publicKeyBase64);
-            const publicKey = forge.pki.publicKeyFromPem(PEM);
+            const publicKey = forge.pki.publicKeyFromPem(publicKeyPEM);
             const encryptedKey = publicKey.encrypt(forge.util.encode64(aesKey));
       
             return {
