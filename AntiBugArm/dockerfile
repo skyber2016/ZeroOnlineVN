@@ -10,6 +10,6 @@ RUN dotnet publish -c Release DetectDupeItemWorker -o out
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS runtime
 WORKDIR /app
 COPY --from=build /app/out ./
-
+ENV TZ="Asia/Ho_Chi_Minh"
 # Khởi chạy ứng dụng khi container được khởi động
 ENTRYPOINT ["dotnet", "DetectDupeItemWorker.dll"]

@@ -23,10 +23,10 @@ const routes: Routes = [
         path: 'nap-the/atm',
         loadChildren: () => import('../../atm/atm.module').then(m => m.AtmModule)
       },
-      {
-        path: 'doi-tien',
-        loadChildren: () => import('../../coin-to-zps/coin-to-zps.module').then(m => m.CoinToZpsModule)
-      },
+      // {
+      //   path: 'doi-tien',
+      //   loadChildren: () => import('../../coin-to-zps/coin-to-zps.module').then(m => m.CoinToZpsModule)
+      // },
       {
         path: 'nhan-thuong-vip',
         loadChildren: () => import('../../reward-vip/reward-vip.module').then(m => m.RewardVipModule)
