@@ -97,9 +97,6 @@ namespace API.Cores
                         await Task.Delay(5000, stoppingToken);
                         continue;
                     }
-                    else {
-                        this.Logger.Info($"BOT STATE {this.Client.ConnectionState}");
-                    }
 
                     if (this.Client.ConnectionState == ConnectionState.Disconnected)
                     {
@@ -131,10 +128,6 @@ namespace API.Cores
                 {
                     await this.CongTien(content, arg.Channel);
                 }
-                else if (command == BotCommand.GiftCode && content.Length == 4)
-                {
-                    await this.GiftCode(content, arg.Channel);
-                }
             }
             catch (Exception ex)
             {
@@ -144,48 +137,14 @@ namespace API.Cores
 
         }
 
-        private async Task GiftCode(string[] command, IMessageChannel channel)
-        {
-            try
-            {
-                var code = command[1];
-                var itemId = command[2];
-                var type = command[3];
-                if (string.IsNullOrEmpty(code) || string.IsNullOrEmpty(itemId) || string.IsNullOrEmpty(type))
-                {
-                    throw new FormatException();
-                }
-                var typeCode = Convert.ToInt32(type);
-                if(typeCode != GiftCodeTypeConstant.SINGLE && typeCode != GiftCodeTypeConstant.MULTIPLE)
-                {
-                    throw new FormatException();
-                }
-                var giftCode = new GiftCodeEntity
-                {
-                    Code = code,
-                    ItemId = Convert.ToInt32(itemId),
-                    Type = typeCode
-                };
-                await this.GiftCodeService.AddAsync(giftCode);
-                var build = new StringBuilder();
-                build.AppendLine($"-------- **Tạo Gift Code** --------");
-                build.AppendLine($"**Gift Code**: {code}");
-                var loaiCode = typeCode == GiftCodeTypeConstant.SINGLE ? "1 cho 1" : "1 cho nhiều";
-                build.AppendLine($"**Loại**: { loaiCode }");
-                build.AppendLine($"**Action ID**: { giftCode.ItemId }");
-                await channel.SendMessageAsync(build.ToString());
-            }
-            catch (FormatException)
-            {
-                await channel.SendMessageAsync("Cú pháp không hợp lệ. **/code {mã} {action_id} {loại} '1': 1 cho 1 - '2': 1 cho nhiều tài khoản**");
-            }
-            
-        }
-
         private async Task CongTien(string[] command, IMessageChannel channel)
         {
             try
             {
+                if(channel.Id != AppSettings.ChannelCongTien)
+                {
+                    return;
+                }
                 var webmoney = Convert.ToInt32(command[2]);
                 var username = command[1];
                 var account = await this.AccountService.SingleBy(new { name = username });
@@ -263,7 +222,7 @@ namespace API.Cores
             }
             catch (Exception ex)
             {
-                await channel.SendMessageAsync(ex.Message);
+                await channel.SendMessageAsync(ex.GetBaseException().Message);
                 this.WriteError(ex);
             }
         }
