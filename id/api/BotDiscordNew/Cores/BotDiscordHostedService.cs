@@ -209,20 +209,20 @@ namespace API.Cores
                         }, tran);
                         this.Logger.Info(builder.ToString());
                     });
-                    await channel.SendMessageAsync("Cộng tiền thành công, vui lòng kiểm tra kênh report");
+                    await channel.SendMessageAsync($"{AppSettings.ServerName}\nCộng tiền thành công, vui lòng kiểm tra kênh report");
                 }
                 else
                 {
-                    await channel.SendMessageAsync("Tài khoản này không tồn tại");
+                    await channel.SendMessageAsync($"{AppSettings.ServerName}\nTài khoản này không tồn tại");
                 }
             }
             catch (FormatException)
             {
-                await channel.SendMessageAsync("Cú pháp không hợp lệ. **/congtien username SoTien**");
+                await channel.SendMessageAsync($"{AppSettings.ServerName}\nCú pháp không hợp lệ. **/congtien username SoTien**");
             }
             catch (Exception ex)
             {
-                await channel.SendMessageAsync(ex.GetBaseException().Message);
+                await channel.SendMessageAsync($"{AppSettings.ServerName}\n"+ex.GetBaseException().Message);
                 this.WriteError(ex);
             }
         }
@@ -252,17 +252,7 @@ namespace API.Cores
                     var text = data.Message.Base64Decode();
                     if (text != null && channel != null)
                     {
-                        //if (data.Image != null)
-                        //{
-                        //    using (var r = new StreamReader(AppSettings.PathToImage + data.Image))
-                        //    {
-                        //        await channel.SendFileAsync(r.BaseStream, data.Image, data.Message.Base64Decode());
-                        //    }
-                        //}
-                        //else
-                        //{
-                        //    await channel.SendMessageAsync(text);
-                        //}
+                        text = $"-------------**{AppSettings.ServerName}**-------------\n{text}";
                         await channel.SendMessageAsync(text);
                     }
                     else

@@ -97,6 +97,42 @@ app.post('/unblock', (req, res) => {
 	});
 })
 
+app.get('/connection', (req, res) => {
+	const { ip, port } = req.query;
+	if (!ip || !port) {
+		res.status(400);
+		res.end();
+		return;
+	}
+	exec(`netstat -an | findstr :${port}`, (error, stdout, stderr) => {
+		if (error) {
+			res.status(400).json(error).end();
+		  	return;
+		}
+	
+		const connections = stdout.split('\n').filter(line => line.includes('ESTABLISHED'));
+		const currentConnections = connections.filter(connection => connection.includes(ip));
+		if (currentConnections.length > 0) {
+			res.status(200).json({
+				message:`IP ${ip} đang truy cập cổng ${port}`,
+				count: currentConnections.length,
+				currents: currentConnections.map(x => x.trim()),
+				connections: connections.map(x => x.trim())
+			}).end();
+		  } else {
+			res.status(400).json({
+				message:`Không có kết nối nào từ IP ${ip}`,
+				count: currentConnections.length,
+				currents: currentConnections.map(x => x.trim()),
+				connections: connections.map(x => x.trim())
+			}).end();
+		  }
+		connections.forEach(connection => {
+		  
+		});
+	  });
+})
+
 app.listen(port, () => {
 	console.log(`App listening on port ${port}`)
 })
