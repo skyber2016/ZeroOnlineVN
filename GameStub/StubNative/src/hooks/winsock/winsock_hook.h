@@ -13,8 +13,8 @@
 
 namespace winsock_hook
 {
-	void init();
-	void destroy();
+	void Init();
+	void Destroy();
 	// Hooked send function
 	int WINAPI hooked_send(SOCKET s, const char* buf, int len, int flags);
 	// Hooked recv function

@@ -1,10 +1,31 @@
-#include <iostream>
+﻿#include <iostream>
 #include <Windows.h>
+#include <string>
+#include <vector>
 
 using namespace std;
 
+std::vector<unsigned char> utf8ToBytes(const std::string& utf8) {
+	std::vector<unsigned char> bytes(utf8.begin(), utf8.end());
+	return bytes;
+}
+
+std::string byteToUtf8(const std::vector<unsigned char>& bytes) {
+	std::string utf8String;
+	utf8String.reserve(bytes.size()); // Dự trữ không gian cho chuỗi UTF-8
+
+	for (unsigned char byte : bytes) {
+		utf8String.push_back(byte);
+	}
+
+	return utf8String;
+}
+
 int main(int argc, char* argv[])
 {
+
+	std::cout << u8"Chào thế giới!" << std::endl;
+	
 	LPCSTR DllPath = argv[1]; // The Path to our DLL
 
 	HWND hwnd = FindWindowA(NULL, "ZeroOnline"); // HWND (Windows window) by Window Name

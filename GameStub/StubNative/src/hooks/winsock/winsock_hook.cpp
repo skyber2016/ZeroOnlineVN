@@ -2,7 +2,7 @@
 using namespace global_variables;
 namespace winsock_hook
 {
-	void init()
+	void Init()
 	{
 		DetourTransactionBegin();
 		DetourUpdateThread(GetCurrentThread());
@@ -17,7 +17,7 @@ namespace winsock_hook
 
 		DetourTransactionCommit();
 	}
-	void destroy()
+	void Destroy()
 	{
 		DetourTransactionBegin();
 		DetourUpdateThread(GetCurrentThread());
@@ -61,10 +61,18 @@ namespace winsock_hook
 	// Hàm connect hook
 	int WINAPI hook_connect(SOCKET s, const sockaddr* name, int namelen)
 	{
-		std::cout << "Hooked connect called!" << std::endl;
-		CurrentSOCKET = s;
-		connectName = name;
-		// Gọi hàm connect gốc
-		return oConnect(s, name, namelen);
+		try
+		{
+			std::cout << "Hooked connect called!" << std::endl;
+			CurrentSOCKET = s;
+			connectName = name;
+			// Gọi hàm connect gốc
+			return oConnect(s, name, namelen);
+		}
+		catch (const std::exception&)
+		{
+			return 0;
+		}
+
 	}
 }

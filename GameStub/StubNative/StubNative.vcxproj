@@ -81,7 +81,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;STUBEXTEND_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;STUBEXTEND_EXPORTS;_WINDOWS;_USRDLL;_AFXDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -93,7 +93,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>detours.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>psapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -150,6 +150,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="IEmoneyChk.h" />
+    <ClInclude Include="src\helpers\sigscan.hpp" />
+    <ClInclude Include="src\hooks\graphic\graphic_hook.h" />
+    <ClInclude Include="src\hooks\mfc\invoke_hook.h" />
     <ClInclude Include="src\actions\default\default_action.h" />
     <ClInclude Include="src\actions\login\login_action.h" />
     <ClInclude Include="src\actions\action_factory.h" />
@@ -162,11 +166,15 @@
     <ClInclude Include="src\sockets\socket.h" />
     <ClInclude Include="src\hooks\winsock\winsock_hook.h" />
     <ClInclude Include="src\variables\type_definations.hpp" />
+    <ClInclude Include="src\helpers\win_helper.hpp" />
     <ClInclude Include="third_party\includes\detours.h" />
     <ClInclude Include="third_party\includes\detver.h" />
+    <ClInclude Include="third_party\includes\ShockwaveFlashObjects.h" />
     <ClInclude Include="third_party\includes\syelog.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\hooks\graphic\graphic_hook.cpp" />
+    <ClCompile Include="src\hooks\mfc\invoke_hook.cpp" />
     <ClCompile Include="src\actions\default\default_action.cpp" />
     <ClCompile Include="src\actions\login\login_action.cpp" />
     <ClCompile Include="src\actions\action_factory.cpp" />
