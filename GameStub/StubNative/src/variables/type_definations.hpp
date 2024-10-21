@@ -21,16 +21,14 @@ enum RENDER_TEXT_STYLE {
 };
 
 struct CMyPos {
-	int x;
-	int y;
-
-	CMyPos(int x = 0, int y = 0) : x(x), y(y) {}
+	int x; // Tọa độ x
+	int y; // Tọa độ y
 };
 
 
-typedef void(__cdecl* ShowString_t)		(int, int, unsigned long, const char*, const char*, int, int, RENDER_TEXT_STYLE, unsigned long, CMyPos&);
-typedef void(__cdecl* ShowTString_t)	(int, int, unsigned long, char const*, char const*, int, int, RENDER_TEXT_STYLE, unsigned long, CMyPos&);
-typedef void(__cdecl* ShowStringEx_t)	(int, int, unsigned long, char const*, char const*, int, int, RENDER_TEXT_STYLE, unsigned long, CMyPos&);
+typedef void(__cdecl* ShowString_t)		(int, int, unsigned long, const char*, const char*, int, int, RENDER_TEXT_STYLE, unsigned long, CMyPos*);
+typedef void(__cdecl* ShowTString_t)	(int, int, unsigned long, char const*, char const*, int, int, RENDER_TEXT_STYLE, unsigned long, CMyPos*);
+typedef void(__cdecl* ShowStringEx_t)	(int, int, unsigned long, char const*, char const*, int, int, RENDER_TEXT_STYLE, unsigned long, CMyPos*);
 typedef HRESULT(APIENTRY* Reset_t) (LPDIRECT3DDEVICE8 pDevice, D3DPRESENT_PARAMETERS* pPresentationParameters);
 typedef HRESULT(APIENTRY* Present_t)(LPDIRECT3DDEVICE8 pDevice, CONST RECT* pSourceRect, CONST RECT* pDestRect, HWND hDestWindowOverride, CONST RGNDATA* pDirtyRegion);
 typedef HRESULT(__stdcall* EndScene_t)(IDirect3DDevice8* pDevice);

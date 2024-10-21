@@ -6,15 +6,16 @@
 #include "../variables/global_variables.hpp"
 #include "../variables/type_definations.hpp"
 
+
 class ActionFactory
 {
 protected:
-	int WINAPI CallSend(const char* buf, int len, int flag);
-	int WINAPI CallRecv(char* buf, int len, int flag);
+	int WINAPI CallSend(SOCKET s, const char* buf, int len, int flag);
+	int WINAPI CallRecv(SOCKET s, char* buf, int len, int flag);
 public:
 
-	virtual int WINAPI Send(const char* buf, int len, int flag);
-	virtual int WINAPI Recv(char* buf, int len, int flag);
+	virtual int WINAPI Send(SOCKET s, const char* buf, int len, int flag);
+	virtual int WINAPI Recv(SOCKET s, char* buf, int len, int flag);
 
 	ActionFactory* GetAction(const char* buf, int len, int flag);
 };

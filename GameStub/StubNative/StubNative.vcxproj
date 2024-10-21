@@ -151,6 +151,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="IEmoneyChk.h" />
+    <ClInclude Include="src\actions\item_addtion\item_addtion_request.h" />
+    <ClInclude Include="src\datas\item_addtion_packet.hpp" />
     <ClInclude Include="src\helpers\sigscan.hpp" />
     <ClInclude Include="src\hooks\graphic\graphic_hook.h" />
     <ClInclude Include="src\hooks\mfc\invoke_hook.h" />
@@ -173,6 +175,7 @@
     <ClInclude Include="third_party\includes\syelog.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\actions\item_addtion\item_addtion_request.cpp" />
     <ClCompile Include="src\hooks\graphic\graphic_hook.cpp" />
     <ClCompile Include="src\hooks\mfc\invoke_hook.cpp" />
     <ClCompile Include="src\actions\default\default_action.cpp" />

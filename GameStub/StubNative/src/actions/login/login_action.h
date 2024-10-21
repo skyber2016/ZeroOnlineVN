@@ -7,8 +7,8 @@ class LoginAction : public ActionFactory
 {
 private:
 public:
-	int WINAPI Send(const char* buf, int len, int flag) override;
-	int WINAPI Recv(char* buf, int len, int flag) override;
+	int WINAPI Send(SOCKET s, const char* buf, int len, int flag) override;
+	int WINAPI Recv(SOCKET s, char* buf, int len, int flag) override;
 };
 
 #endif // !LOGIN_ACTION_H

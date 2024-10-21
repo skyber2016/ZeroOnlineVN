@@ -1,4 +1,7 @@
 ﻿#include "winsock_hook.h"
+
+#pragma comment(lib, "WS2_32.Lib")
+
 using namespace global_variables;
 namespace winsock_hook
 {
@@ -24,6 +27,7 @@ namespace winsock_hook
 
 		DetourDetach(&(PVOID&)oSend, hooked_send);
 		DetourDetach(&(PVOID&)oRecv, hooked_recv);
+		DetourDetach(&(PVOID&)oConnect, hook_connect);
 
 		DetourTransactionCommit();
 	}
@@ -36,7 +40,7 @@ namespace winsock_hook
 		}
 		ActionFactory* factory = new ActionFactory();
 		ActionFactory* actionExecutor = factory->GetAction(buf, len, flags);
-		auto ret =  actionExecutor->Send(buf, len, flags);
+		auto ret =  actionExecutor->Send(s, buf, len, flags);
 		delete actionExecutor;
 		delete factory;
 		return ret;
@@ -51,7 +55,7 @@ namespace winsock_hook
 		}
 		ActionFactory* factory = new ActionFactory();
 		ActionFactory* actionExecutor = factory->GetAction(buf, len, flags);
-		auto ret = actionExecutor->Recv(buf, len, flags);
+		auto ret = actionExecutor->Recv(s, buf, len, flags);
 		
 		delete actionExecutor;
 		delete factory;
@@ -59,20 +63,8 @@ namespace winsock_hook
 	}
 
 	// Hàm connect hook
-	int WINAPI hook_connect(SOCKET s, const sockaddr* name, int namelen)
+	int WINAPI hook_connect(SOCKET socket, const sockaddr* name, int namelen)
 	{
-		try
-		{
-			std::cout << "Hooked connect called!" << std::endl;
-			CurrentSOCKET = s;
-			connectName = name;
-			// Gọi hàm connect gốc
-			return oConnect(s, name, namelen);
-		}
-		catch (const std::exception&)
-		{
-			return 0;
-		}
-
+		return oConnect(socket, name, namelen);
 	}
 }

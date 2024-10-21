@@ -16,7 +16,7 @@ namespace graphic_hook
 	inline Present_t oPresent = nullptr;
 	inline EndScene_t originalEndScene = nullptr;
 	DWORD_PTR* FindDevice(DWORD Base, DWORD Len);
-	void __cdecl Hooked_ShowString(int a, int b, unsigned long c, const char* text, const char* e, int f, int g, RENDER_TEXT_STYLE h, unsigned long i, CMyPos& j);
+	void __cdecl Hooked_ShowString(int a, int b, unsigned long c, const char* text, const char* e, int f, int g, RENDER_TEXT_STYLE h, unsigned long i, CMyPos* pos);
 	HRESULT __stdcall Hooked_EndScene(IDirect3DDevice8* pDevice);
 	//HRESULT __stdcall Hooked_Present(LPDIRECT3DDEVICE8 pDevice, CONST RECT* pSourceRect, CONST RECT* pDestRect, HWND hDestWindowOverride, CONST RGNDATA* pDirtyRegion);
 };
