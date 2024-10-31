@@ -75,7 +75,7 @@ namespace DetectDupeItemCore
             {
                 var tasks = new List<Task>
                 {
-                    ExecuteTimer(CayThongTimerHandle, 2000, stoppingToken),
+                    //ExecuteTimer(CayThongTimerHandle, 2000, stoppingToken),
                     ExecuteTimer(ItemAdditionTimerHandle, 5000, stoppingToken),
                     ExecuteTimer(CoreMergedTimerHandle, 5000, stoppingToken)
                 };

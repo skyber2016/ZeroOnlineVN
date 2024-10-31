@@ -25,6 +25,10 @@ namespace DetectDupeItem.Services
                     var contentErr = await res.Content.ReadAsStringAsync();
                     _logger.Error($"Query error {contentErr}");
                 }
+                if (!res.IsSuccessStatusCode)
+                {
+                    throw new Exception($"Server response status {res.StatusCode}");
+                }
                 return await callback(res);
             }
         }
@@ -46,10 +50,11 @@ namespace DetectDupeItem.Services
                 {
                     var jsonContent = await response.Content.ReadAsStringAsync();
                     var model = JsonConvert.DeserializeObject<List<T>>(jsonContent);
+                    _logger.Info($"{JsonConvert.SerializeObject(data)} response {model.Count} items");
                     return model;
                 }
                 _logger.Error($"Query server response status fail {response.StatusCode}: {JsonConvert.SerializeObject(data)}");
-                return new List<T>();
+                throw new Exception($"Server response status {response.StatusCode}");
             });
             return resp;
         }

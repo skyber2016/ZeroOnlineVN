@@ -34,7 +34,7 @@ namespace API.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var items = await this.GeneralService.FindBy().OrderByDesc("id").GetAsync<WebShopItemEntity>();
+            var items = await this.GeneralService.FindBy().OrderBy("created_date").GetAsync<WebShopItemEntity>();
             var response = items.Select(x => {
                 var map = Mapper.Map<WebShopItemGetResponse>(x);
                 map.Name = map.Name.Base64Decode();

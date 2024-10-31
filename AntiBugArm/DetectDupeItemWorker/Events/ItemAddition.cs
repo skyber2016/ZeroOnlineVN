@@ -179,22 +179,32 @@ internal static class ItemAddition
         {
             return true;
         }
-        QueryPayload queryPayload = new QueryPayload();
-        queryPayload.Sql = "SELECT * FROM " + WebDupeItemEntity.GetTableName() + " WHERE second_id = ? AND second_type = ?";
-        queryPayload.Payload = new object[2] { item.SecondId, item.SecondTypeId };
-        if ((await DatabaseService.Execute<WebDupeItemEntity>(queryPayload)).Any())
-        {
-            _logger.Info((object)$"Detected user_id={user.UserId} username={user.Username} robot_id={item.RobotId} account_id={user.AccountId} item_id={item.SecondId} file_name={fileName} line_number={lineNumber} used item not existed");
-            return false;
-        }
-        queryPayload = new QueryPayload();
+        //QueryPayload queryPayload = new QueryPayload();
+        //queryPayload.Sql = "SELECT * FROM " + WebDupeItemEntity.GetTableName() + " WHERE second_id = ? AND second_type = ?";
+        //queryPayload.Payload = new object[2] { item.SecondId, item.SecondTypeId };
+        //if ((await DatabaseService.Execute<WebDupeItemEntity>(queryPayload)).Any())
+        //{
+        //    _logger.Info((object)$"Detected user_id={user.UserId} username={user.Username} robot_id={item.RobotId} account_id={user.AccountId} item_id={item.SecondId} file_name={fileName} line_number={lineNumber} used item not existed");
+        //    return false;
+        //}
+        var queryPayload = new QueryPayload();
         queryPayload.Sql = "SELECT id FROM cq_itemex WHERE id = ?";
         queryPayload.Payload = new object[1] { item.SecondId };
         if ((await DatabaseService.Execute<ItemExEntity>(queryPayload)).Any())
         {
-            _logger.Info((object)$"Detected user_id={user.UserId} username={user.Username} player_name={item.PlayerName} account_id={user.AccountId} item_id={item.PrimaryId} file_name={fileName} line_number={lineNumber} used item not existed");
+            _logger.Info((object)$"Found in cq_itemex user_id={user.UserId} username={user.Username} player_name={item.PlayerName} account_id={user.AccountId} item_id={item.PrimaryId} file_name={fileName} line_number={lineNumber} used item not existed");
             return false;
         }
+
+        queryPayload = new QueryPayload();
+        queryPayload.Sql = "SELECT id FROM cq_item WHERE id = ?";
+        queryPayload.Payload = new object[1] { item.SecondId };
+        if ((await DatabaseService.Execute<ItemExEntity>(queryPayload)).Any())
+        {
+            _logger.Info((object)$"Found in cq_item user_id={user.UserId} username={user.Username} player_name={item.PlayerName} account_id={user.AccountId} item_id={item.PrimaryId} file_name={fileName} line_number={lineNumber} used item not existed");
+            return false;
+        }
+
         return true;
     }
 

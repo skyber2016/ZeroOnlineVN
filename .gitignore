@@ -96,3 +96,5 @@ TcpForward/build/
 TcpForward/TcpSharp/bin/
 TcpForward/TcpSharp/obj/
 GameStub/build
+/TcpForward/TcpProxy/bin
+/TcpForward/TcpProxy/obj
