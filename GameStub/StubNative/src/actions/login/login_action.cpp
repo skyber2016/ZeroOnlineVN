@@ -1,11 +1,11 @@
 #include "login_action.h"
-int WINAPI LoginAction::Send(const char* buf, int len, int flag)
+int WINAPI LoginAction::Send(SOCKET s, const char* buf, int len, int flag)
 {
-	return this->CallSend(buf, len, flag);
+	return this->CallSend(s, buf, len, flag);
 }
 
 
-int WINAPI LoginAction::Recv(char* buf, int len, int flag)
+int WINAPI LoginAction::Recv(SOCKET s, char* buf, int len, int flag)
 {
-	return this->CallRecv(buf, len, flag);
+	return this->CallRecv(s, buf, len, flag);
 }

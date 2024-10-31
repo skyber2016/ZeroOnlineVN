@@ -2,8 +2,8 @@
 #include <iostream>
 #include "../datas/base_request.hpp"
 #include "login/login_action.h"
-#include "../variables/global_variables.hpp"
 #include "default/default_action.h"
+#include "item_addtion/item_addtion_request.h"
 
 using namespace global_variables;
 
@@ -19,25 +19,29 @@ ActionFactory* ActionFactory::GetAction(const char* buf, int len, int flag)
 	{
 		return new LoginAction();
 	}
-	return new DefaultAction;
+	if (baseRequest->len == 32 && baseRequest->type == DataType::ItemAddtionReq)
+	{
+		return new ItemAddtionRequest();
+	}
+	return new DefaultAction();
 
 }
 
-int WINAPI ActionFactory::Send(const char* buf, int len, int flag)
+int WINAPI ActionFactory::Send(SOCKET s, const char* buf, int len, int flag)
 {
-	return this->CallSend(buf, len, flag);
+	return oSend(s, buf, len, flag);
 }
 
-int WINAPI ActionFactory::Recv(char* buf, int len, int flag)
+int WINAPI ActionFactory::Recv(SOCKET s, char* buf, int len, int flag)
 {
-	return this->CallRecv(buf, len, flag);
+	return oRecv(s, buf, len, flag);
 }
 
-int WINAPI ActionFactory::CallSend(const char* buf, int len, int flag)
+int WINAPI ActionFactory::CallSend(SOCKET s,const char* buf, int len, int flag)
 {
-	return oSend(global_variables::CurrentSOCKET, buf, len, flag);
+	return oSend(s, buf, len, flag);
 }
-int WINAPI ActionFactory::CallRecv(char* buf, int len, int flag)
+int WINAPI ActionFactory::CallRecv(SOCKET s, char* buf, int len, int flag)
 {
-	return oRecv(global_variables::CurrentSOCKET, buf, len, flag);
+	return oRecv(s, buf, len, flag);
 }

@@ -1,17 +1,19 @@
 #include "hook_managers.h"
 namespace hook_managers
 {
-	void initialized()
+	void Initialized()
 	{
-		winsock_hook::init();
+		winsock_hook::Init();
+		graphic_hook::Init();
 		_isInitialized = true;
 	}
 
-	void destroy()
+	void Destroy()
 	{
 		if (_isInitialized)
 		{
-			winsock_hook::destroy();
+			winsock_hook::Destroy();
+			graphic_hook::Destroy();
 		}
 		_isInitialized = false;
 	}
