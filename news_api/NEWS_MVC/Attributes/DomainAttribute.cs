@@ -34,7 +34,7 @@ namespace NEWS_MVC.Attributes
         {
             var context = this.Accessor.HttpContext;
             var schema = context.Request.Scheme;
-            var domain = "zeroonlinevn.com";
+            var domain = "zeroonlinevn.online";
             if (subdomain == null)
             {
                 return $"{schema}://{domain}";

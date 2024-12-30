@@ -3,19 +3,19 @@
 @{
     var thumbnail = this.ViewBag.Thumbnail as string;
     Layout = "~/Views/Shared/_DetailLayout.cshtml";
-    ViewData["Title"] = "Danh sách bài viết";
+    ViewData["Title"] = "List of articles";
 }
 <div class="main-cont clearfix">
     <div class="main-cont-title">
-        <h3>Bài viết<span>INFORMATION</span></h3>
-        <p><span>Vị trí của bạn：</span><a href="/trang-chu">Trang chủ</a> > <a href="/bai-viet">Bài viết</a></p>
+        <h3>Article<span>INFORMATION</span></h3>
+        <p><span>Your location：</span><a href="/trang-chu">Home</a> > <a href="/bai-viet">Article</a></p>
     </div>
     <div id="tabSwiper" class="list">
         <div class="tab" id="newsBtn">
-            <a href="javascript:;" class="active" title=""><i></i>Tất cả</a>
-            <a href="javascript:;" class="" title=""><i></i>Sự kiện</a>
-            <a href="javascript:;" class="" title=""><i></i>Hoạt động</a>
-            <a href="javascript:;" class="" title=""><i></i>Hướng dẫn</a>
+            <a href="javascript:;" class="active" title=""><i></i>All</a>
+            <a href="javascript:;" class="" title=""><i></i>Event</a>
+            <a href="javascript:;" class="" title=""><i></i>Activity</a>
+            <a href="javascript:;" class="" title=""><i></i>Guide</a>
         </div>
         <div class="newslist">
             <div class="swiper-container tab-swiper" id="newsSwiper">
@@ -129,9 +129,9 @@
                                 controlsalways: false,
                                 next: '>',
                                 prev: '<',
-                                first: 'Trang đầu',
-                                last: 'Trang cuối',
-                                go: 'Trang sau',
+                                first: 'Front page',
+                                last: 'Last page',
+                                go: 'Next page',
                                 onchange: function (newPage) {
                                     setData(newPage);
                                 }
@@ -142,10 +142,10 @@
             };
 
             var fragment = function () {
-                newsFragmentWriteFn(0, '#allList', '#allPage', 'alls', 'Tất cả');
-                newsFragmentWriteFn(1, '#eventList', '#eventPage', 'events', 'Sự kiện');
-                newsFragmentWriteFn(2, '#actList', '#actPage', 'activities', 'Hoạt động');
-                newsFragmentWriteFn(3, '#guildList', '#guildPage', 'guilds', 'Hướng dẫn');
+                newsFragmentWriteFn(0, '#allList', '#allPage', 'alls', 'All');
+                newsFragmentWriteFn(1, '#eventList', '#eventPage', 'events', 'Event');
+                newsFragmentWriteFn(2, '#actList', '#actPage', 'activities', 'Activity');
+                newsFragmentWriteFn(3, '#guildList', '#guildPage', 'guilds', 'Guide');
             };
             var init = function () {
                 tabFun();

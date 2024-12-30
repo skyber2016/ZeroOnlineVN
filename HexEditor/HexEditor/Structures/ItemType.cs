@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace HexEditor.Structures
 {
@@ -147,7 +148,8 @@ namespace HexEditor.Structures
                     var item = (ITEM_TYPE)Marshal.PtrToStructure(this.ItemPtr + offset, typeof(ITEM_TYPE));
                     if (item.id == 0)
                     {
-                        return Array.Empty<ITEM_TYPE>();
+                        MessageBox.Show("Có lỗi ITEM_ID=0. Vui lòng kiểm tra trong file .json");
+                        //return Array.Empty<ITEM_TYPE>();
                     }
 
                     //item.name = StringHelper.RemoveDiacritics(item.name);
