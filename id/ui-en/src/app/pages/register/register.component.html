@@ -1,0 +1,56 @@
+<section id="content">
+  <form method="post" name="register">
+    <div class="form-2">
+      <h1>Sign up now</h1>
+      <div class="form-box">
+        <input type="text" class="form-input" id="username" autocomplete="off"  maxlength="12" required="required" [(ngModel)]="username" (ngModelChange)="username = username.toLowerCase()" autofocus="true" [ngModelOptions]="{standalone: true}">
+        <label for="username">Account</label>
+      </div>
+
+      <div class="line"></div>
+
+
+      <div class="form-box">
+        <input type="password" class="form-input" id="passweb1" autocomplete="off" name="pass1" maxlength="12" required="required" [(ngModel)]="password" [ngModelOptions]="{standalone: true}">
+        <label for="passweb1">Password</label>
+      </div>
+
+      <div class="form-box">
+        <input type="email" class="form-input" id="email" autocomplete="off" name="email" maxlength="50" required="required" [(ngModel)]="email" [ngModelOptions]="{standalone: true}">
+        <label for="email">Email</label>
+      </div>
+
+
+      <div class="form-box">
+
+        <select id="question" name="quest" class="form-select" [(ngModel)]="question" [ngModelOptions]="{standalone: true}">
+          <option label="What is your favorite animal?" value="1">What is your favorite animal?</option>
+          <option label="What is the name of your elementary school?" value="2">What is the name of your elementary school?</option>
+          <option label="Who is your dearest friend?" value="3">Who is your dearest friend?</option>
+          <option label="What is your favorite game?" value="4">What is your favorite game?</option>
+          <option label="The place that left the most unforgettable memories?" value="5">The place that left the most unforgettable memories?</option>
+        </select>
+      </div>
+
+      <div class="form-box">
+        <input type="text" class="form-input" id="answer" name="ans" required="" [(ngModel)]="answer" maxlength="50" [ngModelOptions]="{standalone: true}">
+        <label for="answer">The secret answer</label>
+      </div>
+
+      <div class="form-box">
+        <input type="text" class="form-input" id="phone" name="tel" required="required" maxlength="10" [(ngModel)]="sdt" [ngModelOptions]="{standalone: true}">
+        <label for="phone">10 optional numbers</label>
+      </div>
+
+      <div class="captcha">
+        <button class="button button-blue" (click)="onRegister()" type="button" id="btn-register" name="submit" value="REGISTER ACCOUNT">
+          <i class="fa fa-clock-o"></i>
+          <strong> REGISTER</strong>
+        </button>
+        <br>
+
+      </div>
+
+    </div>
+  </form>
+</section>

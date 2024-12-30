@@ -1,0 +1,31 @@
+# Sử dụng một ảnh cơ sở có Node.js
+FROM node:16-alpine AS build
+
+# Đặt thư mục làm việc mặc định trong Docker
+WORKDIR /app
+
+# Sao chép package.json và package-lock.json để cài đặt các phụ thuộc
+COPY package*.json ./
+
+# Cài đặt các phụ thuộc
+RUN npm install --force
+
+# Sao chép tất cả các tệp trong thư mục gốc của dự án Angular vào hình ảnh
+COPY . .
+
+# Xây dựng ứng dụng Angular
+RUN npm run build
+
+RUN rm -rf node_modules
+
+# Sử dụng Nginx để phục vụ ứng dụng đã xây dựng
+FROM nginx:alpine
+
+COPY ./nginx.conf /etc/nginx/nginx.conf
+
+COPY ./mime.types /etc/nginx/mime.types
+
+COPY --from=build /app/dist/id/ /usr/share/nginx/html
+
+# Cổng mặc định cho Nginx là 80, bạn có thể sửa đổi nếu cần
+EXPOSE 80

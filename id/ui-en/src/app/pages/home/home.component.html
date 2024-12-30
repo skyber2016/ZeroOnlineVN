@@ -1,0 +1,55 @@
+<div class="main-head">
+  <div class="breadcrumbs1">
+    <a href="index.php" class="tooltipstered"><i class="fas fa-home-lg"></i> Home</a>
+
+    <a class="active tooltipstered" href="#char_manager"><i class="fal fa-user-check"></i> Zero Online duy nhất tại International</a>
+  </div>
+  <h1 class="module-title">Zero Online International<br>
+    <font color="red" style="
+    font-size: 13px;
+"> View news at : <a href="https://zeroonlinevn.online" target="_blank">https://zeroonlinevn.online</a></font></h1>
+
+</div>
+<div class="main-body">
+  <div class="aiq-action">
+    <ul>
+      <li>
+        <span class="label">Account</span>
+        <span class="value"><strong class="primary-color">{{username}}</strong></span>
+        <span class="action"></span>
+      </li>
+      <li>
+        <span class="label">Game Password</span>
+        <span class="value"><i class="fas fa-ellipsis-h"></i><i class="fas fa-ellipsis-h"></i><i
+          class="fas fa-ellipsis-h"></i></span>
+        <span class="action"><a routerLink="/doi-mat-khau" class="tooltipstered"><i class="fas fa-cogs"></i> <span
+          class="text-option">Edit</span></a></span>
+      </li>
+      <li>
+        <span class="label">Phone Number</span>
+        <span class="value"><i class="fas fa-ellipsis-h"></i><i class="fas fa-ellipsis-h"></i></span>
+        <span class="action"><a href="#acc_manager&amp;act=changesdt_sms" rel="ajax" class="tooltipstered"><i
+          class="fas fa-cogs"></i> <span class="text-option">Edit</span></a></span>
+      </li>
+      <li>
+        <span class="label">Secret Question</span>
+        <span class="value"></span>
+        <span class="action"><a href="#acc_manager&amp;act=changequest" rel="ajax" class="tooltipstered"><i
+          class="fas fa-cogs"></i> <span class="text-option">Edit</span></a></span>
+      </li>
+      <li class="not-hover" *ngIf="data">
+        <span><img [src]="getVIP(data.vip)" alt=""></span>
+        <span class="value">
+          <p class="text-center mb-0" *ngIf="data.percent != '100'">{{data.current}} / <span class="text-danger" style="font-weight: bold">{{data.total}}</span></p>
+          <div class="progress">
+            <div class="progress-bar" style="background-color: #007bff" role="progressbar" [ngStyle]="{width: data.percent + '%'}" aria-valuenow="25"
+                 aria-valuemin="0" aria-valuemax="100">{{data.percent}}%</div>
+          </div>
+        </span>
+        <span class="action"><img  [src]="getVIP(data.vip + 1)" alt=""></span>
+      </li>
+
+
+    </ul>
+  </div>
+</div>

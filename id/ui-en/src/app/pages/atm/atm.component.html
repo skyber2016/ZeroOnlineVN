@@ -1,0 +1,114 @@
+<div class="main-head">
+  <div class="breadcrumbs1">
+    <a [routerLink]="['/']" class="tooltipstered">Home</a>
+    <a [routerLink]="routerContants.card.napThe" class="tooltipstered">Top up card</a>
+  </div>
+  <h1 class="module-title">Scratch card top-up</h1>
+  <div class="page-tabs">
+
+    <div class="tab active"><a [routerLink]="routerContants.card.ATM" class="tooltipstered">Deposit through the bank <sup
+      id="award_un"
+      class="badge badge-green">+10%
+      Gcoin</sup></a></div>
+    <div class="tab"><a [routerLink]="routerContants.card.napThe" class="tooltipstered">Card Viettel</a></div>
+    <div class="tab"><a [routerLink]="routerContants.card.history" class="tooltipstered">Loaded list</a></div>
+  </div>
+  <div class="alert alert-primary">
+    <div class="alert-caption">Note</div>
+    <ul class="alert-list">
+      <li>ATM top-up is promoted into the main account</li>
+      <li>Review time is 1 to 3 minutes</li>
+      <li>Please take a screenshot of the receipt after the transfer and send it to the Admin if the money has not been credited after 1 to 3 minutes</li>
+      <li>Click on the QR code and use the QR scanning feature in the app to enter information more quickly and accurately.</li>
+      <li style="color: red;font-weight: bold">After making the transfer, please take a screenshot of the receipt and click on confirm transfer for the Admin to verify.</li>
+
+    </ul>
+
+  </div>
+  <div class="text-center w-100" style="margin-left: 40%;padding-bottom: 10px;margin: 5px; font-size: 22px;">
+    <div class="col-md-3">
+        <span>Photo of the money transfer receipt</span>
+    </div>
+    <div class="col-md-3">
+      <input type="file" id="file-upload" placeholder=""  class="form-control">
+      <button class="btn btn-success" style="font-size: 22px" (click)="onConfirm()">Transfer confirmation</button>
+    </div>
+    <div class="col-md-3"></div>
+  </div>
+  <div class="section-content">
+    <div class="charge">
+      <div class="charge-form charge-bank">
+        <div class="logo-bank">
+          <span  class="bank-item momo"><img  src="/assets/HT/images/mb.png" alt=""></span>
+        </div>
+
+        <div class="bank-tabs">
+          <div class="tab active">
+            <div class="form">
+              <div class="promo">Deposit money <span>Gcash</span> to be encouraged to continue further <strong>+10%</strong></div>
+              <ul class="list-form form-charge">
+                <li id="chonthe">
+                  <span class="label">Gcash number</span>
+                  <div class="value">09666211925</div>
+                </li>
+                <li>
+                  <span class="label">Gcash name</span>
+                  <div class="value">A***R N</div>
+                </li>
+                <li>
+                  <span class="label">Bank</span>
+                  <div class="value">Gcash E-Wallet</div>
+                </li>
+              </ul>
+              <blockquote>
+                <div class="cap">Note:</div>
+                <ul class="cont">
+                  <li>When making a transfer, please specify the details as follows: <strong class="transfer-text"> {{username}} ZCoin</strong></li>
+                </ul>
+              </blockquote>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class="break"></span>
+  <div class="section-content" id="momo_pay">
+    <div class="charge">
+      <div class="charge-form charge-bank">
+        <div class="logo-bank">
+          <span  class="bank-item momo"><img width="130" src="/assets/HT/images/momo.png" alt=""></span>
+        </div>
+
+        <div class="bank-tabs">
+          <div class="tab active">
+            <div class="form">
+              <div class="promo">Deposit money <span>Paypal</span> to be encouraged to continue further <strong>+10%</strong></div>
+              <ul class="list-form form-charge">
+                <li id="chonthe">
+                  <span class="label">Paypal Account</span>
+                  <div class="value">9105509181</div>
+                </li>
+                <li>
+                  <span class="label">Paypal Name</span>
+                  <div class="value">@ammar1629</div>
+                </li>
+                <li>
+                  <span class="label">Application</span>
+                  <div class="value">Paypal</div>
+                </li>
+              </ul>
+              <blockquote>
+                <div class="cap">Note:</div>
+                <ul class="cont">
+                  <li>When making a transfer, please specify the details as follows: <strong class="transfer-text"> {{username}} ZCoin</strong></li>
+                </ul>
+              </blockquote>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

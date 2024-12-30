@@ -1,0 +1,289 @@
+<img id="dhtmlpointer" src="/assets/HT/show/tooltiparrow.gif">
+<!--End Showtip-->
+<div id="dhtmltooltip"></div>
+<div class="wrap-fluid ">
+  <div class="content">
+    <div class="container">
+      <div class="topuser">
+        <div class="topbar navbar-expand-lg navbar-dark">
+          <button class="navbar-toggler btn-acc" type="button" data-toggle="collapse" data-target="#navbarTopbar"
+                  aria-controls="navbarTopbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <button class="navbar-toggler btn-menu-bar" type="button" data-toggle="collapse" data-target="#navbarCategory"
+                  aria-controls="navbarCategory" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-tasks"></i>
+          </button>
+          <div class="collapse navbar-collapse topbar-container" id="navbarTopbar">
+            <div class="acc-info">
+              <div class="quick-action">
+                <div class="dropdown">
+                  <button class="btn dropdown-toggle" type="button" id="dropdownMenuQuickAction" data-toggle="dropdown"
+                          aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-ellipsis-v" data-toggle="tooltip" data-placement="bottom" title=""
+                       data-original-title="Truy cập nhanh"></i>
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuQuickAction">
+                    <a class="dropdown-item" routerLink="/doi-mat-khau">Change password</a>
+                  </div>
+                </div>
+              </div>
+              <div class="acc-info-content">
+                <div class="aic-top">
+                  <span class="label-name">Account:</span>
+                  <a href="#acc_manager">
+                    <span class="name"> {{fullName}}</span>
+                  </a>
+                </div>
+                <div class="aic-bottom">
+                  <i class="fas fa-sign-out-alt"></i>
+                  <span>
+											<form>
+													<input type="button" (click)="onLogout()" name="submit" value="Thoát"
+                                 style="
+    background: #ffffff00;
+    color: #ffbf00;
+    border: 1px solid #f9914100;
+    font-weight: bold;
+    margin-left: -25px;
+    cursor: pointer;
+">
+													</form>
+												</span>
+                  <span data-toggle="tooltip" data-placement="bottom" title="" id="vip" *ngIf="vip > 0 && this.sub"
+                        [attr.data-original-title]="getTitle()">
+
+													<img [src]="getUrlVip()" alt="" height="30px">
+                    <span class="badge badge-primary" style="background-color: #007bff">{{percent}}%</span>
+												</span>
+                  <span data-toggle="tooltip" data-placement="bottom" title="" id="head_wcoin"
+                        data-original-title="ZCoin hiện có">
+													<i class="ic ic-w"></i>
+													<span> {{money}}</span>
+												</span>
+
+                </div>
+              </div>
+            </div>
+            <div class="acc-action">
+              <div class="links">
+                <a href="https://zeroonlinevn.online" target="_blank">
+                  <i class=" fa fa-home"></i> Home
+                </a>
+                <a href="http://download.zeroonlinevn.online" target="_blank">
+                  <i class="fal fa-download"></i> Download Game
+                </a>
+                <a href="https://zeroonlinevn.online" target="_blank">
+                  <i class=" fa fa-comments"></i> News
+                </a>
+                <a href="https://www.facebook.com/ZeroSeverVN" target="_blank">
+                  <i class="fab fa-facebook-square"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-left">
+        <div class="left-content">
+          <ul class="navigation"></ul>
+        </div>
+      </div>
+      <div class="col-right">
+        <div class="right-content">
+          <div class="main-block">
+            <div class="main-right" style="position: fixed">
+              <div id="Login_Content">
+                <div class="priority-block out-top-20 out-top-20 character-wrap-block">
+                  <br>
+                  <br>
+                  <div class="character-block">
+                    <!--chon nv!-->
+                    <!--sau khi chon-->
+                    <div id="char_view">
+                      <div class="selected-character" id="reload_char">
+                        <div class="image-character nocharacter"></div>
+                        <div class="info-character"></div>
+                      </div>
+                    </div>
+                    <br/>
+                    <div class="bank-jewel">
+                      <ul>
+                        <div clas="text-center">
+                          <a href="#">
+                            <strong>Support</strong>
+                            <span class="tag1 tag1-time">09666211925</span>
+                          </a>
+                        </div>
+                      </ul>
+                    </div>
+                    <div class="menu collapse" id="navbarCategory">
+                      <div class="menu-primary ">
+                        <ul class="category">
+                          <li class="cat-item">
+																		<span>
+																			<i class="fa fa-gift"></i>&emsp;&emsp;GifCode
+																			<i class="fas fa-angle-down"></i>
+																		</span>
+                            <ul class="sub-menu">
+                              <li class="sub-item" *ngIf="isAdmin">
+                                <a routerLink="/gift-code/create">Create GiftCode</a>
+                              </li>
+                              <li class="sub-item">
+                                <a routerLink="/gift-code">Receive the reward
+                                  GiftCode</a>
+                              </li>
+                              <li class="sub-item">
+                                <a routerLink="/gift-code/lich-su">History GiftCode</a>
+                              </li>
+                            </ul>
+                          </li>
+                          <li class="cat-item">
+																		<span>
+																			<i class="fa fa-edit"></i>&emsp;&emsp;Account
+																			<i
+                                        class="fas fa-angle-down"></i>
+																		</span>
+                            <ul class="sub-menu">
+                              <li class="sub-item">
+                                <a routerLink="/doi-mat-khau">Change game password</a>
+                              </li>
+                              <li class="sub-item">
+                                <a href="#acc_manager&act=changesdt_sms" rel="ajax">Change phone number</a>
+                              </li>
+                              <li class="sub-item">
+                                <a href="#acc_manager&act=changequest" rel="ajax">Change the password question</a>
+                              </li>
+                            </ul>
+                          </li>
+                          <li class="cat-item">
+																		<span>
+																			<i class="fa fa-shopping-cart"></i>&emsp;&emsp;Store
+																			<i class="fas fa-angle-down"></i>
+																		</span>
+                            <ul class="sub-menu">
+                              <li class="sub-item">
+                                <a routerLink="/cua-hang">Item</a>
+                              </li>
+                              <li class="sub-item" *ngIf="isAdmin">
+                                <a routerLink="/cua-hang/quan-ly">Store management</a>
+                              </li>
+                              <li class="sub-item">
+                                <a routerLink="/tich-luy-tieu-phi">Accumulated consumption</a>
+                              </li>
+                              <li class="sub-item"  *ngIf="isAdmin">
+                                <a routerLink="/tich-luy-tieu-phi/vat-pham">Expense management</a>
+                              </li>
+                            </ul>
+                          </li>
+
+                          <li class="cat-item">
+																		<span>
+																			<i class="fal fa-calendar-alt"></i>&emsp;&emsp;VIP Recharge Gift
+																			<i class="fas fa-angle-down"></i>
+																		</span>
+                            <ul class="sub-menu">
+                              <li class="sub-item">
+                                <a [routerLink]="['nhan-thuong-vip']" rel="ajax">Receive VIP milestone rewards</a>
+                              </li>
+                              <!-- <li class="sub-item">
+                                <a href="#questdaily" rel="ajax">Daily tasks</a>
+                              </li>
+                              <li class="sub-item">
+                                <a href="#event&act=event_topcard" rel="ajax">Wealth</a>
+                              </li> -->
+                            </ul>
+                          </li>
+                          <!-- <li class="cat-item">
+																		<span>
+																			<i class="fal fa-donate"></i>&emsp;&emsp;Bank
+																			<i
+                                        class="fas fa-angle-down"></i>
+																		</span>
+                            <ul class="sub-menu">
+                              <li class="sub-item">
+                                <a [routerLink]="['/doi-tien']">Exchange Zcoin for Zps.</a>
+                              </li>
+                            </ul>
+                          </li> -->
+                          <li class="cat-item" *ngif="false">
+																		<span>
+																			<i class="fal fa-university"></i>&emsp;&emsp;Top Up Card
+																			<i class="fas fa-angle-down"></i>
+																		</span>
+                            <ul class="sub-menu">
+                              <li class="sub-item">
+                                <a [routerLink]="routerContant.card.ATM">Top up Gcash-Paypal
+                                  <span
+                                    class="badge badge-green">+ 10 %</span>
+                                </a>
+                              </li>
+                              <li class="sub-item">
+                                <a [routerLink]="routerContant.card.ATM">Wallet-Paypal
+                                  <span
+                                    class="badge badge-green">+ 10 %</span>
+                                </a>
+                              </li>
+                              <li class="sub-item">
+                                <a [routerLink]="[routerContant.card.napThe]">Top up the card</a>
+                              </li>
+                              <li class="sub-item">
+                                <a [routerLink]="routerContant.card.history">Top-up history</a>
+                              </li>
+                            </ul>
+                          </li>
+                          <li class="cat-item">
+																		<span>
+																			<i class="fal fa-calendar-star"></i>&emsp;&emsp;The Wheel
+																			<i
+                                        class="fas fa-angle-down"></i>
+																		</span>
+                            <ul class="sub-menu">
+                              <li class="sub-item">
+                                <a routerLink="/vong-quay">Prize Wheel</a>
+                              </li>
+                            </ul>
+                          </li>
+                          <li class="cat-item">
+																		<span>
+																			<i class="fa fa-trophy"></i>&emsp;&emsp;Ranking
+																			<i
+                                        class="fas fa-angle-down"></i>
+																		</span>
+                            <ul class="sub-menu">
+                              <li class="sub-item">
+                                <a [routerLink]="['xep-hang/luc-chien']">Ranking Potency</a>
+                              </li>
+                              <li class="sub-item">
+                                <a routerLink="/xep-hang/ham-doi">Fleet Ranking</a>
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                        <!--
+                  <div class="menu-collap"><span class="collap-icon"></span><span class="collap-text">Thu gọn</span></div>
+                -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="main-left">
+              <div class="in-right-30">
+                <div id='BlockLeft'>
+                  <div id='hienthi'>
+                    <router-outlet></router-outlet>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--end main-left-->
+          </div>
+          <!--end main-block-->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Menu khi xem DT-->
+</div>

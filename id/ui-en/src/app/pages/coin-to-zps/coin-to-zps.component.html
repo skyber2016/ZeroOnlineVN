@@ -1,0 +1,59 @@
+<div class="main-head">
+  <div class="breadcrumbs1">
+    <a [routerLink]="['/']" class="tooltipstered">Home</a>
+    <a [routerLink]="routerContants.card.napThe" class="tooltipstered">Top up the card</a>
+  </div>
+  <h1 class="module-title">Convert ZCoin to ZPs.</h1>
+</div>
+<div class="alert alert-primary">
+  <p class="alert-caption">Note</p>
+  <ul class="noted in-left-10">
+    <li>After converting, you need to <strong>LOG IN AGAIN</strong> to receive ZPs.</li>
+    <li>After purchasing, please come to collect at <strong><a href="./assets/images/huong-dan-nhan-tien.png" target="_blank"
+                                                     style="color: blue">NPC Receives Gifts.</a></strong></li>
+  </ul>
+</div>
+<div class="main-page">
+  <div class="main-left">
+    <div class="main-body">
+      <p>
+        <span style="margin-right: 20px">Zcoin Number</span>
+        <span data-toggle="tooltip" data-placement="bottom" title="" data-original-title="GCent"
+              style="margin-right: 20px">
+                    <i class="ic ic-g"></i>
+                    <span>x {{money}}</span>
+                </span>
+
+      </p>
+      <span class="break"></span>
+      <input type="hidden" name="loaithe" id="loaithe" value="viettel">
+      <div class="cash-section">
+
+        <div class="cash-form-block" style="max-width: 500px; margin: 0 auto;">
+
+          <div class="form-box">
+            <input name="card_num" id="card_num" class="form-input" required="" [(ngModel)]="value" type="number" min="0" [max]="money">
+            <label for="card_num">Enter the amount of Zcoin you want to exchange.</label>
+          </div>
+          <div class="suggest">
+            <div id="msg_card_num"></div>
+          </div>
+        </div>
+      </div>
+
+      <span class="break"></span>
+      <div class="act-btn">
+        <button class="btn btn-primary btn-lg btn-block" id="btn_napthe" type="button" name="submit"
+                (click)="onSubmit()">Change to Zps.
+        </button>
+      </div>
+      <br>
+      <div id="msg_napthe"></div>
+    </div>
+    <div class="form-box text-center">
+      <p style="font-size: 22px; font-weight: bold;color: red;">After converting to ZPs, please go to the NPC to receive your ZPs.</p>
+      <img src="./assets/images/huong-dan-nhan-tien.png" alt="">
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,74 @@
+<div class="main-head">
+  <div class="breadcrumbs1">
+    <a [routerLink]="['/']" class="tooltipstered">Home</a>
+    <a  class="tooltipstered">Gift Code</a>
+  </div>
+  <h1 class="module-title">Create Gift Code</h1>
+</div>
+<div class="alert alert-primary">
+  <p class="alert-caption">Lưu ý</p>
+  <ul class="noted in-left-10">
+    <li>After receiving the Gift Code, the items will be delivered. <strong>cq_bonus</strong></li>
+    <li>Action Id là <strong>action_id</strong> trong bảng <strong>cq_bonus</strong></li>
+  </ul>
+</div>
+<div class="main-page">
+  <div class="main-left">
+    <div class="main-body">
+      <div class="cash-section">
+        <div class="cash-form-block" style="max-width: 500px; margin: 0 auto;">
+
+          <div class="form-box">
+            <input id="giftCode" class="form-input" required="" [(ngModel)]="giftCode" type="text">
+            <label for="giftCode">Gift Code</label>
+          </div>
+
+          <div class="form-box">
+            <input id="item" class="form-input" required="" [(ngModel)]="itemId" type="text">
+            <label for="item">Action Id</label>
+          </div>
+
+          <div class="form-box">
+            <select name="type" class="form-select" [(ngModel)]="type">
+              <option *ngFor="let t of this.types;" [value]="t.key">{{t.value}}</option>
+            </select>
+          </div>
+
+        </div>
+      </div>
+
+      <span class="break"></span>
+      <div class="act-btn">
+        <button class="btn btn-primary btn-lg btn-block" type="button" (click)="create()">Create Gift Code
+        </button>
+      </div>
+    </div>
+    <div class="in-20 font-14 text-semibold">
+      <div class="table-responsive">
+        <table class="table table-striped table-red">
+          <thead>
+          <tr>
+            <th>#</th>
+            <th>Gift Code</th>
+            <th>Type</th>
+            <th>Action Id</th>
+            <th>Status</th>
+            <th>Time</th>
+          </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let gift of giftCodes">
+              <td>{{gift.id}}</td>
+              <td>{{gift.code}}</td>
+              <td>{{gift.type == 1 ? '1 for 1' : '1 for all'}}</td>
+              <td>{{gift.itemId}}</td>
+              <td>{{gift.isUsed ? 'Has been used' : 'Not used yet'}}</td>
+              <td>{{gift.createdDate | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>

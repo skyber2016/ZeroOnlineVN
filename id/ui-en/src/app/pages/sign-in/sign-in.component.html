@@ -1,0 +1,52 @@
+<div class="login-page">
+
+  <div class="login-main">
+
+
+    <div class="home-page">
+      <div class="login-section">
+
+
+        <div class="login-section-container" id="main">
+
+          <section id="content">
+            <form class="form-login" action="" id="login" method="post">
+
+              <h1>Login</h1>
+
+              <div>
+                <input type="text" class="form-input" name="username" id="username" placeholder="Account name" [(ngModel)]="username" [ngModelOptions]="{standalone: true}"
+                       autofocus required>
+              </div>
+              <div>
+                <input type="password" class="form-input" name="password" id="password" placeholder="Password"[(ngModel)]="password" [ngModelOptions]="{standalone: true}"
+                       required="">
+              </div>
+              <div>
+                <button class="btnn btnn-2 btnn-sep icon-send1" type="button" id="submit" name="submit" (click)="onSignIn()">Login
+                </button>
+                <a [routerLink]="[routerContants.auth.register]" class="button button-blue tooltipstered">
+                  <i class="fa fa-globe"></i>
+                  <strong>REGISTER</strong>
+                </a>
+                <a [routerLink]="routerContants.auth.forgotPassword" class="button button-orange tooltipstered">
+                  <i class="fa fa-clock-o"></i>
+                  <strong>Forgot Password ?</strong>
+                </a>
+              </div>
+            </form>
+            <div class="button">
+              <a href="http://download.zeroonlinevn.com" target="_blank" class="tooltipstered">Download the game now</a>
+            </div>
+          </section>
+
+
+        </div>
+
+      </div>
+    </div>
+
+
+  </div>
+
+</div>

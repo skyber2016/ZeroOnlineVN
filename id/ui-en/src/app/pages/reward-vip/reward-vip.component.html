@@ -1,0 +1,51 @@
+<div class="main-head">
+  <div class="breadcrumbs1">
+    <a [routerLink]="['/']" class="tooltipstered">Home</a>
+    <a [routerLink]="['/']" class="tooltipstered">Event</a>
+    <a class="active tooltipstered" href="#">Receive VIP milestone gifts</a>
+
+  </div>
+  <h1 class="module-title">Receive VIP milestone gifts</h1>
+</div>
+<div class="alert alert-primary">
+  <p class="alert-caption">Note</p>
+  <ul class="noted in-left-10">
+    <li><strong>Conditions</strong> : You must reach the corresponding VIP level to receive the reward, and it can only be claimed once</li>
+    <li><strong>After receiving the award</strong> : Please come <strong><a href="./assets/images/huong-dan-nhan-tien.png" target="_blank" style="color: blue">NPC Reward</a></strong> to receive a gift</li>
+    <li><strong>Click to learn about the NPC</strong> : <strong><a href="./assets/images/huong-dan-nhan-tien.png" target="_blank" style="color: blue">NPC Reward</a></strong></li>
+  </ul>
+</div>
+<div class="main-body">
+  <div class="out-top-20">
+    <table class="table table-striped table-red">
+      <thead>
+
+      <tr bgcolor="#FFFFFF">s
+        <th align="center"><b>VIP Milestone</b></th>
+        <th align="center" width="500"><b>Reward</b></th>
+        <th align="center"><b>Receive Reward</b></th>
+      </tr>
+
+      </thead>
+
+      <tbody>
+
+      <tr bgcolor="#FFFFFF" *ngFor="let reward of rewards">
+        <td align="center">
+          <img [src]='"./assets/images/vip/vip" + reward.id + ".png"' alt="">
+        </td>
+        <td align="center" width="500"><span class="tag1 tag1-time">{{reward.name}}</span><img style="padding-left: 10px"
+          [src]="'./assets/images/tich-luy-nhan-qua/vip/' + reward.id + '.png'" [alt]="reward.name"><br></td>
+        <td align="center">
+          <div class="group-popup2">
+            <div class="box-popup box-popup-red" ></div>
+            <input *ngIf="reward.status === 0" value="Not yet achieved" disabled="disabled" class="btn_tichluythe btn btn-green btn-block btn-lg" type="button">
+            <input *ngIf="reward.status === 1" value="Received" disabled="disabled" class="btn_tichluythe btn btn-green btn-block btn-lg" type="button">
+            <input *ngIf="reward.status === 2" value="Receive Reward"  class="btn_tichluythe btn btn-green btn-block btn-lg" type="button" (click)="onSubmit(reward)">
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
