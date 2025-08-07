@@ -21,7 +21,7 @@
                   <button class="btn dropdown-toggle" type="button" id="dropdownMenuQuickAction" data-toggle="dropdown"
                           aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-ellipsis-v" data-toggle="tooltip" data-placement="bottom" title=""
-                       data-original-title="Truy cập nhanh"></i>
+                       data-original-title="Quick access"></i>
                   </button>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuQuickAction">
                     <a class="dropdown-item" routerLink="/doi-mat-khau">Change password</a>
@@ -39,7 +39,7 @@
                   <i class="fas fa-sign-out-alt"></i>
                   <span>
 											<form>
-													<input type="button" (click)="onLogout()" name="submit" value="Thoát"
+													<input type="button" (click)="onLogout()" name="submit" value="Exit"
                                  style="
     background: #ffffff00;
     color: #ffbf00;
@@ -57,7 +57,7 @@
                     <span class="badge badge-primary" style="background-color: #007bff">{{percent}}%</span>
 												</span>
                   <span data-toggle="tooltip" data-placement="bottom" title="" id="head_wcoin"
-                        data-original-title="ZCoin hiện có">
+                        data-original-title="ZCoin Web">
 													<i class="ic ic-w"></i>
 													<span> {{money}}</span>
 												</span>
@@ -73,7 +73,7 @@
                 <a href="http://download.zeroonlinevn.online" target="_blank">
                   <i class="fal fa-download"></i> Download Game
                 </a>
-                <a href="https://zeroonlinevn.online" target="_blank">
+                <a href="https://zeroonlinevn.com" target="_blank">
                   <i class=" fa fa-comments"></i> News
                 </a>
                 <a href="https://www.facebook.com/ZeroSeverVN" target="_blank">
@@ -112,7 +112,7 @@
                         <div clas="text-center">
                           <a href="#">
                             <strong>Support</strong>
-                            <span class="tag1 tag1-time">09666211925</span>
+                            <span class="tag1 tag1-time">Fanpage</span>
                           </a>
                         </div>
                       </ul>
@@ -206,7 +206,7 @@
                               </li>
                             </ul>
                           </li> -->
-                          <li class="cat-item" *ngif="false">
+                          <li class="cat-item" *ngIf="false">
 																		<span>
 																			<i class="fal fa-university"></i>&emsp;&emsp;Top Up Card
 																			<i class="fas fa-angle-down"></i>

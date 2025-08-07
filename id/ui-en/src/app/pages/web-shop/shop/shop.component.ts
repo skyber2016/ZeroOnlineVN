@@ -44,7 +44,7 @@ export class ShopComponent implements OnInit {
   }
 
   fromNow(time): string {
-    moment.locale('vi');
+    moment.locale('en');
     return moment(time, 'yyyy-MM-DD HH:mm:ss').fromNow();
   }
 }
