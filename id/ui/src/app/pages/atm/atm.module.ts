@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { AtmRoutingModule } from './atm-routing.module';
 import {ATMComponent} from './atm.component';
 import {FormsModule} from '@angular/forms';
+import {TranslateModule} from '@ngx-translate/core';
+
 
 
 @NgModule({
@@ -11,7 +13,8 @@ import {FormsModule} from '@angular/forms';
     imports: [
         CommonModule,
         AtmRoutingModule,
-        FormsModule
+        FormsModule,
+        TranslateModule
     ]
 })
 export class AtmModule { }

@@ -1,19 +1,19 @@
 <div class="main-head">
   <div class="breadcrumbs1">
-    <a [routerLink]="['/']" class="tooltipstered">Trang Chủ</a>
-    <a [routerLink]="['/']" class="tooltipstered">Sự kiện</a>
-    <a class="active tooltipstered" href="#">Nhận quà tích lũy tiêu phí</a>
+    <a [routerLink]="['/']" class="tooltipstered">{{ 'REWARD.HOME' | translate }}</a>
+    <a [routerLink]="['/']" class="tooltipstered">{{ 'REWARD.BREADCRUMB' | translate }}</a>
+    <a class="active tooltipstered" href="#">{{ 'REWARD.SHOP_TITLE' | translate }}</a>
 
   </div>
-  <h1 class="module-title">Nhận quà tích lũy tiêu phí</h1>
+  <h1 class="module-title">{{ 'REWARD.SHOP_TITLE' | translate }}</h1>
 </div>
 <div class="alert alert-primary">
-  <p class="alert-caption">Lưu ý</p>
+  <p class="alert-caption">{{ 'TOPUP.NOTE' | translate }}</p>
   <ul class="noted in-left-10">
-    <li><strong>Điều kiện</strong> : Bạn phải mua vật phẩm trong <strong><a href="/cua-hang" target="_blank" style="color: blue">Cửa Hàng</a></strong> để tích điểm đổi quà</li>
-    <li>Sau mỗi tuần (bắt đầu từ thứ 2) điểm tích lũy sẽ được reset</li>
-    <li>Sau khi bấm nhận thưởng thì cần đến NPC để nhận : <strong><a href="./assets/images/huong-dan-nhan-tien.png" target="_blank" style="color: blue">NPC Nhận thưởng</a></strong></li>
-    <li>Điểm hiện tại của bạn: <strong>{{current}}</strong>  VNĐ</li>
+    <li><strong>Điều kiện</strong> : {{ 'REWARD.SHOP_NOTE_1' | translate }}</li>
+    <li>{{ 'REWARD.SHOP_NOTE_2' | translate }}</li>
+    <li>{{ 'REWARD.SHOP_NOTE_3' | translate }} : <strong><a href="./assets/images/huong-dan-nhan-tien.png" target="_blank" style="color: blue">{{ 'REWARD.NPC_NAME' | translate }}</a></strong></li>
+    <li>{{ 'REWARD.SHOP_NOTE_4' | translate }}: <strong>{{current}}</strong>  VNĐ</li>
   </ul>
 </div>
 <div class="main-body">
@@ -22,9 +22,9 @@
       <thead>
 
       <tr bgcolor="#FFFFFF">
-        <th align="center"><b>Mốc tích lũy</b></th>
-        <th align="center" width="500"><b>Phần Thưởng</b></th>
-        <th align="center"><b>Nhận thưởng</b></th>
+        <th align="center"><b>{{ 'REWARD.MILESTONE' | translate }}</b></th>
+        <th align="center" width="500"><b>{{ 'REWARD.REWARD_ITEM' | translate }}</b></th>
+        <th align="center"><b>{{ 'REWARD.RECEIVE_BTN' | translate }}</b></th>
       </tr>
 
       </thead>
@@ -45,9 +45,9 @@
         <td align="center" width="100px">
           <div class="group-popup2">
             <div class="box-popup box-popup-red" ></div>
-            <input *ngIf="reward.status === 0" value="Chưa đạt" disabled="disabled" class="btn_tichluythe btn btn-green btn-block btn-lg" type="button">
-            <input *ngIf="reward.status === 1" value="Đã nhận" disabled="disabled" class="btn_tichluythe btn btn-green btn-block btn-lg" type="button">
-            <input *ngIf="reward.status === 2" value="Nhận thưởng"  class="btn_tichluythe btn btn-green btn-block btn-lg" type="button" (click)="onSubmit(reward)">
+            <input *ngIf="reward.status === 0" [value]="'REWARD.NOT_REACHED' | translate" disabled="disabled" class="btn_tichluythe btn btn-green btn-block btn-lg" type="button">
+            <input *ngIf="reward.status === 1" [value]="'REWARD.RECEIVED' | translate" disabled="disabled" class="btn_tichluythe btn btn-green btn-block btn-lg" type="button">
+            <input *ngIf="reward.status === 2" [value]="'REWARD.RECEIVE_BTN' | translate"  class="btn_tichluythe btn btn-green btn-block btn-lg" type="button" (click)="onSubmit(reward)">
           </div>
         </td>
       </tr>

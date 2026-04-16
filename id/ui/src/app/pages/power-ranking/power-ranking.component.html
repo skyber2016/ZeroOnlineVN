@@ -1,10 +1,10 @@
 <div class="main-head">
   <div class="breadcrumbs1">
-    <a [routerLink]="['/']" class="tooltipstered">Trang Chủ</a>
-    <a [routerLink]="['/']" class="tooltipstered">Xếp Hạng</a>
-    <a class="active tooltipstered" href="#rank&amp;act=ranking">Xếp Hạng Lực chiến</a>
+    <a [routerLink]="['/']" class="tooltipstered">{{ 'RANKING.HOME' | translate }}</a>
+    <a [routerLink]="['/']" class="tooltipstered">{{ 'RANKING.BREADCRUMB' | translate }}</a>
+    <a class="active tooltipstered" href="#rank&amp;act=ranking">{{ 'RANKING.POWER_RANK' | translate }}</a>
   </div>
-  <h1 class="module-title">Xếp hạng lực chiến Robot</h1>
+  <h1 class="module-title">{{ 'RANKING.POWER_RANK_TITLE' | translate }}</h1>
 </div>
 <div class="main-body">
 
@@ -17,14 +17,14 @@
         <thead>
           <tr>
             <th>#</th>
-            <th>Tên nhân vật</th>
+            <th>{{ 'RANKING.CHAR_NAME' | translate }}</th>
             <th>
-              <font color="#AA8052">Lực chiến</font>
+              <font color="#AA8052">{{ 'RANKING.BATTLE_POWER' | translate }}</font>
             </th>
             <th>
-              <font color="green">VIP</font>
+              <font color="green">{{ 'RANKING.VIP' | translate }}</font>
             </th>
-            <th>Điểm cống hiến</th>
+            <th>{{ 'RANKING.DONATION' | translate }}</th>
             <th *ngFor="let column of columns;" class="text-right">{{column.name}}</th>
           </tr>
         </thead>

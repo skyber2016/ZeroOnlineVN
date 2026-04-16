@@ -10,13 +10,13 @@
         <div class="links">
           <ul class="menu1 cleafix">
             <li>
-              <a [routerLink]="['/']">Trang chủ</a>
+              <a [routerLink]="['/']">{{ 'HEADER.HOME' | translate }}</a>
 
             </li>
             <li>
-              <a href="https://download.zeroonlinevn.com" target="_blank">Tải Game</a>
+              <a href="https://download.zeroonlinevn.com" target="_blank">{{ 'HEADER.DOWNLOAD' | translate }}</a>
             </li>
-            <li class="parent"><a href="javascript:void(0)">Cộng Đồng</a>
+            <li class="parent"><a href="javascript:void(0)">{{ 'HEADER.COMMUNITY' | translate }}</a>
               <ul class="children">
                 <li><a href="https://www.facebook.com/ZeroSeverVN" target="_blank">Facebook</a></li>
                 <li><a href="https://www.facebook.com/groups/ZeroOnlineVN" target="_blank">Nhóm Facebook</a></li>
@@ -24,10 +24,15 @@
               </ul>
             </li>
             <li class="parent">
-              <a href="https://zeroonlinevn.com" target="_blank">Tin Tức</a>
+              <a href="https://zeroonlinevn.com" target="_blank">{{ 'HEADER.NEWS' | translate }}</a>
 
             </li>
-
+            <li class="parent"><a href="javascript:void(0)">{{ 'HEADER.LANGUAGE' | translate }}</a>
+              <ul class="children">
+                <li><a href="javascript:void(0)" (click)="switchLang('vi')"><span class="flag-icon flag-icon-vn"></span> Tiếng Việt</a></li>
+                <li><a href="javascript:void(0)" (click)="switchLang('en')"><span class="flag-icon flag-icon-us"></span> English</a></li>
+              </ul>
+            </li>
           </ul>
         </div>
         <span class="welcome"></span>

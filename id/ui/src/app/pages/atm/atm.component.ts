@@ -3,6 +3,7 @@ import {BaseComponent} from '../../shared/components/base.component';
 import {RouterConstant} from '../../core/infrastructure/router-constant';
 import {CardService} from '../../shared/services/card.service';
 import {MessageService} from '../../shared/services/message.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-atm',
@@ -13,7 +14,7 @@ export class ATMComponent extends BaseComponent implements OnInit {
   routerContants = RouterConstant;
   username = localStorage.getItem('fullName');
 
-  constructor(private cardService: CardService, private toastrService: MessageService) {
+  constructor(private cardService: CardService, private toastrService: MessageService, private translate: TranslateService) {
     super();
   }
 
@@ -27,7 +28,7 @@ export class ATMComponent extends BaseComponent implements OnInit {
       if (file.files.length > 0) {
         const fileByte = file.files[0];
         this.cardService.confirmATM(fileByte).toPromise().then(resp => {
-          this.toastrService.success('Request sent successfully, please wait 1-2 minutes');
+          this.toastrService.success(this.translate.instant('ALERT.ATM_SUCCESS'));
         }).finally(() =>{
           const element:any = document.getElementById('file-upload');
           element.value = '';

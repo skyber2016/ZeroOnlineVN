@@ -5,14 +5,15 @@ import { RewardShopRoutingModule } from './reward-shop-routing.module';
 import { RewardShopItemComponent } from './reward-shop-item/reward-shop-item.component';
 import { RewardShopComponent } from './reward-shop/reward-shop.component';
 import {FormsModule} from "@angular/forms";
-
+import {TranslateModule} from '@ngx-translate/core';
 
 @NgModule({
   declarations: [RewardShopItemComponent, RewardShopComponent],
   imports: [
     CommonModule,
     RewardShopRoutingModule,
-    FormsModule
+    FormsModule,
+    TranslateModule
   ]
 })
 export class RewardShopModule { }

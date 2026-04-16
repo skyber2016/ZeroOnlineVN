@@ -1,18 +1,18 @@
 <div class="main-head">
   <div class="breadcrumbs1">
-    <a [routerLink]="['/']" class="tooltipstered">Trang Chủ</a>
-    <a [routerLink]="['/']" class="tooltipstered">Sự kiện</a>
-    <a class="active tooltipstered" href="#">Nhận quà mốc VIP</a>
+    <a [routerLink]="['/']" class="tooltipstered">{{ 'REWARD.HOME' | translate }}</a>
+    <a [routerLink]="['/']" class="tooltipstered">{{ 'REWARD.BREADCRUMB' | translate }}</a>
+    <a class="active tooltipstered" href="#">{{ 'REWARD.VIP_TITLE' | translate }}</a>
 
   </div>
-  <h1 class="module-title">Nhận quà mốc VIP</h1>
+  <h1 class="module-title">{{ 'REWARD.VIP_TITLE' | translate }}</h1>
 </div>
 <div class="alert alert-primary">
-  <p class="alert-caption">Lưu ý</p>
+  <p class="alert-caption">{{ 'TOPUP.NOTE' | translate }}</p>
   <ul class="noted in-left-10">
-    <li><strong>Điều kiện</strong> : Bạn phải đạt mốc VIP tương ướng thì mới có thể nhận được phần thưởng và chỉ nhận được 1 lần duy nhất</li>
-    <li><strong>Sau khi nhận thưởng</strong> : Vui lòng đến <strong><a href="./assets/images/huong-dan-nhan-tien.png" target="_blank" style="color: blue">NPC Nhận thưởng</a></strong> để nhận quà</li>
-    <li><strong>Click để biết NPC</strong> : <strong><a href="./assets/images/huong-dan-nhan-tien.png" target="_blank" style="color: blue">NPC Nhận thưởng</a></strong></li>
+    <li><strong>Điều kiện</strong> : {{ 'REWARD.VIP_NOTE_1' | translate }}</li>
+    <li><strong>{{ 'REWARD.NPC_NOTE' | translate }}</strong></li>
+    <li><strong>{{ 'REWARD.NPC_CLICK' | translate }}</strong> : <strong><a href="./assets/images/huong-dan-nhan-tien.png" target="_blank" style="color: blue">{{ 'REWARD.NPC_NAME' | translate }}</a></strong></li>
   </ul>
 </div>
 <div class="main-body">
@@ -21,9 +21,9 @@
       <thead>
 
       <tr bgcolor="#FFFFFF">
-        <th align="center"><b>Mốc VIP</b></th>
-        <th align="center" width="500"><b>Phần Thưởng</b></th>
-        <th align="center"><b>Nhận thưởng</b></th>
+        <th align="center"><b>{{ 'REWARD.VIP_LEVEL' | translate }}</b></th>
+        <th align="center" width="500"><b>{{ 'REWARD.REWARD_ITEM' | translate }}</b></th>
+        <th align="center"><b>{{ 'REWARD.RECEIVE_BTN' | translate }}</b></th>
       </tr>
 
       </thead>
@@ -39,9 +39,9 @@
         <td align="center">
           <div class="group-popup2">
             <div class="box-popup box-popup-red" ></div>
-            <input *ngIf="reward.status === 0" value="Chưa đạt" disabled="disabled" class="btn_tichluythe btn btn-green btn-block btn-lg" type="button">
-            <input *ngIf="reward.status === 1" value="Đã nhận" disabled="disabled" class="btn_tichluythe btn btn-green btn-block btn-lg" type="button">
-            <input *ngIf="reward.status === 2" value="Nhận thưởng"  class="btn_tichluythe btn btn-green btn-block btn-lg" type="button" (click)="onSubmit(reward)">
+            <input *ngIf="reward.status === 0" [value]="'REWARD.NOT_REACHED' | translate" disabled="disabled" class="btn_tichluythe btn btn-green btn-block btn-lg" type="button">
+            <input *ngIf="reward.status === 1" [value]="'REWARD.RECEIVED' | translate" disabled="disabled" class="btn_tichluythe btn btn-green btn-block btn-lg" type="button">
+            <input *ngIf="reward.status === 2" [value]="'REWARD.RECEIVE_BTN' | translate"  class="btn_tichluythe btn btn-green btn-block btn-lg" type="button" (click)="onSubmit(reward)">
           </div>
         </td>
       </tr>

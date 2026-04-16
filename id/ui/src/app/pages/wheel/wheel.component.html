@@ -1,16 +1,16 @@
 <div class="wheel">
   <div class="main-head">
     <div class="breadcrumbs1">
-      <a [routerLink]="['/']" class="tooltipstered">Trang Chủ</a>
-      <a class="tooltipstered">Vòng quay may mắn</a>
+      <a [routerLink]="['/']" class="tooltipstered">{{ 'WHEEL.HOME' | translate }}</a>
+      <a class="tooltipstered">{{ 'WHEEL.BREADCRUMB' | translate }}</a>
     </div>
-    <h1 class="module-title">Vòng quay may mắn</h1>
+    <h1 class="module-title">{{ 'WHEEL.TITLE' | translate }}</h1>
   </div>
   <div class="alert alert-primary">
-    <p class="alert-caption">Lưu ý</p>
+    <p class="alert-caption">{{ 'TOPUP.NOTE' | translate }}</p>
     <ul class="noted in-left-10">
-      <li>Khi bạn nạp <strong>tối thiểu cứ</strong> mỗi <strong>500.000</strong> thì sẽ được tặng 1 lượt quay.</li>
-      <li>Các vật phẩm khi quay trúng vui lòng đến nhận tại <strong>NPC</strong></li>
+      <li>{{ 'WHEEL.NOTE_1' | translate }} <strong>{{ 'WHEEL.NOTE_2' | translate }}</strong> {{ 'WHEEL.NOTE_3' | translate }} <strong>500.000</strong> {{ 'WHEEL.NOTE_4' | translate }}</li>
+      <li>{{ 'WHEEL.NOTE_5' | translate }} <strong>NPC</strong></li>
     </ul>
   </div>
   <div class="main-page">
@@ -30,7 +30,7 @@
                 </div>
 
                 <div class="text-center">
-                  <h3 class="num-play">Bạn còn <span>{{wheelCount}}</span> lượt quay.</h3>
+                  <h3 class="num-play">{{ 'WHEEL.REMAIN_1' | translate }} <span>{{wheelCount}}</span> {{ 'WHEEL.REMAIN_2' | translate }}</h3>
                 </div>
 
               </section>
@@ -43,9 +43,9 @@
                     <thead>
                     <tr>
                       <th>#</th>
-                      <th>Tên nhân vật</th>
-                      <th><font color="#AA8052">Phần thưởng</font></th>
-                      <th><font color="green">Thời gian</font></th>
+                      <th>{{ 'WHEEL.RANK_1' | translate }}</th>
+                      <th><font color="#AA8052">{{ 'WHEEL.RANK_2' | translate }}</font></th>
+                      <th><font color="green">{{ 'WHEEL.RANK_3' | translate }}</font></th>
 
                     </tr>
                     </thead>

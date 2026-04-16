@@ -5,6 +5,7 @@ import {RewardShopItemService} from "../../../shared/services/reward-shop-item.s
 import {RewardShopService} from "../../../shared/services/reward-shop.service";
 import {RewardShop} from "../../../shared/contants/reward-shop.constants";
 import {environment} from "../../../../environments/environment";
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-reward-shop',
@@ -17,7 +18,7 @@ export class RewardShopComponent implements OnInit {
   current: number = 0;
   rewards = [];
 
-  constructor(private rewardShopItemService: RewardShopItemService, private rewardShopService: RewardShopService, private toastrService: ToastrService) {
+  constructor(private rewardShopItemService: RewardShopItemService, private rewardShopService: RewardShopService, private toastrService: ToastrService, private translate: TranslateService) {
   }
 
   ngOnInit(): void {
@@ -33,7 +34,7 @@ export class RewardShopComponent implements OnInit {
     if (reward.status === 2) {
       this.rewardShopService.post({group: reward.group}).subscribe(resp => {
         this.onInitData();
-        this.toastrService.success('Receiving gifts successful');
+        this.toastrService.success(this.translate.instant('ALERT.REWARD_SUCCESS'));
       });
     }
   }

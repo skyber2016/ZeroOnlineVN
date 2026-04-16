@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {BaseComponent} from '../../shared/components/base.component';
 import {RouterConstant} from '../../core/infrastructure/router-constant';
 import {UserService} from '../../shared/services/user.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-coin-to-zps',
@@ -13,7 +14,7 @@ export class CoinToZpsComponent extends BaseComponent implements OnInit {
   money = 0;
   value = 0;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private translate: TranslateService) {
     super();
   }
 
@@ -23,7 +24,7 @@ export class CoinToZpsComponent extends BaseComponent implements OnInit {
 
   onSubmit() {
     this.userService.coinToZP(this.value).subscribe(resp => {
-      alert('Bạn đã chuyển đổi thành công sang Zps vui lòng đăng nhập lại game để nhận tại NPC Nhận Quà');
+      alert(this.translate.instant('ALERT.ZPS_SUCCESS'));
       if (resp.message) {
         alert(resp.message);
       }

@@ -1,23 +1,23 @@
 <div class="main-head">
   <div class="breadcrumbs1">
-    <a [routerLink]="['/']" class="tooltipstered">Trang Chủ</a>
-    <a [routerLink]="routerContants.card.napThe" class="tooltipstered">Nạp thẻ</a>
+    <a [routerLink]="['/']" class="tooltipstered">{{ 'TOPUP.HOME' | translate }}</a>
+    <a [routerLink]="routerContants.card.napThe" class="tooltipstered">{{ 'TOPUP.BREADCRUMB' | translate }}</a>
   </div>
-  <h1 class="module-title">Quy đổi ZCoin sang ZPs</h1>
+  <h1 class="module-title">{{ 'COIN_ZPS.TITLE' | translate }}</h1>
 </div>
 <div class="alert alert-primary">
-  <p class="alert-caption">Lưu ý</p>
+  <p class="alert-caption">{{ 'TOPUP.NOTE' | translate }}</p>
   <ul class="noted in-left-10">
-    <li>Sau khi quy đổi thì cần phải <strong>ĐĂNG NHẬP LẠI</strong> mới có thể nhận ZPs</li>
-    <li>Sau khi mua vui lòng đến nhận tại <strong><a href="./assets/images/huong-dan-nhan-tien.png" target="_blank"
-                                                     style="color: blue">NPC Nhận thưởng</a></strong></li>
+    <li [innerHTML]="'COIN_ZPS.NOTE_1' | translate"></li>
+    <li>{{ 'COIN_ZPS.NOTE_2_PREFIX' | translate }} <strong><a href="./assets/images/huong-dan-nhan-tien.png" target="_blank"
+                                                     style="color: blue">{{ 'COIN_ZPS.NOTE_2_NPC' | translate }}</a></strong></li>
   </ul>
 </div>
 <div class="main-page">
   <div class="main-left">
     <div class="main-body">
       <p>
-        <span style="margin-right: 20px">Số ZCoin hiện có</span>
+        <span style="margin-right: 20px">{{ 'COIN_ZPS.BALANCE' | translate }}</span>
         <span data-toggle="tooltip" data-placement="bottom" title="" data-original-title="GCent"
               style="margin-right: 20px">
                     <i class="ic ic-g"></i>
@@ -33,7 +33,7 @@
 
           <div class="form-box">
             <input name="card_num" id="card_num" class="form-input" required="" [(ngModel)]="value" type="number" min="0" [max]="money">
-            <label for="card_num">Nhập số tiền muốn quy đổi</label>
+            <label for="card_num">{{ 'COIN_ZPS.INPUT_AMNT' | translate }}</label>
           </div>
           <div class="suggest">
             <div id="msg_card_num"></div>
@@ -44,14 +44,14 @@
       <span class="break"></span>
       <div class="act-btn">
         <button class="btn btn-primary btn-lg btn-block" id="btn_napthe" type="button" name="submit"
-                (click)="onSubmit()">Đổi sang ZPs
+                (click)="onSubmit()">{{ 'COIN_ZPS.EXCHANGE_BTN' | translate }}
         </button>
       </div>
       <br>
       <div id="msg_napthe"></div>
     </div>
     <div class="form-box text-center">
-      <p style="font-size: 22px; font-weight: bold;color: red;">Sau khi quy đổi sang ZPs vui lòng đến NPC để nhận ZPs</p>
+      <p style="font-size: 22px; font-weight: bold;color: red;">{{ 'COIN_ZPS.BOTTOM_NOTE' | translate }}</p>
       <img src="./assets/images/huong-dan-nhan-tien.png" alt="">
     </div>
   </div>

@@ -6,16 +6,16 @@ import {
   HttpInterceptor,
   HttpRequest
 } from '@angular/common/http';
-import {Injectable} from '@angular/core';
-import {environment} from 'src/environments/environment';
-import {catchError, finalize, switchMap} from 'rxjs/operators';
-import {Observable, throwError} from 'rxjs';
-import {Router} from '@angular/router';
-import {RouterConstant} from '../infrastructure/router-constant';
-import {AuthService} from 'src/app/shared/services/auth.service';
-import {MessageConstants} from '../infrastructure/message-constant';
-import {LoaderService} from 'src/app/shared/services/loader.service';
-import {MessageService} from '../../shared/services/message.service';
+import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
+import { catchError, finalize, switchMap } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { Router } from '@angular/router';
+import { RouterConstant } from '../infrastructure/router-constant';
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { MessageConstants } from '../infrastructure/message-constant';
+import { LoaderService } from 'src/app/shared/services/loader.service';
+import { MessageService } from '../../shared/services/message.service';
 
 @Injectable()
 export class ApiEndpointInterceptor implements HttpInterceptor {
@@ -31,6 +31,9 @@ export class ApiEndpointInterceptor implements HttpInterceptor {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    if (req.url.includes('.json')) {
+      return next.handle(req);
+    }
     ApiEndpointInterceptor.counter += 1;
     if (ApiEndpointInterceptor.counter === 1) {
       this.loaderService.isLoading.next(true);
@@ -84,22 +87,22 @@ export class ApiEndpointInterceptor implements HttpInterceptor {
 
   refreshTokenAndRetry(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const refreshToken = localStorage.getItem('refreshToken') || '';
-    if(refreshToken == ''){
+    if (refreshToken == '') {
       this.authService.redirectToLogin();
       return throwError('Not found refresh token');
     }
-    return this.http.post<any>('auth/refreshToken', {refreshToken: localStorage.getItem('refreshToken')})
+    return this.http.post<any>('auth/refreshToken', { refreshToken: localStorage.getItem('refreshToken') })
       .pipe(
         switchMap(result => {
           localStorage.setItem('token', result.token);
           return next.handle(this.mappingToken(req));
         }), catchError(err => {
           if (err.status === 401) {
-            if(err.url.toLowerCase().endsWith('refreshtoken')){
+            if (err.url.toLowerCase().endsWith('refreshtoken')) {
               localStorage.clear();
               this.router.navigate([RouterConstant.auth.login]).then();
             }
-            else{
+            else {
               return this.refreshTokenAndRetry(req, next);
             }
           }

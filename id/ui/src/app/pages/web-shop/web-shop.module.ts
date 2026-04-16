@@ -5,6 +5,7 @@ import { WebShopRoutingModule } from './web-shop-routing.module';
 import { ShopComponent } from './shop/shop.component';
 import { ShopManageComponent } from './shop-manage/shop-manage.component';
 import {FormsModule} from "@angular/forms";
+import {TranslateModule} from '@ngx-translate/core';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import {FormsModule} from "@angular/forms";
   imports: [
     CommonModule,
     WebShopRoutingModule,
-    FormsModule
+    FormsModule,
+    TranslateModule
   ]
 })
 export class WebShopModule { }

@@ -3,6 +3,7 @@ import { WheelService } from "../../shared/services/wheel.service";
 import { MessageService } from "../../shared/services/message.service";
 import { version } from '../../../../package.json';
 import * as moment from 'moment';
+import {TranslateService} from '@ngx-translate/core';
 declare const $: any;
 
 @Component({
@@ -89,7 +90,7 @@ export class WheelComponent implements OnInit {
   histories = [];
   wheelled = false;
   audio = new Audio('/assets/tick.mp3');
-  constructor(private wheelService: WheelService, private message: MessageService) {
+  constructor(private wheelService: WheelService, private message: MessageService, private translate: TranslateService) {
   }
 
   ngOnInit(): void {
@@ -118,7 +119,7 @@ export class WheelComponent implements OnInit {
       const self = this;
 
       setTimeout(function () {
-        self.message.success(resp.message, 'You receive');
+        self.message.success(resp.message, self.translate.instant('ALERT.RECEIVE_WHEEL'));
         $('#p-overlay').removeClass('active');
         self.wheelCount = resp.wheelRemain;
         self.histories = resp.histories;

@@ -1,5 +1,7 @@
 import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 
+import {TranslateService} from '@ngx-translate/core';
+
 // @ts-ignore
 import {version} from '../../../../../package.json';
 @Component({
@@ -9,7 +11,7 @@ import {version} from '../../../../../package.json';
 })
 export class NonLoginComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  constructor() {
+  constructor(public translate: TranslateService) {
   }
   ngOnInit() {
   }
@@ -59,4 +61,8 @@ export class NonLoginComponent implements OnInit, AfterViewInit, OnDestroy {
     this.ids.forEach(item => document.getElementById(item).remove());
   }
 
+  switchLang(lang: string) {
+    this.translate.use(lang);
+    localStorage.setItem('lang', lang);
+  }
 }

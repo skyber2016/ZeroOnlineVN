@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {RewardService} from '../../shared/services/reward.service';
 import {ToastrService} from 'ngx-toastr';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-reward-vip',
@@ -10,7 +11,7 @@ import {ToastrService} from 'ngx-toastr';
 export class RewardVipComponent implements OnInit {
   rewards = [];
 
-  constructor(private rewardVipService: RewardService, private toastrService: ToastrService) {
+  constructor(private rewardVipService: RewardService, private toastrService: ToastrService, private translate: TranslateService) {
   }
 
   ngOnInit(): void {
@@ -25,7 +26,7 @@ export class RewardVipComponent implements OnInit {
     if (reward.status === 2) {
       this.rewardVipService.post({id: reward.id}).subscribe(resp => {
         this.onInitData();
-        this.toastrService.success('Successfully received gifts');
+        this.toastrService.success(this.translate.instant('ALERT.REWARD_SUCCESS'));
       });
     }
   }

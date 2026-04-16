@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {GiftCodeService} from "../../../shared/services/gift-code.service";
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-receive-gift-code',
@@ -9,7 +10,7 @@ import {GiftCodeService} from "../../../shared/services/gift-code.service";
 export class ReceiveGiftCodeComponent implements OnInit {
   giftCode: string;
 
-  constructor(private giftCodeService: GiftCodeService) {
+  constructor(private giftCodeService: GiftCodeService, private translate: TranslateService) {
   }
 
   ngOnInit(): void {
@@ -22,7 +23,7 @@ export class ReceiveGiftCodeComponent implements OnInit {
     this.giftCodeService.receive({
       giftCode: this.giftCode
     }).subscribe(() => {
-      alert('Item received successfully, please go to NPC to receive');
+      alert(this.translate.instant('ALERT.GIFTCODE_SUCCESS'));
       this.giftCode = '';
     })
   }

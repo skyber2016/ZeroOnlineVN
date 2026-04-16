@@ -6,14 +6,15 @@ import { ReceiveGiftCodeComponent } from './receive-gift-code/receive-gift-code.
 import {FormsModule} from "@angular/forms";
 import { GiftCodeCreateComponent } from './gift-code-create/gift-code-create.component';
 import { GiftCodeHistoryComponent } from './gift-code-history/gift-code-history.component';
-
+import {TranslateModule} from '@ngx-translate/core';
 
 @NgModule({
   declarations: [ReceiveGiftCodeComponent, GiftCodeCreateComponent, GiftCodeHistoryComponent],
   imports: [
     CommonModule,
     GiftCodeRoutingModule,
-    FormsModule
+    FormsModule,
+    TranslateModule
   ]
 })
 export class GiftCodeModule { }

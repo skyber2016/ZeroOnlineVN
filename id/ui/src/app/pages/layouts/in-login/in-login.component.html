@@ -39,7 +39,7 @@
                   <i class="fas fa-sign-out-alt"></i>
                   <span>
 											<form>
-													<input type="button" (click)="onLogout()" name="submit" value="Thoát"
+													<input type="button" (click)="onLogout()" name="submit" value="{{ 'HEADER.LOGOUT' | translate }}"
                                  style="
     background: #ffffff00;
     color: #ffbf00;
@@ -68,16 +68,22 @@
             <div class="acc-action">
               <div class="links">
                 <a href="https://zeroonlinevn.com" target="_blank">
-                  <i class=" fa fa-home"></i> Trang chủ
+                  <i class=" fa fa-home"></i> {{ 'HEADER.HOME' | translate }}
                 </a>
                 <a href="http://download.zeroonlinevn.com" target="_blank">
-                  <i class="fal fa-download"></i> Tải game
+                  <i class="fal fa-download"></i> {{ 'HEADER.DOWNLOAD' | translate }}
                 </a>
                 <a href="https://zeroonlinevn.com" target="_blank">
-                  <i class=" fa fa-comments"></i> Tin tức
+                  <i class=" fa fa-comments"></i> {{ 'HEADER.NEWS' | translate }}
                 </a>
                 <a href="https://www.facebook.com/ZeroSeverVN" target="_blank">
                   <i class="fab fa-facebook-square"></i>
+                </a>
+                <a href="javascript:void(0)" (click)="switchLang('vi')" style="margin-left: 10px; cursor: pointer;" title="Tiếng Việt">
+                  <div style="width: 25px; height: 18px; display: inline-block; background-image: url('https://upload.wikimedia.org/wikipedia/commons/2/21/Flag_of_Vietnam.svg'); background-size: cover; border-radius: 2px;"></div>
+                </a>
+                <a href="javascript:void(0)" (click)="switchLang('en')" style="margin-left: 10px; cursor: pointer;" title="English">
+                  <div style="width: 25px; height: 18px; display: inline-block; background-image: url('https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg'); background-size: cover; border-radius: 2px;"></div>
                 </a>
               </div>
             </div>
@@ -127,67 +133,63 @@
 																		</span>
                             <ul class="sub-menu">
                               <li class="sub-item" *ngIf="isAdmin">
-                                <a routerLink="/gift-code/create">Tạo GiftCode</a>
+                                <a routerLink="/gift-code/create">{{ 'SIDEBAR.CREATE_GIFTCODE' | translate }}</a>
                               </li>
                               <li class="sub-item">
-                                <a routerLink="/gift-code">Nhận phần thưởng
-                                  GiftCode</a>
+                                <a routerLink="/gift-code">{{ 'SIDEBAR.RECEIVE_GIFTCODE' | translate }}</a>
                               </li>
                               <li class="sub-item">
-                                <a routerLink="/gift-code/lich-su">Lịch sử GiftCode</a>
+                                <a routerLink="/gift-code/lich-su">{{ 'SIDEBAR.HISTORY_GIFTCODE' | translate }}</a>
                               </li>
                             </ul>
                           </li>
                           <li class="cat-item">
 																		<span>
-																			<i class="fa fa-edit"></i>&emsp;&emsp;Tài khoản
+																			<i class="fa fa-edit"></i>&emsp;&emsp;{{ 'SIDEBAR.ACCOUNT_MGR' | translate }}
 																			<i
                                         class="fas fa-angle-down"></i>
 																		</span>
                             <ul class="sub-menu">
                               <li class="sub-item">
-                                <a routerLink="/doi-mat-khau">Đổi mật khẩu
-                                  Game</a>
+                                <a routerLink="/doi-mat-khau">{{ 'SIDEBAR.CHANGE_PW_GAME' | translate }}</a>
                               </li>
                               <li class="sub-item">
-                                <a href="#acc_manager&act=changesdt_sms" rel="ajax">Đổi số điện
-                                  thoại</a>
+                                <a href="#acc_manager&act=changesdt_sms" rel="ajax">{{ 'SIDEBAR.CHANGE_PHONE' | translate }}</a>
                               </li>
                               <li class="sub-item">
-                                <a href="#acc_manager&act=changequest" rel="ajax">Đổi câu hỏi bí
-                                  mật</a>
+                                <a href="#acc_manager&act=changequest" rel="ajax">{{ 'SIDEBAR.CHANGE_QUESTION' | translate }}</a>
                               </li>
                             </ul>
                           </li>
                           <li class="cat-item">
 																		<span>
-																			<i class="fa fa-shopping-cart"></i>&emsp;&emsp;Cửa hàng
+																			<i class="fa fa-shopping-cart"></i>&emsp;&emsp;{{ 'SIDEBAR.SHOP' | translate }}
 																			<i class="fas fa-angle-down"></i>
 																		</span>
                             <ul class="sub-menu">
                               <li class="sub-item">
-                                <a routerLink="/cua-hang">Vật phẩm</a>
+                                <a routerLink="/cua-hang">{{ 'SIDEBAR.ITEMS' | translate }}</a>
                               </li>
                               <li class="sub-item" *ngIf="isAdmin">
-                                <a routerLink="/cua-hang/quan-ly">Quản lý cửa hàng</a>
+                                <a routerLink="/cua-hang/quan-ly">{{ 'SIDEBAR.MGR_SHOP' | translate }}</a>
                               </li>
                               <li class="sub-item">
-                                <a routerLink="/tich-luy-tieu-phi">Tích lũy tiêu phí</a>
+                                <a routerLink="/tich-luy-tieu-phi">{{ 'SIDEBAR.SPENDING_REWARD' | translate }}</a>
                               </li>
                               <li class="sub-item"  *ngIf="isAdmin">
-                                <a routerLink="/tich-luy-tieu-phi/vat-pham">Quản lý tiêu phí</a>
+                                <a routerLink="/tich-luy-tieu-phi/vat-pham">{{ 'SIDEBAR.MGR_SPENDING' | translate }}</a>
                               </li>
                             </ul>
                           </li>
 
                           <li class="cat-item">
 																		<span>
-																			<i class="fal fa-calendar-alt"></i>&emsp;&emsp;Quà Nạp VIP
+																			<i class="fal fa-calendar-alt"></i>&emsp;&emsp;{{ 'SIDEBAR.VIP_GIFT' | translate }}
 																			<i class="fas fa-angle-down"></i>
 																		</span>
                             <ul class="sub-menu">
                               <li class="sub-item">
-                                <a [routerLink]="['nhan-thuong-vip']" rel="ajax">Nhận thưởng mốc VIP</a>
+                                <a [routerLink]="['nhan-thuong-vip']" rel="ajax">{{ 'SIDEBAR.RECEIVE_VIP' | translate }}</a>
                               </li>
                               <!-- <li class="sub-item">
                                 <a href="#questdaily" rel="ajax">Nhiệm vụ Hằng Ngày</a>
@@ -237,28 +239,28 @@
                           </li>
                           <li class="cat-item">
 																		<span>
-																			<i class="fal fa-calendar-star"></i>&emsp;&emsp;Vòng Quay
+																			<i class="fal fa-calendar-star"></i>&emsp;&emsp;{{ 'SIDEBAR.LUCKY_SPIN' | translate }}
 																			<i
                                         class="fas fa-angle-down"></i>
 																		</span>
                             <ul class="sub-menu">
                               <li class="sub-item">
-                                <a routerLink="/vong-quay">Vòng Quay May Mắn</a>
+                                <a routerLink="/vong-quay">{{ 'SIDEBAR.LUCKY_SPIN' | translate }}</a>
                               </li>
                             </ul>
                           </li>
                           <li class="cat-item">
 																		<span>
-																			<i class="fa fa-trophy"></i>&emsp;&emsp;Xếp Hạng
+																			<i class="fa fa-trophy"></i>&emsp;&emsp;{{ 'HEADER.RANKING' | translate }}
 																			<i
                                         class="fas fa-angle-down"></i>
 																		</span>
                             <ul class="sub-menu">
                               <li class="sub-item">
-                                <a [routerLink]="['xep-hang/luc-chien']">BXH Lực Chiến</a>
+                                <a [routerLink]="['xep-hang/luc-chien']">{{ 'SIDEBAR.RANK_POWER' | translate }}</a>
                               </li>
                               <li class="sub-item">
-                                <a routerLink="/xep-hang/ham-doi">BXH Hạm Đội</a>
+                                <a routerLink="/xep-hang/ham-doi">{{ 'SIDEBAR.RANK_FLEET' | translate }}</a>
                               </li>
                             </ul>
                           </li>

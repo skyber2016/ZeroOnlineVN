@@ -1,10 +1,10 @@
 <div class="main-head">
   <div class="breadcrumbs1">
-    <a [routerLink]="['/']" class="tooltipstered">Trang Chủ</a>
-    <a [routerLink]="['/']" class="tooltipstered">Xếp Hạng</a>
-    <a class="active tooltipstered" href="#rank&amp;act=ranking">Xếp Hạng Lực chiến</a>
+    <a [routerLink]="['/']" class="tooltipstered">{{ 'RANKING.HOME' | translate }}</a>
+    <a [routerLink]="['/']" class="tooltipstered">{{ 'RANKING.BREADCRUMB' | translate }}</a>
+    <a class="active tooltipstered" href="#rank&amp;act=ranking">{{ 'RANKING.POWER_RANK' | translate }}</a>
   </div>
-  <h1 class="module-title">Xếp hạng lực chiến Robot</h1>
+  <h1 class="module-title">{{ 'RANKING.POWER_RANK_TITLE' | translate }}</h1>
 </div>
 <div class="main-body">
 
@@ -17,11 +17,11 @@
         <thead>
         <tr>
           <th>#</th>
-          <th>Tên hạm đội</th>
-          <th><font color="#AA8052">Thành viên</font></th>
-          <th><font color="green">Đô đốc</font></th>
-          <th>Cấp</th>
-          <th>Ngân sách</th>
+          <th>{{ 'RANKING.SYN_NAME' | translate }}</th>
+          <th><font color="#AA8052">{{ 'RANKING.MEMBER_COUNT' | translate }}</font></th>
+          <th><font color="green">{{ 'RANKING.LEADER' | translate }}</font></th>
+          <th>{{ 'RANKING.LEVEL' | translate }}</th>
+          <th>{{ 'RANKING.FUNDS' | translate }}</th>
 
         </tr>
         </thead>

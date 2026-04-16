@@ -1,15 +1,15 @@
 <div class="main-head">
   <div class="breadcrumbs1">
-    <a [routerLink]="['/']" class="tooltipstered">Trang Chủ</a>
-    <a class="tooltipstered">Cửa hàng</a>
+    <a [routerLink]="['/']" class="tooltipstered">{{ 'TOPUP.HOME' | translate }}</a>
+    <a class="tooltipstered">{{ 'WEB_SHOP.TITLE' | translate }}</a>
   </div>
-  <h1 class="module-title">Cửa hàng</h1>
+  <h1 class="module-title">{{ 'WEB_SHOP.TITLE' | translate }}</h1>
 </div>
 <div class="alert alert-primary">
-  <p class="alert-caption">Lưu ý</p>
+  <p class="alert-caption">{{ 'TOPUP.NOTE' | translate }}</p>
   <ul class="noted in-left-10">
-    <li>Sau khi mua vui lòng đến nhận tại <strong><a href="./assets/images/huong-dan-nhan-tien.png" target="_blank"
-                                                     style="color: blue">NPC Nhận thưởng</a></strong></li>
+    <li>{{ 'COIN_ZPS.NOTE_2_PREFIX' | translate }} <strong><a href="./assets/images/huong-dan-nhan-tien.png" target="_blank"
+                                                     style="color: blue">{{ 'COIN_ZPS.NOTE_2_NPC' | translate }}</a></strong></li>
   </ul>
 </div>
 <div class="main-page">
@@ -30,10 +30,10 @@
                           <div class="card-body">
                             <div class="clearfix mb-3"> <span
                               class="float-end price-hp">{{item.priceStr}} VNĐ</span><span
-                              class="float-start badge rounded-pill ml-2" [ngClass]="item.qty > 0 ? 'bg-primary' : 'bg-secondary'"> Còn lại: {{item.qty}}</span></div>
+                              class="float-start badge rounded-pill ml-2" [ngClass]="item.qty > 0 ? 'bg-primary' : 'bg-secondary'"> {{ 'WEB_SHOP.REMAIN' | translate }}: {{item.qty}}</span></div>
                             <h5 class="card-title">{{item.name}}</h5>
-                            <div class="text-center my-4"><a href="javascript:void(0);" style="border-radius:100px" class="btn btn-secondary" *ngIf="item.qty == 0">Hết hàng</a></div>
-                            <div class="text-center my-4"><a href="javascript:void(0);" (click)="buyItem(item)" title="Click là mua luôn, không cần xác nhận" class="btn btn-warning" *ngIf="item.qty > 0">Mua ngay</a></div>
+                            <div class="text-center my-4"><a href="javascript:void(0);" style="border-radius:100px" class="btn btn-secondary" *ngIf="item.qty == 0">{{ 'WEB_SHOP.OUT_OF_STOCK' | translate }}</a></div>
+                            <div class="text-center my-4"><a href="javascript:void(0);" (click)="buyItem(item)" [title]="'WEB_SHOP.BUY_TITLE' | translate" class="btn btn-warning" *ngIf="item.qty > 0">{{ 'WEB_SHOP.BUY_NOW' | translate }}</a></div>
                           </div>
                         </div>
                       </div>
@@ -47,13 +47,13 @@
                   <thead>
                   <tr>
                     <th>#</th>
-                    <th>Lịch sử</th>
+                    <th>{{ 'WEB_SHOP.HISTORY_TITLE' | translate }}</th>
                   </tr>
                   </thead>
                   <tbody>
                   <tr *ngFor="let history of histories; let i = index;">
                     <td>{{i + 1}}</td>
-                    <td><b>{{history.charName}}</b> mua <b>{{history.itemName}}</b> {{fromNow(history.createdDate)}}</td>
+                    <td><b>{{history.charName}}</b> {{ 'WEB_SHOP.BOUGHT' | translate }} <b>{{history.itemName}}</b> {{fromNow(history.createdDate)}}</td>
                   </tr>
                   </tbody>
                 </table>

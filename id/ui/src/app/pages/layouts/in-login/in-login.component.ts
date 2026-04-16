@@ -3,6 +3,7 @@ import {AuthService} from '../../../shared/services/auth.service';
 import {Router} from '@angular/router';
 import {RouterConstant} from '../../../core/infrastructure/router-constant';
 import {UserService} from '../../../shared/services/user.service';
+import {TranslateService} from '@ngx-translate/core';
 
 // @ts-ignore
 import {version} from '../../../../../package.json';
@@ -23,7 +24,7 @@ export class InLoginComponent extends BaseComponent implements OnInit, AfterView
   current = 0;
   total = 0;
   sub = 0;
-  constructor(private authService: AuthService, private router: Router, private userService: UserService) {
+  constructor(private authService: AuthService, private router: Router, private userService: UserService, public translate: TranslateService) {
     super();
   }
 
@@ -113,5 +114,10 @@ export class InLoginComponent extends BaseComponent implements OnInit, AfterView
   getTitle()
   {
     return `Need ${this.sub} to reach the next level`;
+  }
+
+  switchLang(lang: string) {
+    this.translate.use(lang);
+    localStorage.setItem('lang', lang);
   }
 }

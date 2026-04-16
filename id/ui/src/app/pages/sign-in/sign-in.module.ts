@@ -4,6 +4,8 @@ import { SignInRoutingModule } from './sign-in-routing.module';
 import {SignInComponent} from './sign-in.component';
 import {SharedModule} from '../../shared/shared.module';
 import {FormsModule} from '@angular/forms';
+import {TranslateModule} from '@ngx-translate/core';
+
 
 
 @NgModule({
@@ -12,7 +14,8 @@ import {FormsModule} from '@angular/forms';
     CommonModule,
     SignInRoutingModule,
     SharedModule,
-    FormsModule
+    FormsModule,
+    TranslateModule
   ]
 })
 export class SignInModule { }

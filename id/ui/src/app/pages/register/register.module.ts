@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { RegisterRoutingModule } from './register-routing.module';
 import { RegisterComponent } from '../register/register.component';
 import {FormsModule} from '@angular/forms';
+import {TranslateModule} from '@ngx-translate/core';
+
 
 
 @NgModule({
@@ -11,7 +13,8 @@ import {FormsModule} from '@angular/forms';
   imports: [
     CommonModule,
     RegisterRoutingModule,
-    FormsModule
+    FormsModule,
+    TranslateModule
   ]
 })
 export class RegisterModule { }

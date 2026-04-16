@@ -2,6 +2,7 @@ import {AfterViewInit, Component, OnInit} from '@angular/core';
 // @ts-ignore
 import { version } from '../../package.json';
 import {LoaderService} from './shared/services/loader.service';
+import {TranslateService} from '@ngx-translate/core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,7 +10,10 @@ import {LoaderService} from './shared/services/loader.service';
 })
 export class AppComponent implements OnInit, AfterViewInit {
   title = 'id';
-  constructor(private loaderService: LoaderService) {
+  constructor(private loaderService: LoaderService, public translate: TranslateService) {
+    translate.addLangs(['vi', 'en']);
+    const browserLang = localStorage.getItem('lang') || 'vi';
+    translate.use(browserLang.match(/vi|en/) ? browserLang : 'vi');
   }
   css: string[] = [
 

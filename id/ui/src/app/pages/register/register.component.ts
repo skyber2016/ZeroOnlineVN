@@ -3,6 +3,7 @@ import { RouterConstant } from '../../core/infrastructure/router-constant';
 import { AuthService } from '../../shared/services/auth.service';
 import { Router } from '@angular/router';
 import { BaseComponent } from '../../shared/components/base.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-register',
@@ -19,7 +20,7 @@ export class RegisterComponent extends BaseComponent implements OnInit {
   answer = '';
   email = '';
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService, private router: Router, private translate: TranslateService) {
     super();
   }
 
@@ -33,7 +34,7 @@ export class RegisterComponent extends BaseComponent implements OnInit {
 
   onRegister() {
     if (!this.validatePwd(this.password)) {
-      alert('Mật khẩu chỉ được chứa ký tự thường và số\nPassword required a-z and 0-9');
+      alert(this.translate.instant('ALERT.PWD_FORMAT'));
       return;
     }
     this.authService.Register({
@@ -44,7 +45,7 @@ export class RegisterComponent extends BaseComponent implements OnInit {
       answer: this.answer,
       email: this.email
     }).subscribe(resp => {
-      alert('Successful account registration');
+      alert(this.translate.instant('ALERT.REG_SUCCESS'));
       this.router.navigate([RouterConstant.auth.login]).then();
     })
   }

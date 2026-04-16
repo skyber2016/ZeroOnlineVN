@@ -1,17 +1,16 @@
 <div class="main-head">
   <div class="breadcrumbs1">
-    <a [routerLink]="['/']" class="tooltipstered">Trang Chủ</a>
-    <a [routerLink]="routerContants.card.napThe" class="tooltipstered">Nạp thẻ</a>
+    <a [routerLink]="['/']" class="tooltipstered">{{ 'TOPUP.HOME' | translate }}</a>
+    <a [routerLink]="routerContants.card.napThe" class="tooltipstered">{{ 'TOPUP.BREADCRUMB' | translate }}</a>
   </div>
-  <h1 class="module-title">Danh sách thẻ nạp</h1>
+  <h1 class="module-title">{{ 'TOPUP.TITLE_HISTORY' | translate }}</h1>
   <div class="page-tabs">
 
-    <div class="tab"><a [routerLink]="routerContants.card.ATM" class="tooltipstered">Nạp qua ngân hàng <sup id="award_un"
-                                                                                                class="badge badge-green">+20%
-      Gcoin</sup></a></div>
+    <div class="tab"><a [routerLink]="routerContants.card.ATM" class="tooltipstered">{{ 'TOPUP.TAB_ATM' | translate }} <sup id="award_un"
+                                                                                                class="badge badge-green">{{ 'TOPUP.PROMO' | translate }}</sup></a></div>
     <div class="tab ">
-      <a [routerLink]="routerContants.card.napThe" class="tooltipstered">Nạp thẻ Viettel</a></div>
-    <div class="tab active"><a [routerLink]="routerContants.card.history" class="tooltipstered">Danh sách đã nạp</a></div>
+      <a [routerLink]="routerContants.card.napThe" class="tooltipstered">{{ 'TOPUP.TAB_CARD' | translate }}</a></div>
+    <div class="tab active"><a [routerLink]="routerContants.card.history" class="tooltipstered">{{ 'TOPUP.TAB_HISTORY' | translate }}</a></div>
   </div>
 </div>
 
@@ -25,12 +24,12 @@
         <thead>
         <tr>
           <th>#</th>
-          <th>Mã giao dịch</th>
-          <th>Serial</th>
-          <th>Mã thẻ</th>
-          <th>Mệnh giá</th>
-          <th>Trạng thái</th>
-          <th>Thời gian</th>
+          <th>{{ 'TOPUP.HISTORY_TABLE_ID' | translate }}</th>
+          <th>{{ 'TOPUP.HISTORY_TABLE_SERIAL' | translate }}</th>
+          <th>{{ 'TOPUP.HISTORY_TABLE_CODE' | translate }}</th>
+          <th>{{ 'TOPUP.HISTORY_TABLE_VALUE' | translate }}</th>
+          <th>{{ 'TOPUP.HISTORY_TABLE_STATUS' | translate }}</th>
+          <th>{{ 'TOPUP.HISTORY_TABLE_TIME' | translate }}</th>
         </tr>
         </thead>
         <tbody>
